@@ -5,7 +5,7 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
-group = 'com'
+group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -22,9 +22,8 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
