@@ -23,6 +23,12 @@ class defultRestControllerTest {
                 .andExpect(content().string("hogehoge"));
     }
 
+    @Test
+    void runtimeException() throws Exception {
+        this.mockMvc.perform(get("/").param("piyo", "runtime"))
+                .andExpect(status().isConflict())
+                .andExpect(content().string("runtimeException"));
+    }
 
     @Test
     void hogeError() throws Exception {
