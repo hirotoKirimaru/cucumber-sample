@@ -11,7 +11,7 @@ public class SelenideBuilder {
         Configuration.baseUrl = "https://trpg-charactors.firebaseapp.com/";
         Configuration.headless = true;
 
-        // 明示的にreportsFolderを表現しておく。
+        // 明示的にreportsFolderを表現しておく。未来の自分は設定を欲しがるはず。
         Configuration.reportsFolder = config.reportsFolder();
 
         // cucumber側でスクリーンショット取りたいので、Selenideのデフォルトスクショ機能を無効にする。
