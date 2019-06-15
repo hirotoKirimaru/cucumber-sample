@@ -1,6 +1,7 @@
 Feature: ログイン機能
 
   @now
+  @developing
   Scenario: ログインする
     Given topページに遷移する
     When ログインボタンを押す

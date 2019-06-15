@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.0.M3'
-	id 'java'
+    id 'org.springframework.boot' version '2.2.0.M3'
+    id 'java'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -10,44 +10,63 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-	cucumberRuntime {
-		extendsFrom testImplementation
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
 }
 
 repositories {
-	mavenCentral()
-	maven { url 'https://repo.spring.io/snapshot' }
-	maven { url 'https://repo.spring.io/milestone' }
+    mavenCentral()
+    maven { url 'https://repo.spring.io/snapshot' }
+    maven { url 'https://repo.spring.io/milestone' }
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'com.codeborne:selenide:5.2.3'
-	testImplementation 'io.cucumber:cucumber-java:4.3.1'
-	testImplementation 'io.cucumber:cucumber-junit:4.3.1'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-		exclude group: 'junit', module: 'junit'
-	}
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'com.codeborne:selenide:5.2.3'
+    testImplementation 'io.cucumber:cucumber-java:4.3.1'
+    testImplementation 'io.cucumber:cucumber-junit:4.3.1'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        exclude group: 'junit', module: 'junit'
+    }
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
+/**
+ * cucumberを動かすタスク
+ * @developing タグは無視する設定
+ */
 task cucumber() {
-	dependsOn assemble, compileTestJava
-	doLast {
-		javaexec {
-			main = "cucumber.api.cli.Main"
-			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-			args = ['--plugin', 'pretty', '--glue', 'features', 'src/test/resources']
-		}
-	}
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--tags', '~@developing', '--glue', 'features', 'src/test/resources']
+        }
+    }
+}
+
+/**
+ * cucumberのタグ：@nowだけ動かすタスク
+ * @developing タグは無視する
+ */
+task cucumberNow() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--tags', '@now','--tags','~@developing', '--glue', 'features', 'src/test/resources']
+        }
+    }
 }
