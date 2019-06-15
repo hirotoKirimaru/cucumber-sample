@@ -4,7 +4,7 @@ import com.codeborne.selenide.Selenide;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
-public class MyStepdefs {
+public class LoginSteps {
 
 
     @Given("topページに遷移する")
