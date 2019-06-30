@@ -26,6 +26,9 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // feature flag for java
+//    compile 'org.ff4j:ff4j-core:1.8.1'
+//    compile 'org.ff4j:ff4j-web:1.3.0'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'com.codeborne:selenide:5.2.3'
@@ -66,7 +69,7 @@ task cucumberNow() {
         javaexec {
             main = "cucumber.api.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['--plugin', 'pretty', '--tags', '@now','--tags','~@developing', '--glue', 'features', 'src/test/resources']
+            args = ['--plugin', 'pretty', '--tags', '@now', '--tags', '~@developing', '--glue', 'features', 'src/test/resources']
         }
     }
 }
