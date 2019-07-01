@@ -1,10 +1,13 @@
 package com.example.demo.domain;
 
+import lombok.Builder;
+import lombok.Data;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -47,29 +50,32 @@ class OthelloTest {
 
   @Disabled
   @ParameterizedTest
-  @MethodSource("kaiueo")
+//  @MethodSource("kaiueo")
+  @EnumSource(Saiueo.class)
   @DisplayName("player?は?行?列に置けるか2")
-  void hige(testClass testClass) {
-    assertEquals(1, testClass.player);
-    assertEquals(0, testClass.row);
-    assertEquals(0, testClass.column);
-    assertEquals(false, testClass.result);
+  void hige(Saiueo saiueo) {
+    assertEquals(1, saiueo.player);
+    assertEquals(0, saiueo.row);
+    assertEquals(0, saiueo.column);
+    assertEquals(false, saiueo.result);
   }
 
-  private static Stream<testClass> kaiueo() {
-    return Stream.of(
-//        Arguments.of(testClass.builder().player(1).row(0).column(0).result(false).build())
-    );
-  }
+  enum Saiueo {
+    A(1, 0, 0, false),
+    B(1, 0, 1, false),
+    ;
 
-  //
-//  @Data
-//  @Builder
-  class testClass {
-    int player;
-    int row;
-    int column;
-    boolean result;
-  }
 
+    private final int player;
+    private final int row;
+    private final int column;
+    private final boolean result;
+
+    Saiueo(int player, int row, int column, boolean result) {
+      this.player = player;
+      this.row = row;
+      this.column = column;
+      this.result = result;
+    }
+  }
 }
