@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ArgumentsSouceTest {
-  Othello target = new Othello();
+  private Othello target = new Othello();
 
   @Test
   @DisplayName("ゲーム開始")
@@ -97,10 +97,8 @@ class ArgumentsSouceTest {
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
       return Stream.of(
-          Arguments.of(
               Taiueo.builder().player(0).row(0).column(0).result(false).build()
-          )
-      );
+      ).map(Arguments::of);
     }
   }
 }

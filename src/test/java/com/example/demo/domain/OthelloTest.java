@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OthelloTest {
-  Othello target = new Othello();
+  private Othello target = new Othello();
 
   @Test
   @DisplayName("ゲーム開始")
@@ -53,10 +53,8 @@ class OthelloTest {
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
       return Stream.of(
-          Arguments.of(
-              CanSetPlayerPieceTest.builder().player(0).row(0).column(0).result(false).build()
-          )
-      );
+          CanSetPlayerPieceTest.builder().player(0).row(0).column(0).result(false).build()
+      ).map(Arguments::of);
     }
   }
 }
