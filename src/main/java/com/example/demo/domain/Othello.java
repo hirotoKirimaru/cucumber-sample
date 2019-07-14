@@ -13,4 +13,7 @@ public class Othello {
     this.board.setOthelloBoard();
   }
 
+  public boolean canSetPiece(int player, int row, int column) {
+    return false;
+  }
 }

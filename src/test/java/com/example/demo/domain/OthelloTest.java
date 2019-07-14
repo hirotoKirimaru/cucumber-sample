@@ -1,14 +1,16 @@
 package com.example.demo.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.EnumSource;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.*;
 
 import java.util.stream.Stream;
 
@@ -32,6 +34,7 @@ class OthelloTest {
     assertEquals(expect, target.board);
   }
 
+  @Disabled("staticな値ではないとできないため、Builderクラスを使えないので除外")
   @ParameterizedTest
   @MethodSource("aiueo")
   @DisplayName("player?は?行?列に置けるか")
@@ -50,21 +53,17 @@ class OthelloTest {
 
   @Disabled
   @ParameterizedTest
-//  @MethodSource("kaiueo")
   @EnumSource(Saiueo.class)
   @DisplayName("player?は?行?列に置けるか2")
   void hige(Saiueo saiueo) {
-    assertEquals(1, saiueo.player);
-    assertEquals(0, saiueo.row);
-    assertEquals(0, saiueo.column);
-    assertEquals(false, saiueo.result);
+
+    assertEquals(saiueo.result, target.canSetPiece(saiueo.player, saiueo.row, saiueo.column));
   }
 
   enum Saiueo {
     A(1, 0, 0, false),
     B(1, 0, 1, false),
     ;
-
 
     private final int player;
     private final int row;
@@ -76,6 +75,34 @@ class OthelloTest {
       this.row = row;
       this.column = column;
       this.result = result;
+    }
+  }
+
+  @ParameterizedTest
+  @ArgumentsSource(Taiueo.class)
+  @DisplayName("player?は?行?列に置けるか3")
+  void fuga(Taiueo taiueo) {
+
+    assertEquals(taiueo.result, target.canSetPiece(taiueo.player, taiueo.row, taiueo.column));
+  }
+
+  @Data
+  @Builder
+  @NoArgsConstructor
+  @AllArgsConstructor
+  static class Taiueo implements ArgumentsProvider {
+    private int player;
+    private int row;
+    private int column;
+    private boolean result;
+
+    @Override
+    public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
+      return Stream.of(
+          Arguments.of(
+              Taiueo.builder().player(0).row(0).column(0).result(false).build()
+          )
+      );
     }
   }
 }
