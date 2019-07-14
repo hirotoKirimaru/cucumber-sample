@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,63 +32,19 @@ class OthelloTest {
     assertEquals(expect, target.board);
   }
 
-  @Disabled("staticな値ではないとできないため、Builderクラスを使えないので除外")
   @ParameterizedTest
-  @MethodSource("aiueo")
-  @DisplayName("player?は?行?列に置けるか")
-  void hoge(int player, int row, int column, boolean result) {
-    assertEquals(1, player);
-    assertEquals(0, row);
-    assertEquals(0, column);
-    assertEquals(false, result);
-  }
-
-  private static Stream<Arguments> aiueo() {
-    return Stream.of(
-        Arguments.of(1, 0, 0, false)
-    );
-  }
-
-  @Disabled
-  @ParameterizedTest
-  @EnumSource(Saiueo.class)
-  @DisplayName("player?は?行?列に置けるか2")
-  void hige(Saiueo saiueo) {
-
-    assertEquals(saiueo.result, target.canSetPiece(saiueo.player, saiueo.row, saiueo.column));
-  }
-
-  enum Saiueo {
-    A(1, 0, 0, false),
-    B(1, 0, 1, false),
-    ;
-
-    private final int player;
-    private final int row;
-    private final int column;
-    private final boolean result;
-
-    Saiueo(int player, int row, int column, boolean result) {
-      this.player = player;
-      this.row = row;
-      this.column = column;
-      this.result = result;
-    }
-  }
-
-  @ParameterizedTest
-  @ArgumentsSource(Taiueo.class)
+  @ArgumentsSource(CanSetPlayerPieceTest.class)
   @DisplayName("player?は?行?列に置けるか3")
-  void fuga(Taiueo taiueo) {
+  void fuga(CanSetPlayerPieceTest param) {
 
-    assertEquals(taiueo.result, target.canSetPiece(taiueo.player, taiueo.row, taiueo.column));
+    assertEquals(param.result, target.canSetPlayerPiece(param.player, param.row, param.column));
   }
 
   @Data
   @Builder
   @NoArgsConstructor
   @AllArgsConstructor
-  static class Taiueo implements ArgumentsProvider {
+  static class CanSetPlayerPieceTest implements ArgumentsProvider {
     private int player;
     private int row;
     private int column;
@@ -100,7 +54,7 @@ class OthelloTest {
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
       return Stream.of(
           Arguments.of(
-              Taiueo.builder().player(0).row(0).column(0).result(false).build()
+              CanSetPlayerPieceTest.builder().player(0).row(0).column(0).result(false).build()
           )
       );
     }
