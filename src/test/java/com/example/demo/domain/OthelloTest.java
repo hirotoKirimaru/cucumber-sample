@@ -1,9 +1,6 @@
 package com.example.demo.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -15,13 +12,15 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OthelloTest {
-  private Othello target = new Othello();
+  private final Othello target;
+
+  OthelloTest() {
+    target = new Othello();
+  }
 
   @Test
   @DisplayName("ゲーム開始")
   void start() {
-    target.start();
-
     Board expect = new Board();
     expect.setBoard(new int[CodeConstant.Othello.SQUARE][CodeConstant.Othello.SQUARE]);
     (expect.getBoard())[3][3] = CodeConstant.Othello.PLAYER_1_PIECE;

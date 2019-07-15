@@ -14,4 +14,8 @@ public class Board {
     this.board[3][4] = CodeConstant.Othello.PLAYER_2_PIECE;
     this.board[4][3] = CodeConstant.Othello.PLAYER_2_PIECE;
   }
+
+  public boolean canSetOthelloPlayerPiece(int player, int row, int column) {
+    return false;
+  }
 }
