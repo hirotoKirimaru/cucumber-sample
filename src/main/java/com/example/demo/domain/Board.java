@@ -9,10 +9,10 @@ public class Board {
 
   void setOthelloBoard() {
     this.board = new int[CodeConstant.Othello.SQUARE][CodeConstant.Othello.SQUARE];
-    this.board[3][3] = CodeConstant.Othello.PLAYER_1_PIECE;
-    this.board[4][4] = CodeConstant.Othello.PLAYER_1_PIECE;
-    this.board[3][4] = CodeConstant.Othello.PLAYER_2_PIECE;
-    this.board[4][3] = CodeConstant.Othello.PLAYER_2_PIECE;
+    this.board[3][3] = CodeConstant.Othello.piece.PLAYER_1;
+    this.board[4][4] = CodeConstant.Othello.piece.PLAYER_1;
+    this.board[3][4] = CodeConstant.Othello.piece.PLAYER_2;
+    this.board[4][3] = CodeConstant.Othello.piece.PLAYER_2;
   }
 
   public boolean canSetOthelloPlayerPiece(int player, int row, int column) {

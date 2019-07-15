@@ -23,17 +23,17 @@ class OthelloTest {
   void start() {
     Board expect = new Board();
     expect.setBoard(new int[CodeConstant.Othello.SQUARE][CodeConstant.Othello.SQUARE]);
-    (expect.getBoard())[3][3] = CodeConstant.Othello.PLAYER_1_PIECE;
-    (expect.getBoard())[4][4] = CodeConstant.Othello.PLAYER_1_PIECE;
-    (expect.getBoard())[3][4] = CodeConstant.Othello.PLAYER_2_PIECE;
-    (expect.getBoard())[4][3] = CodeConstant.Othello.PLAYER_2_PIECE;
+    (expect.getBoard())[3][3] = CodeConstant.Othello.piece.PLAYER_1;
+    (expect.getBoard())[4][4] = CodeConstant.Othello.piece.PLAYER_1;
+    (expect.getBoard())[3][4] = CodeConstant.Othello.piece.PLAYER_2;
+    (expect.getBoard())[4][3] = CodeConstant.Othello.piece.PLAYER_2;
 
     assertEquals(expect, target.board);
   }
 
   @ParameterizedTest
   @ArgumentsSource(CanSetPlayerPieceTest.class)
-  @DisplayName("player?は?行?列に置けるか3")
+  @DisplayName("player?は?行?列に置けるか")
   void fuga(CanSetPlayerPieceTest param) {
 
     assertEquals(param.result, target.canSetPlayerPiece(param.player, param.row, param.column));
