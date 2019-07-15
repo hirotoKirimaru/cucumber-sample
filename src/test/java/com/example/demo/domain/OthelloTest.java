@@ -1,15 +1,22 @@
 package com.example.demo.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.*;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+import com.example.demo.domain.CodeConstant.Othello.*;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static com.example.demo.domain.CodeConstant.Othello.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OthelloTest {
   private final Othello target;
@@ -22,11 +29,11 @@ class OthelloTest {
   @DisplayName("ゲーム開始")
   void start() {
     Board expect = new Board();
-    expect.setBoard(new int[CodeConstant.Othello.SQUARE][CodeConstant.Othello.SQUARE]);
-    (expect.getBoard())[3][3] = CodeConstant.Othello.piece.PLAYER_1;
-    (expect.getBoard())[4][4] = CodeConstant.Othello.piece.PLAYER_1;
-    (expect.getBoard())[3][4] = CodeConstant.Othello.piece.PLAYER_2;
-    (expect.getBoard())[4][3] = CodeConstant.Othello.piece.PLAYER_2;
+    expect.setBoard(new int[SQUARE][SQUARE]);
+    (expect.getBoard())[3][3] = piece.PLAYER_1;
+    (expect.getBoard())[4][4] = piece.PLAYER_1;
+    (expect.getBoard())[3][4] = piece.PLAYER_2;
+    (expect.getBoard())[4][3] = piece.PLAYER_2;
 
     assertEquals(expect, target.board);
   }
