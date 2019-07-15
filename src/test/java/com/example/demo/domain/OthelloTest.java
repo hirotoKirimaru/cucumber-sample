@@ -52,7 +52,7 @@ class OthelloTest {
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
       return Stream.of(
-          CanSetPlayerPieceTest.builder().player(0).row(0).column(0).result(false).build()
+          CanSetPlayerPieceTest.builder().player(1).row(0).column(0).result(false).build()
       ).map(Arguments::of);
     }
   }

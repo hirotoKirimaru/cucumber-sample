@@ -16,6 +16,10 @@ public class Board {
   }
 
   public boolean canSetOthelloPlayerPiece(int player, int row, int column) {
-    return false;
+    int piece = board[row][column];
+    if (piece != 0 || piece == player) {
+      return false;
+    }
+    return true;
   }
 }

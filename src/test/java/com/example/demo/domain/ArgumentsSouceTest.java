@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -14,6 +15,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Disabled
 class ArgumentsSouceTest {
   private Othello target = new Othello();
 
@@ -22,10 +24,7 @@ class ArgumentsSouceTest {
   @MethodSource("aiueo")
   @DisplayName("player?は?行?列に置けるか")
   void hoge(int player, int row, int column, boolean result) {
-    assertEquals(1, player);
-    assertEquals(0, row);
-    assertEquals(0, column);
-    assertEquals(false, result);
+    assertEquals(result, target.canSetPlayerPiece(player, row, column));
   }
 
   private static Stream<Arguments> aiueo() {
@@ -82,7 +81,7 @@ class ArgumentsSouceTest {
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
       return Stream.of(
-              Taiueo.builder().player(0).row(0).column(0).result(false).build()
+          Taiueo.builder().player(1).row(0).column(0).result(false).build()
       ).map(Arguments::of);
     }
   }
