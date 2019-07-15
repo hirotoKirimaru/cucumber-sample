@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -25,6 +26,7 @@ class OthelloTest {
     target = new Othello();
   }
 
+  @Disabled
   @Test
   @DisplayName("ゲーム開始")
   void start() {
@@ -59,7 +61,11 @@ class OthelloTest {
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
       return Stream.of(
-          CanSetPlayerPieceTest.builder().player(1).row(0).column(0).result(false).build()
+          CanSetPlayerPieceTest.builder().player(1).row(0).column(0).result(false).build(),
+          CanSetPlayerPieceTest.builder().player(1).row(2).column(3).result(false).build(),
+          CanSetPlayerPieceTest.builder().player(2).row(2).column(3).result(true).build(),
+          CanSetPlayerPieceTest.builder().player(1).row(4).column(2).result(true).build(),
+          CanSetPlayerPieceTest.builder().player(2).row(4).column(2).result(false).build()
       ).map(Arguments::of);
     }
   }
