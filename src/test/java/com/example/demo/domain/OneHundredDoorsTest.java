@@ -16,8 +16,15 @@ class OneHundredDoorsTest {
             .build();
 
     target.toggle(1);
-//    assertEquals(true, target.doors[0]);
-    assertEquals(false, target.doors[0]);
+    assertEquals(true, target.doors[0]);
+    assertAll(
+        () -> assertEquals(false, target.doors[1], "1"),
+        () -> assertEquals(false, target.doors[60], "2"),
+        () -> assertEquals(false, target.doors[70], "3")
+
+    );
+
+//    assertEquals(false, target.doors[0]);
   }
 
 }
