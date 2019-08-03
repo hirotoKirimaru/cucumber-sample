@@ -22,6 +22,19 @@ class OneHundredDoorsTest {
   @DisplayName("executeの動作チェック")
   @Nested
   class execute {
+    @DisplayName("1")
+    @Test
+    void test_01() {
+
+      boolean[] expect = new boolean[100];
+      target.execute();
+      assertAll(
+//          ()-> assertEquals(expect, target.getDoors(),"雑比較"),
+          () -> assertEquals(true, target.getDoors()[0], "雑比較")
+
+      );
+    }
+
 
   }
 
@@ -86,8 +99,6 @@ class OneHundredDoorsTest {
     }
 
   }
-
-
 
 
 }
