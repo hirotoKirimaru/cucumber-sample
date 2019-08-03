@@ -1,15 +1,15 @@
 package com.example.demo.domain;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Builder
 public class OneHundredDoors {
-  public boolean[] doors;
+
+  private boolean[] doors;
 
   public void toggle(int i) {
-    for (int a = 0; a < doors.length; a += i) {
+    for (int a = i - 1; a < doors.length; a += i) {
       doors[a] = !doors[a];
     }
   }
