@@ -17,7 +17,6 @@ public class OneHundredDoors {
   public void execute() {
     for (int i = 1; i <= doors.length; i++) {
       toggle(i);
-      System.out.println(i);
     }
   }
 }
