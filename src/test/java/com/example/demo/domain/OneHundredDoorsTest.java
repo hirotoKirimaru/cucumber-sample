@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -7,14 +8,27 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OneHundredDoorsTest {
-  OneHundredDoors target = OneHundredDoors.builder()
-      .doors(new boolean[100])
-      .build();
+  OneHundredDoors target;
 
-  @DisplayName("toggle")
+  @BeforeEach
+  void setup() {
+    target =
+        OneHundredDoors.builder()
+            .doors(new boolean[100])
+            .build();
+  }
+
+
+  @DisplayName("executeの動作チェック")
   @Nested
+  class execute {
+
+  }
+
+  @Nested
+  @DisplayName("toggleの動作チェック")
   class toggle {
-    @DisplayName("")
+    @DisplayName("1")
     @Test
     void test_01() {
       assertAll(
@@ -33,7 +47,7 @@ class OneHundredDoorsTest {
       );
     }
 
-    @DisplayName("")
+    @DisplayName("2")
     @Test
     void test_02() {
       assertAll(
@@ -52,7 +66,7 @@ class OneHundredDoorsTest {
       );
     }
 
-    @DisplayName("")
+    @DisplayName("3")
     @Test
     void test_03() {
       assertAll(
