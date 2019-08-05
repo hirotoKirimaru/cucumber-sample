@@ -19,10 +19,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ArgumentsSouceTest {
   private Othello target = new Othello();
 
+
+  //  @Disabled("staticな値ではないとできないため、Builderクラスを使えないので除外")
+  @ParameterizedTest
+  @ValueSource(strings = {"1", "2", "3"})
+  @DisplayName("player?は?行?列に置けるか4")
+  void hoge3(String param) {
+    assertEquals("1", param);
+  }
+
+
   //  @Disabled("staticな値ではないとできないため、Builderクラスを使えないので除外")
   @ParameterizedTest
   @MethodSource("aiueo")
-  @DisplayName("player?は?行?列に置けるか")
+  @DisplayName("player?は?行?列に置けるか1")
   void hoge(int player, int row, int column, boolean result) {
     assertEquals(result, target.canSetPlayerPiece(player, row, column));
   }
@@ -81,7 +91,9 @@ class ArgumentsSouceTest {
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
       return Stream.of(
-          Taiueo.builder().player(1).row(0).column(0).result(false).build()
+          Taiueo.builder().player(1).row(0).column(0).result(false).build(),
+          Taiueo.builder().player(2).row(0).column(0).result(true).build(),
+          Taiueo.builder().player(1).row(0).column(1).result(true).build()
       ).map(Arguments::of);
     }
   }
