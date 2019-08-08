@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -33,13 +34,9 @@ class AssertX {
     );
   }
 
+
   @Test
   void _assertThat() {
-//    assertThat(list.get(0)).as("乱太郎")
-//        .hasFieldOrPropertyWithValue("name", "")
-//        .hasFieldOrPropertyWithValue("age", "")
-//        .hasFieldOrPropertyWithValue("sex", "");
-
     // 特徴: 1度でassertできる。
     // しかし、途中でfalseになった場合、以降の処理が検証されない。
     // assertAllでくくった場合、検証メソッドの数だけ処理を繰り返す。
@@ -51,13 +48,21 @@ class AssertX {
         .hasFieldOrPropertyWithValue("age", "10")
         .hasFieldOrPropertyWithValue("sex", "1");
 
+    // assertThatなら、softAssertionsを使う方がよさそうだ。
+    SoftAssertions softly = new SoftAssertions();
+    softly.assertThat(list.get(0)).as("乱太郎")
+        .hasFieldOrPropertyWithValue("name", "")
+        .hasFieldOrPropertyWithValue("age", "")
+        .hasFieldOrPropertyWithValue("sex", "");
+    softly.assertAll();
 
-    assertAll(
-        () -> assertThat(list.size()).as("size").isEqualTo(1),
-        () -> assertThat(list.get(0)).as("乱太郎").isEqualTo(null),
-        () -> assertThat(list.get(1)).as("きり丸").isEqualTo(null),
-        () -> assertThat(list.get(2)).as("新兵衛").isEqualTo(null)
-    );
+
+//    assertAll(
+//        () -> assertThat(list.size()).as("size").isEqualTo(1),
+//        () -> assertThat(list.get(0)).as("乱太郎").isEqualTo(null),
+//        () -> assertThat(list.get(1)).as("きり丸").isEqualTo(null),
+//        () -> assertThat(list.get(2)).as("新兵衛").isEqualTo(null)
+//    );
   }
 
   @Data
