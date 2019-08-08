@@ -23,6 +23,8 @@ class AssertX {
           Ninja.builder().name("きり丸").age("9").sex("1").build(),
           Ninja.builder().name("新兵衛").age("8").sex("2").build()
       );
+  Ninja RANTARO =
+      Ninja.builder().name("乱太郎").age("10").sex("1").build();
 
   @Test
   void _assertEquals() {
@@ -51,7 +53,8 @@ class AssertX {
     // assertThatなら、softAssertionsを使う方がよさそうだ。
     SoftAssertions softly = new SoftAssertions();
     softly.assertThat(list.get(0)).as("乱太郎")
-        .hasFieldOrPropertyWithValue("name", "")
+        .isEqualTo(RANTARO)
+        .hasFieldOrPropertyWithValue("name", "リンターロ")
         .hasFieldOrPropertyWithValue("age", "")
         .hasFieldOrPropertyWithValue("sex", "");
     softly.assertAll();
