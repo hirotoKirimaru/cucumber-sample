@@ -16,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Disabled
 class AssertX {
-  List<User> list =
+  List<Ninja> list =
       Arrays.asList(
-          User.builder().name("乱太郎").age("10").sex("1").build(),
-          User.builder().name("きり丸").age("9").sex("1").build(),
-          User.builder().name("新兵衛").age("8").sex("2").build()
+          Ninja.builder().name("乱太郎").age("10").sex("1").build(),
+          Ninja.builder().name("きり丸").age("9").sex("1").build(),
+          Ninja.builder().name("新兵衛").age("8").sex("2").build()
       );
 
   @Test
@@ -35,12 +35,28 @@ class AssertX {
 
   @Test
   void _assertThat() {
+//    assertThat(list.get(0)).as("乱太郎")
+//        .hasFieldOrPropertyWithValue("name", "")
+//        .hasFieldOrPropertyWithValue("age", "")
+//        .hasFieldOrPropertyWithValue("sex", "");
+
+    // 特徴: 1度でassertできる。
+    // しかし、途中でfalseになった場合、以降の処理が検証されない。
+    // assertAllでくくった場合、検証メソッドの数だけ処理を繰り返す。
+    // ただし、name, age, sexの検証メソッドをそれぞれ呼ぶのではなく、
+    // nameとageとsexの検証セットを3回繰り返す。
+    // 同じエラーメッセージが何度も発生するのでうざったいし、後続が処理されない。
+    assertThat(list.get(0)).as("乱太郎")
+        .hasFieldOrPropertyWithValue("name", "乱太郎")
+        .hasFieldOrPropertyWithValue("age", "10")
+        .hasFieldOrPropertyWithValue("sex", "1");
+
+
     assertAll(
         () -> assertThat(list.size()).as("size").isEqualTo(1),
         () -> assertThat(list.get(0)).as("乱太郎").isEqualTo(null),
         () -> assertThat(list.get(1)).as("きり丸").isEqualTo(null),
         () -> assertThat(list.get(2)).as("新兵衛").isEqualTo(null)
-
     );
   }
 
@@ -48,7 +64,7 @@ class AssertX {
   @Builder
   @NoArgsConstructor
   @AllArgsConstructor
-  private static class User {
+  private static class Ninja {
     String name;
     String age;
     String sex;
