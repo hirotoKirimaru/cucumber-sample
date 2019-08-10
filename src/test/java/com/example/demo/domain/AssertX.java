@@ -26,6 +26,12 @@ class AssertX {
   Ninja RANTARO =
       Ninja.builder().name("乱太郎").age("10").sex("1").build();
 
+  Ninja KIRIMARU =
+      Ninja.builder().name("きり丸").age("9").sex("1").build();
+
+  Ninja SHINBE =
+      Ninja.builder().name("新兵衛").age("8").sex("2").build();
+
   @Test
   void _assertEquals() {
     assertAll(
@@ -52,20 +58,27 @@ class AssertX {
 
     // assertThatなら、softAssertionsを使う方がよさそうだ。
     SoftAssertions softly = new SoftAssertions();
+    softly.assertThat(list).hasSize(1);
     softly.assertThat(list.get(0)).as("乱太郎")
-        .isEqualTo(RANTARO)
-        .hasFieldOrPropertyWithValue("name", "リンターロ")
-        .hasFieldOrPropertyWithValue("age", "")
-        .hasFieldOrPropertyWithValue("sex", "");
+        .isEqualTo(null);
+//        .hasFieldOrPropertyWithValue("name", "リンターロ")
+//        .hasFieldOrPropertyWithValue("age", "")
+//        .hasFieldOrPropertyWithValue("sex", "");
+
+    softly.assertThat(list.get(1)).as("きり丸").isEqualTo(null);
+    softly.assertThat(list.get(2)).as("新兵衛").isEqualTo(null);
     softly.assertAll();
 
+  }
 
-//    assertAll(
-//        () -> assertThat(list.size()).as("size").isEqualTo(1),
-//        () -> assertThat(list.get(0)).as("乱太郎").isEqualTo(null),
-//        () -> assertThat(list.get(1)).as("きり丸").isEqualTo(null),
-//        () -> assertThat(list.get(2)).as("新兵衛").isEqualTo(null)
-//    );
+  @Test
+  void _assertThat2() {
+    assertAll(
+        () -> assertThat(list.get(0)).as("乱太郎")
+            .hasFieldOrPropertyWithValue("name", null)
+            .hasFieldOrPropertyWithValue("age", null)
+            .hasFieldOrPropertyWithValue("sex", null)
+    );
   }
 
   @Data
