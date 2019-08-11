@@ -2,7 +2,7 @@ version: 2.1
 workflows:
   due_push_or_pull_request: #workflow名
     jobs:
-      - test:
+      - test
 jobs:
   test:
     docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
