@@ -1,0 +1,203 @@
+version: 2.1
+orbs:
+  slack: circleci/slack@0.1.10
+executors:
+  default:
+    docker:
+      - image: circleci/node:8.11.3
+workflows:
+  due_push_or_pull_request: #workflow名
+    jobs:
+      - checkoutFile
+      - test:
+          requires:
+            - checkoutFile
+      - sonarqube:
+          requires:
+            - checkoutFile
+      - formatCheck:
+          requires:
+            - checkoutFile
+      - stepCountDiff:
+          requires:
+            - checkoutFile
+          filters:
+            branches:
+              only: /.*feat.*/
+      - stepCountAll:
+          requires:
+            - checkoutFile
+          filters:
+            branches:
+              only: master
+      - humanCheck:
+          type: approval #人によるチェック
+          requires:
+            - test
+            - formatCheck
+      - send-approval-link:
+          requires:
+            - test
+            - formatCheck
+      - releaseStaging:
+          requires:
+            - humanCheck
+      - reviewdog:
+          requires:
+            - checkoutFile
+  daily_workflow:
+    triggers:
+      - schedule:
+          cron: "00 15 * * *" #UTCなので+9(0時起動)
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - checkoutFile
+      - stepCountAll:
+          requires:
+            - checkoutFile
+jobs:
+  checkoutFile:
+    docker:
+      - image: circleci/node:8.11.3
+    working_directory: ~/workspace
+    steps:
+      - restore_cache:
+          keys:
+            - source-v1-{{ .Branch }}-{{ .Revision }}
+            - source-v1-{{ .Branch }}-
+            - source-v1-
+      - checkout
+      - save_cache:
+          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - .git
+      - restore_cache:
+          key: v1-npm-deps-{{ checksum "yarn.lock" }}
+      - run: yarn
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: . # workspaceのrootパス（絶対パスかworking_directoryからの相対パス）
+          paths:
+            - . # 共有するパス（絶対パスかrootからの相対パス）
+  test:
+    docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
+      - image: circleci/openjdk:8u181-jdk-node-browsers-legacy
+    working_directory: ~/workspace
+    steps:
+      - attach_workspace: # workspaceをアタッチする
+          at: .
+      - run: sudo chmod +x ./gradlew
+      - run: ./gradlew test
+  sonarqube:
+    docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
+      - image: circleci/openjdk:8u181-jdk-node-browsers-legacy
+    working_directory: ~/workspace
+    steps:
+      - attach_workspace: # workspaceをアタッチする
+          at: .
+      - run: sudo chmod +x ./gradlew
+      - run:
+          name: sonarqube
+          command: |
+            ./gradlew sonarqube \
+            -Dsonar.projectKey=hirotoKirimaru_circleCITest \
+            -Dsonar.organization=hirotokirimaru-github \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=4f8bf55109e6f26a1b2fe41c2412e30d534a624c
+  formatCheck:
+    docker:
+      - image: circleci/node:8.11.3
+    working_directory: ~/workspace
+    steps:
+      - attach_workspace: # workspaceをアタッチする
+          at: .
+      - run: sudo chmod +x node_modules/.bin/eslint
+      - run:
+          name: lint
+          command: |
+            mkdir -p /tmp/test-reports/eslint
+            node_modules/.bin/eslint . --format junit --output-file /tmp/test-reports/eslint/results.xml
+      - store_test_results:
+          path: /tmp/test-reports
+      - store_artifacts:
+          path: /tmp/test-reports
+  stepCountDiff:
+    docker:
+      - image: circleci/node:8.11.3
+    working_directory: ~/workspace
+    steps:
+      - attach_workspace: # workspaceをアタッチする
+          at: .
+      - run: sudo chmod +x ./node_modules/.bin/cloc
+      - run:
+          name: cloc
+          command: |
+            # 差分比較元のコミットハッシュ(masterからの分岐元を調べている)
+            BASE_COMMIT=$(git show-branch --sha1-name master | tail -1 | awk '{print substr($0, index($0, "[") +1, index($0, "]") -2)}')
+            # 差分確認元ハッシュの確認用
+            echo $BASE_COMMIT
+            # 差分
+            ./node_modules/.bin/cloc --diff --vcs=git $BASE_COMMIT HEAD >> /tmp/stepCount.txt
+      - store_test_results:
+          path: /tmp/
+      - store_artifacts:
+          path: /tmp/
+  stepCountAll:
+    docker:
+      - image: circleci/node:8.11.3
+    working_directory: ~/workspace
+    steps:
+      - attach_workspace: # workspaceをアタッチする
+          at: .
+      - run: sudo chmod +x node_modules/.bin/cloc
+      - run:
+          name: cloc
+          command: |
+            # 差分
+            ./node_modules/.bin/cloc src >> /tmp/stepCount.txt
+      - store_test_results:
+          path: /tmp/
+      - store_artifacts:
+          path: /tmp/
+  send-approval-link:
+    docker:
+      - image: circleci/node:8.11.3
+    steps:
+      - slack/notify:
+          message: |
+            Please check and approve Job to deploy.
+            https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}
+          webhook: "https://hooks.slack.com/services/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"
+  releaseStaging:
+    docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
+      - image: circleci/openjdk:8u181-jdk-node-browsers-legacy
+    working_directory: ~/workspace
+    steps:
+      - attach_workspace: # workspaceをアタッチする
+          at: .
+      - run: mkdir /tmp/jarFile;
+      - run: sudo chmod +x ./gradlew
+      - run: ./gradlew build
+      - run: cp ./build/libs/circleCITest-0.0.1-SNAPSHOT.jar /tmp/jarFile/circleCItest.jar;
+      - store_artifacts:
+          path: /tmp/jarFile/circleCITest.jar;
+          destination: artifact-file
+      - store_artifacts:
+          path: /tmp/jarFile
+  reviewdog:
+    docker:
+      - image: golang:latest
+        environment:
+          REVIEWDOG_VERSION: "0.9.11"
+    working_directory: ~/workspace
+    steps:
+      - attach_workspace: # workspaceをアタッチする
+          at: .
+      - run: curl -fSL https://github.com/haya14busa/reviewdog/releases/download/$REVIEWDOG_VERSION/reviewdog_linux_amd64 -o reviewdog && chmod +x ./reviewdog
+      - run: go vet ./... 2>&1 | ./reviewdog -f=govet -reporter=github-pr-check
