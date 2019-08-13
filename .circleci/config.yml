@@ -41,7 +41,7 @@ jobs:
           name: sonarqube
           command: |
             ./gradlew sonarqube \
-            -Dsonar.projectKey=hirotoKirimaru_cucumber_test \
-            -Dsonar.organization=hirotokirimaru-github \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=e4fad5649f8a99331522c44b01ba548962654be5
+              -Dsonar.projectKey=hirotoKirimaru_cucumber-sample \
+              -Dsonar.organization=hirotokirimaru-github \
+              -Dsonar.host.url=https://sonarcloud.io \
+              -Dsonar.login=7a3d5a80c3619dce9eef1efa9d4e9b9fbf0b9f83
