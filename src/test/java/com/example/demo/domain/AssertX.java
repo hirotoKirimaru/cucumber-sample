@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -15,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//@Disabled
+@Disabled
 class AssertX {
   List<Ninja> list =
       Arrays.asList(
@@ -32,6 +33,7 @@ class AssertX {
   Ninja SHINBE =
       Ninja.builder().name("新兵衛").age("8").sex("2").build();
 
+  @Disabled
   @Test
   void _assertEquals() {
     assertAll(
@@ -42,7 +44,7 @@ class AssertX {
     );
   }
 
-
+  @Disabled
   @Test
   void _assertThat() {
     // 特徴: 1度でassertできる。
@@ -71,6 +73,7 @@ class AssertX {
 
   }
 
+  @DisplayName("assertThatの検証2")
   @Test
   void _assertThat2() {
     assertAll(
