@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.2.0.M3'
     id 'java'
     id "org.sonarqube" version "2.7"
+    id "jacoco"
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -46,6 +47,16 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+sonarqube {
+    properties {
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.projectKey", "hirotoKirimaru_cucumber-sample"
+        property "sonar.organization", "hirotokirimaru-github"
+        property "sonar.login", "7a3d5a80c3619dce9eef1efa9d4e9b9fbf0b9f83"
+        property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+    }
 }
 
 /**
