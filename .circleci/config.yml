@@ -6,6 +6,9 @@ workflows:
       - test:
           requires:
             - checkoutFile
+      - sonarqube:
+          requires:
+            - checkoutFile
 jobs:
   checkoutFile:
     docker:
@@ -26,3 +29,19 @@ jobs:
           at: .
       - run: sudo chmod +x ./gradlew
       - run: ./gradlew test
+  sonarqube:
+    docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
+      - image: circleci/openjdk:8u181-jdk-node-browsers-legacy
+    working_directory: ~/workspace
+    steps:
+      - attach_workspace: # workspaceをアタッチする
+          at: .
+      - run: sudo chmod +x ./gradlew
+      - run:
+          name: sonarqube
+          command: |
+            ./gradlew sonarqube \
+            -Dsonar.projectKey=hirotoKirimaru_cucumber_test \
+            -Dsonar.organization=hirotokirimaru-github \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=e4fad5649f8a99331522c44b01ba548962654be5
