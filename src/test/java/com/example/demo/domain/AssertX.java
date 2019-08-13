@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -83,6 +84,20 @@ class AssertX {
             .hasFieldOrPropertyWithValue("sex", null)
     );
   }
+
+  @Test
+  void _assertThatThrownBy() {
+
+    SoftAssertions softly = new SoftAssertions();
+    softly.assertThatThrownBy(
+        () -> list.get(999)
+    ).isInstanceOfSatisfying(ArrayIndexOutOfBoundsException.class,
+        e -> assertEquals(e.getMessage(), "Index 999 out of bounds for length 3")
+    );
+
+    softly.assertAll();
+  }
+
 
   @Data
   @Builder
