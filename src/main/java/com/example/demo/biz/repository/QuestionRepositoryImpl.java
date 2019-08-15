@@ -1,5 +1,6 @@
 package com.example.demo.biz.repository;
 
+import com.example.demo.biz.domain.CodeConstant;
 import com.example.demo.biz.domain.Questions;
 import com.example.demo.biz.mapper.QuestionMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,18 +21,18 @@ public class QuestionRepositoryImpl implements QuestionRepository {
   public List<Questions> findQuestions(List<Integer> genre, int size) {
     List<Questions> questionsList =
         Arrays.asList(
-            Questions.builder().genre(1).build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build()
+            Questions.builder().genre(CodeConstant.Questions.Genre.JAVA.getType()).build(),
+            Questions.builder().genre(CodeConstant.Questions.Genre.JAVA.getType()).build(),
+            Questions.builder().genre(CodeConstant.Questions.Genre.JAVA.getType()).build(),
+            Questions.builder().genre(CodeConstant.Questions.Genre.JAVASCRIPT.getType()).build(),
+            Questions.builder().genre(CodeConstant.Questions.Genre.JAVASCRIPT.getType()).build(),
+            Questions.builder().genre(CodeConstant.Questions.Genre.JAVASCRIPT.getType()).build(),
+            Questions.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build(),
+            Questions.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build(),
+            Questions.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build(),
+            Questions.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build()
         );
 
-    return null;
+    return questionsList;
   }
 }

@@ -1,7 +1,11 @@
 package com.example.demo.biz.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 public class CodeConstant {
-  static class Othello {
+
+  public static class Othello {
     /**
      * 升目.
      */
@@ -19,6 +23,24 @@ public class CodeConstant {
       static int PLAYER_2_CAN_SET = 4;
       static int SOME_PLAYER_SET = 6;
     }
+
+  }
+
+  public static class Questions {
+    @Getter
+    @AllArgsConstructor
+    public enum Genre {
+      JAVA(1),
+      JAVASCRIPT(2),
+      RUBY(3),
+      PYTHON(4),
+
+      ;
+      int type;
+
+
+    }
+
 
   }
 
