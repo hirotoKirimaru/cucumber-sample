@@ -1,6 +1,5 @@
-package com.example.demo.domain.exception;
+package com.example.demo.domain.interceptor;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -8,8 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-@Slf4j
-public class ExceptionHandler {
+public class DomainInterceptor {
 
   @Before(
       "execution(* com.example.demo.domain.*.*(..)))"

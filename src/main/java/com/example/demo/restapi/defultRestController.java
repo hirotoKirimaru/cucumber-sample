@@ -1,5 +1,6 @@
 package com.example.demo.restapi;
 
+import com.example.demo.exception.AlreadyExistsException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
@@ -12,21 +13,21 @@ import java.util.Objects;
 @RestController
 public class defultRestController {
 
-    @RequestMapping("/")
-    public String hogeApi(@Validated Param param) throws Exception {
-        if (Objects.equals(param.getPiyo(), "runtime")) {
-            throw new RuntimeException();
-        }
-
-        return "hogehoge";
+  @RequestMapping("/")
+  public String hogeApi(@Validated Param param) throws Exception {
+    if (Objects.equals(param.getPiyo(), "runtime")) {
+      throw new AlreadyExistsException();
     }
 
-    @Data
-    @AllArgsConstructor
-    private static class Param {
-        @NotNull
-        private String piyo;
-    }
+    return "hogehoge";
+  }
+
+  @Data
+  @AllArgsConstructor
+  private static class Param {
+    @NotNull
+    private String piyo;
+  }
 
 //    @Component
 //    private static class ParamValidater implements Validator {
