@@ -1,8 +1,8 @@
-package com.example.demo.domain;
+package com.example.demo.biz.domain;
 
 import lombok.Data;
 
-import static com.example.demo.domain.CodeConstant.Othello.*;
+import static com.example.demo.biz.domain.CodeConstant.Othello.*;
 
 @Data
 public class Board {

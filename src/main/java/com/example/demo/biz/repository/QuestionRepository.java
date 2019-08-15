@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package com.example.demo.biz.repository;
 
-import com.example.demo.domain.Questions;
+import com.example.demo.biz.domain.Questions;
 
 import java.util.List;
 

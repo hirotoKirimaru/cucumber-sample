@@ -1,8 +1,7 @@
-package com.example.demo.service;
+package com.example.demo.biz.service;
 
-import com.example.demo.domain.Questions;
-import com.example.demo.repository.QuestionRepository;
-import org.assertj.core.api.JUnitSoftAssertions;
+import com.example.demo.biz.domain.Questions;
+import com.example.demo.biz.repository.QuestionRepository;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

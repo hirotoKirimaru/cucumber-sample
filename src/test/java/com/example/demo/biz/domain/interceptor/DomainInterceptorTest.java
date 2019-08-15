@@ -1,6 +1,6 @@
-package com.example.demo.domain.interceptor;
+package com.example.demo.biz.domain.interceptor;
 
-import com.example.demo.domain.OneHundredDoors;
+import com.example.demo.biz.domain.OneHundredDoors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;

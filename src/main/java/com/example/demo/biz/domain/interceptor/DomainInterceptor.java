@@ -1,4 +1,4 @@
-package com.example.demo.domain.interceptor;
+package com.example.demo.biz.domain.interceptor;
 
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 public class DomainInterceptor {
 
   @Before(
-      "execution(* com.example.demo.domain.*.*(..)))"
+      "execution(* com.example.demo.biz.domain.*.*(..)))"
   )
   void before() {
     System.out.println("*** START ***");
   }
 
   @After(
-      "execution(* com.example.demo.domain.*.*(..)))"
+      "execution(* com.example.demo.biz.domain.*.*(..)))"
   )
   void after() {
     System.out.println("*** END ***");

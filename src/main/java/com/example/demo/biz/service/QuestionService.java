@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package com.example.demo.biz.service;
 
-import com.example.demo.domain.Questions;
+import com.example.demo.biz.domain.Questions;
 
 import java.util.List;
 

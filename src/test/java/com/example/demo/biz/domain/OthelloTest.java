@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.demo.biz.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,11 +12,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-import com.example.demo.domain.CodeConstant.Othello.*;
+import com.example.demo.biz.domain.CodeConstant.Othello.*;
 
 import java.util.stream.Stream;
 
-import static com.example.demo.domain.CodeConstant.Othello.*;
+import static com.example.demo.biz.domain.CodeConstant.Othello.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OthelloTest {
