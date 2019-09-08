@@ -1,28 +1,50 @@
 package jp.co.kelly.biz.domain;
 
+import jdk.jfr.Name;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
+import java.lang.reflect.Method;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Disabled
+//@Disabled
+@DisplayNameGeneration(ArgumentsSouceTest.Gen.class)
 class ArgumentsSouceTest {
   private Othello target = new Othello();
 
+  static class Gen extends DisplayNameGenerator.Standard {
+
+    @Override
+    public String generateDisplayNameForClass(Class<?> testClass) {
+      return "1:"+ super.generateDisplayNameForClass(testClass);
+    }
+
+    @Override
+    public String generateDisplayNameForNestedClass(Class<?> nestedClass) {
+      return "2:"+super.generateDisplayNameForNestedClass(nestedClass);
+    }
+
+    @Override
+    public String generateDisplayNameForMethod(Class<?> testClass, Method testMethod) {
+      return "3:" + super.generateDisplayNameForMethod(testClass, testMethod);
+    }
+  }
 
   //  @Disabled("staticな値ではないとできないため、Builderクラスを使えないので除外")
-  @ParameterizedTest
+  @ParameterizedTest(name = "gagaga[index]")
   @ValueSource(strings = {"1", "2", "3"})
-  @DisplayName("player?は?行?列に置けるか4")
+//  @DisplayName("player?は?行?列に置けるか4")
   void hoge3(String param) {
     assertEquals("1", param);
   }
