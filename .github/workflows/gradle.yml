@@ -13,5 +13,11 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: sudo
+      run: sudo chmod +x ./gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: test
+      run: ./gradlew test
+    - name: sonarcloud
+      run: ./gradlew sonarqube
