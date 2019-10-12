@@ -32,6 +32,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
             Questions.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build(),
             Questions.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build()
         );
+    mapper.isis();
 
     return questionsList;
   }

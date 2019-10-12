@@ -1,34 +1,35 @@
 package jp.co.kelly.biz.repository;
 
+import jp.co.kelly.biz.domain.CodeConstant;
 import jp.co.kelly.biz.domain.Questions;
 import jp.co.kelly.biz.mapper.QuestionMapper;
-import jp.co.kelly.biz.domain.CodeConstant;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static org.mockito.Mockito.mock;
 
+@ExtendWith(MockitoExtension.class)
 class QuestionRepositoryImplTest {
+  @Mock
   private QuestionMapper mapper;
   private QuestionRepository target;
 
   private SoftAssertions softly = new SoftAssertions();
 
-  QuestionRepositoryImplTest() {
-    mapper = mock(QuestionMapper.class);
-    target = new QuestionRepositoryImpl(mapper);
-  }
-
   @BeforeEach
   void setup() {
+    target = new QuestionRepositoryImpl(mapper);
     softly = new SoftAssertions();
   }
 
@@ -49,8 +50,6 @@ class QuestionRepositoryImplTest {
         CodeConstant.Questions.Genre.JAVASCRIPT.getType(),
         CodeConstant.Questions.Genre.RUBY.getType()
     );
-
-
     List<Questions> actual = target.findQuestions(genreList, 10);
 
     softly.assertThat(actual).hasSize(10);
