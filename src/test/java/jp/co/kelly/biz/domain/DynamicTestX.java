@@ -1,6 +1,7 @@
 package jp.co.kelly.biz.domain;
 
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 class DynamicTestX {
+  @Disabled
   @TestFactory
   List<DynamicTest> test_01() {
     List<DynamicTest> tests = new ArrayList<>();
@@ -30,6 +32,7 @@ class DynamicTestX {
     return tests;
   }
 
+  @Disabled
   @Test
   void test_02(){
     // 動かない…

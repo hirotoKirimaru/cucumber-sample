@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -39,7 +40,7 @@ class ArgumentsSouceTest {
     }
   }
 
-  //  @Disabled("staticな値ではないとできないため、Builderクラスを使えないので除外")
+    @Disabled("staticな値ではないとできないため、Builderクラスを使えないので除外")
   @ParameterizedTest(name = "gagaga[index]")
   @ValueSource(strings = {"1", "2", "3"})
 //  @DisplayName("player?は?行?列に置けるか4")
@@ -89,6 +90,7 @@ class ArgumentsSouceTest {
     }
   }
 
+  @Disabled
   @ParameterizedTest
   @ArgumentsSource(Taiueo.class)
   @DisplayName("player?は?行?列に置けるか3")
