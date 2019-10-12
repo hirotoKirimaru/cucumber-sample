@@ -21,3 +21,5 @@ jobs:
       run: ./gradlew test
     - name: sonarcloud
       run: ./gradlew sonarqube
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_SONAR }}
