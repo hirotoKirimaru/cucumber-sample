@@ -1,4 +1,4 @@
-package jp.co.kelly.restapi;
+package jp.co.kelly.restapi.handler;
 
 import jp.co.kelly.exception.ConflictException;
 import org.springframework.http.HttpStatus;
