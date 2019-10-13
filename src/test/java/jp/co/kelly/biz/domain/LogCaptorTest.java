@@ -26,7 +26,7 @@ class LogCaptorTest {
     private LogCaptor target;
 
     @Mock
-    private Appender mockAppender;
+    private Appender<ch.qos.logback.classic.spi.ILoggingEvent> mockAppender;
     @Captor
     private ArgumentCaptor<LoggingEvent> logCaptor;
 
