@@ -3,10 +3,7 @@ package jp.co.kelly.biz.domain;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.Appender;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -14,12 +11,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class LogCaptorTest {
@@ -62,4 +60,23 @@ class LogCaptorTest {
         assertThat(allValues.get(1).getFormattedMessage()).isEqualTo("ログ=end");
 
     }
+
+    @Nested
+    class mockValue {
+        @Captor
+        ArgumentCaptor<LocalDateTime> mockTime;
+
+        @DisplayName("モックした値のパラメータ確認")
+        @Test
+        void test_01() {
+            target.execute();
+
+            verify(dateConverter).toString(mockTime.capture());
+            List<LocalDateTime> allValues = mockTime.getAllValues();
+
+            LocalDateTime expectTime = LocalDateTime.of(2019,1,1,1,1);
+            assertThat(allValues.get(0)).isEqualTo(expectTime);
+        }
+    }
+
 }
