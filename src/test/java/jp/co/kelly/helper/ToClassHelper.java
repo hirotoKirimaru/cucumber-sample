@@ -64,9 +64,7 @@ public class ToClassHelper {
 
     @Test
     public void test_02() {
-        Path path = Paths.get("src",
-                "test",
-                "resources", "jp", "co", "kelly", "human.json");
+        Path path = Paths.get("src\\test\\resources", "jp\\co\\kelly\\human.json");
 
         Human expect = Human.builder()
                 .age(18)
