@@ -10,10 +10,6 @@ import java.util.List;
 public class HogeMstAsToSendSubSystem implements ToSendSubSystem {
     private final QuestionRepository repository;
 
-    void createCsv() {
-        execute();
-    }
-
     @Override
     public List<HogeMst> getRecord() {
         return Arrays.asList(

@@ -24,6 +24,6 @@ class HogeMstAsToSendSubSystemTest {
 
     @Test
     void constructor() {
-        target.createCsv();
+        target.execute();
     }
 }
