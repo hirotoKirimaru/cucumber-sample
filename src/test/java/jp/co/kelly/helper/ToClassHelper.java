@@ -28,12 +28,10 @@ public class ToClassHelper {
 
             String json = IOUtils.toString(input, StandardCharsets.UTF_8);
             return fromJson(json, clazz);
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("何か失敗した");
         }
-        throw new RuntimeException("何か失敗した");
     }
 
     <T> T fromJson(String json, Class<T> clazz) {
