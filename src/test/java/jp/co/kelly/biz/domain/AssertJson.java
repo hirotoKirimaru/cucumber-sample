@@ -20,12 +20,15 @@ class AssertJson {
         @Test
         void test_00() throws JSONException {
             // language=json
-            String expect = "{\"animal\": \"gorilla\",\n" +
-                    " \"age\": 18\n" +
+            String expect = "{\n" +
+                    "  \"animal\": \"gorilla\",\n" +
+                    "  \"age\": 18\n" +
                     "}\n";
 
             // language=json
-            String actual = "{ \"age\": 18," +
+            String actual = "{\n" +
+                    "  \"age\": 18,\n" +
+                    "  " +
                     "\"animal\": \"gorilla\"\n" +
                     "}\n";
 
