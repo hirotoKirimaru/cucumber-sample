@@ -31,12 +31,19 @@ class NestedList {
 
     @Test
     void test_02() {
+      ReturnHistory expect1 = ReturnHistory.builder()
+          .id("1")
+          .date(LocalDateTime.of(2015, 1, 1, 1, 1, 1))
+          .build();
+
       Entry entry =
           Entry.builder()
               .detail(
                   List.of(
                       Detail.builder()
-                          .returnHistory(List.of())
+                          .returnHistory(List.of(
+                              expect1
+                          ))
                           .build(),
                       Detail.builder()
                           .build()
@@ -45,35 +52,41 @@ class NestedList {
               .build();
 
       List<ReturnHistory> actual = entry.flatHistory();
-      System.out.println(actual);
 
       assertThat(actual).hasSize(1);
+      assertThat(actual).containsExactlyInAnyOrder(
+          expect1
+      );
     }
 
     @Test
     void test_03() {
+      ReturnHistory expect1 = ReturnHistory.builder()
+          .id("1")
+          .date(LocalDateTime.of(2015, 1, 1, 1, 1, 1))
+          .build();
+      ReturnHistory expect2 = ReturnHistory.builder()
+          .id("2")
+          .date(LocalDateTime.of(2016, 1, 1, 1, 1, 1))
+          .build();
+      ReturnHistory expect3 = ReturnHistory.builder()
+          .id("3")
+          .date(LocalDateTime.of(2017, 1, 1, 1, 1, 1))
+          .build();
+
       Entry entry =
           Entry.builder()
               .detail(
                   List.of(
                       Detail.builder()
                           .returnHistory(List.of(
-                              ReturnHistory.builder()
-                                  .id("1")
-                                  .date(LocalDateTime.of(2015, 1, 1, 1, 1, 1))
-                                  .build(),
-                              ReturnHistory.builder()
-                                  .id("2")
-                                  .date(LocalDateTime.of(2016, 1, 1, 1, 1, 1))
-                                  .build()
+                              expect1,
+                              expect2
                           ))
                           .build(),
                       Detail.builder()
                           .returnHistory(List.of(
-                              ReturnHistory.builder()
-                                  .id("3")
-                                  .date(LocalDateTime.of(2017, 1, 1, 1, 1, 1))
-                                  .build()
+                              expect3
                           ))
                           .build(),
                       Detail.builder()
@@ -85,6 +98,9 @@ class NestedList {
       List<ReturnHistory> actual = entry.flatHistory();
 
       assertThat(actual).hasSize(3);
+      assertThat(actual).containsExactlyInAnyOrder(
+          expect1, expect2, expect3
+      );
     }
   }
 
