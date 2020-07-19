@@ -18,6 +18,9 @@ public class Entry {
   private List<Detail> detail;
 
   public List<ReturnHistory> flatHistory() {
+    if (Objects.isNull(detail)){
+      return List.of();
+    }
     return detail.stream()
         .map(Detail::getReturnHistory)
         .filter(Objects::nonNull)
