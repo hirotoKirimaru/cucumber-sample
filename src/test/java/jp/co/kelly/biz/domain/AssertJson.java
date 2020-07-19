@@ -127,7 +127,7 @@ class AssertJson {
 
         JSONAssert.assertEquals(expect, actual,
                 new CustomComparator(JSONCompareMode.STRICT,
-                        new Customization("time.insertTime", new RegularExpressionValueMatcher<>(".*2020.*")),
+                        new Customization("time.insertTime", new RegularExpressionValueMatcher<>(".*2019.*")),
                         new Customization("time.updateTime", new RegularExpressionValueMatcher<>(".*2020.*"))
                 )
         );
