@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Data
@@ -18,10 +19,8 @@ public class Entry {
   private List<Detail> detail;
 
   public List<ReturnHistory> flatHistory() {
-    if (Objects.isNull(detail)){
-      return List.of();
-    }
-    return detail.stream()
+    return Optional.ofNullable(detail).stream()
+        .flatMap(Collection::stream)
         .map(Detail::getReturnHistory)
         .filter(Objects::nonNull)
         .flatMap(Collection::stream)
