@@ -1,18 +1,11 @@
 package jp.co.kelly.biz.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,38 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * List<返品履歴>をフラットに取得したい
  */
 class NestedList {
-  @Data
-  @Builder
-  @NoArgsConstructor
-  @AllArgsConstructor
-  public class Entry {
-    private List<Detail> detail;
-
-    public List<ReturnHistory> flatHistory() {
-      return detail.stream()
-          .map(Detail::getReturnHistory)
-          .filter(Objects::nonNull)
-          .flatMap(Collection::stream)
-          .collect(Collectors.toList());
-    }
-  }
-
-  @Data
-  @Builder
-  @NoArgsConstructor
-  @AllArgsConstructor
-  public class Detail {
-    private List<ReturnHistory> returnHistory;
-  }
-
-  @Data
-  @Builder
-  @NoArgsConstructor
-  @AllArgsConstructor
-  public class ReturnHistory {
-    private String id;
-    private LocalDateTime date;
-  }
 
   @DisplayName("NestのNestのNest…をうまく処理する方法")
   @Nested
