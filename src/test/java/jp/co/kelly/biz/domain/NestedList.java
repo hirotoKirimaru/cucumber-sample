@@ -45,6 +45,7 @@ class NestedList {
               .build();
 
       List<ReturnHistory> actual = entry.flatHistory();
+      System.out.println(actual);
 
       assertThat(actual).hasSize(1);
     }
