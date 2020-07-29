@@ -46,7 +46,8 @@ dependencies {
 }
 
 test {
-    maxParallelForks = Runtime.runtime.availableProsessors()
+//    maxParallelForks = Runtime.runtime.availableProsessors()
+    maxParallelForks = 4
     forkEvery = 4
 
     useJUnitPlatform()
