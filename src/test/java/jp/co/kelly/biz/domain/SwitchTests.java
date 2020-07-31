@@ -1,6 +1,5 @@
 package jp.co.kelly.biz.domain;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 
 class SwitchTests {
