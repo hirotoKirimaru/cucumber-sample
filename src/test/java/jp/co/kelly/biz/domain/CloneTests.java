@@ -26,7 +26,7 @@ class CloneTests {
 
   @Test
   public void serializableのデータはコピーできない() {
-    ReturnHistory expect = new ReturnHistory("100", LocalDateTime.of(2019, 10, 1, 1, 1), new Gorilla("1"));
+    ReturnHistory expect = new ReturnHistory("100", LocalDateTime.of(2019, 10, 1, 1, 1), new Gorilla("1"), null);
 
     try {
       SerializationUtils.clone(expect);
@@ -36,6 +36,22 @@ class CloneTests {
       Assertions.fail();
     }
 
+  }
+
+  @Test
+  public void データをコピーする3() {
+    ReturnHistory expect = new ReturnHistory("100", LocalDateTime.of(2019, 10, 1, 1, 1),
+        null,
+        new Animal("999", LocalDateTime.MIN));
+
+    ReturnHistory actual = SerializationUtils.clone(expect);
+
+    System.out.println("====================");
+    System.out.println(expect);
+    System.out.println("====================");
+    System.out.println(actual);
+
+    assertThat(actual).isEqualTo(expect);
   }
 
 
