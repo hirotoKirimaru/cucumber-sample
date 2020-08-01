@@ -15,4 +15,10 @@ import java.time.LocalDateTime;
 public class ReturnHistory implements Serializable {
   private String id;
   private LocalDateTime date;
+  private Gorilla gorilla;
+
+  public ReturnHistory(String id, LocalDateTime date) {
+    this.id = id;
+    this.date = date;
+  }
 }

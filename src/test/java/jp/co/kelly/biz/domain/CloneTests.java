@@ -1,6 +1,8 @@
 package jp.co.kelly.biz.domain;
 
+import org.apache.commons.lang3.SerializationException;
 import org.apache.commons.lang3.SerializationUtils;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -9,8 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CloneTests {
 
@@ -21,6 +22,20 @@ class CloneTests {
     ReturnHistory actual = SerializationUtils.clone(expect);
 
     assertThat(actual).isEqualTo(expect);
+  }
+
+  @Test
+  public void serializableのデータはコピーできない() {
+    ReturnHistory expect = new ReturnHistory("100", LocalDateTime.of(2019, 10, 1, 1, 1), new Gorilla("1"));
+
+    try {
+      SerializationUtils.clone(expect);
+    } catch (SerializationException e){
+      // 目的通りのエラーが出ること
+    } catch(Exception e){
+      Assertions.fail();
+    }
+
   }
 
 
@@ -81,6 +96,7 @@ class CloneTests {
     }
 
     @Disabled("確実に失敗するので")
+
     @Test
     public void リストデータをコピーする2() {
       Detail expect = new Detail(
