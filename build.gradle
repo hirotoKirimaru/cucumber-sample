@@ -38,7 +38,8 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok'
 
     // xmlunitで特定の項目を無視したければ、このライブラリを使う。
-    testImplementation 'org.xmlunit:xmlunit-placeholders:2.6.2'
+    testImplementation 'org.xmlunit:xmlunit-core:2.7.0'
+    testImplementation 'org.xmlunit:xmlunit-placeholders:2.7.0'
 
     testImplementation 'com.codeborne:selenide:5.2.3'
     testImplementation 'io.cucumber:cucumber-java:4.3.1'
