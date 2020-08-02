@@ -141,7 +141,7 @@ class CloneTests {
   public class Jacson {
     ObjectMapper om = new ObjectMapper();
 
-//    @Disabled("LocalDateTimeが変換できない")
+    @Disabled("LocalDateTimeが変換できない")
     @Test
     void test_01() throws IOException {
       Detail expect = new Detail(
