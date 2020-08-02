@@ -141,7 +141,7 @@ class CloneTests {
   public class Jacson {
     ObjectMapper om = new ObjectMapper();
 
-    @Disabled("LocalDateTimeが変換できない")
+//    @Disabled("LocalDateTimeが変換できない")
     @Test
     void test_01() throws IOException {
       Detail expect = new Detail(
@@ -150,8 +150,8 @@ class CloneTests {
               new ReturnHistory("200", LocalDateTime.of(2020, 10, 1, 1, 1))
           )
       );
-
-      Detail actual = om.readValue(om.writeValueAsString(expect), Detail.class);
+      String s = om.writeValueAsString(expect);
+      Detail actual = om.readValue(s, Detail.class);
 
       SerializationUtils.clone(expect);
 
