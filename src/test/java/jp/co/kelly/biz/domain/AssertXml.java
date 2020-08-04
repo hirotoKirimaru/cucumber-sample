@@ -1,14 +1,10 @@
 package jp.co.kelly.biz.domain;
 
-import org.junit.Assert;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
-import org.xmlunit.XMLUnitException;
 import org.xmlunit.builder.DiffBuilder;
-import org.xmlunit.builder.Input;
-import org.xmlunit.diff.*;
+import org.xmlunit.diff.Diff;
 import org.xmlunit.placeholder.PlaceholderDifferenceEvaluator;
-
-import javax.xml.transform.Source;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -63,7 +59,10 @@ class AssertXml {
         Diff diff = DiffBuilder.compare(expect).withTest(actual)
             .withDifferenceEvaluator(new PlaceholderDifferenceEvaluator())
             .build();
-        assertFalse(diff.hasDifferences());
+
+        assertThat(diff.getDifferences())
+            .withFailMessage(diff.getDifferences().toString())
+            .hasSize(0);
 
     }
 
