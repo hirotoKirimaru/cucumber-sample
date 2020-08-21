@@ -1,5 +1,6 @@
 package jp.co.kelly.biz.domain;
 
+import org.assertj.core.api.SoftAssertions;
 import org.json.JSONException;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -35,6 +36,14 @@ class AssertAllTests {
 
     testList.add(exec);
 //    testList.add(exec2);
+
+    SoftAssertions softly = new SoftAssertions();
+    softly.assertThat(true).isTrue();
+//    softly.assertThat(true).isFalse();
+
+    Executable exec3 = () -> softly.assertAll();
+
+    testList.add(exec3);
 
     assertAll(
       testList
