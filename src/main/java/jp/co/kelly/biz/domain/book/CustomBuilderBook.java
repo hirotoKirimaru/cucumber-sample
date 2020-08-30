@@ -1,6 +1,7 @@
 package jp.co.kelly.biz.domain.book;
 
 import lombok.Builder;
+import lombok.Generated;
 import lombok.Value;
 
 @Value
@@ -11,6 +12,16 @@ public class CustomBuilderBook {
   private final String author;
 
   public static class Builder {
+    public CustomBuilderBook.Builder id(final Isbn id) {
+      this.id = id;
+      return this;
+    }
+
+    public CustomBuilderBook.Builder id(final String id) {
+      this.id = new Isbn(id);
+      return this;
+    }
+
     public CustomBuilderBook build() {
       validate();
 

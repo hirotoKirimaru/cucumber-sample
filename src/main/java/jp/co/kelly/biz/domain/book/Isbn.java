@@ -11,7 +11,7 @@ public class Isbn {
   private static final String PREFIX_ISBN = "978";
 
 
-  Isbn(String code) {
+  public Isbn(String code) {
     if (!(code.length() == 10 || code.length() == 13)) throw new RuntimeException("ISBNの桁数が正しくない");
     String isbn1 = convert10to13(code);
     // ISBNではない可能性がある。2列目バーコードを読み取った可能性。

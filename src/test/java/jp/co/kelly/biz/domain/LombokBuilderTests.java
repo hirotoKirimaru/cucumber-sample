@@ -2,6 +2,7 @@ package jp.co.kelly.biz.domain;
 
 import jp.co.kelly.biz.domain.book.Book;
 import jp.co.kelly.biz.domain.book.CustomBuilderBook;
+import jp.co.kelly.biz.domain.book.Isbn;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
@@ -41,6 +42,7 @@ class LombokBuilderTests {
 
   @Nested
   class CustomBuilderBookTests {
+    @DisplayName("validate設定に引っかからない場合は同一のものが生成される")
     @Test
     void test_01() {
       CustomBuilderBook actual = CustomBuilderBook.builder()
@@ -53,6 +55,7 @@ class LombokBuilderTests {
       assertThat(actual).isEqualTo(expect);
     }
 
+    @DisplayName("validateの設定")
     @Test
     void test_02() {
       assertThatThrownBy(
@@ -60,6 +63,36 @@ class LombokBuilderTests {
       ).isInstanceOfSatisfying(
           RuntimeException.class,
           (e) -> assertThat(e.getMessage()).isEqualTo("エラー！")
+      );
+    }
+
+    @DisplayName("ISBNをStringでもISBN型でもBookに渡したときにできるようにする")
+    @Test
+    void test_03() {
+      CustomBuilderBook actual = CustomBuilderBook.builder()
+          .id("9784621303252")
+          .money(100)
+          .author("kirimaru")
+          .build();
+      CustomBuilderBook expect = CustomBuilderBook.builder()
+          .id(new Isbn("9784621303252"))
+          .money(100)
+          .author("kirimaru")
+          .build();
+
+      assertThat(actual).isEqualTo(expect);
+    }
+
+    @DisplayName("ISBN側のエラーに引っかかった場合ちゃんとthrowすること")
+    @Test
+    void test_04() {
+      assertThatThrownBy(
+          () -> CustomBuilderBook.builder()
+              .id("123456789")
+              .build()
+      ).isInstanceOfSatisfying(
+          RuntimeException.class,
+          (e) -> assertThat(e.getMessage()).isEqualTo("ISBNの桁数が正しくない")
       );
     }
   }
