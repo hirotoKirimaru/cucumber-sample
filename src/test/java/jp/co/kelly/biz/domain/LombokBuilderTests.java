@@ -12,14 +12,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LombokBuilderTests {
 
-  @DisplayName("エラーにならないこと")
+  @DisplayName("Builderのデフォルト値を設定できること")
   @Test
   void test_01() {
     Book actual = Book.builder()
         .build();
 
     Book expect = Book.builder()
-//        .author("kirimaru")
+        .author("kirimaru")
         .build();
 
     assertThat(actual).isEqualTo(expect);

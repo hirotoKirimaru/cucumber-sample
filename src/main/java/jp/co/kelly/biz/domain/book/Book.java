@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 public class Book {
   private Isbn id;
   private int money;
-  private String author;
+  @Builder.Default
+  private String author = "kirimaru"; // デフォルト値
   private LocalDateTime generateDate;
   private String generateUser;
   private LocalDateTime updateDate;
