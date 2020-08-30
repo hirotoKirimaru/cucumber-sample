@@ -1,11 +1,10 @@
 package jp.co.kelly.biz.domain.book;
 
 import lombok.Builder;
-import lombok.Generated;
 import lombok.Value;
 
 @Value
-@Builder(builderClassName = "Builder", buildMethodName = "build")
+@Builder(builderClassName = "Builder", buildMethodName = "build", toBuilder = true)
 public class CustomBuilderBook {
   private final Isbn id;
   private final int money;

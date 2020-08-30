@@ -123,6 +123,24 @@ class LombokBuilderTests {
           (e) -> assertThat(e.getMessage()).isEqualTo("ISBNの桁数が正しくない")
       );
     }
+
+    @DisplayName("toBuilderで不変条件を満たせなくなった時、ちゃんとエラーが表示されること")
+    @Test
+    void test_05() {
+      CustomBuilderBook actual = CustomBuilderBook.builder()
+          .id("9784621303252")
+          .money(100)
+          .author("kirimaru")
+          .build();
+      assertThatThrownBy(
+          () -> actual.toBuilder()
+              .id("123456789")
+              .build()
+      ).isInstanceOfSatisfying(
+          RuntimeException.class,
+          (e) -> assertThat(e.getMessage()).isEqualTo("ISBNの桁数が正しくない")
+      );
+    }
   }
 
 }
