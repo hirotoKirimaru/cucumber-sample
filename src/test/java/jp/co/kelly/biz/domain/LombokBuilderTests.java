@@ -12,32 +12,60 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LombokBuilderTests {
 
-  @DisplayName("Builderのデフォルト値を設定できること")
-  @Test
-  void test_01() {
-    Book actual = Book.builder()
-        .build();
+  @DisplayName("できるだけ、デフォルトのbuildeを使う")
+  @Nested
+  class DefaultBuilder {
+    @DisplayName("Builderのデフォルト値を設定できること")
+    @Test
+    void test_01() {
+      Book actual = Book.builder()
+          .build();
 
-    Book expect = Book.builder()
-        .author("kirimaru")
-        .build();
+      Book expect = Book.builder()
+          .author("kirimaru")
+          .build();
 
-    assertThat(actual).isEqualTo(expect);
-  }
+      assertThat(actual).isEqualTo(expect);
+    }
 
-  @DisplayName("Builderで値を設定した後に、デフォルト値で上書きしないこと")
-  @Test
-  void test_02() {
-    String gorilla = "gorilla";
-    Book actual = Book.builder()
-        .author(gorilla)
-        .build();
+    @DisplayName("Builderで値を設定した後に、デフォルト値で上書きしないこと")
+    @Test
+    void test_02() {
+      String gorilla = "gorilla";
+      Book actual = Book.builder()
+          .author(gorilla)
+          .build();
 
-    Book expect = Book.builder()
-        .author(gorilla)
-        .build();
+      Book expect = Book.builder()
+          .author(gorilla)
+          .build();
 
-    assertThat(actual).isEqualTo(expect);
+      assertThat(actual).isEqualTo(expect);
+    }
+
+    @DisplayName("toBuilderクラスの検証")
+    @Test
+    void test_03() {
+      // GIVEN
+      Book first = Book.builder()
+          .id(new Isbn("9784621303252"))
+          .money(100)
+          .author("kirimaru")
+          .build();
+
+      // WHEN
+      Book actual =  first.toBuilder().author("摂津のきり丸").build();
+
+      // ACTUAL
+      Book expect = Book.builder()
+          .id(new Isbn("9784621303252"))
+          .money(100)
+          .author("摂津のきり丸")
+          .build();
+
+
+      assertThat(actual).isEqualTo(expect);
+    }
   }
 
   @Nested
