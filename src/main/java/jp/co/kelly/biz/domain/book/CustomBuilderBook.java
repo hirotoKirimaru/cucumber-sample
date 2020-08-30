@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Value;
 
 @Value
-@Builder(builderClassName = "Builder", buildMethodName = "build", toBuilder = true)
+@Builder(builderClassName = "Builder", toBuilder = true)
 public class CustomBuilderBook {
   private final Isbn id;
   private final int money;
