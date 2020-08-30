@@ -1,10 +1,6 @@
 package jp.co.kelly.biz.domain;
 
 import jp.co.kelly.biz.domain.book.Book;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

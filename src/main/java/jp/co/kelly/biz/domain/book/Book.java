@@ -1,23 +1,19 @@
 package jp.co.kelly.biz.domain.book;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
 
 import java.time.LocalDateTime;
 
-@Data
+@Value
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class Book {
-  private Isbn id;
-  private int money;
+  private final Isbn id;
+  private final int money;
   @Builder.Default
-  private String author = "kirimaru"; // デフォルト値
-  private LocalDateTime generateDate;
-  private String generateUser;
-  private LocalDateTime updateDate;
-  private String updateUser;
+  private final String author = "kirimaru"; // デフォルト値
+  private final LocalDateTime generateDate;
+  private final String generateUser;
+  private final LocalDateTime updateDate;
+  private final String updateUser;
 }
