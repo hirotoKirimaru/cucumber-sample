@@ -141,6 +141,22 @@ class LombokBuilderTests {
           (e) -> assertThat(e.getMessage()).isEqualTo("ISBNの桁数が正しくない")
       );
     }
+
+    @DisplayName("旧データは変更されていないこと。変更していないデータは引き継いでいること")
+    @Test
+    void test_06() {
+      CustomBuilderBook oldBook = CustomBuilderBook.builder()
+          .money(500)
+          .author("kirimaru")
+          .build();
+      CustomBuilderBook newBook = oldBook.toBuilder()
+          .money(1000)
+          .build();
+
+      assertThat(oldBook.getMoney()).isEqualTo(500);
+      assertThat(newBook.getMoney()).isEqualTo(1000);
+      assertThat(newBook.getAuthor()).isEqualTo("kirimaru");
+    }
   }
 
 }
