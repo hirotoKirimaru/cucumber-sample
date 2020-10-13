@@ -9,4 +9,5 @@ external:
     endpoint: twitter
   facebook:
     <<: *common
+    port: 10080
     endpoint: facebook
