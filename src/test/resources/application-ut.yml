@@ -1,3 +1,19 @@
 app:
   config:
     appName: "Kirimaru"
+repository:
+  Driver: postgres
+  url:
+  aaa:
+external:
+  common: &common
+    host: localhost
+    protocol: http
+    port: 80
+    timeout: 3
+  twitter:
+    <<: *common
+    endpoint: twitter
+  facebook:
+    <<: *common
+    endpoint: facebook
