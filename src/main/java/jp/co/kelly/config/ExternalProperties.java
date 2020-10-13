@@ -17,9 +17,9 @@ public abstract class ExternalProperties {
   private String timeout;
 
 
-  public URL getUrl(){
+  public URL getUrl() {
     try {
-      return new URL("");
+      return new URL(protocol + "://" + host + ":" + port + "/" + endpoint);
     } catch (MalformedURLException e) {
       throw new RuntimeException("URLじゃないよ！");
     }
