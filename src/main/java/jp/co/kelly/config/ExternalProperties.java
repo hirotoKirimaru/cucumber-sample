@@ -2,10 +2,8 @@ package jp.co.kelly.config;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
 
 @Getter
 @Setter
@@ -17,11 +15,7 @@ public abstract class ExternalProperties {
   private String timeout;
 
 
-  public URL getUrl() {
-    try {
-      return new URL(protocol + "://" + host + ":" + port + "/" + endpoint);
-    } catch (MalformedURLException e) {
-      throw new RuntimeException("URLじゃないよ！");
-    }
+  public URI getUri() {
+    return URI.create(protocol + "://" + host + ":" + port + "/" + endpoint);
   }
 }
