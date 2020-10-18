@@ -30,7 +30,7 @@ public class ToClassHelper {
             return fromJson(json, clazz);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("何か失敗した");
+            throw new RuntimeException("何か失敗した", e);
         }
     }
 
