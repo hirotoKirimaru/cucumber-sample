@@ -19,7 +19,8 @@ jobs:
       run: ./gradlew build
     - name: test
       run: ./gradlew test
-    - name: Upload test result
+    - if: always()
+      name: Upload test result
       uses: actions/upload-artifact@v2
       with:
         name: test
