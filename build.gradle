@@ -29,6 +29,14 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-aop' // aspect使いたい
+
+    // Database
+    implementation 'org.flywaydb:flyway-core'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
     // feature flag for java
 //    compile 'org.ff4j:ff4j-core:1.8.1'
 //    compile 'org.ff4j:ff4j-web:1.3.0'
