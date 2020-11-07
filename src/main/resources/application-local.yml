@@ -8,3 +8,5 @@ spring:
     username: user
     password: pass
     initialization-mode: always
+  flyway:
+    schemas: test
