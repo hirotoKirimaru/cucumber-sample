@@ -1,3 +1,7 @@
+info:
+  app:
+    name: local
+    version: 0.0.1
 app:
   config:
     appName: "HogeHoge"

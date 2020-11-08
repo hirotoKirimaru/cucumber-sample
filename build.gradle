@@ -11,6 +11,11 @@ group = 'jp.co.kelly'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+// actuator infoに情報を載せる
+springBoot {
+    buildInfo()
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
