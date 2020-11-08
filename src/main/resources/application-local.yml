@@ -10,3 +10,4 @@ spring:
     initialization-mode: always
   flyway:
     schemas: test
+    locations: classpath:db/migration,db/dev
