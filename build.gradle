@@ -16,6 +16,13 @@ springBoot {
     buildInfo()
 }
 
+bootRun{
+    // -Pprofiles=prdで起動できるようにする
+    if (project.properties.containsKey("profiles")){
+        jvmArgs += '-Dspring.profiles.active='+ project.properties.get("profiles")
+    }
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
