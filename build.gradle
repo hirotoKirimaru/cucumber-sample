@@ -85,12 +85,12 @@ test {
 
     useJUnitPlatform()
 
-    retry {
-        // true だとBuild失敗。 falseだとBuild成功扱い。
-        failOnPassedAfterRetry = false
-        maxFailures = 10
-        maxRetries = 3
-    }
+//    retry {
+//        // true だとBuild失敗。 falseだとBuild成功扱い。
+//        failOnPassedAfterRetry = false
+//        maxFailures = 10
+//        maxRetries = 3
+//    }
 
 }
 
