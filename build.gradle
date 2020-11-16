@@ -76,6 +76,10 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         exclude group: 'junit', module: 'junit'
     }
+
+    // FTPサーバ
+    implementation 'commons-net:commons-net:3.7.2'
+    testImplementation 'org.mockftpserver:MockFtpServer:2.7.1'
 }
 
 test {

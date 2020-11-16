@@ -11,3 +11,11 @@ external:
     <<: *common
     port: 10080
     endpoint: facebook
+ftp:
+  host: localhost
+  port: 9082
+  username: user
+  password: pass
+  defaultTimeout: 3
+  soTimeout: 3
+  dataTimeout: 3
