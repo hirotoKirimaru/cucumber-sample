@@ -19,8 +19,6 @@ public class FtpClientImpl {
 
     try(FtpFileTransmitter ftp = new FtpFileTransmitter(ftpConfiguration)){
 
-      ftp.connect();
-      ftp.changeBinaryFileType();
       for (Path path : paths) {
         createAndMoveRemoteDirectory(tmpRootPath ,path, ftp);
         transferFiles(path, ftp);

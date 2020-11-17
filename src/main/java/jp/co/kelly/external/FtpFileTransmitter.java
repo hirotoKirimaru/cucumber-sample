@@ -16,15 +16,24 @@ import org.apache.commons.net.ftp.FTPReply;
 /**
  * Threadsafeではないので、DIコンテナへの登録はNG。
  */
-@RequiredArgsConstructor
 public class FtpFileTransmitter implements AutoCloseable {
   private final FtpConfiguration configuration;
+  private final FTPClient ftp;
+  private final String home;
 
-  private FTPClient ftp;
-  private String home;
+  public FtpFileTransmitter(FtpConfiguration configuration) {
+    this.configuration = configuration;
+    this.ftp = new FTPClient();
+    try {
+      connect();
+      this.home = ftp.printWorkingDirectory();
+    } catch (IOException e) {
+      throw new RuntimeException("生成できませんでした", e);
+    }
 
-  public void connect() throws IOException {
-    ftp = new FTPClient();
+  }
+
+  private void connect() throws IOException {
     ftp.setDefaultTimeout(configuration.getDefaultTimeout() * 1000);
     ftp.setDataTimeout(configuration.getDataTimeout() * 1000);
     ftp.connect(configuration.getHost(), configuration.getPort());
@@ -35,31 +44,25 @@ public class FtpFileTransmitter implements AutoCloseable {
     }
     ftp.setSoTimeout(configuration.getSoTimeout() * 1000);
 
-    try {
-      ftp.login(configuration.getUsername(), configuration.getPassword());
-      ftp.enterLocalPassiveMode();
-      home = ftp.printWorkingDirectory();
-    } catch (Exception e) {
-      throw e;
-    }
+    ftp.login(configuration.getUsername(), configuration.getPassword());
+
+    ftp.enterLocalPassiveMode();
+    ftp.setFileType(FTP.BINARY_FILE_TYPE);
   }
 
+  // ftp = nullにした方がいい…？
   @Override
   public void close() throws IOException {
     if (ftp == null || !ftp.isConnected()) {
-      ftp = null;
+//      ftp = null;
       return;
     }
 
-    try {
-      ftp.disconnect();
-    } finally {
-      ftp = null;
-    }
-  }
-
-  public void changeBinaryFileType() throws IOException {
-    ftp.setFileType(FTP.BINARY_FILE_TYPE);
+//    try {
+    ftp.disconnect();
+//    } finally {
+//      ftp = null;
+//    }
   }
 
   public void ftpCreateDirectoryTree(Path remoteDirectory) throws IOException {
@@ -81,7 +84,7 @@ public class FtpFileTransmitter implements AutoCloseable {
         a -> a.getName().equals(dir.getFileName().toString())
     );
 
-    if (!alreadyExists){
+    if (!alreadyExists) {
       if (!ftp.makeDirectory(dir.toString())) {
         throw new RuntimeException("ディレクトリ作れなかった");
       }
