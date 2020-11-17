@@ -31,7 +31,6 @@ public class FtpFileTransmitter implements AutoCloseable {
 
     int reply = ftp.getReplyCode();
     if (!FTPReply.isPositiveCompletion(reply)) {
-      ftp.disconnect();
       throw new RuntimeException("接続できませんでした");
     }
     ftp.setSoTimeout(configuration.getSoTimeout() * 1000);
