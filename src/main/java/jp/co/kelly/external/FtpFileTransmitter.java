@@ -3,7 +3,6 @@ package jp.co.kelly.external;
 
 import lombok.RequiredArgsConstructor;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,6 +21,7 @@ public class FtpFileTransmitter implements AutoCloseable {
   private final FtpConfiguration configuration;
 
   private FTPClient ftp;
+  private String home;
 
   public void connect() throws IOException {
     ftp = new FTPClient();
@@ -39,6 +39,7 @@ public class FtpFileTransmitter implements AutoCloseable {
     try {
       ftp.login(configuration.getUsername(), configuration.getPassword());
       ftp.enterLocalPassiveMode();
+      home = ftp.printWorkingDirectory();
     } catch (Exception e) {
       throw e;
     }
@@ -94,7 +95,7 @@ public class FtpFileTransmitter implements AutoCloseable {
 
   public void putFileToPath(Path path, String toString) throws IOException {
     ftp.storeFile(toString, Files.newInputStream(path));
-    ftp.changeWorkingDirectory("/"); // Unixのルートディレクトリ
+    ftp.changeWorkingDirectory(home);
   }
 }
 

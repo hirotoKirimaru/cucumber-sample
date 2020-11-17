@@ -23,21 +23,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FtpClientImplTests {
   FtpClientImpl target;
-  private static final String separator = File.separator;
+  // 実行元はWin, MacわからないのでFile.speratorで判別すべきだが、転送先はUnixで間違いないので、固定したほうが良さそう。
   private static final Path TMP_ROOT_PATH = Path.of("tmp", "dummy");
   private static final Path EXPECTED_FILE_PATH = Path.of("20201116", "AIUEO");
   private static final String EXPECTED_FILE_ONE = "01.png";
   private static final String EXPECTED_FILE_TWO = "02.png";
-
+  public static final String HOME = "/user";
 
   FakeFtpServer server = new FakeFtpServer();
 
   public FtpClientImplTests() {
     server.setServerControlPort(9082);
-    server.addUserAccount(new UserAccount("user", "pass", "/"));
+    server.addUserAccount(new UserAccount("user", "pass", HOME));
 
     FileSystem fileSystem = new UnixFakeFileSystem();
-    fileSystem.add(new DirectoryEntry("/"));
+    fileSystem.add(new DirectoryEntry(HOME));
     server.setFileSystem(fileSystem);
   }
 
@@ -73,8 +73,8 @@ class FtpClientImplTests {
     );
     target.ftp(TMP_ROOT_PATH, paths);
 
-    assertThat(server.getFileSystem().exists(File.separator + EXPECTED_FILE_PATH.toString())).isTrue();
-    assertThat(server.getFileSystem().exists(File.separator + EXPECTED_FILE_PATH.toString() + File.separator + EXPECTED_FILE_ONE)).isTrue();
+    assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString())).isTrue();
+    assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString() + "/" + EXPECTED_FILE_ONE)).isTrue();
     assertThat(Files.exists(Paths.get(TMP_ROOT_PATH.toString()))).isTrue();
   }
 
@@ -87,9 +87,9 @@ class FtpClientImplTests {
     );
     target.ftp(TMP_ROOT_PATH, paths);
 
-    assertThat(server.getFileSystem().exists(File.separator + EXPECTED_FILE_PATH.toString())).isTrue();
-    assertThat(server.getFileSystem().exists(File.separator + EXPECTED_FILE_PATH.toString() + File.separator + EXPECTED_FILE_ONE)).isTrue();
-    assertThat(server.getFileSystem().exists(File.separator + EXPECTED_FILE_PATH.toString() + File.separator + EXPECTED_FILE_TWO)).isTrue();
+    assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString())).isTrue();
+    assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString() + File.separator + EXPECTED_FILE_ONE)).isTrue();
+    assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString() + File.separator + EXPECTED_FILE_TWO)).isTrue();
     assertThat(Files.exists(Paths.get(TMP_ROOT_PATH.toString()))).isTrue();
   }
 
