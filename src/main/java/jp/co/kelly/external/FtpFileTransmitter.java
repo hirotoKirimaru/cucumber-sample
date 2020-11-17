@@ -18,16 +18,11 @@ public class FtpFileTransmitter implements AutoCloseable {
   private final FTPClient ftp;
   private final String home;
 
-  public FtpFileTransmitter(FtpConfiguration configuration) {
+  public FtpFileTransmitter(FtpConfiguration configuration) throws IOException{
     this.configuration = configuration;
     this.ftp = new FTPClient();
-    try {
-      connect();
-      this.home = ftp.printWorkingDirectory();
-    } catch (IOException e) {
-      throw new RuntimeException("生成できませんでした", e);
-    }
-
+    connect();
+    this.home = ftp.printWorkingDirectory();
   }
 
   private void connect() throws IOException {
@@ -41,9 +36,7 @@ public class FtpFileTransmitter implements AutoCloseable {
     }
     ftp.setSoTimeout(configuration.getSoTimeout() * 1000);
 
-    ftp.login(configuration.getUsername(), configuration.getPassword());
-    reply = ftp.getReplyCode();
-    if (!FTPReply.isPositiveCompletion(reply)) {
+    if (!ftp.login(configuration.getUsername(), configuration.getPassword())) {
       throw new RuntimeException("ログインできませんでした");
     }
 
