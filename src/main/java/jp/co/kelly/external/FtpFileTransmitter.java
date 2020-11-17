@@ -1,17 +1,14 @@
 package jp.co.kelly.external;
 
-
-import lombok.RequiredArgsConstructor;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Iterator;
-
-import org.apache.commons.net.ftp.FTP;
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPReply;
 
 /**
  * Threadsafeではないので、DIコンテナへの登録はNG。
@@ -65,7 +62,7 @@ public class FtpFileTransmitter implements AutoCloseable {
 //    }
   }
 
-  public void ftpCreateDirectoryTree(Path remoteDirectory) throws IOException {
+  public void ftpCreateDirectoryTree(Path remoteDirectory) {
     final Iterator<Path> iterator = remoteDirectory.iterator();
 
     iterator.forEachRemaining(
@@ -98,6 +95,7 @@ public class FtpFileTransmitter implements AutoCloseable {
   public void putFileToPath(Path path) throws IOException {
     ftp.storeFile(path.getFileName().toString(), Files.newInputStream(path));
   }
+
   public void changeHomeDirectory() throws IOException {
     ftp.changeWorkingDirectory(home);
   }
