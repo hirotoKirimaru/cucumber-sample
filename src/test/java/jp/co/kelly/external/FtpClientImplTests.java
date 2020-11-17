@@ -10,6 +10,7 @@ import org.mockftpserver.fake.filesystem.DirectoryEntry;
 import org.mockftpserver.fake.filesystem.FileSystem;
 import org.mockftpserver.fake.filesystem.UnixFakeFileSystem;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,8 +23,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FtpClientImplTests {
   FtpClientImpl target;
-  private static final String TMP_ROOT_PATH = "/tmp/dummy";
-  private static final String EXPECTED_FILE_PATH = "/20201116/AIUEO";
+  private static final String separator = File.separator;
+  private static final String TMP_ROOT_PATH = separator + "tmp" + separator + "dummy";
+  private static final String EXPECTED_FILE_PATH = separator + "20201116" + separator + "AIUEO" + separator;
   private static final String EXPECTED_FILE_ONE = "01.png";
   private static final String EXPECTED_FILE_TWO = "02.png";
 
@@ -71,7 +73,6 @@ class FtpClientImplTests {
         Files.createFile(Paths.get(TMP_ROOT_PATH + EXPECTED_FILE_PATH + EXPECTED_FILE_ONE))
     );
     target.ftp(TMP_ROOT_PATH, paths);
-
 
 
     assertThat(server.getFileSystem().exists(EXPECTED_FILE_PATH)).isTrue();
