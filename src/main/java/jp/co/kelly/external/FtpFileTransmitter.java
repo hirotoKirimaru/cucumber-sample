@@ -95,8 +95,10 @@ public class FtpFileTransmitter implements AutoCloseable {
     }
   }
 
-  public void putFileToPath(Path path, String toString) throws IOException {
-    ftp.storeFile(toString, Files.newInputStream(path));
+  public void putFileToPath(Path path) throws IOException {
+    ftp.storeFile(path.getFileName().toString(), Files.newInputStream(path));
+  }
+  public void changeHomeDirectory() throws IOException {
     ftp.changeWorkingDirectory(home);
   }
 }

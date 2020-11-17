@@ -1,52 +1,53 @@
 package jp.co.kelly.external;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class FtpClientImpl {
   private final FtpConfiguration ftpConfiguration;
-  public FtpClientImpl(FtpConfiguration ftpConfiguration){
-    this.ftpConfiguration = ftpConfiguration;
-  }
 
-  public void ftp(Path tmpRootPath, List<Path> paths) {
+  public void ftp(Path localRootPath, List<Path> paths) {
 
-    try(FtpFileTransmitter ftp = new FtpFileTransmitter(ftpConfiguration)){
-
+    try (FtpFileTransmitter ftp = new FtpFileTransmitter(ftpConfiguration)) {
       for (Path path : paths) {
-        createAndMoveRemoteDirectory(tmpRootPath ,path, ftp);
-        transferFiles(path, ftp);
+        transfer(ftp, localRootPath, path);
       }
-
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-
   }
 
-  private void transferFiles(Path path, FtpFileTransmitter ftp) throws IOException {
-    if (!Files.exists(path)) {
-      throw new RuntimeException("ファイルが無い");
-    }
-    ftp.putFileToPath(path, path.getFileName().toString());
+  /**
+   * ファイルを転送する。
+   *
+   * 1. MKDIRとCDを繰り返して、目的の構造をリモートに生成する
+   * 2. ファイルを転送する。
+   * 3. ホームディレクトリに戻る。(複数ファイル転送のために一度ホームに戻る)
+   */
+  private void transfer(FtpFileTransmitter ftp, Path localRootPath, Path path) throws IOException {
+    ftp.ftpCreateDirectoryTree(Path.of(createRemoteDirectory(localRootPath, path)));
+    ftp.putFileToPath(path);
+
+    ftp.changeHomeDirectory();
   }
 
-  private void createAndMoveRemoteDirectory(Path s, Path path, FtpFileTransmitter ftp) throws IOException {
-    if (!Files.exists(path)){
-      throw new RuntimeException("");
-    }
-
-    String remoteFileName = path.getFileName().toString();
-
-//    String remoteDirectory = path.toAbsolutePath().toString().replace(s, "");
-    String remoteDirectory = path.toString().replace(s.toString(), "");
-    remoteDirectory = remoteDirectory.replace(remoteFileName, "");
-    ftp.ftpCreateDirectoryTree(Path.of(remoteDirectory));
+  /**
+   * ローカルパスからリモートのディレクトリを生成する。
+   *
+   * @param localRootPath　C:\\tmp\transfers
+   * @param localPath C:\\tmp\transfers\blog\2020\11\18\01.png
+   * @return blog\2020\11\18
+   */
+  private String createRemoteDirectory(Path localRootPath, Path localPath) {
+        // Absoluteにすると、C:\\とでてきてWinとLinuxでうまく変換できない。
+//    String remoteDirectoryIncludeFileName = localPath.toAbsolutePath().toString().replace(localRootPath, "");
+    String remoteDirectoryIncludeFileName = localPath.toString().replace(localRootPath.toString(), "");
+    return remoteDirectoryIncludeFileName.replace(localPath.getFileName().toString(), "");
   }
 }
