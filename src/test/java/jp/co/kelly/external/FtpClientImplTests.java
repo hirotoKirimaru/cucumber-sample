@@ -24,8 +24,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class FtpClientImplTests {
   FtpClientImpl target;
   private static final String separator = File.separator;
-  private static final String TMP_ROOT_PATH = separator + "tmp" + separator + "dummy";
-  private static final String EXPECTED_FILE_PATH = separator + "20201116" + separator + "AIUEO" + separator;
+  private static final Path TMP_ROOT_PATH = Path.of("tmp", "dummy");
+  private static final Path EXPECTED_FILE_PATH = Path.of("20201116", "AIUEO");
   private static final String EXPECTED_FILE_ONE = "01.png";
   private static final String EXPECTED_FILE_TWO = "02.png";
 
@@ -43,7 +43,7 @@ class FtpClientImplTests {
 
   @BeforeEach
   void setup() {
-    FileUtils.deleteQuietly(FileUtils.getFile(TMP_ROOT_PATH));
+    FileUtils.deleteQuietly(FileUtils.getFile(TMP_ROOT_PATH.toFile()));
     server.start();
 
     FtpConfiguration ftpConfiguration = new FtpConfiguration();
@@ -62,22 +62,35 @@ class FtpClientImplTests {
   @AfterEach
   void tearDoiwn() {
     server.stop();
-    FileUtils.deleteQuietly(FileUtils.getFile(TMP_ROOT_PATH));
+    FileUtils.deleteQuietly(FileUtils.getFile(TMP_ROOT_PATH.toFile()));
   }
-
 
   @Test
   void test_01() throws IOException {
-    Files.createDirectories(Paths.get(TMP_ROOT_PATH + EXPECTED_FILE_PATH));
+    Files.createDirectories(Paths.get(TMP_ROOT_PATH.toString(), EXPECTED_FILE_PATH.toString()));
     List<Path> paths = List.of(
-        Files.createFile(Paths.get(TMP_ROOT_PATH + EXPECTED_FILE_PATH + EXPECTED_FILE_ONE))
+        Files.createFile(Paths.get(TMP_ROOT_PATH.toString(), EXPECTED_FILE_PATH.toString(), EXPECTED_FILE_ONE))
     );
     target.ftp(TMP_ROOT_PATH, paths);
 
+    assertThat(server.getFileSystem().exists(File.separator + EXPECTED_FILE_PATH.toString())).isTrue();
+    assertThat(server.getFileSystem().exists(File.separator + EXPECTED_FILE_PATH.toString() + File.separator + EXPECTED_FILE_ONE)).isTrue();
+    assertThat(Files.exists(Paths.get(TMP_ROOT_PATH.toString()))).isTrue();
+  }
 
-    assertThat(server.getFileSystem().exists(EXPECTED_FILE_PATH)).isTrue();
-    assertThat(server.getFileSystem().exists(EXPECTED_FILE_PATH + EXPECTED_FILE_ONE)).isTrue();
-    assertThat(Files.exists(Paths.get(TMP_ROOT_PATH))).isTrue();
+  @Test
+  void test_02() throws IOException {
+    Files.createDirectories(Paths.get(TMP_ROOT_PATH.toString(), EXPECTED_FILE_PATH.toString()));
+    List<Path> paths = List.of(
+        Files.createFile(Paths.get(TMP_ROOT_PATH.toString(), EXPECTED_FILE_PATH.toString(), EXPECTED_FILE_ONE)),
+        Files.createFile(Paths.get(TMP_ROOT_PATH.toString(), EXPECTED_FILE_PATH.toString(), EXPECTED_FILE_TWO))
+    );
+    target.ftp(TMP_ROOT_PATH, paths);
+
+    assertThat(server.getFileSystem().exists(File.separator + EXPECTED_FILE_PATH.toString())).isTrue();
+    assertThat(server.getFileSystem().exists(File.separator + EXPECTED_FILE_PATH.toString() + File.separator + EXPECTED_FILE_ONE)).isTrue();
+    assertThat(server.getFileSystem().exists(File.separator + EXPECTED_FILE_PATH.toString() + File.separator + EXPECTED_FILE_TWO)).isTrue();
+    assertThat(Files.exists(Paths.get(TMP_ROOT_PATH.toString()))).isTrue();
   }
 
 }

@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Iterator;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -16,7 +18,7 @@ import org.apache.commons.net.ftp.FTPReply;
  * Threadsafeではないので、DIコンテナへの登録はNG。
  */
 @RequiredArgsConstructor
-public class FtpFileTransmitter implements AutoCloseable{
+public class FtpFileTransmitter implements AutoCloseable {
   private final FtpConfiguration configuration;
 
   private FTPClient ftp;
@@ -34,25 +36,25 @@ public class FtpFileTransmitter implements AutoCloseable{
     }
     ftp.setSoTimeout(configuration.getSoTimeout() * 1000);
 
-    try{
+    try {
       ftp.login(configuration.getUsername(), configuration.getPassword());
       ftp.enterLocalPassiveMode();
-    } catch(Exception e){
+    } catch (Exception e) {
       this.close();
       throw e;
     }
   }
 
   @Override
-  public void close() throws IOException{
-    if (ftp == null || !ftp.isConnected()){
+  public void close() throws IOException {
+    if (ftp == null || !ftp.isConnected()) {
       ftp = null;
       return;
     }
 
-    try{
+    try {
       ftp.disconnect();
-    }finally {
+    } finally {
       ftp = null;
     }
   }
@@ -61,39 +63,39 @@ public class FtpFileTransmitter implements AutoCloseable{
     ftp.setFileType(FTP.BINARY_FILE_TYPE);
   }
 
-  public void ftpCreateDirectoryTree(String remoteDirectory) throws IOException {
-    String[] directories = getDirectories(remoteDirectory);
+  public void ftpCreateDirectoryTree(Path remoteDirectory) throws IOException {
+    final Iterator<Path> iterator = remoteDirectory.iterator();
 
-    boolean dirExists = true;
-    for (String dir : directories){
-      if(!dir.isEmpty()){
-        if(dirExists){
-          dirExists = ftp.changeWorkingDirectory(dir);
+    iterator.forEachRemaining(
+        dir -> {
+          try {
+            makeDirectoryAndChange(dir);
+          } catch (IOException e) {
+            throw new RuntimeException(e);
+          }
         }
-        if (!dirExists){
-          makeDirectoryAndChange(dir);
-        }
+    );
+  }
+
+  private void makeDirectoryAndChange(Path dir) throws IOException {
+    final boolean alreadyExists = Arrays.stream(ftp.listDirectories()).anyMatch(
+        a -> a.getName().equals(dir.getFileName().toString())
+    );
+
+    if (!alreadyExists){
+      if (!ftp.makeDirectory(dir.toString())) {
+        throw new RuntimeException("ディレクトリ作れなかった");
       }
     }
-  }
 
-  private String[] getDirectories(String remoteDirectory) {
-
-    return remoteDirectory.split("\\\\");
-  }
-
-  private void makeDirectoryAndChange(String dir) throws IOException {
-    if (!ftp.makeDirectory(dir)) {
-      throw new RuntimeException("ディレクトリ作れなかった");
-    }
-    if (!ftp.changeWorkingDirectory(dir)) {
+    if (!ftp.changeWorkingDirectory(dir.toString())) {
       throw new RuntimeException("cdできなかった");
     }
   }
 
   public void putFileToPath(Path path, String toString) throws IOException {
     ftp.storeFile(toString, Files.newInputStream(path));
-    ftp.changeWorkingDirectory("\\");
+    ftp.changeWorkingDirectory("/");
   }
 }
 

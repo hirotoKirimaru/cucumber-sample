@@ -15,7 +15,7 @@ public class FtpClientImpl {
     this.ftpConfiguration = ftpConfiguration;
   }
 
-  public void ftp(String tmpRootPath, List<Path> paths) {
+  public void ftp(Path tmpRootPath, List<Path> paths) {
 
     try(FtpFileTransmitter ftp = new FtpFileTransmitter(ftpConfiguration)){
 
@@ -39,7 +39,7 @@ public class FtpClientImpl {
     ftp.putFileToPath(path, path.getFileName().toString());
   }
 
-  private void createAndMoveRemoteDirectory(String s, Path path, FtpFileTransmitter ftp) throws IOException {
+  private void createAndMoveRemoteDirectory(Path s, Path path, FtpFileTransmitter ftp) throws IOException {
     if (!Files.exists(path)){
       throw new RuntimeException("");
     }
@@ -47,10 +47,8 @@ public class FtpClientImpl {
     String remoteFileName = path.getFileName().toString();
 
 //    String remoteDirectory = path.toAbsolutePath().toString().replace(s, "");
-    String remoteDirectory = path.toString().replace(s, "");
-    remoteDirectory = remoteDirectory.replace(File.separator + remoteFileName, "");
-    ftp.ftpCreateDirectoryTree(remoteDirectory);
-
-
+    String remoteDirectory = path.toString().replace(s.toString(), "");
+    remoteDirectory = remoteDirectory.replace(remoteFileName, "");
+    ftp.ftpCreateDirectoryTree(Path.of(remoteDirectory));
   }
 }
