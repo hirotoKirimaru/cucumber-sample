@@ -40,7 +40,6 @@ public class FtpFileTransmitter implements AutoCloseable {
       ftp.login(configuration.getUsername(), configuration.getPassword());
       ftp.enterLocalPassiveMode();
     } catch (Exception e) {
-      this.close();
       throw e;
     }
   }
