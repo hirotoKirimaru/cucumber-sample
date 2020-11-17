@@ -14,7 +14,7 @@ public class FtpClientImpl {
 
   public void ftp(Path localRootPath, List<Path> paths) {
 
-    try (var ftp = new FtpFileTransmitter(ftpConfiguration)) {
+    try (FtpFileTransmitter ftp = new FtpFileTransmitter(ftpConfiguration)) {
       for (Path path : paths) {
         transfer(ftp, localRootPath, path);
       }
