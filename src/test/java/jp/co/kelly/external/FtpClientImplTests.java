@@ -47,7 +47,7 @@ class FtpClientImplTests {
     server.start();
 
     FtpConfiguration ftpConfiguration = new FtpConfiguration();
-    ftpConfiguration.setUsername("usera");
+    ftpConfiguration.setUsername("user");
     ftpConfiguration.setPassword("pass");
     ftpConfiguration.setHost("localhost");
     ftpConfiguration.setPort(9082);
