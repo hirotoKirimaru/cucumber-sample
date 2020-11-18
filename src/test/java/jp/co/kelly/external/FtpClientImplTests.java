@@ -1,6 +1,7 @@
 package jp.co.kelly.external;
 
 import org.apache.commons.io.FileUtils;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ class FtpClientImplTests {
   FakeFtpServer server = new FakeFtpServer();
 
   public FtpClientImplTests() {
-    server.setServerControlPort(9082);
+    server.setServerControlPort(0);
     server.addUserAccount(new UserAccount("user", "pass", HOME));
 
     FileSystem fileSystem = new UnixFakeFileSystem();
@@ -48,7 +49,7 @@ class FtpClientImplTests {
     ftpConfiguration.setUsername("user");
     ftpConfiguration.setPassword("pass");
     ftpConfiguration.setHost("localhost");
-    ftpConfiguration.setPort(9082);
+    ftpConfiguration.setPort(server.getServerControlPort());
     ftpConfiguration.setDefaultTimeout(3);
     ftpConfiguration.setSoTimeout(3);
     ftpConfiguration.setDataTimeout(3);
@@ -71,9 +72,11 @@ class FtpClientImplTests {
     );
     target.ftp(TMP_ROOT_PATH, paths);
 
-    assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString())).isTrue();
-    assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString() + "/" + EXPECTED_FILE_ONE)).isTrue();
-    assertThat(Files.exists(Paths.get(TMP_ROOT_PATH.toString()))).isTrue();
+    SoftAssertions softly = new SoftAssertions();
+    softly.assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString())).isTrue();
+    softly.assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString() + "/" + EXPECTED_FILE_ONE)).isTrue();
+    softly.assertThat(Files.exists(Paths.get(TMP_ROOT_PATH.toString()))).isTrue();
+    softly.assertAll();
   }
 
   @Test
@@ -85,10 +88,12 @@ class FtpClientImplTests {
     );
     target.ftp(TMP_ROOT_PATH, paths);
 
-    assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString())).isTrue();
-    assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString() + File.separator + EXPECTED_FILE_ONE)).isTrue();
-    assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString() + File.separator + EXPECTED_FILE_TWO)).isTrue();
-    assertThat(Files.exists(Paths.get(TMP_ROOT_PATH.toString()))).isTrue();
+    SoftAssertions softly = new SoftAssertions();
+    softly.assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString())).isTrue();
+    softly.assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString() + "/" + EXPECTED_FILE_ONE)).isTrue();
+    softly.assertThat(server.getFileSystem().exists(HOME + "/" + EXPECTED_FILE_PATH.toString() + "/" + EXPECTED_FILE_TWO)).isTrue();
+    softly.assertThat(Files.exists(Paths.get(TMP_ROOT_PATH.toString()))).isTrue();
+    softly.assertAll();
   }
 
 }
