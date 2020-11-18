@@ -82,11 +82,12 @@ dependencies {
     testImplementation 'org.mockftpserver:MockFtpServer:2.7.1'
 }
 
-test {
-//    maxParallelForks = Runtime.runtime.availableProsessors()
-    maxParallelForks = 4
+tasks.withType(Test) {
+    maxParallelForks = Runtime.runtime.availableProcessors()
     forkEvery = 4
+}
 
+test {
     useJUnitPlatform()
 
 //    retry {
