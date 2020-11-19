@@ -83,8 +83,9 @@ dependencies {
 }
 
 tasks.withType(Test) {
-    maxParallelForks = Runtime.runtime.availableProcessors()
-    forkEvery = 4
+// 自分の環境だと逆に遅い
+//    maxParallelForks = Runtime.runtime.availableProcessors()
+//    forkEvery = 4
 }
 
 test {
