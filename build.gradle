@@ -34,8 +34,8 @@ configurations {
 }
 
 repositories {
-    jcenter()
-//    mavenCentral()
+//    jcenter()
+    mavenCentral()
 //    maven { url 'https://repo.spring.io/snapshot' }
 //    maven { url 'https://repo.spring.io/milestone' }
 }
