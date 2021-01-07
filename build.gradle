@@ -1,5 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.5.RELEASE'
+    id 'org.springframework.boot' version '2.4.1'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
     id "org.sonarqube" version "2.7"
     id "jacoco"
@@ -7,11 +8,9 @@ plugins {
     id 'org.gradle.test-retry' version '1.1.9'
 }
 
-apply plugin: 'io.spring.dependency-management'
-
 group = 'jp.co.kelly'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '15'
 
 // actuator infoに情報を載せる
 springBoot {
@@ -35,9 +34,10 @@ configurations {
 }
 
 repositories {
-    mavenCentral()
-    maven { url 'https://repo.spring.io/snapshot' }
-    maven { url 'https://repo.spring.io/milestone' }
+    jcenter()
+//    mavenCentral()
+//    maven { url 'https://repo.spring.io/snapshot' }
+//    maven { url 'https://repo.spring.io/milestone' }
 }
 
 dependencies {
