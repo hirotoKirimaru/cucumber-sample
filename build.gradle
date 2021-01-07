@@ -16,6 +16,9 @@ sourceCompatibility = '15'
 springBoot {
     buildInfo()
 }
+jacoco {
+    toolVersion = '0.8.7-SNAPSHOT'
+}
 
 bootRun{
     // -Pprofiles=prdで起動できるようにする
@@ -38,6 +41,9 @@ repositories {
     mavenCentral()
 //    maven { url 'https://repo.spring.io/snapshot' }
 //    maven { url 'https://repo.spring.io/milestone' }
+    // https://github.com/gradle/gradle/issues/15038 解消されたら消す
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+
 }
 
 dependencies {
