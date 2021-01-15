@@ -80,6 +80,10 @@ dependencies {
     // FTPサーバ
     implementation 'commons-net:commons-net:3.7.2'
     testImplementation 'org.mockftpserver:MockFtpServer:2.7.1'
+
+    // rest-assured
+    testImplementation 'io.rest-assured:xml-path:4.3.3'
+    testImplementation 'io.rest-assured:spring-mock-mvc:4.3.3'
 }
 
 tasks.withType(Test) {
