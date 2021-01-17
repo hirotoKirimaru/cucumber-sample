@@ -13,3 +13,5 @@ pluginManagement {
 	}
 }
 rootProject.name = 'jp.co.kelly'
+include 'e2e'
+

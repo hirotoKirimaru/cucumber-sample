@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group 'jp.co.kelly'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'io.rest-assured:rest-assured:4.3.3'
+//    testImplementation 'io.rest-assured:json-path:4.3.3'
+//    testImplementation 'io.rest-assured:xml-path:4.3.3'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}
