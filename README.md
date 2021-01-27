@@ -1,3 +1,5 @@
+[![](https://tokei.rs/b1/github/hirotoKirimaru/cucumber-sample)](https://github.com/hirotoKirimaru/cucumber-sample).
+
 # 未来の自分へ
 ## 環境
 
@@ -29,3 +31,5 @@
     DB操作等もE2Eでチェックしたいことも考えると、nightwatch.js等ではカバーできないと判断。
     というか、そもそも、フロントエンド側でBDDをやるテストフレームワークが見つからなかった。
     あったけど、スター数が1桁のものしか見つからなかった…。
+
+
