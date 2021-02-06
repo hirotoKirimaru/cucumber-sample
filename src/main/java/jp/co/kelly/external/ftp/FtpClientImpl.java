@@ -1,4 +1,4 @@
-package jp.co.kelly.external;
+package jp.co.kelly.external.ftp;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

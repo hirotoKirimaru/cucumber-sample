@@ -1,4 +1,4 @@
-package jp.co.kelly.external;
+package jp.co.kelly.external.ftp;
 
 import lombok.Data;
 import lombok.ToString;

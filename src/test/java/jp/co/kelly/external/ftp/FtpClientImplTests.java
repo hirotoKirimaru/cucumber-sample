@@ -1,4 +1,4 @@
-package jp.co.kelly.external;
+package jp.co.kelly.external.ftp;
 
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.api.SoftAssertions;
@@ -11,7 +11,6 @@ import org.mockftpserver.fake.filesystem.DirectoryEntry;
 import org.mockftpserver.fake.filesystem.FileSystem;
 import org.mockftpserver.fake.filesystem.UnixFakeFileSystem;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

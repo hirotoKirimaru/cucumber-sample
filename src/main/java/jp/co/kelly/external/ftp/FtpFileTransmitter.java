@@ -1,4 +1,4 @@
-package jp.co.kelly.external;
+package jp.co.kelly.external.ftp;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
