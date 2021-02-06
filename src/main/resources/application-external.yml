@@ -1,0 +1,13 @@
+external:
+  commons: &external-common
+    schema: https
+    connectionTimeout: 3
+    readTimeout: 3
+  dummy-user:
+    <<: *external-common
+    host: randomuser.me
+    path: /api
+  zip-cloud:
+    <<: *external-common
+    host: zipcloud.ibsnet.co.jp
+    path: /api/search
