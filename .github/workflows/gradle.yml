@@ -29,3 +29,24 @@ jobs:
       run: ./gradlew sonarqube
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_SONAR }}
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Qodana - Code Inspection
+      uses: JetBrains/qodana-action@v1.0-eap
+      with:
+        project-dir: /src
+        results-dir: qodana-results # will be resolved as /github/workspace/myproject/qodana-results
+        report-dir: qodana-report # will be resolved as /github/workspace/myproject/qodana-report
+    - if: alyways()
+      name: Results-dir
+      uses: actions/upload-artifact@v2
+      with:
+        name: results-dir
+        path: qodana-results
+    - if: alyways()
+      name: Report-dir
+      uses: actions/upload-artifact@v2
+      with:
+        name: report-dir
+        path: qodana-report
