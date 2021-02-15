@@ -209,8 +209,8 @@ class ZipCloudClientImplTests {
       properties.setPort(0);
       properties.setPath("/api/search");
 
-      RestOperationFactory restOperationFactory = new RestOperationFactory(restTemplateBuilder, new RestTemplateInterceptor());
-      RestOperations restOperations = restOperationFactory.createRestOperations(properties);
+//      RestOperationFactory restOperationFactory = new RestOperationFactory(restTemplateBuilder, new RestTemplateInterceptor());
+//      RestOperations restOperations = restOperationFactory.createRestOperations(properties);
 
 //      target = new ZipCloudClientImpl(properties, restOperations);
       target = new ZipCloudClientImpl(properties);
