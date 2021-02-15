@@ -38,13 +38,13 @@ jobs:
         project-dir: /src
         results-dir: qodana-results # will be resolved as /github/workspace/myproject/qodana-results
         report-dir: qodana-report # will be resolved as /github/workspace/myproject/qodana-report
-    - if: alyways()
+    - if: always()
       name: Results-dir
       uses: actions/upload-artifact@v2
       with:
         name: results-dir
         path: qodana-results
-    - if: alyways()
+    - if: always()
       name: Report-dir
       uses: actions/upload-artifact@v2
       with:
