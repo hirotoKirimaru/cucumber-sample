@@ -33,6 +33,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - name: Debug SSH
+      uses: mxschmitt/action-tmate@v3
     - name: Qodana - Code Inspection
       uses: JetBrains/qodana-action@v1.0-eap
       with:
