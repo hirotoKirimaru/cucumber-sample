@@ -32,6 +32,7 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v1
     - name: Qodana - Code Inspection
       uses: JetBrains/qodana-action@v1.0-eap
       with:
