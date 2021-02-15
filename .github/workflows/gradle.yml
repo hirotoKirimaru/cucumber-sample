@@ -29,27 +29,27 @@ jobs:
       run: ./gradlew sonarqube
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_SONAR }}
-  analyze:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-#    - name: Debug SSH
-#      uses: mxschmitt/action-tmate@v3
-    - name: Qodana - Code Inspection
-      uses: JetBrains/qodana-action@v1.0-eap
-      with:
-        project-dir: /
-        results-dir: qodana-results # will be resolved as /github/workspace/myproject/qodana-results
-        report-dir: qodana-report # will be resolved as /github/workspace/myproject/qodana-report
-    - if: always()
-      name: Results-dir
-      uses: actions/upload-artifact@v2
-      with:
-        name: results-dir
-        path: qodana-results
-    - if: always()
-      name: Report-dir
-      uses: actions/upload-artifact@v2
-      with:
-        name: report-dir
-        path: qodana-report
+#  analyze:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v1
+##    - name: Debug SSH
+##      uses: mxschmitt/action-tmate@v3
+#    - name: Qodana - Code Inspection
+#      uses: JetBrains/qodana-action@v1.0-eap
+#      with:
+#        project-dir: /
+#        results-dir: qodana-results # will be resolved as /github/workspace/myproject/qodana-results
+#        report-dir: qodana-report # will be resolved as /github/workspace/myproject/qodana-report
+#    - if: always()
+#      name: Results-dir
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: results-dir
+#        path: qodana-results
+#    - if: always()
+#      name: Report-dir
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: report-dir
+#        path: qodana-report
