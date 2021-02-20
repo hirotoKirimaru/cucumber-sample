@@ -93,6 +93,9 @@ dependencies {
 
     // WebClient
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // CSVMapper
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
 }
 
 tasks.withType(Test) {
