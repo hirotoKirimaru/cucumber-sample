@@ -1,4 +1,4 @@
-年月日,平均気温(℃),最高気温(℃),最低気温(℃),日照時間(時間),降水量の合計(mm)
+date,temperatureAverage,temperatureHigh,temperatureLow,daylightHours,precipitationAmount
 2014/1/1,7.1,15.0,-2.5,8.5,0.0
 2014/1/2,5.4,12.8,-1.8,8.9,0.0
 2014/1/3,3.6,10.3,-2.1,4.0,0.0

@@ -1,5 +1,8 @@
 package jp.co.kelly.biz.domain.weather;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -9,17 +12,25 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonPropertyOrder({
+    "date",
+    "temperatureAverage",
+    "temperatureHigh",
+    "temperatureLow",
+    "daylightHours",
+    "precipitationAmount"
+})
 public class Weather {
-  private String date;
-  private String temperatureAverage;
-  private String temparatureHigh;
-  private String temparatureLow;
-  private String daylightHours;
-  private String precipitationAmount;
-//  private LocalDate date;
-//  private BigDecimal temperatureAverage;
-//  private BigDecimal temparatureHigh;
-//  private BigDecimal temparatureLow;
-//  private BigDecimal daylightHours;
-//  private BigDecimal precipitationAmount;
+  @JsonProperty("date")
+  private LocalDate date;
+  @JsonProperty("temperatureAverage")
+  private BigDecimal temperatureAverage;
+  @JsonProperty("temperatureHigh")
+  private BigDecimal temperatureHigh;
+  @JsonProperty("temperatureLow")
+  private BigDecimal temperatureLow;
+  @JsonProperty("daylightHours")
+  private BigDecimal daylightHours;
+  @JsonProperty("precipitationAmount")
+  private BigDecimal precipitationAmount;
 }
