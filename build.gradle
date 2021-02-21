@@ -96,6 +96,9 @@ dependencies {
 
     // CSVMapper
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
+
+    // spring-cloud-starter-config
+    implementation 'org.springframework.cloud.spring-cloud-starter-config'
 }
 
 tasks.withType(Test) {
