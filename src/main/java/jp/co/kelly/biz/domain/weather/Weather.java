@@ -5,15 +5,21 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Value
+@Data
 @Builder
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
 public class Weather {
-  private LocalDate date;
-  private BigDecimal temperatureAverage;
-  private BigDecimal temparatureHigh;
-  private BigDecimal temparatureLow;
-  private BigDecimal daylightHours;
-  private BigDecimal precipitationAmount;
+  private String date;
+  private String temperatureAverage;
+  private String temparatureHigh;
+  private String temparatureLow;
+  private String daylightHours;
+  private String precipitationAmount;
+//  private LocalDate date;
+//  private BigDecimal temperatureAverage;
+//  private BigDecimal temparatureHigh;
+//  private BigDecimal temparatureLow;
+//  private BigDecimal daylightHours;
+//  private BigDecimal precipitationAmount;
 }
