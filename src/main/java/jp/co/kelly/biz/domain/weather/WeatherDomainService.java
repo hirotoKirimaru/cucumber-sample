@@ -50,4 +50,28 @@ public class WeatherDomainService {
 
     return rtn;
   }
+
+  public List<Weather> readCsvNoHeader(Path path) throws IOException {
+    JavaTimeModule javaTimeModule = new JavaTimeModule();
+    javaTimeModule.addDeserializer(
+        LocalDate.class,
+        new LocalDateDeserializer(DateTimeFormatter.ofPattern("yyyy/M/d"))
+    );
+    csvMapper.registerModule(javaTimeModule);
+
+    CsvSchema csvSchema = csvMapper
+        .schemaFor(Weather.class);
+    List<Weather> rtn = new ArrayList<>();
+
+    MappingIterator<Weather> objectMappingIterator =
+        csvMapper.readerFor(Weather.class)
+            .with(csvSchema)
+            .readValues(path.toFile());
+
+    while (objectMappingIterator.hasNext()) {
+      rtn.add(objectMappingIterator.next());
+    }
+
+    return rtn;
+  }
 }
