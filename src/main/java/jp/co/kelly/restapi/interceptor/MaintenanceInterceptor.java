@@ -5,6 +5,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.handler.WebRequestHandlerInterceptorAdapter;
 
@@ -15,9 +16,10 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 
 @Slf4j
-@Component
+//@Component
 //public class MaintenanceInterceptor extends WebRequestHandlerInterceptorAdapter {
-  public class MaintenanceInterceptor extends HandlerInterceptorAdapter {
+  public class MaintenanceInterceptor implements AsyncHandlerInterceptor {
+//  public class MaintenanceInterceptor extends HandlerInterceptorAdapter {
 //  /**
 //   * Create a new WebRequestHandlerInterceptorAdapter for the given WebRequestInterceptor.
 //   *
@@ -35,6 +37,7 @@ import java.time.ZoneOffset;
     LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Tokyo"));
 
     if (now.isBefore(LocalDateTime.MAX)) {
+      log.error("メンテナンス中です");
       return false;
     }
 

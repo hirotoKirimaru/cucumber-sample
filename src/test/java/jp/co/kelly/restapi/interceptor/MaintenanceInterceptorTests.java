@@ -23,13 +23,14 @@ class MaintenanceInterceptorTests {
   private MockMvc mockMvc;
   private final String rootUrl = "/animals";
 
-  @Mock
-  WebRequestInterceptor webRequestInterceptor;
+//  @Mock
+//  WebRequestInterceptor webRequestInterceptor;
 
   @BeforeEach
   void setup() {
     mockMvc = MockMvcBuilders.standaloneSetup(new AnimalsRestController())
-        .addInterceptors(new MaintenanceInterceptor(webRequestInterceptor))
+//        .addInterceptors(new MaintenanceInterceptor(webRequestInterceptor))
+        .addInterceptors(new MaintenanceInterceptor())
         .build();
   }
 

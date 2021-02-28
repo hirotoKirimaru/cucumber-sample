@@ -9,10 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
-  private final MaintenanceInterceptor maintenanceInterceptor;
+//  private final MaintenanceInterceptor maintenanceInterceptor;
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(maintenanceInterceptor);
+    registry.addInterceptor(new MaintenanceInterceptor());
   }
 }
