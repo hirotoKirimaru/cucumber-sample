@@ -1,7 +1,5 @@
 package jp.co.kelly.biz.domain;
 
-import cucumber.api.java.it.Ma;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
