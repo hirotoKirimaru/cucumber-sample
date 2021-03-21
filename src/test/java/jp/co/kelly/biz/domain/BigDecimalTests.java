@@ -240,20 +240,24 @@ class BigDecimalTests {
   void test_17() {
 
     assertThat(
-        BigDecimal.ONE.movePointRight(1)
-    ).isEqualTo(BigDecimal.TEN);
+        BigDecimal.ONE.movePointRight(1).toPlainString()
+    ).isEqualTo("10");
 
     assertThat(
-        BigDecimal.TEN.movePointLeft(1)
-    ).isEqualTo(BigDecimal.ONE.setScale(1));
+        BigDecimal.TEN.movePointLeft(1).toPlainString()
+    ).isEqualTo("1.0");
 
     assertThat(
-        BigDecimal.ONE.multiply(BigDecimal.TEN)
-    ).isEqualTo(BigDecimal.TEN);
+        BigDecimal.ONE.movePointLeft(3).toPlainString()
+    ).isEqualTo("0.001");
 
     assertThat(
-        BigDecimal.TEN.divide(BigDecimal.TEN)
-    ).isEqualTo(BigDecimal.ONE);
+        BigDecimal.ONE.multiply(BigDecimal.TEN).toPlainString()
+    ).isEqualTo("10");
+
+    assertThat(
+        BigDecimal.TEN.divide(BigDecimal.TEN).toPlainString()
+    ).isEqualTo("1");
 
   }
 
