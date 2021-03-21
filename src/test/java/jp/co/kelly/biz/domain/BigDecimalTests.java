@@ -143,4 +143,16 @@ class BigDecimalTests {
         BigDecimal.valueOf(123.45).toPlainString()
     ).isEqualTo("123.45");
   }
+
+  @DisplayName("new 時にDoubleわたすと事故る")
+  @Test
+  void test_12() {
+
+    assertThat(
+        BigDecimal.valueOf(0.0000001).toString()
+    ).isEqualTo("1.0E-7");
+    assertThat(
+        BigDecimal.valueOf(0.0000001).toPlainString()
+    ).isEqualTo("0.00000010");
+  }
 }
