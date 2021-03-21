@@ -155,4 +155,28 @@ class BigDecimalTests {
         BigDecimal.valueOf(0.0000001).toPlainString()
     ).isEqualTo("0.00000010");
   }
+
+  @Test
+  void test_13() {
+
+    assertThat(
+        BigDecimal.ONE.negate().toPlainString()
+    ).isEqualTo("-1");
+
+    assertThat(
+        BigDecimal.ONE.negate().negate().toPlainString()
+    ).isEqualTo("1");
+  }
+
+  @Test
+  void test_14() {
+
+    assertThat(
+        BigDecimal.ONE.toPlainString()
+    ).isEqualTo("1");
+
+    assertThat(
+        BigDecimal.ONE.negate().plus().toPlainString()
+    ).isEqualTo("-1");
+  }
 }
