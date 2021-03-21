@@ -53,4 +53,56 @@ class BigDecimalTests {
         )
     ).isEqualTo(BigDecimal.TEN);
   }
+
+
+  @Test
+  void test_05() {
+
+    BigDecimal one = BigDecimal.ONE.setScale(1);
+    BigDecimal two = BigDecimal.ONE.setScale(2);
+    assertThat(
+        one.equals(two)
+    ).isEqualTo(false);
+  }
+
+  @Test
+  void test_06() {
+
+    BigDecimal one = BigDecimal.ONE.setScale(1);
+    BigDecimal two = BigDecimal.ONE.setScale(2);
+    BigDecimal subtract = one.subtract(two);
+    assertThat(
+        subtract.signum() == 0
+    ).isEqualTo(true);
+  }
+
+  @Test
+  void test_07() {
+
+    BigDecimal one = BigDecimal.ONE.setScale(100);
+    BigDecimal two = BigDecimal.valueOf(1.01);
+    BigDecimal subtract = one.subtract(two);
+    assertThat(
+        subtract.signum() != 0
+    ).isEqualTo(true);
+  }
+
+  @DisplayName("精度は大きい方になる")
+  @Test
+  void test_08() {
+
+    BigDecimal one = BigDecimal.ONE.setScale(10);
+    BigDecimal two = BigDecimal.ONE.setScale(2);
+    BigDecimal subtract = one.subtract(two);
+
+    assertThat(
+        subtract.scale()
+    ).isEqualTo(10);
+
+    BigDecimal subtract2 = two.subtract(one);
+
+    assertThat(
+        subtract.scale()
+    ).isEqualTo(10);
+  }
 }
