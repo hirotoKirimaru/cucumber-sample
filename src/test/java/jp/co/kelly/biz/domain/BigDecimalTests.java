@@ -133,14 +133,14 @@ class BigDecimalTests {
   void test_11() {
 
     assertThat(
-        new BigDecimal(123.45).toString()
+        new BigDecimal(123.45).toPlainString()
     ).isEqualTo("123.4500000000000028421709430404007434844970703125");
 
     assertThat(
-        new BigDecimal("123.45").toString()
+        new BigDecimal("123.45").toPlainString()
     ).isEqualTo("123.45");
     assertThat(
-        BigDecimal.valueOf(123.45).toString()
+        BigDecimal.valueOf(123.45).toPlainString()
     ).isEqualTo("123.45");
   }
 }
