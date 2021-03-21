@@ -105,4 +105,14 @@ class BigDecimalTests {
         subtract.scale()
     ).isEqualTo(10);
   }
+
+  @Test
+  void test_09() {
+
+    BigDecimal one = BigDecimal.ONE.setScale(1);
+    BigDecimal two = BigDecimal.ONE.setScale(2);
+    assertThat(
+        one.compareTo(two) == 0
+    ).isEqualTo(true);
+  }
 }
