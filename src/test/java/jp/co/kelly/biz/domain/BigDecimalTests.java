@@ -256,4 +256,59 @@ class BigDecimalTests {
     ).isEqualTo(BigDecimal.ONE);
 
   }
+
+  @Test
+  void test_19() {
+    assertThat(
+        BigDecimal.ONE
+            .multiply(BigDecimal.TEN, new MathContext(1, RoundingMode.DOWN))
+        .toString()
+    ).isEqualTo("1E+1");
+
+    assertThat(
+        BigDecimal.ONE
+            .multiply(BigDecimal.TEN, new MathContext(3, RoundingMode.DOWN))
+    ).isEqualTo(BigDecimal.TEN);
+  }
+
+  @Test
+  void test_20() {
+        assertThat(
+        BigDecimal.valueOf(12345.6789)
+            .multiply(BigDecimal.TEN, new MathContext(2, RoundingMode.DOWN))
+            .setScale(10)
+    ).isEqualTo(BigDecimal.valueOf(120000));
+  }
+
+  @Test
+  void test_21() {
+    BigDecimal example = BigDecimal.valueOf(100.00001);
+    assertThat(
+        example.scale()
+    ).isEqualTo(5);
+
+    assertThat(
+        example.precision()
+    ).isEqualTo(8);
+
+    assertThat(
+        example.toString()
+    ).isEqualTo("100.00001");
+  }
+
+  @Test
+  void test_22() {
+    BigDecimal example = BigDecimal.valueOf(0.00001);
+    assertThat(
+        example.scale()
+    ).isEqualTo(6);
+
+    assertThat(
+        example.precision()
+    ).isEqualTo(2);
+
+    assertThat(
+        example.toString()
+    ).isEqualTo("0.000010");
+  }
 }
