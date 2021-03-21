@@ -262,7 +262,7 @@ class BigDecimalTests {
     assertThat(
         BigDecimal.ONE
             .multiply(BigDecimal.TEN, new MathContext(1, RoundingMode.DOWN))
-        .toString()
+            .toString()
     ).isEqualTo("1E+1");
 
     assertThat(
@@ -273,11 +273,17 @@ class BigDecimalTests {
 
   @Test
   void test_20() {
-        assertThat(
+    assertThat(
         BigDecimal.valueOf(12345.6789)
             .multiply(BigDecimal.TEN, new MathContext(2, RoundingMode.DOWN))
-            .setScale(10)
-    ).isEqualTo(BigDecimal.valueOf(120000));
+            .toPlainString()
+    ).isEqualTo("120000");
+
+    assertThat(
+        BigDecimal.valueOf(12345.6789)
+            .multiply(BigDecimal.TEN)
+            .toPlainString()
+    ).isEqualTo("123456.7890");
   }
 
   @Test
