@@ -22,7 +22,7 @@ jobs:
             - . # 共有するパス（絶対パスかrootからの相対パス）
   test:
     docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
-      - image: circleci/openjdk:11.0.8
+      - image: circleci/openjdk-15-boot-2.8.3-buster
     working_directory: ~/workspace
     steps:
       - attach_workspace: # workspaceをアタッチする
@@ -30,8 +30,8 @@ jobs:
       - run: sudo chmod +x ./gradlew
       - run: ./gradlew test
   sonarqube:
-    docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
-      - image: circleci/openjdk:11.0.8
+    docker: # https://circleci.com/docs/ja/2.0/docker-image-tags.json
+      - image: circleci/openjdk-15-boot-2.8.3-buster
     working_directory: ~/workspace
     steps:
       - attach_workspace: # workspaceをアタッチする
