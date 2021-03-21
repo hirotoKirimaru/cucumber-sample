@@ -1,15 +1,18 @@
 package jp.co.kelly.biz.domain;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 class BigDecimalTests {
   @Test
   void test_01() {
@@ -178,5 +181,79 @@ class BigDecimalTests {
     assertThat(
         BigDecimal.ONE.negate().plus().toPlainString()
     ).isEqualTo("-1");
+  }
+
+  @Test
+  void test_15() {
+
+    assertThat(
+        BigDecimal.ONE.scaleByPowerOfTen(1).toPlainString()
+    ).isEqualTo("10");
+
+    // setScaleしないと1E+1になっちゃう…。
+    assertThat(
+        BigDecimal.ONE.setScale(1).scaleByPowerOfTen(1)
+    ).isEqualTo(BigDecimal.TEN);
+
+    assertThat(
+        BigDecimal.TEN.scaleByPowerOfTen(-1)
+    ).isEqualTo(BigDecimal.ONE.setScale(1));
+  }
+
+  @DisplayName("性能確認")
+  @Test
+  void test_16() {
+    log.info("***************");
+    log.info("compareTo");
+    for (int i = 0; i < 1000000; i++) {
+      boolean b = BigDecimal.ZERO.compareTo(BigDecimal.ZERO) == 0;
+    }
+    log.info("***************");
+
+    log.info("***************");
+    log.info("signum");
+    for (int i = 0; i < 1000000; i++) {
+      boolean b = BigDecimal.ZERO.signum() == 0;
+    }
+    log.info("***************");
+
+
+    // compareTo内部でsignumを呼んでるから、0除算回避であればsignumを使うべき。
+    // Quick path for equal scale and non-inflated case.
+//    if (scale == val.scale) {
+//      long xs = intCompact;
+//      long ys = val.intCompact;
+//      if (xs != INFLATED && ys != INFLATED)
+//        return xs != ys ? ((xs > ys) ? 1 : -1) : 0;
+//    }
+//    int xsign = this.signum();
+//    int ysign = val.signum();
+//    if (xsign != ysign)
+//      return (xsign > ysign) ? 1 : -1;
+//    if (xsign == 0)
+//      return 0;
+//    int cmp = compareMagnitude(val);
+//    return (xsign > 0) ? cmp : -cmp;
+  }
+
+  @Test
+  void test_17() {
+
+    assertThat(
+        BigDecimal.ONE.movePointRight(1)
+    ).isEqualTo(BigDecimal.TEN);
+
+    assertThat(
+        BigDecimal.TEN.movePointLeft(1)
+    ).isEqualTo(BigDecimal.ONE.setScale(1));
+
+    assertThat(
+        BigDecimal.ONE.multiply(BigDecimal.TEN)
+    ).isEqualTo(BigDecimal.TEN);
+
+    assertThat(
+        BigDecimal.TEN.divide(BigDecimal.TEN)
+    ).isEqualTo(BigDecimal.ONE);
+
   }
 }
