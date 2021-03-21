@@ -127,4 +127,20 @@ class BigDecimalTests {
         remainder
     ).isEqualTo(BigDecimal.valueOf(1.11));
   }
+
+  @DisplayName("new 時にDoubleわたすと事故る")
+  @Test
+  void test_11() {
+
+    assertThat(
+        new BigDecimal(123.45).toString()
+    ).isEqualTo("123.4500000000000028421709430404007434844970703125");
+
+    assertThat(
+        new BigDecimal("123.45").toString()
+    ).isEqualTo("123.45");
+    assertThat(
+        BigDecimal.valueOf(123.45).toString()
+    ).isEqualTo("123.45");
+  }
 }
