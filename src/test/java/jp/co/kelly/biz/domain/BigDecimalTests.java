@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,5 +38,19 @@ class BigDecimalTests {
     assertThat(
         one.signum() == two.signum()
     ).isEqualTo(true);
+  }
+
+  @Test
+  void test_04() {
+    List<BigDecimal> list = new ArrayList<>();
+    for (int i = 0; i < 10; i++) {
+      list.add(BigDecimal.ONE);
+    }
+
+    assertThat(
+        list.stream().reduce(
+            BigDecimal.ZERO, BigDecimal::add
+        )
+    ).isEqualTo(BigDecimal.TEN);
   }
 }
