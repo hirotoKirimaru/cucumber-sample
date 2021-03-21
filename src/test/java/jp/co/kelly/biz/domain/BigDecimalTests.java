@@ -115,4 +115,16 @@ class BigDecimalTests {
         one.compareTo(two) == 0
     ).isEqualTo(true);
   }
+
+  @DisplayName("あまり")
+  @Test
+  void test_10() {
+
+    BigDecimal three = BigDecimal.valueOf(3);
+    BigDecimal ten = BigDecimal.valueOf(10.11);
+    BigDecimal remainder = ten.remainder(three);
+    assertThat(
+        remainder
+    ).isEqualTo(BigDecimal.valueOf(1.11));
+  }
 }
