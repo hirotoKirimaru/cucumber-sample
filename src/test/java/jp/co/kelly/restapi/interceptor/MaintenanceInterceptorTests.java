@@ -38,7 +38,7 @@ class MaintenanceInterceptorTests {
   void success() throws Exception {
     this.mockMvc.perform(get(rootUrl).param("piyo", "aiueo"))
         .andExpect(status().isOk())
-        .andExpect(content().string(""));
+        .andExpect(content().string("hogehoge"));
   }
 
 }
