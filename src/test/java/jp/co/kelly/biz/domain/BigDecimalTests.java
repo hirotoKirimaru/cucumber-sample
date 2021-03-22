@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Slf4j
 class BigDecimalTests {
@@ -57,6 +58,19 @@ class BigDecimalTests {
     ).isEqualTo(BigDecimal.TEN);
   }
 
+  @Test
+  void test_04_02() {
+    List<BigDecimal> list = new ArrayList<>();
+    for (int i = 0; i < 10; i++) {
+      list.add(BigDecimal.ONE);
+    }
+
+    assertThat(
+        list.stream().reduce(
+            BigDecimal.TEN, BigDecimal::subtract
+        )
+    ).isEqualTo(BigDecimal.ZERO);
+  }
 
   @Test
   void test_05() {
@@ -123,11 +137,9 @@ class BigDecimalTests {
   @Test
   void test_10() {
 
-    BigDecimal three = BigDecimal.valueOf(3);
-    BigDecimal ten = BigDecimal.valueOf(10.11);
-    BigDecimal remainder = ten.remainder(three);
     assertThat(
-        remainder
+        BigDecimal.valueOf(10.11)
+            .remainder(BigDecimal.valueOf(3))
     ).isEqualTo(BigDecimal.valueOf(1.11));
   }
 
@@ -320,5 +332,99 @@ class BigDecimalTests {
     assertThat(
         example.toString()
     ).isEqualTo("0.000010");
+  }
+
+  @Test
+  void test_23() {
+    // 単純に1 / 3 の割り算する. 割り切れないとArithmeticExceptionが発生する.
+    assertThatThrownBy(
+        () -> BigDecimal.ONE.divide(BigDecimal.valueOf(3))
+    ).isInstanceOfSatisfying(
+        ArithmeticException.class,
+        (e) -> e.getMessage().equals("Non-terminating decimal expansion; no exact representable decimal result.")
+    );
+
+    // 1 / 3 の割り算をした後に、第二引数のscaleで丸める(切り上げする)
+    assertThat(
+        BigDecimal.ONE
+            .divide(BigDecimal.valueOf(3), 3, RoundingMode.UP)
+            .toPlainString()
+    ).isEqualTo("0.334");
+
+    // 1 / 3 の割り算をする前に精度を増やしておき、増やした精度で丸める(切り上げする)
+    assertThat(
+        BigDecimal.ONE
+            .setScale(3, RoundingMode.UP)
+            .divide(BigDecimal.valueOf(3), RoundingMode.UP)
+            .toPlainString()
+    ).isEqualTo("0.334");
+
+    // 1 / 3 の割り算をした後に、MathContextの有効数字で丸める（切り上げする）
+    assertThat(
+        BigDecimal.ONE
+            .divide(BigDecimal.valueOf(3), new MathContext(3, RoundingMode.UP))
+            .toPlainString()
+    ).isEqualTo("0.334");
+
+    assertThat(
+        BigDecimal.ONE
+            .divide(BigDecimal.valueOf(3), RoundingMode.UP)
+            .toPlainString()
+    ).isEqualTo("1");
+
+    assertThat(
+        BigDecimal.ONE
+            .divide(BigDecimal.valueOf(3), 3, RoundingMode.UP)
+            .multiply(BigDecimal.valueOf(100))
+            .toPlainString()
+    ).isEqualTo("33.400");
+
+    assertThat(
+        BigDecimal.ONE
+            .divide(BigDecimal.valueOf(3), 6, RoundingMode.UP)
+            .multiply(BigDecimal.valueOf(100))
+            .setScale(3, RoundingMode.UP)
+            .toPlainString()
+    ).isEqualTo("33.334");
+  }
+
+  @Test
+  void test_24() {
+    // 10 > 1の時は1
+    assertThat(
+       BigDecimal.TEN.compareTo(BigDecimal.ONE)
+    ).isEqualTo(1);
+
+    // 1 < 10の時は-1
+    assertThat(
+        BigDecimal.ONE.compareTo(BigDecimal.TEN)
+    ).isEqualTo(-1);
+
+    // 一致している時は0
+    // 0.0 と 0.00の比較
+    assertThat(
+        BigDecimal.ONE.setScale(1)
+            .compareTo(BigDecimal.ONE.setScale(2))
+    ).isEqualTo(0);
+  }
+
+  @Test
+  void test_25() {
+
+    assertThat(
+        BigDecimal.ONE.setScale(1)
+            .equals(BigDecimal.ONE.setScale(2))
+    ).isEqualTo(false);
+  }
+
+  @Test
+  void test_26() {
+    assertThat(
+        BigDecimal.ZERO
+            .compareTo(BigDecimal.ZERO.setScale(2))
+    ).isEqualTo(0);
+    assertThat(
+        BigDecimal.ZERO.signum()
+    ).isEqualTo(0);
   }
 }
