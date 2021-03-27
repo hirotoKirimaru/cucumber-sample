@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGenerator;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ class SpringJunitConfigTest {
     @Autowired
     DateConverter target;
 
-    @ComponentScan({"jp.co.kelly.biz.domain"})
+    @ComponentScan(value = {"jp.co.kelly.biz.domain"}, nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class)
     static class Config {
     }
 
