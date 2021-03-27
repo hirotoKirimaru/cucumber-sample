@@ -20,7 +20,7 @@ class SpringJunitConfigTest {
     @Autowired
     DateConverter target;
 
-    @ComponentScan(value = {"jp.co.kelly.biz.domain"}, nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class)
+    @ComponentScan(value = {"kirimaru.biz.domain"}, nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class)
     static class Config {
     }
 

@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 public class DomainInterceptor {
 
   @Before(
-      "execution(* jp.co.kelly.biz.domain.*.*(..)))"
+      "execution(* kirimaru.biz.domain.*.*(..)))"
   )
   void before() {
     System.out.println("*** START ***");
   }
 
   @After(
-      "execution(* jp.co.kelly.biz.domain.*.*(..)))"
+      "execution(* kirimaru.biz.domain.*.*(..)))"
   )
   void after() {
     System.out.println("*** END ***");

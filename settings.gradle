@@ -12,6 +12,6 @@ pluginManagement {
 		}
 	}
 }
-rootProject.name = 'jp.co.kelly'
+rootProject.name = 'kirimaru'
 include 'e2e'
 

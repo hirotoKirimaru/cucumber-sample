@@ -14,7 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
     DBSetupListener.class
 })
 class AnotationTests {
-  @ComponentScan({"jp.co.kelly.biz.domain.hogehoge"})
+  @ComponentScan({"kirimaru.biz.domain.hogehoge"})
   public static class Config {
   }
 
