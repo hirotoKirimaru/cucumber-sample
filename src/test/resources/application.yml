@@ -2,4 +2,9 @@ spring:
   profiles:
     active:
       - ut
+    group:
+      ut:
+        - common
+        - external-ut
+        - repository-ut
 
