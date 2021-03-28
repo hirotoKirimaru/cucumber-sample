@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
+import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
@@ -12,13 +12,13 @@ import java.net.URI;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringJUnitConfig(initializers = ConfigFileApplicationContextInitializer.class)
+@SpringJUnitConfig(initializers = ConfigDataApplicationContextInitializer.class)
 @EnableConfigurationProperties({TwitterProperties.class})
 class TwitterPropertiesTests {
   @Autowired
   TwitterProperties properties;
 
-  @SpringJUnitConfig(initializers = ConfigFileApplicationContextInitializer.class)
+  @SpringJUnitConfig(initializers = ConfigDataApplicationContextInitializer.class)
   @EnableConfigurationProperties({TwitterProperties.class})
   @TestPropertySource(properties = {"external.twitter.protocol=https"})
   @Nested
