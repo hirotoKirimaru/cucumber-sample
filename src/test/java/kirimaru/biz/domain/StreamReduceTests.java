@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -92,7 +93,21 @@ class StreamReduceTests {
 //    Map<Stream<String>, List<Human>> collect = humanList.stream().collect(Collectors.groupingBy(e ->
 //        e.petList.stream().map(f -> f.kind)
 //    ));
-    List<Human> collect = humanList.stream().filter(Human::hasDog).collect(Collectors.toList());
+//    List<Human> collect = humanList.stream().filter(Human::hasDog).collect(Collectors.toList());
+//    List<Human> collect =
+       Map<String, Object> collect = humanList.stream()
+        .flatMap(e -> e.getPetList().stream())
+        .map(Human.Pet::getKind)
+        .distinct()
+        .collect(Collectors.toMap(Function.identity(),
+            k -> humanList.stream()
+                .map(h -> h.getPetList().stream()
+                    .map(f -> f.kind)
+//                .map(Human.Pet::getKind)
+//                    .anyMatch( i-> i.equals("dog"))
+            )))
+        ;
+//        .collect(Collectors.toList());
 
 
 //        assertThat(
