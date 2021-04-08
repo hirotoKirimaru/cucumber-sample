@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,6 +24,10 @@ class StreamReduceTests {
     private final String div;
     private final List<Pet> petList;
     private final Wallet wallet;
+
+    public boolean hasDog(){
+      return petList.stream().anyMatch(e -> e.kind.equals("dog"));
+    }
 
     @Getter
     @Builder
@@ -83,11 +89,16 @@ class StreamReduceTests {
     );
 
 //    Map<String, List<Human>> collect =
-//        humanList.stream().collect(Collectors.groupingBy(e -> e.petList.stream().flatMap(e -> e.kind)));
+//    Map<Stream<String>, List<Human>> collect = humanList.stream().collect(Collectors.groupingBy(e ->
+//        e.petList.stream().map(f -> f.kind)
+//    ));
+    List<Human> collect = humanList.stream().filter(Human::hasDog).collect(Collectors.toList());
+
 
 //        assertThat(
 //          collect.get("dog").stream().mapToInt(e -> e.)
 //        )
+    System.out.println(collect);
 
 //    assertThat()
 //    1110
