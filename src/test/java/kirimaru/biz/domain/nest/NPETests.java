@@ -63,4 +63,31 @@ class NPETests {
       fail("失敗");
     }
   }
+
+  @Test
+  void test_05() {
+    Boolean a = null;
+    try {
+      boolean hoge = a == false;
+    } catch (NullPointerException e) {
+      return;
+    } catch (Exception e) {
+      fail("失敗");
+    }
+    fail("失敗");
+  }
+
+  @Test
+  void test_06() {
+    BigDecimal a = null;
+
+    String hoge = a == null ? null : a.toPlainString();
+    String fuga = Optional.ofNullable(a).map(BigDecimal::toPlainString).orElse(null);
+
+    assertThat(hoge).isNull();
+    assertThat(fuga).isNull();
+
+//    Optional chaining で書きたい…
+//    String hoge = a?.toPlainString();
+  }
 }
