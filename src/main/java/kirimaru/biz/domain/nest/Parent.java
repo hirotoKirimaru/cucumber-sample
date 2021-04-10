@@ -8,7 +8,7 @@ import java.util.List;
 @Value
 @Builder
 public class Parent {
-  private Child detail;
-  private List<Child> detailList;
+  private Child child;
+  private List<Child> children;
 
 }

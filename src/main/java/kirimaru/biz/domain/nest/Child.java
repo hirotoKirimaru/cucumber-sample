@@ -8,6 +8,6 @@ import java.util.List;
 @Value
 @Builder
 public class Child {
-  private GrandChild detailDetail;
-  private List<GrandChild> detailDetailList;
+  private GrandChild grandChild;
+  private List<GrandChild> grandChildren;
 }

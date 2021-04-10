@@ -23,8 +23,8 @@ class OptionalTests {
 
       assertThat(
           Optional.ofNullable(parent)
-              .map(Parent::getDetail)
-              .map(Child::getDetailDetail)
+              .map(Parent::getChild)
+              .map(Child::getGrandChild)
               .map(GrandChild::getAmount)
               .orElse(0)
 
@@ -36,17 +36,16 @@ class OptionalTests {
     void test_02() {
       Parent parent = null;
 
-      if (parent == null ||
-          parent.getDetail() == null ||
-          parent.getDetail().getDetailDetail() == null ||
-          parent.getDetail().getDetailDetail().getTax() == 0) {
-        int zero = parent.getDetail().getDetailDetail().getTax();
+      if (parent != null ||
+          parent.getChild() != null ||
+          parent.getChild().getGrandChild() != null) {
+        int zero = parent.getChild().getGrandChild().getTax();
       }
 
       assertThat(
           Optional.ofNullable(parent)
-              .map(Parent::getDetail)
-              .map(Child::getDetailDetail)
+              .map(Parent::getChild)
+              .map(Child::getGrandChild)
               .map(GrandChild::getTax) // int型でも中間はIntegerになる
               .orElse(0)
 
@@ -60,8 +59,8 @@ class OptionalTests {
 
       assertThat(
           Optional.ofNullable(parent)
-              .map(Parent::getDetail)
-              .map(Child::getDetailDetail)
+              .map(Parent::getChild)
+              .map(Child::getGrandChild)
               .map(GrandChild::getRate)
               .orElse(BigDecimal.ZERO)
 
@@ -70,20 +69,41 @@ class OptionalTests {
     }
 
     @Test
+    void test_03_01() {
+      Parent parent = Parent.builder()
+          .child(Child.builder()
+              .grandChild(GrandChild.builder()
+                  .rate(BigDecimal.TEN)
+                  .build())
+              .build())
+          .build();
+
+      assertThat(
+          Optional.ofNullable(parent)
+              .map(Parent::getChild)
+              .map(Child::getGrandChild)
+              .map(GrandChild::getRate)
+              .orElse(BigDecimal.ZERO)
+
+      ).isEqualTo(BigDecimal.TEN);
+
+    }
+
+    @Test
     void test_04() {
       Parent parent = null;
 
       if (parent == null ||
-          parent.getDetail() == null ||
-          parent.getDetail().getDetailDetail() == null ||
-          parent.getDetail().getDetailDetail().getRate() == null) {
-        BigDecimal zero = parent.getDetail().getDetailDetail().getRate();
+          parent.getChild() == null ||
+          parent.getChild().getGrandChild() == null ||
+          parent.getChild().getGrandChild().getRate() == null) {
+        BigDecimal zero = parent.getChild().getGrandChild().getRate();
       }
 
       assertThat(
           Optional.ofNullable(parent)
-              .map(Parent::getDetail)
-              .map(Child::getDetailDetail)
+              .map(Parent::getChild)
+              .map(Child::getGrandChild)
               .map(GrandChild::getRate)
               .orElse(BigDecimal.ZERO)
 
@@ -101,13 +121,13 @@ class OptionalTests {
       baseDetailList.add(Child.builder().build());
 
       Parent parent = Parent.builder()
-          .detailList(baseDetailList)
+          .children(baseDetailList)
           .build();
 
       assertThat(
-          Optional.ofNullable(parent.getDetailList())
+          Optional.ofNullable(parent.getChildren())
               .stream().flatMap(Collection::stream)
-              .map(Child::getDetailDetailList)
+              .map(Child::getGrandChildren)
               .filter(Objects::nonNull) // NPE回避用ロジック
               .flatMap(Collection::stream)
               .map(GrandChild::getRate)
