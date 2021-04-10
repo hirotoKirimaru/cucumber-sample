@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Value
 @Builder
-public class BaseDetailDetail {
+public class GrandChild {
   private int tax;
   private Integer amount;
   private BigDecimal rate;

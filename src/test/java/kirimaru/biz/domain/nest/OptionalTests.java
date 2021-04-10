@@ -12,7 +12,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class OptionalTests {
 
@@ -20,13 +19,13 @@ class OptionalTests {
   class One {
     @Test
     void test_01() {
-      Base base = null;
+      Parent parent = null;
 
       assertThat(
-          Optional.ofNullable(base)
-              .map(Base::getDetail)
-              .map(BaseDetail::getDetailDetail)
-              .map(BaseDetailDetail::getAmount)
+          Optional.ofNullable(parent)
+              .map(Parent::getDetail)
+              .map(Child::getDetailDetail)
+              .map(GrandChild::getAmount)
               .orElse(0)
 
       ).isEqualTo(0);
@@ -35,20 +34,20 @@ class OptionalTests {
 
     @Test
     void test_02() {
-      Base base = null;
+      Parent parent = null;
 
-      if (base == null ||
-          base.getDetail() == null ||
-          base.getDetail().getDetailDetail() == null ||
-          base.getDetail().getDetailDetail().getTax() == 0) {
-        int zero = base.getDetail().getDetailDetail().getTax();
+      if (parent == null ||
+          parent.getDetail() == null ||
+          parent.getDetail().getDetailDetail() == null ||
+          parent.getDetail().getDetailDetail().getTax() == 0) {
+        int zero = parent.getDetail().getDetailDetail().getTax();
       }
 
       assertThat(
-          Optional.ofNullable(base)
-              .map(Base::getDetail)
-              .map(BaseDetail::getDetailDetail)
-              .map(BaseDetailDetail::getTax) // int型でも中間はIntegerになる
+          Optional.ofNullable(parent)
+              .map(Parent::getDetail)
+              .map(Child::getDetailDetail)
+              .map(GrandChild::getTax) // int型でも中間はIntegerになる
               .orElse(0)
 
       ).isEqualTo(0);
@@ -57,13 +56,13 @@ class OptionalTests {
 
     @Test
     void test_03() {
-      Base base = null;
+      Parent parent = null;
 
       assertThat(
-          Optional.ofNullable(base)
-              .map(Base::getDetail)
-              .map(BaseDetail::getDetailDetail)
-              .map(BaseDetailDetail::getRate)
+          Optional.ofNullable(parent)
+              .map(Parent::getDetail)
+              .map(Child::getDetailDetail)
+              .map(GrandChild::getRate)
               .orElse(BigDecimal.ZERO)
 
       ).isEqualTo(BigDecimal.ZERO);
@@ -72,20 +71,20 @@ class OptionalTests {
 
     @Test
     void test_04() {
-      Base base = null;
+      Parent parent = null;
 
-      if (base == null ||
-          base.getDetail() == null ||
-          base.getDetail().getDetailDetail() == null ||
-          base.getDetail().getDetailDetail().getRate() == null) {
-        BigDecimal zero = base.getDetail().getDetailDetail().getRate();
+      if (parent == null ||
+          parent.getDetail() == null ||
+          parent.getDetail().getDetailDetail() == null ||
+          parent.getDetail().getDetailDetail().getRate() == null) {
+        BigDecimal zero = parent.getDetail().getDetailDetail().getRate();
       }
 
       assertThat(
-          Optional.ofNullable(base)
-              .map(Base::getDetail)
-              .map(BaseDetail::getDetailDetail)
-              .map(BaseDetailDetail::getRate)
+          Optional.ofNullable(parent)
+              .map(Parent::getDetail)
+              .map(Child::getDetailDetail)
+              .map(GrandChild::getRate)
               .orElse(BigDecimal.ZERO)
 
       ).isEqualTo(BigDecimal.ZERO);
@@ -98,20 +97,20 @@ class OptionalTests {
   class List {
     @Test
     void test_01() {
-      ArrayList<BaseDetail> baseDetailList = new ArrayList<>();
-      baseDetailList.add(BaseDetail.builder().build());
+      ArrayList<Child> baseDetailList = new ArrayList<>();
+      baseDetailList.add(Child.builder().build());
 
-      Base base = Base.builder()
+      Parent parent = Parent.builder()
           .detailList(baseDetailList)
           .build();
 
       assertThat(
-          Optional.ofNullable(base.getDetailList())
+          Optional.ofNullable(parent.getDetailList())
               .stream().flatMap(Collection::stream)
-              .map(BaseDetail::getDetailDetailList)
+              .map(Child::getDetailDetailList)
               .filter(Objects::nonNull) // NPE回避用ロジック
               .flatMap(Collection::stream)
-              .map(BaseDetailDetail::getRate)
+              .map(GrandChild::getRate)
               .collect(Collectors.toList())
       ).isEmpty();
 

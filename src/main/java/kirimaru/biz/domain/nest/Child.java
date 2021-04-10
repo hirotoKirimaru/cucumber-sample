@@ -7,8 +7,7 @@ import java.util.List;
 
 @Value
 @Builder
-public class Base {
-  private BaseDetail detail;
-  private List<BaseDetail> detailList;
-
+public class Child {
+  private GrandChild detailDetail;
+  private List<GrandChild> detailDetailList;
 }
