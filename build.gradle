@@ -10,7 +10,8 @@ plugins {
 
 group = 'kirimaru'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '16'
+//sourceCompatibility = '16'
+sourceCompatibility = '15' //lombokが動かない
 
 // actuator infoに情報を載せる
 springBoot {
