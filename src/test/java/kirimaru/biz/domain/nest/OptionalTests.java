@@ -1,10 +1,15 @@
 package kirimaru.biz.domain.nest;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -87,4 +92,30 @@ class OptionalTests {
 
     }
   }
+
+  @DisplayName("ListでNPE回避")
+  @Nested
+  class List {
+    @Test
+    void test_01() {
+      ArrayList<BaseDetail> baseDetailList = new ArrayList<>();
+      baseDetailList.add(BaseDetail.builder().build());
+
+      Base base = Base.builder()
+          .detailList(baseDetailList)
+          .build();
+
+      assertThat(
+          Optional.ofNullable(base.getDetailList())
+              .stream().flatMap(Collection::stream)
+              .map(BaseDetail::getDetailDetailList)
+              .filter(Objects::nonNull) // NPE回避用ロジック
+              .flatMap(Collection::stream)
+              .map(BaseDetailDetail::getRate)
+              .collect(Collectors.toList())
+      ).isEmpty();
+
+    }
+  }
+
 }
