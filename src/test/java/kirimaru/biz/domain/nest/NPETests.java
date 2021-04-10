@@ -22,8 +22,10 @@ class NPETests {
 
     try {
       boolean hoge = null == a;
-    } catch (NullPointerException e) {
-      //
+//    } catch (NullPointerException e) {
+
+//      System.out.println("エラー発生");
+
     } catch (Exception e) {
       fail("失敗");
     }
@@ -34,9 +36,9 @@ class NPETests {
     Integer a = null;
     try {
       boolean hoge = a == null;
-    } catch (NullPointerException e) {
-      //
-      System.out.println("エラー発生");
+//    } catch (NullPointerException e) {
+
+//      System.out.println("エラー発生");
     } catch (Exception e) {
       fail("失敗");
     }
