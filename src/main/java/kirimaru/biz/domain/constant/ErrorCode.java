@@ -27,6 +27,12 @@ public enum ErrorCode {
   }
 
   public String fillMessages(@NonNull String... values) {
+    validate(values);
+    return message.format(values);
+  }
+
+
+  private void validate(@NonNull String... values) {
     for (String value : values) {
       Objects.requireNonNull(value);
     }
@@ -34,7 +40,6 @@ public enum ErrorCode {
     if (values.length != prepareNum) {
       throw new RuntimeException("コンパイルエラーにしたい！");
     }
-    return message.format(values);
   }
 
 }
