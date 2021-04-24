@@ -15,12 +15,30 @@ import static org.assertj.core.api.Assertions.assertThat;
 class NumToNumArrayTest {
   NumToNumArray numToNumArray = new NumToNumArray();
 
-  @Test
-  void test_01() {
-    assertThat(
-        numToNumArray.toArrayNoOrder(109)
-    ).containsExactlyInAnyOrder(1, 0, 9);
+  @Nested
+  class ToArrayNoOrder {
+
+    @Test
+    void test_01() {
+      assertThat(
+          numToNumArray.toArrayNoOrder(109)
+      ).containsExactlyInAnyOrder(1, 0, 9);
+    }
   }
+
+  @Nested
+  class ToArrayNoOrder2 {
+
+    @Test
+    void test_01() {
+      assertThat(
+          numToNumArray.toArrayNoOrder2(109)
+      ).containsExactlyInAnyOrder(1, 0, 9);
+    }
+  }
+
+
+
 
   @Disabled("CIでは毎回回したくない")
   @Nested
@@ -40,6 +58,20 @@ class NumToNumArrayTest {
       // 8034弱
     }
 
+    @Test
+    void test_02() {
+
+      long start = System.currentTimeMillis();
+
+      for (int i = 0; i < 100000000; i++) {
+        numToNumArray.toArrayNoOrder2(i);
+      }
+
+      long end = System.currentTimeMillis();
+
+      System.out.println(end - start);
+      // 4263弱
+    }
 
   }
 }
