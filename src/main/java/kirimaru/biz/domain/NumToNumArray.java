@@ -19,6 +19,7 @@ public class NumToNumArray {
   public List<Integer> toArrayNoOrder2(int i) {
 
     List<Integer> list = new ArrayList<>();
+//    List<Integer> list = new ArrayList<>(String.valueOf(i).length()); // 初期配列用意してる時間の方が長い
     while (true) {
       list.add(i % 10);
       i /= 10;
