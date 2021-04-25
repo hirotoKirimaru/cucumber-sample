@@ -58,24 +58,28 @@ class ReflectionTests {
       assertThat(
           result
       ).isEqualTo(123);
+    }
 
-//      Class<? extends Parent> clazz = target.getClass();            // class は予約語なので慣例的に clazz や klass などにする
-//      Method method = clazz.getDeclaredMethod("getChild", null); // 第二引数は呼び出すメソッドの引数の型の配列。無いときは null にする
-//      method.setAccessible(true);
-//      Child child = (Child)method.invoke(clazz, null);
-//      Method childMethod = child.getClass().getDeclaredMethod("getGrandChild");
-//      Object grandChild = childMethod.invoke(childMethod);
-//      Method taxMethod = grandChild.getClass().getDeclaredMethod("getTax");
-//      Object tax = taxMethod.invoke(taxMethod);
+    @Test
+    void test_02() throws Exception {
+      Parent target = Parent.builder()
+          .child(Child.builder()
+              .grandChild(GrandChild.builder()
+                  .tax(123)
+                  .build())
+              .build())
+          .build();
 
-//      method.setAccessible(true);                            // 見えないはずのメソッドを見えるようにする魔法のメソッド
-//      String result = (String) method.invoke(target, null);  // 第一引数にメソッドを呼び出すインスタンス、第二引数以後は実際の引数
-//      System.out.println(result);
-//
-//      System.out.println(parent);
-//      assertThat(
-//          tax
-//      ).isEqualTo(123);
+      Class clazz = target.getClass();
+      Method method = clazz.getDeclaredMethod("getChild");
+      Object child = method.invoke(target);
+      Object grandChild = child.getClass().getDeclaredMethod("getGrandChild").invoke(child);
+      Object tax = grandChild.getClass().getDeclaredMethod("getTax").invoke(grandChild);
+
+      assertThat(
+          tax
+      ).isEqualTo(123);
+
     }
 
 
