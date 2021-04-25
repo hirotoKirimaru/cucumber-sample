@@ -53,17 +53,18 @@ class ErrorCodeTests {
       ).isInstanceOf(NullPointerException.class);
     }
 
-    private final String hoge = "{0}が{1}の時、{2}は必須です。";
 
     @Disabled("MessageFormatだと2倍くらいかかる")
     @Nested
     class 性能チェック {
+      private final String hoge = "{0}が{1}の時、{2}は必須です。";
+      private final MessageFormat fuga = new MessageFormat("{0}が{1}の時、{2}は必須です。");
       @Test
       void test_01() {
         log.info("*******************");
         long l = System.currentTimeMillis();
         for (int i = 0; i < 10000000; i++) {
-          ErrorCode.E0003.fillMessages("1", "2", "3");
+          fuga.format("1", "2", "3");
         }
         long l1 = System.currentTimeMillis() - l;
         log.info("staticじゃない:" + l1);
