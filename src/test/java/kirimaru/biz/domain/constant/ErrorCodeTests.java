@@ -56,35 +56,33 @@ class ErrorCodeTests {
     private final String hoge = "{0}が{1}の時、{2}は必須です。";
 
     @Disabled("MessageFormatだと2倍くらいかかる")
-    @Test
-    void test_06() {
-      log.info("*******************");
-      long l = System.currentTimeMillis();
-      for (int i = 0; i < 10000000; i++) {
-        ErrorCode.E0003.fillMessages("1", "2", "3");
+    @Nested
+    class 性能チェック {
+      @Test
+      void test_01() {
+        log.info("*******************");
+        long l = System.currentTimeMillis();
+        for (int i = 0; i < 10000000; i++) {
+          ErrorCode.E0003.fillMessages("1", "2", "3");
+        }
+        long l1 = System.currentTimeMillis() - l;
+        log.info("staticじゃない:" + l1);
+        // 3755
       }
-      long l1 = l - System.currentTimeMillis();
-      log.info("staticじゃない:" + l1);
-      log.info("*******************");
-      log.info("*******************");
-      long a = System.currentTimeMillis();
-      for (int i = 0; i < 10000000; i++) {
-        MessageFormat.format(hoge, "1", "2", "3");
-      }
-      long l2 = a - System.currentTimeMillis();
-      log.info("static:" + l2);
-      log.info("*******************");
 
-      log.info("*******************");
-      long b = System.currentTimeMillis();
-      for (int i = 0; i < 10000000; i++) {
-        ErrorCode.E0003.fillMessages("1", "2", "3");
+      @Test
+      void test_02() {
+        log.info("*******************");
+        long a = System.currentTimeMillis();
+        for (int i = 0; i < 10000000; i++) {
+          MessageFormat.format(hoge, "1", "2", "3");
+        }
+        long l2 = System.currentTimeMillis() - a;
+        log.info("static:" + l2);
+        // 7861
       }
-      long l3 = b - System.currentTimeMillis();
-      log.info("再度：staticじゃない:" + l3);
-      log.info("*******************");
-
     }
+
   }
 
 }
