@@ -1,10 +1,15 @@
 package kirimaru.biz.domain;
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,45 +18,100 @@ class MessageFormatTest {
 
   @Test
   void test_01() {
-    //staticなメソッドを使う方法
-    String template = "Hello! {0}さん。{1}も元気？";
-    Object[] params = {"太郎","花子"};
-    String message = MessageFormat.format(template, params);
-    System.out.println(message);
+    String message = MessageFormat.format(
+        "{0}が{1}の時、{2}は必須です。",
+        "契約者", "未成年", "保護者"
+    );
+    assertThat(
+        message
+    ).isEqualTo("契約者が未成年の時、保護者は必須です。");
 
+  }
 
-    //インスタンスを生成する方法
-    MessageFormat mf = new MessageFormat("エラーコード:{0} エラー理由：{1}");
-    String[] params2 = {"E-112", "不正な文字列です。"};
-    String[] params3 = {"E-113", "文字列が空です。"};
-    String[] params4 = {"E-114", "セッションが不正です。"};
-    System.out.println(mf.format(params2));
-    System.out.println(mf.format(params3));
-    System.out.println(mf.format(params4));
+  @Test
+  void test_02() {
+    MessageFormat mf = new MessageFormat("{0}が{1}の時、{2}は必須です。");
+    assertThat(
+        mf.format(new String[]{"契約者", "未成年", "保護者"})
+    ).isEqualTo("契約者が未成年の時、保護者は必須です。");
+  }
 
+  @Nested
+  class NumberFormat {
 
-    //数字のフォーマット
-    MessageFormat mfNo = new MessageFormat("数字そのまま{0} or カンマなし：{1,number,#}");
-    Integer[] paramsNo = {123456,123456};
-    System.out.println(mfNo.format(paramsNo));
+    @Test
+    void test_01() {
+      assertThat(
+          MessageFormat.format("{0}", 123456)
+      ).isEqualTo("123,456");
+    }
 
-    String str = String.format("%05d", 1);
-    System.out.println(str);
+    @Test
+    void test_02() {
+      assertThat(
+          MessageFormat.format("{0,number,#}", 123456)
+      ).isEqualTo("123456");
+    }
 
+    @Test
+    void test_03() {
+      assertThat(
+          MessageFormat.format("{0,number,#.##}", 123456.123456)
+      ).isEqualTo("123456.12");
+    }
 
-    //0埋め(パディング)
-    MessageFormat mfNo2 = new MessageFormat("0埋め数字{0,number,0000}");
-    Integer[] paramsNo2 = {1};
-    System.out.println(mfNo2.format(paramsNo2));
+    @Test
+    void test_04() {
+      assertThat(
+          MessageFormat.format("{0,number,#.##}", 123456.999)
+      ).isEqualTo("123457");
+    }
 
+    @Test
+    void test_05() {
+      assertThat(
+          MessageFormat.format("{0,number,0000}", 1)
+      ).isEqualTo("0001");
+      assertThat(
+          String.format("%04d", 1)
+      ).isEqualTo("0001");
+    }
+  }
 
-    //日付と時間の変換
-    MessageFormat mfDay = new MessageFormat("こんにちは。今日は{0,date,yyyy年MM月dd日}、時刻は{0,time}です。数字だけにすると、{0,date,yyyyMMdd}、時刻は{0,time,HHMMSS}です。");
-    Object[] paramsDay = {new Date(System.currentTimeMillis())};
-    System.out.println(mfDay.format(paramsDay));
+  @Nested
+  class DateFormatter {
+    @Test
+    void test_01() {
+      Date now = Date.from(Instant.ofEpochSecond(1619358874));
+      assertThat(
+          MessageFormat.format("{0,date,yyyy年MM月dd日} {0,time,HH時mm分ss秒}", now)
+      ).isEqualTo("2021年04月25日 22時54分34秒");
+    }
 
-    Date date = new Date();
-    String dateStr = new SimpleDateFormat("yyyyMMddhhmmss").format(date);
-    System.out.println(dateStr);
+    @Test
+    void test_02() {
+      Date now = Date.from(Instant.ofEpochSecond(1619358874));
+      assertThat(
+          MessageFormat.format("{0,date} {0,time}", now)
+      ).isEqualTo("2021/04/25 22:54:34");
+    }
+
+    @Test
+    void test_03() {
+      Date now = Date.from(Instant.ofEpochSecond(1619358874));
+      MessageFormat mf = new MessageFormat("{0,date} {0,time}");
+      assertThat(
+          mf.format(new Date[]{now})
+      ).isEqualTo("2021/04/25 22:54:34");
+    }
+
+    @Test
+    void test_04() {
+      Date now = Date.from(Instant.ofEpochSecond(1619358874));
+      MessageFormat mf = new MessageFormat("{0,date} {0,time}", Locale.ENGLISH);
+      assertThat(
+          mf.format(new Date[]{now})
+      ).isEqualTo("Apr 25, 2021 10:54:34 PM");
+    }
   }
 }
