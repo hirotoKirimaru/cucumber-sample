@@ -72,7 +72,7 @@ class NumToNumArrayTest {
       long end = System.currentTimeMillis();
 
       System.out.println(end - start);
-      // 8034弱
+      // 8941弱
     }
 
     @Test
@@ -87,7 +87,22 @@ class NumToNumArrayTest {
       long end = System.currentTimeMillis();
 
       System.out.println(end - start);
-      // 4263弱
+      // 4227弱
+    }
+
+    @Test
+    void test_03() {
+
+      long start = System.currentTimeMillis();
+
+      for (int i = 0; i < 100000000; i++) {
+        numToNumArray.toArray2(i);
+      }
+
+      long end = System.currentTimeMillis();
+
+      System.out.println(end - start);
+      // 8359弱
     }
 
   }
