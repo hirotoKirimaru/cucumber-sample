@@ -90,6 +90,21 @@ class NumToNumArrayTest {
       // 4227弱
     }
 
+    class Measure {
+      long start;
+      long end;
+
+      public void start() {
+        this.start = System.currentTimeMillis();
+      }
+
+      public void end() {
+        this.end = System.currentTimeMillis();
+
+        System.out.println(this.end - this.start);
+      }
+    }
+
     @Test
     void test_03() {
 
