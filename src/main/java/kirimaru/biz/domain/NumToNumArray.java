@@ -16,6 +16,11 @@ public class NumToNumArray {
     return list;
   }
 
+
+  public int[] toArray2(int i) {
+    return String.valueOf(i).chars().map(e -> e - 48).toArray();
+  }
+
   public List<Integer> toArrayReverseOrder(int i) {
 
     List<Integer> list = new ArrayList<>();

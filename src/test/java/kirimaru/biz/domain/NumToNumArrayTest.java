@@ -24,6 +24,17 @@ class NumToNumArrayTest {
   }
 
   @Nested
+  class ToArray2 {
+
+    @Test
+    void test_01() {
+      assertThat(
+          numToNumArray.toArray2(109)
+      ).isEqualTo(new int[]{1, 0, 9});
+    }
+  }
+
+  @Nested
   class ToArrayReverseOrder {
 
     @Test
