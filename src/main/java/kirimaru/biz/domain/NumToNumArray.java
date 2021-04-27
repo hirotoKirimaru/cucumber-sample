@@ -6,7 +6,7 @@ import java.util.List;
 public class NumToNumArray {
 
   @Deprecated(since = "遅い")
-  public List<Integer> toArrayNoOrder(int i) {
+  public List<Integer> toArray(int i) {
 
     List<Integer> list = new ArrayList<>();
     for (char c : String.valueOf(i).toCharArray()) {
@@ -16,7 +16,7 @@ public class NumToNumArray {
     return list;
   }
 
-  public List<Integer> toArrayNoOrder2(int i) {
+  public List<Integer> toArrayReverseOrder(int i) {
 
     List<Integer> list = new ArrayList<>();
 //    List<Integer> list = new ArrayList<>(String.valueOf(i).length()); // 初期配列用意してる時間の方が長い

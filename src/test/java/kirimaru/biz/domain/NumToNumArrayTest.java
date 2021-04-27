@@ -1,12 +1,9 @@
 package kirimaru.biz.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,24 +13,24 @@ class NumToNumArrayTest {
   NumToNumArray numToNumArray = new NumToNumArray();
 
   @Nested
-  class ToArrayNoOrder {
+  class ToArray {
 
     @Test
     void test_01() {
       assertThat(
-          numToNumArray.toArrayNoOrder(109)
-      ).containsExactlyInAnyOrder(1, 0, 9);
+          numToNumArray.toArray(109)
+      ).isEqualTo(List.of(1, 0, 9));
     }
   }
 
   @Nested
-  class ToArrayNoOrder2 {
+  class ToArrayReverseOrder {
 
     @Test
     void test_01() {
       assertThat(
-          numToNumArray.toArrayNoOrder2(109)
-      ).containsExactlyInAnyOrder(1, 0, 9);
+          numToNumArray.toArrayReverseOrder(109)
+      ).isEqualTo(List.of(9, 0, 1));
     }
   }
 
@@ -49,7 +46,7 @@ class NumToNumArrayTest {
       long start = System.currentTimeMillis();
 
       for (int i = 0; i < 100000000; i++) {
-        numToNumArray.toArrayNoOrder(i);
+        numToNumArray.toArray(i);
       }
 
       long end = System.currentTimeMillis();
@@ -64,7 +61,7 @@ class NumToNumArrayTest {
       long start = System.currentTimeMillis();
 
       for (int i = 0; i < 100000000; i++) {
-        numToNumArray.toArrayNoOrder2(i);
+        numToNumArray.toArrayReverseOrder(i);
       }
 
       long end = System.currentTimeMillis();
