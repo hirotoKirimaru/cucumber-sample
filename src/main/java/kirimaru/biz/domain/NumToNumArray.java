@@ -30,4 +30,12 @@ public class NumToNumArray {
 
     return list;
   }
+
+  public int toIntReverseOrder(List<Integer> integers) {
+    int tmp = 0;
+    for (int i = 0; i < integers.size(); i++) {
+      tmp += integers.get(i) * Math.pow(10, i);
+    }
+    return tmp;
+  }
 }

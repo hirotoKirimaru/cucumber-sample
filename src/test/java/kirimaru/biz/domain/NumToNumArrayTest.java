@@ -34,7 +34,16 @@ class NumToNumArrayTest {
     }
   }
 
+  @Nested
+  class ToIntReverseOrder {
 
+    @Test
+    void test_01() {
+      assertThat(
+          numToNumArray.toIntReverseOrder(List.of(9, 0, 1))
+      ).isEqualTo(109);
+    }
+  }
 
 
   @Disabled("CIでは毎回回したくない")
