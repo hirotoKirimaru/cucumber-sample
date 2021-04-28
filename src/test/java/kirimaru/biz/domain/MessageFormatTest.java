@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 class MessageFormatTest {
@@ -75,6 +76,13 @@ class MessageFormatTest {
       assertThat(
           String.format("%04d", 1)
       ).isEqualTo("0001");
+    }
+
+    @Test
+    void test_06() {
+      assertThatThrownBy(
+          () -> MessageFormat.format("{0,number,0000}", "1")
+      ).isInstanceOf(IllegalArgumentException.class);
     }
   }
 
