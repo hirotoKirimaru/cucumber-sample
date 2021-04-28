@@ -37,6 +37,15 @@ class MessageFormatTest {
     ).isEqualTo("契約者が未成年の時、保護者は必須です。");
   }
 
+//  @Test
+//  void test_03() {
+//    assertThat(
+//        new MessageFormat() // 初期でもフォーマットが必要なのかよ。
+//            .format("{0}が{1}の時、{2}は必須です。","契約者", "未成年", "保護者")
+//    ).isEqualTo("契約者が未成年の時、保護者は必須です。");
+//  }
+
+
   @Nested
   class NumberFormat {
 
