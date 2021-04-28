@@ -32,9 +32,9 @@ class MessageFormatTest {
 
   @Test
   void test_02() {
-    MessageFormat mf = new MessageFormat("{0}が{1}の時、{2}は必須です。");
     assertThat(
-        mf.format(new String[]{"契約者", "未成年", "保護者"})
+        new MessageFormat("{0}が{1}の時、{2}は必須です。")
+            .format(new String[]{"契約者", "未成年", "保護者"})
     ).isEqualTo("契約者が未成年の時、保護者は必須です。");
   }
 
