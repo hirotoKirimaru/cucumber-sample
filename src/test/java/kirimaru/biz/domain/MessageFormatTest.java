@@ -1,6 +1,7 @@
 package kirimaru.biz.domain;
 
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -78,8 +79,12 @@ class MessageFormatTest {
       ).isEqualTo("0001");
     }
 
+    @DisplayName("Objectに変換しても、ダメみたい")
     @Test
     void test_06() {
+      assertThatThrownBy(
+          () -> MessageFormat.format("{0,number,0000}", (Object)"1")
+      ).isInstanceOf(IllegalArgumentException.class);
       assertThatThrownBy(
           () -> MessageFormat.format("{0,number,0000}", "1")
       ).isInstanceOf(IllegalArgumentException.class);
