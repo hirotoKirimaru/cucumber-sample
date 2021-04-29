@@ -24,7 +24,7 @@ class WeatherDomainServiceTests {
   @BeforeEach
   void setup() throws IOException {
     FileUtils.copyToFile(
-        getClass().getResourceAsStream("/kell/2014ebina.csv"),
+        getClass().getResourceAsStream("/kirimaru/2014ebina.csv"),
         path.toFile()
     );
   }
@@ -64,7 +64,7 @@ class WeatherDomainServiceTests {
     @BeforeEach
     void setup() throws IOException {
       FileUtils.copyToFile(
-          getClass().getResourceAsStream("/kell/2014ebina2.csv"),
+          getClass().getResourceAsStream("/kirimaru/2014ebina2.csv"),
           path.toFile()
       );
     }
