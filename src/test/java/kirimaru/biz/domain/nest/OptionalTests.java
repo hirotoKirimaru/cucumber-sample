@@ -36,10 +36,12 @@ class OptionalTests {
     void test_02() {
       Parent parent = null;
 
-      if (parent != null ||
-          parent.getChild() != null ||
-          parent.getChild().getGrandChild() != null) {
-        int zero = parent.getChild().getGrandChild().getTax();
+      if (parent != null) {
+        if (parent.getChild() != null) {
+          if (parent.getChild().getGrandChild() != null) {
+            int zero = parent.getChild().getGrandChild().getTax();
+          }
+        }
       }
 
       assertThat(
@@ -93,13 +95,15 @@ class OptionalTests {
     void test_04() {
       Parent parent = null;
 
-      if (parent == null ||
-          parent.getChild() == null ||
-          parent.getChild().getGrandChild() == null ||
-          parent.getChild().getGrandChild().getRate() == null) {
-        BigDecimal zero = parent.getChild().getGrandChild().getRate();
+      if (parent != null) {
+        if (parent.getChild() != null) {
+          if (parent.getChild().getGrandChild() != null) {
+            if (parent.getChild().getGrandChild().getRate() != null) {
+              BigDecimal zero = parent.getChild().getGrandChild().getRate();
+            }
+          }
+        }
       }
-
       assertThat(
           Optional.ofNullable(parent)
               .map(Parent::getChild)
