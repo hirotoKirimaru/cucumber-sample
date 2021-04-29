@@ -46,6 +46,29 @@ public class Contract {
    * |x|2020/02/29|2024/11/30|false||
    */
   public boolean canExpire() {
-    return true;
+    // 契約日の日 -1 - 解約日の日なら解約できる。
+    // (契約日の日 -1は月跨ぎの可能性があるので、解約日+1する)
+    if (contractDate.getDayOfMonth() == expireDate.plusDays(1).getDayOfMonth()) {
+      return true;
+    }
+    // 契約日が月頭、解約日が月末なら解約できる
+    if (contractDate.getDayOfMonth() == 1) {
+      if (expireDate.plusDays(1).getDayOfMonth() == 1) {
+        return true;
+      }
+    }
+
+    // 契約日が2月以外の月末、解約日が2月の月末なら解約できる。
+    if (contractDate.getMonthValue() == 2) {
+      return false;
+    }
+
+    if (expireDate.getMonthValue() == 2) {
+      if (expireDate.plusDays(1).getDayOfMonth() == 1) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

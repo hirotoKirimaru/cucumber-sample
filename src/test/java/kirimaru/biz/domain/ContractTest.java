@@ -19,7 +19,7 @@ class ContractTest {
   @TestInstance(TestInstance.Lifecycle.PER_CLASS)
   class CanExpire {
     @MethodSource(value = "canExpire")
-    @ParameterizedTest
+    @ParameterizedTest(name = "契約日が{0}, 解約日が{1}の時、{2}")
     void test_01(LocalDate start, LocalDate end, boolean result) {
       var target = Contract.builder()
           .contractDate(start)
