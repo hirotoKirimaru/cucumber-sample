@@ -45,6 +45,8 @@ public class Contract {
    * |x|2020/11/30|2021/03/31|false|1日後|
    * |3|2020/12/31|2021/02/28|true|Not うるう|
    * |3|2020/12/31|2024/02/29|true|うるう|
+   * |3|2020/12/30|2024/02/28|true|not うるう|
+   * |3|2020/12/30|2021/02/29|true|うるう|
    * |x|2020/02/29|2024/12/31|false|2日後|
    * |x|2020/02/29|2024/11/30|false|1日後|
    */
@@ -63,12 +65,10 @@ public class Contract {
 
     // 月の途中から起算し，最終月に応当日のない場合は、最終月の末日
     // 末日 = N +1日が1日になるもの
-    if (contractDate.plusDays(1).getDayOfMonth() != expireDate.plusDays(1).getDayOfMonth()) {
-      return false;
-    }
-
     if (contractDate.getDayOfMonth() > expireDate.getDayOfMonth()) {
-      return true;
+      if (expireDate.plusDays(1).getDayOfMonth() == 1) {
+        return true;
+      }
     }
 
     return false;
