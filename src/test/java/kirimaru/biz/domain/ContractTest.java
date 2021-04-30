@@ -1,8 +1,6 @@
 package kirimaru.biz.domain;
 
-import ch.qos.logback.core.spi.LifeCycle;
 import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -26,7 +24,7 @@ class ContractTest {
           .expireDate(end)
           .build();
 
-      assertThat(target.canExpire()).isEqualTo(result);
+      assertThat(target.canExpire2()).isEqualTo(result);
     }
 
     private Stream<Arguments> canExpire() {

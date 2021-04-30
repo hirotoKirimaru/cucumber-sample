@@ -65,7 +65,8 @@ public class Contract {
    * |x|2020/02/29|2024/12/31|false|2日後|
    * |x|2020/02/29|2024/11/30|false|1日後|
    */
-  public boolean canExpire() {
+  @Deprecated(since = "法律に従ってない")
+  public boolean canExpire2() {
     // 契約日の日 -1 - 解約日の日なら解約できる。
     // 実際に+1や-1日すると、月を跨ぐのでNG
     if (contractDate.getDayOfMonth() - 1 == expireDate.getDayOfMonth()) {
