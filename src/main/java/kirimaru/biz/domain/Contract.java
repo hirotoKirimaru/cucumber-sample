@@ -34,7 +34,7 @@ public class Contract {
    * |条件|契約日|解約日|可能|備考|
    * |---|---|---|---|---|
    * |1|2020/12/10|2021/02/09|true|1日前|
-   * |x|2020/12/10|2021/02/10|false|同日|
+   * |x|2020/12/10|2021/12/10|false|同日|
    * |2|2020/12/01|2021/03/31|true|月頭で月末|
    * |x|2020/12/01|2021/03/30|false|月頭で月末-1日|
    * |2|2020/12/01|2021/02/28|true|Not うるう|
@@ -49,34 +49,33 @@ public class Contract {
    * |x|2020/02/29|2024/11/30|false|1日後|
    */
   public boolean canExpire() {
-    // 契約日の日 -1 - 解約日の日なら解約できる。
-    // 実際に+1や-1日すると、月を跨ぐのでNG
-    if (contractDate.getDayOfMonth() - 1 == expireDate.getDayOfMonth()) {
-      return true;
-    }
-    // 契約日が月頭、解約日が月末なら解約できる
+    // 月の初日から起算する場合は、最終月の末日
     if (contractDate.getDayOfMonth() == 1) {
       if (expireDate.plusDays(1).getDayOfMonth() == 1) {
         return true;
       }
     }
+    // 月の途中から起算し，最終月に応当日のある場合は、最終月の応当日の前日
+    // 実際に+1や-1日すると、月を跨ぐのでNG
+    if (contractDate.getDayOfMonth() - 1 == expireDate.getDayOfMonth()) {
+      return true;
+    }
 
-    // 契約日が2月以外の月末、解約日が2月の月末なら解約できる。
-    if (contractDate.getMonthValue() == 2) {
+    // 月の途中から起算し，最終月に応当日のない場合は、最終月の末日
+    // 末日 = N +1日が1日になるもの
+    if (contractDate.plusDays(1).getDayOfMonth() != expireDate.plusDays(1).getDayOfMonth()) {
       return false;
     }
 
-    if (expireDate.getMonthValue() == 2) {
-      if (expireDate.plusDays(1).getDayOfMonth() == 1) {
-        return true;
-      }
+    if (contractDate.getDayOfMonth() > expireDate.getDayOfMonth()) {
+      return true;
     }
 
     return false;
   }
 
   /**
-   * ※ 法律を知らなかったオレオレ解約ルール。
+   * ※ 法律を知らなかったオレオレ解約ルール。ただ、奇跡的に上手く設計できていたようだ。
    *
    * <p>
    * 解約日は契約日からキッチリ1カ月単位で割り切れる場合は解約できる。
