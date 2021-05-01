@@ -42,7 +42,7 @@ class ContractTest {
           Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2021, 3, 31), false),
           Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2021, 2, 28), true),
           Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2024, 2, 29), true),
-          Arguments.of(LocalDate.of(2020, 12, 30), LocalDate.of(2021, 2, 28), true),
+          Arguments.of(LocalDate.of(2020, 12, 30), LocalDate.of(2024, 2, 28), false),
           Arguments.of(LocalDate.of(2020, 12, 30), LocalDate.of(2024, 2, 29), true)
           );
     }
