@@ -29,23 +29,22 @@ class ContractTest {
 
     private Stream<Arguments> canExpire() {
       return Stream.of(
-          Arguments.of(LocalDate.of(2020, 12, 10), LocalDate.of(2021, 2, 9), true),
-          Arguments.of(LocalDate.of(2020, 12, 10), LocalDate.of(2021, 12, 10), false),
           Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 3, 31), true),
           Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 3, 30), false),
           Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 2, 28), true),
           Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2024, 2, 29), true),
-          Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2021, 3, 30), true),
+          Arguments.of(LocalDate.of(2020, 12, 10), LocalDate.of(2021, 12, 9), true),
+          Arguments.of(LocalDate.of(2020, 12, 10), LocalDate.of(2021, 12, 10), false),
+          Arguments.of(LocalDate.of(2020, 2, 29), LocalDate.of(2024, 11, 30), false),
+          Arguments.of(LocalDate.of(2020, 2, 29), LocalDate.of(2024, 12, 31), false),
+          Arguments.of(LocalDate.of(2020, 11, 30), LocalDate.of(2021, 3, 31), false),
           Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2021, 4, 30), true),
           Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2021, 3, 31), false),
-          Arguments.of(LocalDate.of(2020, 11, 30), LocalDate.of(2021, 3, 31), false),
           Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2021, 2, 28), true),
           Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2024, 2, 29), true),
-          Arguments.of(LocalDate.of(2020, 12, 30), LocalDate.of(2024, 2, 29), true),
           Arguments.of(LocalDate.of(2020, 12, 30), LocalDate.of(2021, 2, 28), true),
-          Arguments.of(LocalDate.of(2020, 2, 29), LocalDate.of(2024, 12, 31), false),
-          Arguments.of(LocalDate.of(2020, 2, 29), LocalDate.of(2024, 11, 30), false)
-      );
+          Arguments.of(LocalDate.of(2020, 12, 30), LocalDate.of(2024, 2, 29), true)
+          );
     }
   }
 
