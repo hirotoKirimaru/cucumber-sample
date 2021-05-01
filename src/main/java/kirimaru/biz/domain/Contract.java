@@ -57,13 +57,12 @@ public class Contract {
       }
     }
     // 月の途中から起算し，最終月に応当日のある場合は、最終月の応当日の前日
-    // 実際に+1や-1日すると、月を跨ぐのでNG
+    // -1日すると、月を跨ぐ可能性があるのでNG
     if (contractDate.getDayOfMonth() == expireDate.plusDays(1).getDayOfMonth()) {
       return true;
     }
 
     // 月の途中から起算し，最終月に応当日のない場合は、最終月の末日
-    // 末日 = N +1日が1日になるもの
     if (contractDate.getDayOfMonth() > expireDate.getDayOfMonth()) {
       if (expireDate.plusDays(1).getDayOfMonth() == 1) {
         return true;
