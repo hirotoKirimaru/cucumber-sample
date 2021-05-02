@@ -62,8 +62,8 @@ class ContractTest {
   }
 
   @Nested
-  @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-  class CanExpire_Another {
+//  @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+  static class CanExpire_Another {
     @MethodSource(value = "canExpire")
     @ParameterizedTest
     void test_01(Param param) {
@@ -75,10 +75,10 @@ class ContractTest {
       assertThat(target.canExpire()).isEqualTo(param.result);
     }
 
-    //    @Builder
+    @Builder
     @Data
     @AllArgsConstructor
-    class Param implements Arguments {
+    static class Param implements Arguments {
       private LocalDate start;
       private LocalDate end;
       private boolean result;
@@ -89,9 +89,10 @@ class ContractTest {
       }
     }
 
-    private Stream<Arguments> canExpire() {
+    private static Stream<Arguments> canExpire() {
       return Stream.of(
-          Arguments.of(new Param(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 3, 31), true))
+          Arguments.of(Param.builder().start(LocalDate.of(2020, 12, 1)).end(LocalDate.of(2021, 3, 31)).result(true).build())
+//          Arguments.of(new Param(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 3, 31), true))
 //          Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 3, 30), false),
 //          Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 2, 28), true),
 //          Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2024, 2, 29), true),
