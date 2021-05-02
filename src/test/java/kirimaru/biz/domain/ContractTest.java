@@ -1,5 +1,9 @@
 package kirimaru.biz.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,6 +31,15 @@ class ContractTest {
       assertThat(target.canExpire()).isEqualTo(result);
     }
 
+    @AllArgsConstructor
+    class Param implements Arguments {
+
+      @Override
+      public Object[] get() {
+        return new Object[0];
+      }
+    }
+
     private Stream<Arguments> canExpire() {
       return Stream.of(
           Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 3, 31), true),
@@ -44,10 +57,58 @@ class ContractTest {
           Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2024, 2, 29), true),
           Arguments.of(LocalDate.of(2020, 12, 30), LocalDate.of(2024, 2, 28), false),
           Arguments.of(LocalDate.of(2020, 12, 30), LocalDate.of(2024, 2, 29), true)
-          );
+      );
     }
   }
 
+  @Nested
+  @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+  class CanExpire_Another {
+    @MethodSource(value = "canExpire")
+    @ParameterizedTest
+    void test_01(Param param) {
+      var target = Contract.builder()
+          .contractDate(param.start)
+          .expireDate(param.end)
+          .build();
+
+      assertThat(target.canExpire()).isEqualTo(param.result);
+    }
+
+    //    @Builder
+    @Data
+    @AllArgsConstructor
+    class Param implements Arguments {
+      private LocalDate start;
+      private LocalDate end;
+      private boolean result;
+
+      @Override
+      public Object[] get() {
+        return new Object[0];
+      }
+    }
+
+    private Stream<Arguments> canExpire() {
+      return Stream.of(
+          Arguments.of(new Param(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 3, 31), true))
+//          Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 3, 30), false),
+//          Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 2, 28), true),
+//          Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2024, 2, 29), true),
+//          Arguments.of(LocalDate.of(2020, 12, 10), LocalDate.of(2021, 12, 9), true),
+//          Arguments.of(LocalDate.of(2020, 12, 10), LocalDate.of(2021, 12, 10), false),
+//          Arguments.of(LocalDate.of(2020, 2, 29), LocalDate.of(2024, 11, 30), false),
+//          Arguments.of(LocalDate.of(2020, 2, 29), LocalDate.of(2024, 12, 31), false),
+//          Arguments.of(LocalDate.of(2020, 11, 30), LocalDate.of(2021, 3, 31), false),
+//          Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2021, 4, 30), true),
+//          Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2021, 3, 31), false),
+//          Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2021, 2, 28), true),
+//          Arguments.of(LocalDate.of(2020, 12, 31), LocalDate.of(2024, 2, 29), true),
+//          Arguments.of(LocalDate.of(2020, 12, 30), LocalDate.of(2024, 2, 28), false),
+//          Arguments.of(LocalDate.of(2020, 12, 30), LocalDate.of(2024, 2, 29), true)
+      );
+    }
+  }
 
   @Nested
   @TestInstance(TestInstance.Lifecycle.PER_CLASS)
