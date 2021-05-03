@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,6 +21,8 @@ class ContractTest {
   class CanExpire {
     @MethodSource(value = "canExpire")
     @ParameterizedTest(name = "契約日が{0}, 解約日が{1}の時、{2}")
+//    @ParameterizedTest(name="[{index}]{displayName}{arguments}{argumentsWithNames}")
+//    @ParameterizedTest
     void test_01(LocalDate start, LocalDate end, boolean result) {
       var target = Contract.builder()
           .contractDate(start)
@@ -29,15 +30,6 @@ class ContractTest {
           .build();
 
       assertThat(target.canExpire()).isEqualTo(result);
-    }
-
-    @AllArgsConstructor
-    class Param implements Arguments {
-
-      @Override
-      public Object[] get() {
-        return new Object[0];
-      }
     }
 
     private Stream<Arguments> canExpire() {
@@ -62,8 +54,28 @@ class ContractTest {
   }
 
   @Nested
-//  @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-  static class CanExpire_Another {
+  @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+  class CanExpire_Another {
+    @BeforeEach
+    void setUp() {
+      System.out.println("setup");
+    }
+
+    @BeforeAll
+    void beforeAll() {
+      System.out.println("beforeAll");
+    }
+
+    @AfterAll
+    void afterAll() {
+      System.out.println("afterAll");
+    }
+
+    @AfterEach
+    void tearDown() {
+      System.out.println("afterEach");
+    }
+
     @MethodSource(value = "canExpire")
     @ParameterizedTest
     void test_01(Param param) {
@@ -75,10 +87,10 @@ class ContractTest {
       assertThat(target.canExpire()).isEqualTo(param.result);
     }
 
-    @Builder
+//    @Builder
     @Data
     @AllArgsConstructor
-    static class Param implements Arguments {
+    class Param implements Arguments {
       private LocalDate start;
       private LocalDate end;
       private boolean result;
@@ -89,10 +101,10 @@ class ContractTest {
       }
     }
 
-    private static Stream<Arguments> canExpire() {
+    private Stream<Arguments> canExpire() {
       return Stream.of(
-          Arguments.of(Param.builder().start(LocalDate.of(2020, 12, 1)).end(LocalDate.of(2021, 3, 31)).result(true).build())
-//          Arguments.of(new Param(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 3, 31), true))
+//          Arguments.of(Param.builder().start(LocalDate.of(2020, 12, 1)).end(LocalDate.of(2021, 3, 31)).result(true).build())
+          Arguments.of(new Param(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 3, 31), true))
 //          Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 3, 30), false),
 //          Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2021, 2, 28), true),
 //          Arguments.of(LocalDate.of(2020, 12, 1), LocalDate.of(2024, 2, 29), true),
