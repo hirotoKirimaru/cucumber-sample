@@ -2,8 +2,25 @@ package kirimaru.biz.domain.ecard.card;
 
 import lombok.AllArgsConstructor;
 
-public abstract class Card {
+import java.util.Arrays;
+import java.util.Optional;
+
+@AllArgsConstructor
+public class Card {
+  public CardDiv cardDiv;
+
+  public Card(int cardDiv) {
+    this.cardDiv = CardDiv.get(cardDiv);
+  }
+
   public BattleResult battle(Card card) {
+    int result = this.cardDiv.value - card.cardDiv.value;
+
+    if (result == 0) {
+      return BattleResult.EVEN;
+    } else if (result > 1) {
+      return BattleResult.WIN;
+    }
     return BattleResult.WIN;
   }
 
@@ -13,6 +30,14 @@ public abstract class Card {
     CITIZEN(1),
     SLAVE(2);
     int value;
+
+    public static CardDiv get(int value) {
+      Optional<CardDiv> first = Arrays.stream(values()).filter(e -> e.value == value).findFirst();
+      if (first.isPresent()) {
+        return first.get();
+      }
+      throw new RuntimeException(String.valueOf(value));
+    }
   }
 
   @AllArgsConstructor
