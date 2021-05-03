@@ -18,8 +18,12 @@ public class Card {
 
     if (result == 0) {
       return BattleResult.EVEN;
-    } else if (result > 1) {
+    } else if (result == -1) {
       return BattleResult.WIN;
+    } else if (result == -2) {
+      return BattleResult.LOSE;
+    } else if (result == 1) {
+      return BattleResult.LOSE;
     }
     return BattleResult.WIN;
   }

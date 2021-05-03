@@ -29,7 +29,11 @@ class CardTest {
 
     private Stream<Arguments> battle() {
       return Stream.of(
-          Arguments.of(Card.CardDiv.EMPEROR, Card.CardDiv.CITIZEN, Card.BattleResult.WIN)
+          Arguments.of(Card.CardDiv.EMPEROR, Card.CardDiv.CITIZEN, Card.BattleResult.WIN),
+          Arguments.of(Card.CardDiv.EMPEROR, Card.CardDiv.SLAVE, Card.BattleResult.LOSE),
+          Arguments.of(Card.CardDiv.CITIZEN, Card.CardDiv.CITIZEN, Card.BattleResult.EVEN),
+          Arguments.of(Card.CardDiv.SLAVE, Card.CardDiv.EMPEROR, Card.BattleResult.WIN),
+          Arguments.of(Card.CardDiv.SLAVE, Card.CardDiv.CITIZEN, Card.BattleResult.LOSE)
       );
     }
   }
