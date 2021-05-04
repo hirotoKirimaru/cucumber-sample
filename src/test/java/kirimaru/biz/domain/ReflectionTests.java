@@ -4,6 +4,7 @@ package kirimaru.biz.domain;
 import kirimaru.biz.domain.nest.Child;
 import kirimaru.biz.domain.nest.GrandChild;
 import kirimaru.biz.domain.nest.Parent;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -49,6 +50,29 @@ class ReflectionTests {
 //      ).isEqualTo("説明");
 
 
+    }
+
+    @Disabled("あとで再度調査する")
+    @DisplayName("privateなものを取得する")
+    @Test
+    void test_02() throws Exception {
+      Parent target = Parent.builder()
+          .child(Child.builder()
+              .grandChild(GrandChild.builder()
+                  .description("説明")
+                  .build())
+              .build())
+          .build();
+
+      SpelParserConfiguration config = new SpelParserConfiguration(true, true);
+      StandardEvaluationContext context = new StandardEvaluationContext(target);
+
+      ExpressionParser expressionParser = new SpelExpressionParser(config);
+      Object description = expressionParser.parseExpression("child.grandChild.description").getValue(context);
+
+      assertThat(
+          description
+      ).isEqualTo("説明");
     }
   }
 
