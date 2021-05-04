@@ -4,6 +4,7 @@ package kirimaru.biz.domain;
 import kirimaru.biz.domain.nest.Child;
 import kirimaru.biz.domain.nest.GrandChild;
 import kirimaru.biz.domain.nest.Parent;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.expression.ExpressionParser;
@@ -19,12 +20,14 @@ class ReflectionTests {
 
   @Nested
   class Reflect {
+    @DisplayName("publicなものを取得する")
     @Test
     void test_01() throws Exception {
       Parent target = Parent.builder()
           .child(Child.builder()
               .grandChild(GrandChild.builder()
                   .tax(123)
+                  .description("説明")
                   .build())
               .build())
           .build();
@@ -34,11 +37,17 @@ class ReflectionTests {
 
       ExpressionParser expressionParser = new SpelExpressionParser(config);
       Object parent = expressionParser.parseExpression("child.grandChild.tax").getValue(context);
+//      Object description = expressionParser.parseExpression("child.grandChild.description").getValue(context);
 
       System.out.println(parent);
       assertThat(
           parent
       ).isEqualTo(123);
+
+//      assertThat(
+//          description
+//      ).isEqualTo("説明");
+
 
     }
   }
@@ -50,14 +59,23 @@ class ReflectionTests {
     void test_01() throws Exception {
       GrandChild target = GrandChild.builder()
           .tax(123)
+          .description("説明")
           .build();
 
       Class clazz = target.getClass();
       Method method = clazz.getDeclaredMethod("getTax");
       int result = (int) method.invoke(target);
+      Method method2 = clazz.getDeclaredMethod("getDescription");
+      method2.setAccessible(true);
+      String result2 = (String) method2.invoke(target);
       assertThat(
           result
       ).isEqualTo(123);
+
+      assertThat(
+        result2
+      ).isEqualTo("説明");
+
     }
 
     @Test

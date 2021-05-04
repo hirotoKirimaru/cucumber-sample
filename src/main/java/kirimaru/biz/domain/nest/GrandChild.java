@@ -11,4 +11,9 @@ public class GrandChild {
   private int tax;
   private Integer amount;
   private BigDecimal rate;
+  private String description;
+
+  private String getDescription() {
+    return description;
+  }
 }
