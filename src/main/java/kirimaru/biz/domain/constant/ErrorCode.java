@@ -33,7 +33,7 @@ public enum ErrorCode {
    */
   public String fillMessages(@NonNull String... values) {
     validate(values);
-    return MessageFormat.format(message, values);
+    return MessageFormat.format(message, (Object[]) values);
   }
 
 
