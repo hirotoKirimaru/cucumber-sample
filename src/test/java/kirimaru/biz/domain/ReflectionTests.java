@@ -97,7 +97,7 @@ class ReflectionTests {
       ).isEqualTo(123);
 
       assertThat(
-        result2
+          result2
       ).isEqualTo("説明");
 
     }
@@ -124,7 +124,34 @@ class ReflectionTests {
 
     }
 
+    @Test
+    void test_03() throws Exception {
+      GrandChild target = GrandChild.builder()
+          .build();
 
+      Class clazz = target.getClass();
+      Method method = clazz.getDeclaredMethod("computeMultiple", int.class, int.class);
+      method.setAccessible(true);
+      int result = (int) method.invoke(target, 100, 20);
+      assertThat(
+          result
+      ).isEqualTo(2000);
+    }
+
+
+    @Test
+    void test_04() throws Exception {
+      GrandChild target = GrandChild.builder()
+          .build();
+
+      Class clazz = target.getClass();
+      Method method = clazz.getDeclaredMethod("computeMultipleArray", int[].class);
+      method.setAccessible(true);
+      int result = (int) method.invoke(target, new int[]{100, 20, 3, 4});
+      assertThat(
+          result
+      ).isEqualTo(24000);
+    }
   }
 
 

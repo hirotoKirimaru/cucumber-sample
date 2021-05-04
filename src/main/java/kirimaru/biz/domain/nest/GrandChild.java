@@ -16,4 +16,16 @@ public class GrandChild {
   private String getDescription() {
     return description;
   }
+
+  private int computeMultiple(int num1, int num2) {
+    return num1 * num2;
+  }
+
+  private int computeMultipleArray(int... nums) {
+    int tmp = 1;
+    for (int num : nums) {
+      tmp *= num;
+    }
+    return tmp;
+  }
 }
