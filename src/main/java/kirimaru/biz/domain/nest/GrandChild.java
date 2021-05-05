@@ -1,6 +1,7 @@
 package kirimaru.biz.domain.nest;
 
 import lombok.Builder;
+import lombok.Setter;
 import lombok.Value;
 
 import java.math.BigDecimal;

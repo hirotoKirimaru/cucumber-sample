@@ -112,16 +112,12 @@ class ReflectionTests {
               .build())
           .build();
 
-      Class clazz = target.getClass();
-      Method method = clazz.getDeclaredMethod("getChild");
+      Method method = target.getClass().getDeclaredMethod("getChild");
       Object child = method.invoke(target);
       Object grandChild = child.getClass().getDeclaredMethod("getGrandChild").invoke(child);
       Object tax = grandChild.getClass().getDeclaredMethod("getTax").invoke(grandChild);
 
-      assertThat(
-          tax
-      ).isEqualTo(123);
-
+      assertThat(tax).isEqualTo(123);
     }
 
     @Test
@@ -129,13 +125,10 @@ class ReflectionTests {
       GrandChild target = GrandChild.builder()
           .build();
 
-      Class clazz = target.getClass();
-      Method method = clazz.getDeclaredMethod("computeMultiple", int.class, int.class);
+      Method method = target.getClass().getDeclaredMethod("computeMultiple", int.class, int.class);
       method.setAccessible(true);
       int result = (int) method.invoke(target, 100, 20);
-      assertThat(
-          result
-      ).isEqualTo(2000);
+      assertThat(result).isEqualTo(2000);
     }
 
 
@@ -148,9 +141,22 @@ class ReflectionTests {
       Method method = clazz.getDeclaredMethod("computeMultipleArray", int[].class);
       method.setAccessible(true);
       int result = (int) method.invoke(target, new int[]{100, 20, 3, 4});
+//      int result = (int) method.invoke(target, 100, 20, 3, 4);
+      assertThat(result).isEqualTo(24000);
+    }
+
+    @Disabled("こんなイメージで動かす")
+    @Test
+    void test_05() throws Exception {
+      GrandChild target = GrandChild.builder()
+          .build();
+
+      Class clazz = target.getClass();
+      Method method = clazz.getDeclaredMethod("setTax", String.class);
+      method.invoke(target, 123);
       assertThat(
-          result
-      ).isEqualTo(24000);
+          target.getTax()
+      ).isEqualTo(123);
     }
   }
 
