@@ -14,6 +14,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,46 +34,40 @@ class ReflectionTests {
               .build())
           .build();
 
-      SpelParserConfiguration config = new SpelParserConfiguration(true, true);
+//      SpelParserConfiguration config = new SpelParserConfiguration(true, true);
       StandardEvaluationContext context = new StandardEvaluationContext(target);
 
-      ExpressionParser expressionParser = new SpelExpressionParser(config);
+//      ExpressionParser expressionParser = new SpelExpressionParser(config);
+      ExpressionParser expressionParser = new SpelExpressionParser();
       Object parent = expressionParser.parseExpression("child.grandChild.tax").getValue(context);
+//      Object parent = expressionParser.parseExpression(".*tax").getValue(context);
 //      Object description = expressionParser.parseExpression("child.grandChild.description").getValue(context);
 
-      System.out.println(parent);
-      assertThat(
-          parent
-      ).isEqualTo(123);
-
-//      assertThat(
-//          description
-//      ).isEqualTo("説明");
-
-
+      assertThat(parent).isEqualTo(123);
     }
 
-    @Disabled("あとで再度調査する")
-    @DisplayName("privateなものを取得する")
     @Test
     void test_02() throws Exception {
       Parent target = Parent.builder()
-          .child(Child.builder()
-              .grandChild(GrandChild.builder()
-                  .description("説明")
+          .children(List.of(
+              Child.builder()
+                  .grandChildren(List.of(
+                      GrandChild.builder()
+                          .tax(123)
+                          .build())
+                  )
                   .build())
-              .build())
+          )
           .build();
 
-      SpelParserConfiguration config = new SpelParserConfiguration(true, true);
+//      SpelParserConfiguration config = new SpelParserConfiguration(true, true);
       StandardEvaluationContext context = new StandardEvaluationContext(target);
 
-      ExpressionParser expressionParser = new SpelExpressionParser(config);
-      Object description = expressionParser.parseExpression("child.grandChild.description").getValue(context);
+//      ExpressionParser expressionParser = new SpelExpressionParser(config);
+      ExpressionParser expressionParser = new SpelExpressionParser();
+      Object description = expressionParser.parseExpression("children[0].grandChildren[0].tax").getValue(context);
 
-      assertThat(
-          description
-      ).isEqualTo("説明");
+      assertThat(description).isEqualTo(123);
     }
   }
 
