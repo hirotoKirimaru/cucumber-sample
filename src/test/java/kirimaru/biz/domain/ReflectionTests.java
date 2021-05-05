@@ -112,8 +112,7 @@ class ReflectionTests {
               .build())
           .build();
 
-      Method method = target.getClass().getDeclaredMethod("getChild");
-      Object child = method.invoke(target);
+      Object child = target.getClass().getDeclaredMethod("getChild").invoke(target);
       Object grandChild = child.getClass().getDeclaredMethod("getGrandChild").invoke(child);
       Object tax = grandChild.getClass().getDeclaredMethod("getTax").invoke(grandChild);
 
