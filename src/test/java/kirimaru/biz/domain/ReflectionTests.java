@@ -153,6 +153,27 @@ class ReflectionTests {
       assertThat(tax).isEqualTo(123);
     }
 
+    @DisplayName("直接配列を参照する")
+    @Test
+    void test_02_03() throws Exception {
+      Child target = Child.builder()
+          .grandChildren(List.of(
+              GrandChild.builder()
+                  .tax(123)
+                  .build()
+          )).build();
+
+      Field fieldGrandChildren = target.getClass().getDeclaredField("grandChildren");
+      fieldGrandChildren.setAccessible(true);
+      List grandChildren = (List)fieldGrandChildren.get(target);
+      Object grandChild = grandChildren.get(0);
+      Field fieldTax = grandChild.getClass().getDeclaredField("tax");
+      fieldTax.setAccessible(true);
+      Object tax = fieldTax.get(grandChild);
+
+      assertThat(tax).isEqualTo(123);
+    }
+
     @Test
     void test_03() throws Exception {
       GrandChild target = GrandChild.builder()
