@@ -13,6 +13,7 @@ import org.springframework.expression.spel.SpelParserConfiguration;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -110,6 +111,44 @@ class ReflectionTests {
       Object child = target.getClass().getDeclaredMethod("getChild").invoke(target);
       Object grandChild = child.getClass().getDeclaredMethod("getGrandChild").invoke(child);
       Object tax = grandChild.getClass().getDeclaredMethod("getTax").invoke(grandChild);
+
+      assertThat(tax).isEqualTo(123);
+    }
+
+    @DisplayName("直接変数を参照する")
+    @Test
+    void test_02_01() throws Exception {
+      Parent target = Parent.builder()
+          .child(Child.builder()
+              .grandChild(GrandChild.builder()
+                  .tax(123)
+                  .build())
+              .build())
+          .build();
+
+      Field childFiled = target.getClass().getDeclaredField("child");
+      childFiled.setAccessible(true);
+      Object child = childFiled.get(target);
+      Field childField = child.getClass().getDeclaredField("grandChild");
+      childField.setAccessible(true);
+      Object grandChild = childField.get(child);
+      Field fieldTax = grandChild.getClass().getDeclaredField("tax");
+      fieldTax.setAccessible(true);
+      Object tax = fieldTax.get(grandChild);
+
+      assertThat(tax).isEqualTo(123);
+    }
+
+    @DisplayName("直接変数を参照する")
+    @Test
+    void test_02_02() throws Exception {
+      GrandChild target = GrandChild.builder()
+          .tax(123)
+          .build();
+
+      Field fieldTax = target.getClass().getDeclaredField("tax");
+      fieldTax.setAccessible(true);
+      Object tax = fieldTax.get(target);
 
       assertThat(tax).isEqualTo(123);
     }
