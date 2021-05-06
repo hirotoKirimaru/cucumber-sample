@@ -165,13 +165,26 @@ class ReflectionTests {
 
       Field fieldGrandChildren = target.getClass().getDeclaredField("grandChildren");
       fieldGrandChildren.setAccessible(true);
-      List grandChildren = (List)fieldGrandChildren.get(target);
+      List grandChildren = (List) fieldGrandChildren.get(target);
       Object grandChild = grandChildren.get(0);
       Field fieldTax = grandChild.getClass().getDeclaredField("tax");
       fieldTax.setAccessible(true);
       Object tax = fieldTax.get(grandChild);
 
       assertThat(tax).isEqualTo(123);
+    }
+
+    @DisplayName("直接変数を書き換える")
+    @Test
+    void test_02_04() throws Exception {
+      GrandChild target = GrandChild.builder()
+          .build();
+
+      Field fieldTax = target.getClass().getDeclaredField("tax");
+      fieldTax.setAccessible(true);
+      fieldTax.set(target, 123);
+
+      assertThat(target.getTax()).isEqualTo(123);
     }
 
     @Test
