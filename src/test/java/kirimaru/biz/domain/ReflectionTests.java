@@ -16,6 +16,7 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -94,6 +95,29 @@ class ReflectionTests {
       assertThat(dog).isEqualTo(1);
       assertThat(cat).isEqualTo(3);
       assertThat(mouse).isEqualTo(10);
+    }
+
+    @Test
+    void test_04() throws Exception {
+      Parent target = Parent.builder()
+          .children(List.of(
+              Child.builder()
+                  .grandChildren(List.of(
+                      GrandChild.builder()
+                          .build())
+                  )
+                  .build())
+          )
+          .build();
+
+      StandardEvaluationContext context = new StandardEvaluationContext(target);
+
+      ExpressionParser expressionParser = new SpelExpressionParser();
+      Object size = expressionParser.parseExpression("children[0].grandChildren[0].animals.size() > 1").getValue(context);
+      Object noSize = expressionParser.parseExpression("children[0].grandChildren[0].animals.size() == 0").getValue(context);
+
+      assertThat(size).isEqualTo(true);
+      assertThat(noSize).isEqualTo(false);
     }
   }
 
