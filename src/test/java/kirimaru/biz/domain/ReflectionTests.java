@@ -119,6 +119,51 @@ class ReflectionTests {
       assertThat(size).isEqualTo(true);
       assertThat(noSize).isEqualTo(false);
     }
+
+    @Disabled("処理イメージ")
+    @Test
+    void test_05() throws Exception {
+      Parent target = Parent.builder()
+          .children(List.of(
+              Child.builder()
+                  .grandChildren(List.of(
+                      GrandChild.builder()
+                          .build())
+                  )
+                  .build())
+          )
+          .build();
+
+      StandardEvaluationContext context = new StandardEvaluationContext(target);
+
+      ExpressionParser expressionParser = new SpelExpressionParser();
+      expressionParser.parseExpression("children[0].grandChildren[0].tax").setValue(context, 123);
+
+      assertThat(target.getChildren().get(0).getGrandChildren().get(0).getTax()).isEqualTo(123);
+    }
+
+    @Disabled("処理イメージ")
+    @Test
+    void test_06() throws Exception {
+      Parent target = Parent.builder()
+          .children(List.of(
+              Child.builder()
+                  .grandChildren(List.of(
+                      GrandChild.builder()
+                          .build())
+                  )
+                  .build())
+          )
+          .build();
+
+      StandardEvaluationContext context = new StandardEvaluationContext(target);
+
+      ExpressionParser expressionParser = new SpelExpressionParser();
+      expressionParser.parseExpression("children[0].grandChildren[0].animals").setValue(context, 123);
+
+      assertThat(target.getChildren().get(0).getGrandChildren().get(0).getTax()).isEqualTo(123);
+    }
+
   }
 
 
@@ -261,7 +306,7 @@ class ReflectionTests {
       assertThat(result).isEqualTo(24000);
     }
 
-    @Disabled("こんなイメージで動かす")
+    @Disabled("処理イメージ")
     @Test
     void test_05() throws Exception {
       GrandChild target = GrandChild.builder()

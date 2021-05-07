@@ -3,6 +3,7 @@ package kirimaru.biz.domain.nest;
 import kirimaru.biz.domain.book.CustomBuilderBook;
 import kirimaru.biz.domain.book.Isbn;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Setter;
 import lombok.Value;
 
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Value
+//@Data
 @Builder(builderClassName = "Builder")
 public class GrandChild {
   private int tax;
