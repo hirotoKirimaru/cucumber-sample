@@ -1,6 +1,7 @@
 package kirimaru.biz.domain.spel;
 
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ class ArithmeticOperatorsTests {
     @Autowired
     ArithmeticOperators target;
 
+    @DisplayName("DIしないと値を取得できない")
     @Test
     void test_01() {
 //      ArithmeticOperators target = new ArithmeticOperators();
