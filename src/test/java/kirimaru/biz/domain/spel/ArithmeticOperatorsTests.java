@@ -40,7 +40,7 @@ class ArithmeticOperatorsTests {
     }
   }
 
-  @ComponentScan(value = {"kirimaru.biz.domain"}, nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class)
+  @ComponentScan(value = {"kirimaru.biz.domain.spel"}, nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class)
   static class Config {
   }
 }
