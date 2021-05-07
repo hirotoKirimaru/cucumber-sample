@@ -24,6 +24,20 @@ class ReflectionTests {
 
   @Nested
   class Reflect {
+    @Test
+    void test_01_01() throws Exception {
+      var target = GrandChild.builder()
+              .tax(123)
+              .build();
+
+      StandardEvaluationContext context = new StandardEvaluationContext(target);
+
+      ExpressionParser expressionParser = new SpelExpressionParser();
+      Object parent = expressionParser.parseExpression("tax").getValue(context);
+
+      assertThat(parent).isEqualTo(123);
+    }
+
     @DisplayName("publicなものを取得する")
     @Test
     void test_01() throws Exception {
