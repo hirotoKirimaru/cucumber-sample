@@ -1,18 +1,23 @@
 package kirimaru.biz.domain.nest;
 
+import kirimaru.biz.domain.book.CustomBuilderBook;
+import kirimaru.biz.domain.book.Isbn;
 import lombok.Builder;
 import lombok.Setter;
 import lombok.Value;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 @Value
-@Builder
+@Builder(builderClassName = "Builder")
 public class GrandChild {
   private int tax;
   private Integer amount;
   private BigDecimal rate;
   private String description;
+  private Map<String, Integer> animals = Map.of("dog", 1, "cat", 3, "mouse", 10);
 
   private String getDescription() {
     return description;
@@ -29,4 +34,10 @@ public class GrandChild {
     }
     return tmp;
   }
+
+//  public static class Builder {
+//    public CustomBuilderBook build() {
+//      return new GrandChild(id, money, author);
+//    }
+//
 }

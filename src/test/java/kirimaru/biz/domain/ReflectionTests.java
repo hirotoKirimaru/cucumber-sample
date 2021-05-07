@@ -70,6 +70,31 @@ class ReflectionTests {
 
       assertThat(description).isEqualTo(123);
     }
+
+    @Test
+    void test_03() throws Exception {
+      Parent target = Parent.builder()
+          .children(List.of(
+              Child.builder()
+                  .grandChildren(List.of(
+                      GrandChild.builder()
+                          .build())
+                  )
+                  .build())
+          )
+          .build();
+
+      StandardEvaluationContext context = new StandardEvaluationContext(target);
+
+      ExpressionParser expressionParser = new SpelExpressionParser();
+      Object dog = expressionParser.parseExpression("children[0].grandChildren[0].animals['dog']").getValue(context);
+      Object cat = expressionParser.parseExpression("children[0].grandChildren[0].animals['cat']").getValue(context);
+      Object mouse = expressionParser.parseExpression("children[0].grandChildren[0].animals['mouse']").getValue(context);
+
+      assertThat(dog).isEqualTo(1);
+      assertThat(cat).isEqualTo(3);
+      assertThat(mouse).isEqualTo(10);
+    }
   }
 
 
