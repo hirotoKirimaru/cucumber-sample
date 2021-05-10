@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -82,6 +84,39 @@ public class YearMonthTests {
           YearMonth.from(
               LocalDate.of(2021, 2, 15)
           ).atEndOfMonth()
+      ).isEqualTo(LocalDate.of(2021, 2, 28));
+    }
+  }
+
+  @Nested
+  class LocalDateから月2 {
+
+
+    @Test
+    void test_01() {
+      assertThat(
+          LocalDate.of(2020, 1, 15).with(TemporalAdjusters.lastDayOfMonth())
+      ).isEqualTo(LocalDate.of(2020, 1, 31));
+    }
+
+    @Test
+    void test_02() {
+      assertThat(
+          LocalDate.of(2020, 4, 15).with(TemporalAdjusters.lastDayOfMonth())
+      ).isEqualTo(LocalDate.of(2020, 4, 30));
+    }
+
+    @Test
+    void test_03() {
+      assertThat(
+          LocalDate.of(2020, 2, 15).with(TemporalAdjusters.lastDayOfMonth())
+      ).isEqualTo(LocalDate.of(2020, 2, 29));
+    }
+
+    @Test
+    void test_04() {
+      assertThat(
+          LocalDate.of(2021, 2, 15).with(TemporalAdjusters.lastDayOfMonth())
       ).isEqualTo(LocalDate.of(2021, 2, 28));
     }
 
