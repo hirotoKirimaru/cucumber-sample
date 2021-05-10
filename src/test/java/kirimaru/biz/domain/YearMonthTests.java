@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
@@ -74,6 +75,13 @@ public class YearMonthTests {
     void test_04() {
       assertThat(
           YearMonth.parse("2021-02").atEndOfMonth()
+      ).isEqualTo(LocalDate.of(2021, 2, 28));
+    }
+
+    @Test
+    void test_05() {
+      assertThat(
+          YearMonth.parse("2021/02", DateTimeFormatter.ofPattern("yyyy/MM")).atEndOfMonth()
       ).isEqualTo(LocalDate.of(2021, 2, 28));
     }
   }
