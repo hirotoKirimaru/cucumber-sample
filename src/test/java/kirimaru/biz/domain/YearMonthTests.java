@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.util.Calendar;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -124,5 +125,29 @@ public class YearMonthTests {
       ).isEqualTo(LocalDate.of(2021, 2, 28));
     }
 
+  }
+
+  // Java8より前の書き方
+  @Nested
+  class Calenderから月末 {
+    @Test
+    void test_01() {
+      Calendar cal = Calendar.getInstance();
+      cal.set(Calendar.YEAR, 2000);
+      cal.set(Calendar.MONTH, 1); // 0=1月, 1=2月
+      assertThat(
+          cal.getActualMaximum(Calendar.DATE)
+      ).isEqualTo(29);
+    }
+
+    @Test
+    void test_02() {
+      Calendar cal = Calendar.getInstance();
+      cal.set(Calendar.YEAR, 2000);
+      cal.set(Calendar.MONTH, 0); // 0=1月, 1=2月
+      assertThat(
+          cal.getActualMaximum(Calendar.DATE)
+      ).isEqualTo(31);
+    }
   }
 }
