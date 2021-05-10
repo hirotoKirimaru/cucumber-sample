@@ -32,6 +32,13 @@ public class YearMonthTests {
     }
 
     @Test
+    void test_01_03() {
+      assertThat(
+          YearMonth.of(202_0, 1).atEndOfMonth().getDayOfMonth()
+      ).isEqualTo(31);
+    }
+
+    @Test
     void test_02() {
       assertThat(
           YearMonth.of(2020, 4).atEndOfMonth()
