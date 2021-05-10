@@ -16,6 +16,37 @@ public class YearMonthTests {
 
   @Nested
   class YearMonthから月末を求める {
+    @Test
+    void test_01() {
+      assertThat(
+          YearMonth.of(2020, 1).atEndOfMonth()
+      ).isEqualTo(LocalDate.of(2020, 1, 31));
+    }
+
+    @Test
+    void test_02() {
+      assertThat(
+          YearMonth.of(2020, 4).atEndOfMonth()
+      ).isEqualTo(LocalDate.of(2020, 4, 30));
+    }
+
+    @Test
+    void test_03() {
+      assertThat(
+          YearMonth.of(2020, 2).atEndOfMonth()
+      ).isEqualTo(LocalDate.of(2020, 2, 29));
+    }
+
+    @Test
+    void test_04() {
+      assertThat(
+          YearMonth.of(2021, 2).atEndOfMonth()
+      ).isEqualTo(LocalDate.of(2021, 2, 28));
+    }
+  }
+
+  @Nested
+  class YearMonthから月末を求める2 {
 
 
     @Test
