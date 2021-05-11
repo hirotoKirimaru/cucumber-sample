@@ -1,5 +1,6 @@
 package kirimaru.biz.domain;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -171,6 +173,40 @@ public class YearMonthTests {
       assertThat(
           LocalDate.of(2021, 2, 15).with(TemporalAdjusters.lastDayOfMonth())
       ).isEqualTo(LocalDate.of(2021, 2, 28));
+    }
+
+    @Disabled("動かさない")
+    @Nested
+    class 性能確認 {
+      int size = 1_000_000_000;
+
+      @Test
+      void test_01() {
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < size; i++) {
+          LocalDate now = LocalDate.of(2021, 2, 28);
+          LocalDate end = now.with(TemporalAdjusters.lastDayOfMonth());
+          boolean equals = Objects.equals(now, end);
+//          assertThat(equals).isTrue();
+        }
+        long end = System.currentTimeMillis();
+
+        System.out.println("*******************");
+        System.out.println(end - start);
+      }
+
+      @Test
+      void test_02() {
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < size; i++) {
+          boolean b = LocalDate.of(2021, 2, 28).plusDays(1).getDayOfMonth() == 1;
+//          assertThat(b).isTrue();
+        }
+        long end = System.currentTimeMillis();
+
+        System.out.println("*******************");
+        System.out.println(end - start);
+      }
     }
 
   }
