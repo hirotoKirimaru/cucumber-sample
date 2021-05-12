@@ -193,6 +193,7 @@ public class YearMonthTests {
 
         System.out.println("*******************");
         System.out.println(end - start);
+        // 60ミリ秒
       }
 
       @Test
@@ -206,6 +207,38 @@ public class YearMonthTests {
 
         System.out.println("*******************");
         System.out.println(end - start);
+        // 20ミリ秒
+      }
+
+      @Test
+      void test_03() {
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < size; i++) {
+          LocalDate now = LocalDate.of(2021, 2, 28);
+          boolean b = YearMonth.from(now).atEndOfMonth().equals(now);
+//          assertThat(b).isTrue();
+        }
+        long end = System.currentTimeMillis();
+
+        System.out.println("*******************");
+        System.out.println(end - start);
+        // 60ミリ秒
+      }
+
+      @Test
+      void test_04() {
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < size; i++) {
+          LocalDateTime now = LocalDateTime.of(2021, 2, 28, 1, 1);
+          LocalDateTime end = now.with(TemporalAdjusters.lastDayOfMonth());
+          boolean equals = Objects.equals(now, end);
+//          assertThat(equals).isTrue();
+        }
+        long end = System.currentTimeMillis();
+
+        System.out.println("*******************");
+        System.out.println(end - start);
+        // 20ミリ秒
       }
     }
 
@@ -249,6 +282,13 @@ public class YearMonthTests {
       ).isEqualTo(LocalDate.of(2021, 2, 28));
     }
 
+
+    @Test
+    void test_05() {
+      assertThat(
+          LocalDateTime.of(2021, 2, 15, 1, 1).with(TemporalAdjusters.lastDayOfMonth())
+      ).isEqualTo(LocalDateTime.of(2021, 2, 28, 1, 1));
+    }
   }
 
   // Java8より前の書き方
