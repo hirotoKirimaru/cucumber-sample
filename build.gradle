@@ -8,6 +8,10 @@ plugins {
     id 'org.gradle.test-retry' version '1.1.9'
 }
 
+bootJar{
+    archiveFileName = 'kirimaru.jar'
+}
+
 group = 'kirimaru'
 version = '0.0.1-SNAPSHOT'
 //sourceCompatibility = '16'
