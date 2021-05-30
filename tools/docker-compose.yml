@@ -1,13 +1,20 @@
 version: '3.8'
 services:
-  postgres:
-    image: postgres:latest
-    ports:
-      - "15432:5432"
-    container_name: postgres
+  # MySQL
+  db:
+#    image: mysql:latest
+    image: kirimaru/test-mysql:001
+    container_name: mysql_host
     environment:
-      POSTGRES_PASSWORD: pass
-      POSTGRES_USER: user
-      POSTGRES_DB: database
-    hostname: postgres
-    restart: always
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+#    volumes:
+#      - ./docker/db/data:/var/lib/mysql
+#      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+#      - ./docker/db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
