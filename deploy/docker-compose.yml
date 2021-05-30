@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  app:
+    image: kirimaru:latest
+    container_name: app
+    environment:
+      SPRING.PROFILE.ACTIVE: WIN
+    restart: always
+    depends_on:
+      - "db"
+    ports:
+      - 80:80
+  db:
+    image: postgres:latest
+    ports:
+      - "15432:5432"
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: user
+      POSTGRES_DB: database
+    hostname: postgres
+    restart: always
