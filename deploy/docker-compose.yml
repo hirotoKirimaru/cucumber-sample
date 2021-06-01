@@ -7,13 +7,13 @@ services:
       SPRING_PROFILES_ACTIVE: dummy
     restart: always
     depends_on:
-      - "db"
+      - "db2"
     ports:
       - 80:80
 #    networks: [backend]
-    links:
-      - "db:database"
-  db:
+#    links:
+#      - "db:database"
+  db2:
     image: postgres:latest
     ports:
       - "15432:5432"
