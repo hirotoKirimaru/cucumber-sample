@@ -1,32 +1,38 @@
 version: '3.8'
 services:
   app:
-    image: kirimaru:latest
+    image: kirimaru/test-application:latest
     container_name: app
     environment:
       SPRING_PROFILES_ACTIVE: dummy
     restart: always
     depends_on:
-      - "db2"
+      - "db"
     ports:
       - 80:80
-#    networks: [backend]
-#    links:
+    networks: [kirimaru-network]
+#    links:　# 今はlinksを使わないほうが良いらしい。
 #      - "db:database"
-  db2:
+  database:
+#  dummy.hostname:
     image: postgres:latest
-    ports:
-      - "15432:5432"
+#    ports:
+#      - "15432:5432"
+#    container_name: test-container
     container_name: postgres
+#    hostname: test-host
     environment:
       POSTGRES_PASSWORD: pass
       POSTGRES_USER: user
       POSTGRES_DB: database
-    hostname: postgres
+#    hostname: postgres
+    hostname: dummy.hostname
     restart: always
-#    networks: [backend]
-#networks:
-#  default:
-#    driver: kirimaru-network
+    networks: [kirimaru-network]
+networks:
+  kirimaru-network:
+    driver: bridge
+#    external:
+#      name: kirimaru
 #  backend:
 #    driver: kirimaru-network
