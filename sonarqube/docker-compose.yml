@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  sonarqube:
+    image: sonarqube:latest
+    container_name: sonarqube
+    environment:
+      sonar.jdbc.url: jdbc:postgresql://db:5432/sonar
+      sonar.jdbc.username: sonar
+      sonar.jdbc.password: sonar
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 9000:9000
+    networks: [sonarnet]
+#    volumes:
+#      - ./sonarqube_conf:/opt/sonarqube/conf
+#      - ./sonarqube_data:/opt/sonarqube/data
+#      - ./sonarqube_extensions:/opt/sonarqube/extensions
+#      - ./sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    container_name: postgres
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+    hostname: postgres
+    restart: always
+    networks: [sonarnet]
+#    volumes:
+#      - ./postgresql:/var/lib/postgresql
+      # postgresのDockerfileに記載されているVOLUMEと同じ箇所を指定
+#      - ./postgresql_data:/var/lib/postgresql/data
+networks:
+  sonarnet:
+    driver: bridge
+
+#volumes:
+#  sonarqube_conf:
+#  sonarqube_data:
+#  sonarqube_extensions:
+#  sonarquve_bundled-plugins:
+#  postgresql:
+#  postgresql_data:
