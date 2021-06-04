@@ -1,4 +1,9 @@
 FROM azul/zulu-openjdk-alpine:15.0.2
 ARG JAR_FILE=build/libs/kirimaru.jar
-COPY ${JAR_FILE} app.jar
+
+ENV TZ=Asia/Tokyo
+
+ENV APP_DIR=/usr/local/app
+
+COPY ${JAR_FILE} ${APP_DIR}
 ENTRYPOINT ["java","-jar","/app.jar"]
