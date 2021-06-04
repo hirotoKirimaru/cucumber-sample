@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.annotation.PostConstruct;
 import java.util.Map;
 
 @Setter
@@ -44,5 +45,10 @@ public abstract class ExternalProperties {
 
     map.forEach(builder::queryParam);
     return builder.toUriString();
+  }
+
+  @PostConstruct
+  public void validate() {
+    System.out.println("あいうえお");
   }
 }
