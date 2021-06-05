@@ -1,5 +1,6 @@
 package kirimaru.config;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -21,5 +22,13 @@ class FacebookPropertiesTests {
   void test_01() {
     URI url = properties.getUri();
     assertThat(url.toString()).isEqualTo("http://localhost:10080/facebook");
+  }
+
+  @Test
+  void AutowiredしないときはPostConstructが呼ばれない() {
+    new FacebookProperties();
+
+    // 起動ログを目視で確認する
+
   }
 }
