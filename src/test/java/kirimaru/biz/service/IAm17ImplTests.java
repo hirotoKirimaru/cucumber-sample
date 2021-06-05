@@ -7,10 +7,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class IAm17ImplTests {
@@ -21,8 +23,17 @@ class IAm17ImplTests {
 
   @Test
   void test_01() {
-    assertThat(target.iam17(LocalDateTime.now()))
-        .isEqualTo("");
-    ;
+    when(systemDateTimeResolver.now()).thenReturn(LocalDateTime.of(2021, 6, 5, 0, 0));
+
+    assertThat(target.iam17(LocalDate.of(1992, 2, 4)))
+        .isEqualTo("17歳148ヵ月");
+  }
+
+  @Test
+  void test_02() {
+    when(systemDateTimeResolver.now()).thenReturn(LocalDateTime.of(2021, 6, 5, 0, 0));
+
+    assertThat(target.iam17(LocalDate.of(1992, 3, 4)))
+        .isEqualTo("17歳147ヵ月");
   }
 }
