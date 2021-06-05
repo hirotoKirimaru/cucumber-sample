@@ -50,5 +50,6 @@ public abstract class ExternalProperties {
   @PostConstruct
   public void validate() {
     System.out.println("あいうえお");
+    System.out.println(this);
   }
 }

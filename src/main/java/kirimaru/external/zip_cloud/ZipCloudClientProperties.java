@@ -11,9 +11,9 @@ import javax.annotation.PostConstruct;
 @ConfigurationProperties(prefix = "external.zip-cloud")
 @ToString(callSuper = true)
 public class ZipCloudClientProperties extends ExternalProperties {
-  @PostConstruct
-  @Override
-  public void validate() {
-    super.validate();
-  }
+//  @PostConstruct
+//  @Override
+//  public void validate() {
+//    super.validate();
+//  }
 }

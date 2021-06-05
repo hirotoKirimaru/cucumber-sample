@@ -17,10 +17,10 @@ class ZipCloudClientPropertiesTests {
   @Autowired
   ZipCloudClientProperties properties;
 
-  @Test
-  void test_01() {
-    properties.toString();
-  }
+//  @Test
+//  void test_01() {
+//    properties.toString();
+//  }
 
   @Test
   void test_02() {
