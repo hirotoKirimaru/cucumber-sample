@@ -9,9 +9,8 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.YearMonth;
+import java.time.*;
+import java.time.temporal.TemporalField;
 import java.util.List;
 
 @Service
@@ -22,14 +21,19 @@ public class IAm17Impl {
 
   public CustomYearMonth iam17(LocalDate birth) {
     LocalDateTime now = systemDateTimeResolver.now();
+
     int year = now.getYear() - birth.getYear();
     int month = now.getMonthValue() - birth.getMonthValue();
-    if (birth.getYear() >= 17) {
-      month = month + ((year - 17) * 12);
-      year = 17;
-    } else {
-      year = birth.getYear();
+    int day = now.getDayOfMonth() - birth.getDayOfMonth();
+
+    if (day < 0) {
+      month--;
     }
+
+    month += ((year - 17) * 12);
+    year = 17;
+
+
     return CustomYearMonth.of(year, month);
   }
 
