@@ -29,4 +29,12 @@ public abstract class ExternalProperties {
     log.info(this.toString());
     log.info("********************");
   }
+
+  // 起動しなくなるので、PostConstructはしない
+//  @PostConstruct
+  public void validate() {
+    if (host == null) {
+      throw new RuntimeException("設定されていない！");
+    }
+  }
 }
