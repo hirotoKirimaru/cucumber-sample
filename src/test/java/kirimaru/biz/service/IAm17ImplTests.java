@@ -1,5 +1,6 @@
 package kirimaru.biz.service;
 
+import kirimaru.biz.domain.CustomYearMonth;
 import kirimaru.biz.domain.date.SystemDateTimeResolver;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +27,7 @@ class IAm17ImplTests {
     when(systemDateTimeResolver.now()).thenReturn(LocalDateTime.of(2021, 6, 5, 0, 0));
 
     assertThat(target.iam17(LocalDate.of(1992, 2, 4)))
-        .isEqualTo("17歳148ヵ月");
+        .isEqualTo(CustomYearMonth.of(17, 148));
   }
 
   @Test
@@ -34,6 +35,6 @@ class IAm17ImplTests {
     when(systemDateTimeResolver.now()).thenReturn(LocalDateTime.of(2021, 6, 5, 0, 0));
 
     assertThat(target.iam17(LocalDate.of(1992, 3, 4)))
-        .isEqualTo("17歳147ヵ月");
+        .isEqualTo(CustomYearMonth.of(17, 147));
   }
 }
