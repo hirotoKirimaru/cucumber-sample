@@ -19,9 +19,21 @@ public abstract class ExternalProperties {
   private String endpoint;
   private String timeout;
 
+  @ToString.Exclude // ログに出さない
+  private String basicUser;
+  @ToString.Exclude // ログに出さない
+  private String basicPassword;
+
+  @ToString.Include(name = "rootUrl") // デフォルトはメソッド名になる
   public URI getUri() {
     return URI.create(protocol + "://" + host + ":" + port + "/" + endpoint);
   }
+
+  // getterと同名ならログが出る？デモでない。
+  public boolean isHoge() {
+    return false;
+  }
+
 
   @PostConstruct
   public void display() {
