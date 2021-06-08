@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - SpringBootTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>SpringBootTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/kirimaru.biz.domain.html">kirimaru.biz.domain</a> &gt; SpringBootTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.016s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">test_01()</td>
+<td class="success">0.016s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2021-06-08 23:55:06.830  INFO 9988 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [kirimaru.biz.domain.SpringBootTests], using SpringBootContextLoader
+2021-06-08 23:55:06.832  INFO 9988 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [kirimaru.biz.domain.SpringBootTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2021-06-08 23:55:06.848  INFO 9988 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2021-06-08 23:55:06.852  INFO 9988 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@165844f9, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@71f2edbe, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@4e0c49aa, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@226141f4, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@764ab6cd, org.springframework.test.context.support.DirtiesContextTestExecutionListener@10b33aa7, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3c5e6002, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1418f89c, org.springframework.test.context.event.EventPublishingTestExecutionListener@37c7c80c, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@3e28ba51, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@713993e6, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@22b65945, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@2bb872b7, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@5039afa3, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@6d22b0e1]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.4.5)
+
+2021-06-08 23:55:07.152  INFO 9988 --- [    Test worker] kirimaru.biz.domain.SpringBootTests      : Starting SpringBootTests using Java 15.0.1 on MizukamiHiroto with PID 9988 (started by nainai in C:\Users\naina\products\cucumber-sample\kirimaru-backend)
+2021-06-08 23:55:07.153  INFO 9988 --- [    Test worker] kirimaru.biz.domain.SpringBootTests      : The following profiles are active: ut,common,external-ut,repository-ut
+2021-06-08 23:55:07.209  INFO 9988 --- [    Test worker] kirimaru.biz.domain.SpringBootTests      : Started SpringBootTests in 0.352 seconds (JVM running for 33.259)
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 6.7</a> at 2021/06/08 23:55:23</p>
+</div>
+</div>
+</body>
+</html>

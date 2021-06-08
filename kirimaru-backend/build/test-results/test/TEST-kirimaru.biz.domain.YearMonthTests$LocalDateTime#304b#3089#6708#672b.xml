@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kirimaru.biz.domain.YearMonthTests$LocalDateTimeから月末" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-06-08T14:55:07" hostname="MIZUKAMIHIROTO" time="0.015">
+  <properties/>
+  <testcase name="test_01()" classname="kirimaru.biz.domain.YearMonthTests$LocalDateTimeから月末" time="0.002"/>
+  <testcase name="test_02()" classname="kirimaru.biz.domain.YearMonthTests$LocalDateTimeから月末" time="0.001"/>
+  <testcase name="test_03()" classname="kirimaru.biz.domain.YearMonthTests$LocalDateTimeから月末" time="0.0"/>
+  <testcase name="test_04()" classname="kirimaru.biz.domain.YearMonthTests$LocalDateTimeから月末" time="0.0"/>
+  <testcase name="test_05()" classname="kirimaru.biz.domain.YearMonthTests$LocalDateTimeから月末" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

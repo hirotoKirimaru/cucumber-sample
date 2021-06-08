@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kirimaru.biz.service.IAm17ImplTests" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-06-08T14:55:08" hostname="MIZUKAMIHIROTO" time="0.074">
+  <properties/>
+  <testcase name="[1] birth=1992-02-04, year=17, month=148" classname="kirimaru.biz.service.IAm17ImplTests" time="0.03"/>
+  <testcase name="[2] birth=1992-03-04, year=17, month=147" classname="kirimaru.biz.service.IAm17ImplTests" time="0.003"/>
+  <testcase name="[3] birth=2021-06-04, year=17, month=-204" classname="kirimaru.biz.service.IAm17ImplTests" time="0.003"/>
+  <testcase name="[4] birth=2021-06-05, year=17, month=-204" classname="kirimaru.biz.service.IAm17ImplTests" time="0.004"/>
+  <testcase name="[5] birth=2021-06-06, year=17, month=-205" classname="kirimaru.biz.service.IAm17ImplTests" time="0.003"/>
+  <testcase name="[6] birth=2021-05-04, year=17, month=-203" classname="kirimaru.biz.service.IAm17ImplTests" time="0.003"/>
+  <testcase name="[7] birth=2021-05-05, year=17, month=-203" classname="kirimaru.biz.service.IAm17ImplTests" time="0.01"/>
+  <testcase name="[8] birth=2021-05-06, year=17, month=-204" classname="kirimaru.biz.service.IAm17ImplTests" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
