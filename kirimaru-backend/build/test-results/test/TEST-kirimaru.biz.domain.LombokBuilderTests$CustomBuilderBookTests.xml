@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kirimaru.biz.domain.LombokBuilderTests$CustomBuilderBookTests" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:47" hostname="MIZUKAMIHIROTO" time="0.056">
+  <properties/>
+  <testcase name="validate設定に引っかからない場合は同一のものが生成される" classname="kirimaru.biz.domain.LombokBuilderTests$CustomBuilderBookTests" time="0.011"/>
+  <testcase name="validateの設定" classname="kirimaru.biz.domain.LombokBuilderTests$CustomBuilderBookTests" time="0.003"/>
+  <testcase name="ISBNをStringでもISBN型でもBookに渡したときにできるようにする" classname="kirimaru.biz.domain.LombokBuilderTests$CustomBuilderBookTests" time="0.008"/>
+  <testcase name="ISBN側のエラーに引っかかった場合ちゃんとthrowすること" classname="kirimaru.biz.domain.LombokBuilderTests$CustomBuilderBookTests" time="0.005"/>
+  <testcase name="toBuilderで不変条件を満たせなくなった時、ちゃんとエラーが表示されること" classname="kirimaru.biz.domain.LombokBuilderTests$CustomBuilderBookTests" time="0.026"/>
+  <testcase name="旧データは変更されていないこと。変更していないデータは引き継いでいること" classname="kirimaru.biz.domain.LombokBuilderTests$CustomBuilderBookTests" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

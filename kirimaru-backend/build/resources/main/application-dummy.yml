@@ -1,0 +1,20 @@
+info:
+  app:
+    name: dummy
+    version: 0.0.1
+app:
+  config:
+    appName: "HogeHoge"
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://db:5432/database
+    url: jdbc:postgresql://dummy.hostname:5432/database
+    username: user
+    password: pass
+    initialization-mode: always
+  flyway:
+    schemas: test
+    locations: classpath:db/migration,db/dev
+server:
+  port: 80

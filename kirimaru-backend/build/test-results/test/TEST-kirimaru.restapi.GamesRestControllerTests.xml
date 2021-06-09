@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kirimaru.restapi.GamesRestControllerTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:44:13" hostname="MIZUKAMIHIROTO" time="0.128">
+  <properties/>
+  <testcase name="success()" classname="kirimaru.restapi.GamesRestControllerTests" time="0.087"/>
+  <testcase name="hogeError()" classname="kirimaru.restapi.GamesRestControllerTests" time="0.03"/>
+  <system-out><![CDATA[2021-06-09 22:44:10.103  INFO 18184 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [kirimaru.restapi.GamesRestControllerTests], using SpringBootContextLoader
+2021-06-09 22:44:10.104  INFO 18184 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [kirimaru.restapi.GamesRestControllerTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2021-06-09 22:44:10.105  INFO 18184 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kirimaru.restapi.GamesRestControllerTests]: GamesRestControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2021-06-09 22:44:10.111  INFO 18184 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kirimaru.DemoApplication for test class kirimaru.restapi.GamesRestControllerTests
+2021-06-09 22:44:10.112  INFO 18184 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2021-06-09 22:44:10.113  INFO 18184 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@648e94da, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@c591706, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@1569d5d4, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7b7127ca, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@6b49443a, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f6c8f72, org.springframework.test.context.transaction.TransactionalTestExecutionListener@74f0283e, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@64d0e1d, org.springframework.test.context.event.EventPublishingTestExecutionListener@2704f27a, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@6cd8fef7, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@191c8a8a, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@774f4252, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@77d8e9e3, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@5cdc9ea9, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@21e91762]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.4.5)
+
+2021-06-09 22:44:10.209  INFO 18184 --- [    Test worker] k.restapi.GamesRestControllerTests       : Starting GamesRestControllerTests using Java 15.0.1 on MizukamiHiroto with PID 18184 (started by nainai in C:\Users\naina\products\cucumber-sample\kirimaru-backend)
+2021-06-09 22:44:10.209  INFO 18184 --- [    Test worker] k.restapi.GamesRestControllerTests       : The following profiles are active: ut,common,external-ut,repository-ut
+2021-06-09 22:44:11.576  INFO 18184 --- [    Test worker] kirimaru.config.ExternalProperties       : ********************
+2021-06-09 22:44:11.576  INFO 18184 --- [    Test worker] kirimaru.config.ExternalProperties       : FacebookProperties(super=ExternalProperties(host=localhost, protocol=http, port=10080, endpoint=facebook, timeout=3, rootUrl=http://localhost:10080/facebook))
+2021-06-09 22:44:11.576  INFO 18184 --- [    Test worker] kirimaru.config.ExternalProperties       : ********************
+2021-06-09 22:44:11.614  INFO 18184 --- [    Test worker] kirimaru.config.ExternalProperties       : ********************
+2021-06-09 22:44:11.614  INFO 18184 --- [    Test worker] kirimaru.config.ExternalProperties       : TwitterProperties(super=ExternalProperties(host=localhost, protocol=http, port=80, endpoint=twitter, timeout=3, rootUrl=http://localhost:80/twitter))
+2021-06-09 22:44:11.615  INFO 18184 --- [    Test worker] kirimaru.config.ExternalProperties       : ********************
+あいうえお
+ZipCloudClientProperties(super=ExternalProperties(schema=null, host=null, port=0, path=null, connectionTimeout=0, readTimeout=0, rootUrl=))
+かきくけこ
+2021-06-09 22:44:12.027  INFO 18184 --- [    Test worker] k.e.operation.RestOperationFactory       : Initialize RestTemplate completed. properties=[ZipCloudClientProperties(super=ExternalProperties(schema=null, host=null, port=0, path=null, connectionTimeout=0, readTimeout=0, rootUrl=))]
+2021-06-09 22:44:12.421  INFO 18184 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-09 22:44:13.208  INFO 18184 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-06-09 22:44:13.208  INFO 18184 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-06-09 22:44:13.209  INFO 18184 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2021-06-09 22:44:13.269  INFO 18184 --- [    Test worker] k.restapi.GamesRestControllerTests       : Started GamesRestControllerTests in 3.153 seconds (JVM running for 97.761)
+2021-06-09 22:44:13.309  INFO 18184 --- [    Test worker] k.r.interceptor.MaintenanceInterceptor   : preHandle
+2021-06-09 22:44:13.380 ERROR 18184 --- [    Test worker] k.r.interceptor.MaintenanceInterceptor   : postHandle
+2021-06-09 22:44:13.380 ERROR 18184 --- [    Test worker] k.r.interceptor.MaintenanceInterceptor   : afterCompletion
+2021-06-09 22:44:13.406  INFO 18184 --- [    Test worker] k.r.interceptor.MaintenanceInterceptor   : preHandle
+2021-06-09 22:44:13.421 ERROR 18184 --- [    Test worker] k.r.interceptor.MaintenanceInterceptor   : afterCompletion
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

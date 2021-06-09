@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kirimaru.biz.domain.constant.LogLevelTests$TraceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-08T14:55:03" hostname="MIZUKAMIHIROTO" time="1.289">
+<testsuite name="kirimaru.biz.domain.constant.LogLevelTests$TraceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:45" hostname="MIZUKAMIHIROTO" time="1.286">
   <properties/>
-  <testcase name="testIsLogEnabled()" classname="kirimaru.biz.domain.constant.LogLevelTests$TraceTest" time="1.289"/>
+  <testcase name="testIsLogEnabled()" classname="kirimaru.biz.domain.constant.LogLevelTests$TraceTest" time="1.286"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

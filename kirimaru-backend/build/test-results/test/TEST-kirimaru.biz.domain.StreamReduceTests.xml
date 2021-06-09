@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kirimaru.biz.domain.StreamReduceTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:50" hostname="MIZUKAMIHIROTO" time="0.008">
+  <properties/>
+  <testcase name="犬を買っている人のお金=1100と猫飼っている人のお金=10で合計1110になること" classname="kirimaru.biz.domain.StreamReduceTests" time="0.008"/>
+  <system-out><![CDATA[{cat=java.util.stream.ReferencePipeline$3@787d07ef, dog=java.util.stream.ReferencePipeline$3@1c9eb89a}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

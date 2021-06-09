@@ -1,0 +1,17 @@
+info:
+  app:
+    name: local
+    version: 0.0.1
+app:
+  config:
+    appName: "HogeHoge"
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:15432/database
+    username: user
+    password: pass
+    initialization-mode: always
+  flyway:
+    schemas: test
+    locations: classpath:db/migration,db/dev

@@ -1,0 +1,1 @@
+UPDATE BOOK SET amount= 100 Where isbn = '1234567890123';

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kirimaru.biz.domain.interceptor.DomainInterceptorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:46" hostname="MIZUKAMIHIROTO" time="0.32">
+  <properties/>
+  <testcase name="ExceptionHandlerが処理の開始と終了時に標準出力をすることの確認" classname="kirimaru.biz.domain.interceptor.DomainInterceptorTest" time="0.32"/>
+  <system-out><![CDATA[*** START ***
+*** END ***
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - FacebookPropertiesTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>FacebookPropertiesTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/kirimaru.config.html">kirimaru.config</a> &gt; FacebookPropertiesTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">2</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.016s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">AutowiredしないときはPostConstructが呼ばれない()</td>
+<td class="success">0.007s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">test_01()</td>
+<td class="success">0.009s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2021-06-09 22:43:55.054  INFO 18184 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [kirimaru.config.FacebookPropertiesTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2021-06-09 22:43:55.054  INFO 18184 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kirimaru.config.FacebookPropertiesTests]: FacebookPropertiesTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2021-06-09 22:43:55.058  INFO 18184 --- [    Test worker] o.s.t.c.s.DefaultTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2021-06-09 22:43:55.060  INFO 18184 --- [    Test worker] o.s.t.c.s.DefaultTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@74d265e6, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@24b2e6b4, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@292bb419, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7e6697d2, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@19fc30ad, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2ac8f260, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5e37105c, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@14a5d44f, org.springframework.test.context.event.EventPublishingTestExecutionListener@6c24e72e, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@1924338, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@674116a6, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@5dfca1ad, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@16aa20ab, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@5322ac5, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@6a29f8e3]
+2021-06-09 22:43:55.458  INFO 18184 --- [    Test worker] kirimaru.config.ExternalProperties       : ********************
+2021-06-09 22:43:55.459  INFO 18184 --- [    Test worker] kirimaru.config.ExternalProperties       : FacebookProperties(super=ExternalProperties(host=localhost, protocol=http, port=10080, endpoint=facebook, timeout=3, rootUrl=http://localhost:10080/facebook))
+2021-06-09 22:43:55.459  INFO 18184 --- [    Test worker] kirimaru.config.ExternalProperties       : ********************
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.0.2</a> at 2021/06/09 22:44:15</p>
+</div>
+</div>
+</body>
+</html>

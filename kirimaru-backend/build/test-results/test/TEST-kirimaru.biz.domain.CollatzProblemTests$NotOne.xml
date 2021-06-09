@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kirimaru.biz.domain.CollatzProblemTests$NotOne" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:16" hostname="MIZUKAMIHIROTO" time="0.01">
+  <properties/>
+  <testcase name="test_01()" classname="kirimaru.biz.domain.CollatzProblemTests$NotOne" time="0.003"/>
+  <testcase name="test_02()" classname="kirimaru.biz.domain.CollatzProblemTests$NotOne" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
