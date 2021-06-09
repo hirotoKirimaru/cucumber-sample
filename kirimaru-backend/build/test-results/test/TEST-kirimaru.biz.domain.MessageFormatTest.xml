@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kirimaru.biz.domain.MessageFormatTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:48" hostname="MIZUKAMIHIROTO" time="0.003">
-  <properties/>
-  <testcase name="test_01()" classname="kirimaru.biz.domain.MessageFormatTest" time="0.001"/>
-  <testcase name="test_02()" classname="kirimaru.biz.domain.MessageFormatTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

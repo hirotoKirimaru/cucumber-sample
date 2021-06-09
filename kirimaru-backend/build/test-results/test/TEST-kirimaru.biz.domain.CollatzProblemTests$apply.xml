@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kirimaru.biz.domain.CollatzProblemTests$apply" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:16" hostname="MIZUKAMIHIROTO" time="0.02">
-  <properties/>
-  <testcase name="test_01()" classname="kirimaru.biz.domain.CollatzProblemTests$apply" time="0.008"/>
-  <testcase name="test_02()" classname="kirimaru.biz.domain.CollatzProblemTests$apply" time="0.001"/>
-  <testcase name="test_03()" classname="kirimaru.biz.domain.CollatzProblemTests$apply" time="0.005"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

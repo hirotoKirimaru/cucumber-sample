@@ -1,7 +1,0 @@
-info:
-  app:
-    name: stg
-    version: 0.0.1
-app:
-  config:
-    appName: "Human"

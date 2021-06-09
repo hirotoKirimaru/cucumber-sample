@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="できるだけ、デフォルトのbuildeを使う" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:47" hostname="MIZUKAMIHIROTO" time="0.012">
-  <properties/>
-  <testcase name="Builderのデフォルト値を設定できること" classname="kirimaru.biz.domain.LombokBuilderTests$DefaultBuilder" time="0.005"/>
-  <testcase name="Builderで値を設定した後に、デフォルト値で上書きしないこと" classname="kirimaru.biz.domain.LombokBuilderTests$DefaultBuilder" time="0.001"/>
-  <testcase name="toBuilderクラスの検証" classname="kirimaru.biz.domain.LombokBuilderTests$DefaultBuilder" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

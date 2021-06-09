@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ファイルから読み込むようにするだけ" tests="1" skipped="1" failures="0" errors="0" timestamp="2021-06-09T13:44:02" hostname="MIZUKAMIHIROTO" time="0.0">
-  <properties/>
-  <testcase name="test_01()" classname="kirimaru.external.zip_cloud.ZipCloudClientImplTests$BodyJson" time="0.0">
-    <skipped/>
-  </testcase>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

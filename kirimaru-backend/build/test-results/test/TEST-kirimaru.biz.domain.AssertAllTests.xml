@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kirimaru.biz.domain.AssertAllTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:07" hostname="MIZUKAMIHIROTO" time="6.916">
-  <properties/>
-  <testcase name="アサーションルーレットを忌避するためにしゃぶり尽くす" classname="kirimaru.biz.domain.AssertAllTests" time="6.916"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kirimaru.biz.domain.AssertJson" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:14" hostname="MIZUKAMIHIROTO" time="0.033">
-  <properties/>
-  <testcase name="特定の項目だけ無条件でJsonで無視する" classname="kirimaru.biz.domain.AssertJson" time="0.028"/>
-  <testcase name="特定の項目だけ正規表現でJsonで無視する" classname="kirimaru.biz.domain.AssertJson" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

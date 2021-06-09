@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kirimaru.biz.service.QuestionServiceImplTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:54" hostname="MIZUKAMIHIROTO" time="0.029">
-  <properties/>
-  <testcase name="test_01()" classname="kirimaru.biz.service.QuestionServiceImplTest" time="0.029"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

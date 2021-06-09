@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kirimaru.biz.domain.AssertJson$通常比較" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:14" hostname="MIZUKAMIHIROTO" time="0.0">
-  <properties/>
-  <testcase name="普通の比較" classname="kirimaru.biz.domain.AssertJson$通常比較" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

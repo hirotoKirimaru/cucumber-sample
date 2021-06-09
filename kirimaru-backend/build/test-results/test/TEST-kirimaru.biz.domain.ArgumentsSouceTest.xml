@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="1:ArgumentsSouceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-06-09T13:43:07" hostname="MIZUKAMIHIROTO" time="0.258">
-  <properties/>
-  <testcase name="[1] saiueo=A" classname="kirimaru.biz.domain.ArgumentsSouceTest" time="0.142"/>
-  <testcase name="[2] saiueo=B" classname="kirimaru.biz.domain.ArgumentsSouceTest" time="0.003"/>
-  <testcase name="[1] player=1, row=0, column=0, result=false" classname="kirimaru.biz.domain.ArgumentsSouceTest" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
