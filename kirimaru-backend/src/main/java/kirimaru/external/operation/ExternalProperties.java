@@ -3,6 +3,8 @@ package kirimaru.external.operation;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.Assert;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.PostConstruct;
@@ -10,6 +12,7 @@ import java.util.Map;
 
 @Setter
 @ToString
+@Slf4j
 public abstract class ExternalProperties {
   private String schema;
   private String host;
@@ -49,7 +52,7 @@ public abstract class ExternalProperties {
 
   @PostConstruct
   public void validate() {
-    System.out.println("あいうえお");
-    System.out.println(this);
+//    Assert.state(schema != null, "schema is not null");
+    log.info(this.toString());
   }
 }

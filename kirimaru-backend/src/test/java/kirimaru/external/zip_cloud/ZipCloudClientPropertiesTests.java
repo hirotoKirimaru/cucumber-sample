@@ -1,6 +1,7 @@
 package kirimaru.external.zip_cloud;
 
 import kirimaru.config.FacebookProperties;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -11,6 +12,7 @@ import java.net.URI;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled("今は意味がない")
 @SpringJUnitConfig(initializers = ConfigDataApplicationContextInitializer.class)
 @EnableConfigurationProperties({ZipCloudClientProperties.class})
 class ZipCloudClientPropertiesTests {
