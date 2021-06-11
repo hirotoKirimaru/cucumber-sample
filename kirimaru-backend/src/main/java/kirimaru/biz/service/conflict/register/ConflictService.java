@@ -1,4 +1,4 @@
-package kirimaru.biz.domain.conflict.update;
+package kirimaru.biz.service.conflict.register;
 
 import kirimaru.DemoApplication;
 import org.springframework.stereotype.Service;

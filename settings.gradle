@@ -17,4 +17,5 @@ rootProject.name = 'kirimaru'
 include 'kirimaru-e2e'
 include 'kirimaru-repository'
 include 'kirimaru-backend'
+include 'kirimaru-core'
 

@@ -1,0 +1,75 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'io.freefair.lombok' version '5.3.3.3'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-aop' // aspect使いたい
+
+    // Database
+    implementation 'org.flywaydb:flyway-core'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    // actuator
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // feature flag for java
+//    compile 'org.ff4j:ff4j-core:1.8.1'
+//    compile 'org.ff4j:ff4j-web:1.3.0'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    // xmlunitで特定の項目を無視したければ、このライブラリを使う。
+    testImplementation 'org.xmlunit:xmlunit-core:2.7.0'
+    testImplementation 'org.xmlunit:xmlunit-placeholders:2.7.0'
+
+    testImplementation 'com.codeborne:selenide:5.2.3'
+    testImplementation 'io.cucumber:cucumber-java:4.3.1'
+    testImplementation 'io.cucumber:cucumber-junit:4.3.1'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        exclude group: 'junit', module: 'junit'
+    }
+
+    // FTPサーバ
+    implementation 'commons-net:commons-net:3.7.2'
+    testImplementation 'org.mockftpserver:MockFtpServer:2.7.1'
+
+    // rest-assured
+//    testImplementation 'io.rest-assured:rest-assured:4.3.3'
+//    testImplementation 'io.rest-assured:json-path:4.3.3'
+    testImplementation 'io.rest-assured:xml-path:4.3.3'
+    testImplementation 'io.rest-assured:spring-mock-mvc:4.3.3'
+
+    // Wiremock Server
+    testImplementation "com.github.tomakehurst:wiremock-jre8:2.27.2"
+    testImplementation "ru.lanwen.wiremock:wiremock-junit5:1.3.1"
+
+    // WebClient
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // CSVMapper
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
+
+    // spring-cloud-starter-config
+//    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+}
+
+test {
+    useJUnitPlatform()
+}
