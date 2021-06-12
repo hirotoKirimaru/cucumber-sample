@@ -1,7 +1,6 @@
 package kirimaru.biz.domain.constant;
 
 import org.slf4j.Logger;
-import org.slf4j.event.Level;
 
 public enum LogLevel {
 

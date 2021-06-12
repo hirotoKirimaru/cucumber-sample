@@ -19,7 +19,13 @@ compileJava{
 repositories {
     mavenCentral()
 }
+bootJar {
+    enabled = false
+}
 
+jar {
+    enabled = true
+}
 dependencies {
     implementation project(':kirimaru-core')
 //    implementation projects.kirimaruCore
