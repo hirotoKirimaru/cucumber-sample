@@ -5,20 +5,10 @@ plugins {
     id 'io.freefair.lombok' version '5.3.3.3'
 }
 
-group 'kirimaru'
-version '0.0.1-SNAPSHOT'
-
-test {
-    useJUnitPlatform()
-}
-
-compileJava{
-
-}
-
 repositories {
     mavenCentral()
 }
+
 bootJar {
     enabled = false
 }
@@ -26,11 +16,8 @@ bootJar {
 jar {
     enabled = true
 }
+
 dependencies {
-    implementation project(':kirimaru-core')
-//    implementation projects.kirimaruCore
-//    testImplementation project(':kirimaru-core')
-//    testCompileOnly project(':kirimaru-core')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-aop' // aspect使いたい
 
