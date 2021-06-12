@@ -1,6 +1,5 @@
 package kirimaru.exception;
 
-import kirimaru.biz.domain.constant.ErrorCode;
 import kirimaru.biz.domain.constant.ErrorMessageCode;
 import lombok.AllArgsConstructor;
 
