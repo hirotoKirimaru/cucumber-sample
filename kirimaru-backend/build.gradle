@@ -138,8 +138,13 @@ sonarqube {
         property "sonar.projectKey", "hirotoKirimaru_cucumber-sample"
         property "sonar.organization", "hirotokirimaru-github"
         property "sonar.login", "7a3d5a80c3619dce9eef1efa9d4e9b9fbf0b9f83"
-        property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+//        print "${project.buildDir}"
+//        property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+        property "sonar.jacoco.reportPath", "kirimaru-backend/build/jacoco/test.exec"
     }
+//    doLast {
+//        print "${project.buildDir}"
+//    }
 }
 
 /**
