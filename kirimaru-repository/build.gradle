@@ -22,8 +22,9 @@ repositories {
 
 dependencies {
     implementation project(':kirimaru-core')
-    testImplementation project(':kirimaru-core')
-    testCompileOnly project(':kirimaru-core')
+//    implementation projects.kirimaruCore
+//    testImplementation project(':kirimaru-core')
+//    testCompileOnly project(':kirimaru-core')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-aop' // aspect使いたい
 

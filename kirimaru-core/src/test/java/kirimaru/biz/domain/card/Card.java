@@ -1,4 +1,4 @@
-package kirimaru.biz.domain.ecard.card;
+package kirimaru.biz.domain.card;
 
 import lombok.AllArgsConstructor;
 
