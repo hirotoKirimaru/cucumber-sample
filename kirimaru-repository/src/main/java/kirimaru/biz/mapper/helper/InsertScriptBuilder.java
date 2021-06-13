@@ -49,6 +49,11 @@ public class InsertScriptBuilder {
     sj.add("'kirimaru'");
 
 
+//    sj.add("'" + StaticBeanAccessor.getNowString() + "'");
+//    sj.add("'" + StaticBeanAccessor.getUser() + "'");
+//    sj.add("'" + StaticBeanAccessor.getNowString() + "'");
+//    sj.add("'" + StaticBeanAccessor.getUser() + "'");
+
     sb.append(sj);
     sb.append("</script>");
 
