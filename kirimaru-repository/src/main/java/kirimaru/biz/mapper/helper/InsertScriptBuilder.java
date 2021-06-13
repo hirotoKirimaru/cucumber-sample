@@ -43,16 +43,16 @@ public class InsertScriptBuilder {
         sj.add("#{" + field1.attributeName + "}");
       }
     }
-    sj.add("'" + LocalDateTime.of(2021, 10, 1, 2, 3).toString() + "'");
-    sj.add("'kirimaru'");
-    sj.add("'" + LocalDateTime.of(2021, 10, 1, 2, 3).toString() + "'");
-    sj.add("'kirimaru'");
+//    sj.add("'" + LocalDateTime.of(2021, 10, 1, 2, 3).toString() + "'");
+//    sj.add("'kirimaru'");
+//    sj.add("'" + LocalDateTime.of(2021, 10, 1, 2, 3).toString() + "'");
+//    sj.add("'kirimaru'");
 
 
-//    sj.add("'" + StaticBeanAccessor.getNowString() + "'");
-//    sj.add("'" + StaticBeanAccessor.getUser() + "'");
-//    sj.add("'" + StaticBeanAccessor.getNowString() + "'");
-//    sj.add("'" + StaticBeanAccessor.getUser() + "'");
+    sj.add("'" + StaticBeanAccessor.getNowString() + "'");
+    sj.add("'" + StaticBeanAccessor.getUser() + "'");
+    sj.add("'" + StaticBeanAccessor.getNowString() + "'");
+    sj.add("'" + StaticBeanAccessor.getUser() + "'");
 
     sb.append(sj);
     sb.append("</script>");

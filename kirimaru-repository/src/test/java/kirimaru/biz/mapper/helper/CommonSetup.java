@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,9 @@ public class CommonSetup {
   DataSource dataSource;
 
   SimpleJdbcInsert simpleJdbcInsert;
+
+  public static LocalDateTime now = LocalDateTime.of(2021, 10, 1, 2, 3);
+
 
   protected void insertBooks(Book... records) {
     this.simpleJdbcInsert =

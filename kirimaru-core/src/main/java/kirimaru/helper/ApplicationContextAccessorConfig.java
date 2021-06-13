@@ -12,16 +12,17 @@ import org.springframework.core.env.Environment;
 @Configuration
 public class ApplicationContextAccessorConfig {
   @Bean
-  public static BeanFactoryPostProcessor beanAccessprInitializer() {
-    return new ApplicationContextAccssorInitializer();
+  public static BeanFactoryPostProcessor beanAccessorInitializer() {
+    return new ApplicationContextAccessorInitializer();
   }
 
-  private static class ApplicationContextAccssorInitializer implements BeanFactoryPostProcessor, EnvironmentAware {
+  private static class ApplicationContextAccessorInitializer
+      implements BeanFactoryPostProcessor, EnvironmentAware {
     @Setter
     private Environment environment;
 
     @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
       ApplicationContextAccessor.initialize(beanFactory, environment);
     }
 

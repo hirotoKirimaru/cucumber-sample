@@ -19,6 +19,6 @@ public class StaticBeanAccessor {
   }
 
   public static String getNowString() {
-    return getNow().format(DateTimeFormatter.ISO_LOCAL_DATE);
+    return getNow().toString();
   }
 }

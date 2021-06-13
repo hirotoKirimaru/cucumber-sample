@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static kirimaru.helper.ApplicationContextAccessor.getBean;
+import static org.mockito.Mockito.when;
 
 @TestConfiguration
 @Import(ApplicationContextAccessorConfig.class)
@@ -19,6 +20,7 @@ public class MapperUnitTestConfig {
   @Bean
   SystemDateTimeResolver systemDateTimeResolver(){
     SystemDateTimeResolver resolver = Mockito.mock(SystemDateTimeResolver.class);
+    when(resolver.now()).thenReturn(CommonSetup.now);
     return resolver;
   }
 
