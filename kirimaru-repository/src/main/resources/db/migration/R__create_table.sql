@@ -1,4 +1,4 @@
-create TABLE BOOK
+CREATE TABLE BOOK
 (
     isbn         VARCHAR(13) PRIMARY KEY,
     money        INT,
