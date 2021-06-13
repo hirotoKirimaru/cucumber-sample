@@ -3,11 +3,12 @@ package kirimaru.biz.domain.book;
 import lombok.Builder;
 import lombok.Value;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Value
 @Builder(toBuilder = true)
-public class Book {
+public class Book implements Serializable {
   private final Isbn id;
   private final int money;
   @Builder.Default
