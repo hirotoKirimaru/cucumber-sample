@@ -21,9 +21,9 @@ public class InsertScriptBuilder {
 
     sb.append("<script>");
 
-    sb.append("INSERT INTO ").append(table.getTable()).append("(");
+    sb.append("INSERT INTO ").append(table.getTable());
 
-    var sj = new StringJoiner(",");
+    var sj = new StringJoiner(",", "(", ")");
     for (Field field1 : field) {
       if (field1.attribute != null) {
         sj.add(field1.columnName);
@@ -35,7 +35,7 @@ public class InsertScriptBuilder {
     sj.add("update_date");
     sj.add("update_user");
 
-    sb.append(sj).append(") VALUES ");
+    sb.append(sj).append(" VALUES ");
 
     sj = new StringJoiner(",", "(", ")");
     for (Field field1 : field) {
