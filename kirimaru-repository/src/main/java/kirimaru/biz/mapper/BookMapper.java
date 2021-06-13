@@ -1,6 +1,8 @@
 package kirimaru.biz.mapper;
 
+import kirimaru.biz.domain.constant.CodeConstant;
 import kirimaru.biz.mapper.dto.BookDto;
+import kirimaru.biz.mapper.helper.InsertScriptBuilder;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,15 +24,17 @@ public interface BookMapper {
   int insert(BookDto book);
 
   public static class ScriptBuilder {
-    public String insert() {
-      return new StringBuilder()
-          .append(
-              """
-                  INSERT INTO BOOK 
-                  (isbn, money, author, generate_date, generate_user, update_date, update_user) 
-                  VALUES (#{isbn}, #{money}, #{author}, #{generateDate}, #{generateUser}, #{updateDate}, #{updateUser})
-                  """
-          ).toString();
+    public String insert(BookDto record) {
+      return new InsertScriptBuilder()
+          .table(CodeConstant.DbTable.BOOK)
+          .field("isbn", "isbn", record.getIsbn())
+          .field("money", "money", record.getMoney())
+          .field("author", "author", record.getAuthor())
+          .field("generate_date", "generateDate", record.getGenerateDate())
+          .field("generate_user", "generateUser", record.getGenerateUser())
+          .field("update_date", "updateDate", record.getUpdateDate())
+          .field("update_user", "updateUser", record.getUpdateUser())
+          .build();
     }
   }
 }

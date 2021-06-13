@@ -2,7 +2,7 @@ package kirimaru.biz.domain;
 
 import lombok.Data;
 
-import static kirimaru.biz.domain.CodeConstant.Othello.*;
+import static kirimaru.biz.domain.constant.CodeConstant.Othello.*;
 
 @Data
 public class Board {

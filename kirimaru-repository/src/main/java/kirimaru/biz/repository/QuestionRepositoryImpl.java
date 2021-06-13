@@ -1,6 +1,6 @@
 package kirimaru.biz.repository;
 
-import kirimaru.biz.domain.CodeConstant;
+import kirimaru.biz.domain.constant.CodeConstant;
 import kirimaru.biz.domain.Questions;
 import kirimaru.biz.mapper.QuestionMapper;
 import lombok.RequiredArgsConstructor;

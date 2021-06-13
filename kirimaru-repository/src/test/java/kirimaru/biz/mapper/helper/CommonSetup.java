@@ -1,9 +1,8 @@
 package kirimaru.biz.mapper.helper;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import kirimaru.biz.domain.constant.CodeConstant;
 import kirimaru.biz.domain.book.Book;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,18 +24,10 @@ public class CommonSetup {
 
   SimpleJdbcInsert simpleJdbcInsert;
 
-  @AllArgsConstructor
-  @Getter
-  public enum DbName {
-    BOOK("book");
-
-    String table;
-  }
-
   protected void insertBooks(Book... records) {
     this.simpleJdbcInsert =
         new SimpleJdbcInsert(dataSource)
-            .withTableName(DbName.BOOK.getTable())
+            .withTableName(CodeConstant.DbTable.BOOK.getTable())
     ;
     for (var record : records) {
       this.simpleJdbcInsert.execute(toMap(record));

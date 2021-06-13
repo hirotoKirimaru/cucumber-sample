@@ -1,5 +1,6 @@
 package kirimaru.biz.domain;
 
+import kirimaru.biz.domain.constant.CodeConstant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
