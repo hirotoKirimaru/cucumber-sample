@@ -25,6 +25,8 @@ jobs:
       with:
         name: test
         path: build/reports/**/*
+    - name: testReport
+      run: ./gradlew jacocoTestReport
     - name: sonarcloud
       run: ./gradlew sonarqube
       env:
