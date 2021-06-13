@@ -7,3 +7,6 @@ spring:
   flyway:
 #    schemas: test
     locations: classpath:db/migration,db/dev
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

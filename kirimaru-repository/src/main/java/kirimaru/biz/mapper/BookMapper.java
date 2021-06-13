@@ -25,7 +25,11 @@ public interface BookMapper {
     public String insert() {
       return new StringBuilder()
           .append(
-              "INSERT INTO BOOK VALUES(#{isbn}, #{money}, #{author}, #{generateDate}, #{generateUser}, #{updateDate}, #{updateUser})"
+              """
+                  INSERT INTO BOOK 
+                  (isbn, money, author, generate_date, generate_user, update_date, update_user) 
+                  VALUES (#{isbn}, #{money}, #{author}, #{generateDate}, #{generateUser}, #{updateDate}, #{updateUser})
+                  """
           ).toString();
     }
   }
