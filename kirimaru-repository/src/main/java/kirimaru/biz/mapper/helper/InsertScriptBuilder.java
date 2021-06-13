@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -28,16 +29,27 @@ public class InsertScriptBuilder {
         sj.add(field1.columnName);
       }
     }
-    sb.append(sj).append(") VALUES (");
 
-    sj = new StringJoiner(",");
+    sj.add("generate_date");
+    sj.add("generate_user");
+    sj.add("update_date");
+    sj.add("update_user");
+
+    sb.append(sj).append(") VALUES ");
+
+    sj = new StringJoiner(",", "(", ")");
     for (Field field1 : field) {
       if (field1.attribute != null) {
         sj.add("#{" + field1.attributeName + "}");
       }
     }
+    sj.add("'" + LocalDateTime.of(2021, 10, 1, 2, 3).toString() + "'");
+    sj.add("'kirimaru'");
+    sj.add("'" + LocalDateTime.of(2021, 10, 1, 2, 3).toString() + "'");
+    sj.add("'kirimaru'");
+
+
     sb.append(sj);
-    sb.append(")");
     sb.append("</script>");
 
     return sb.toString();

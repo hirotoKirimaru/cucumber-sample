@@ -30,10 +30,10 @@ public interface BookMapper {
           .field("isbn", "isbn", record.getIsbn())
           .field("money", "money", record.getMoney())
           .field("author", "author", record.getAuthor())
-          .field("generate_date", "generateDate", record.getGenerateDate())
-          .field("generate_user", "generateUser", record.getGenerateUser())
-          .field("update_date", "updateDate", record.getUpdateDate())
-          .field("update_user", "updateUser", record.getUpdateUser())
+//          .field("generate_date", "generateDate", record.getGenerateDate())
+//          .field("generate_user", "generateUser", record.getGenerateUser())
+//          .field("update_date", "updateDate", record.getUpdateDate())
+//          .field("update_user", "updateUser", record.getUpdateUser())
           .build();
     }
   }
