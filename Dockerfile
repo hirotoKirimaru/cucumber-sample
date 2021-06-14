@@ -6,4 +6,4 @@ ENV TZ=Asia/Tokyo
 ENV APP_DIR=/usr/local/app
 
 COPY ${JAR_FILE} ${APP_DIR}
-ENTRYPOINT ["java","-jar","/app.jar"]
+CMD ["java","-jar","/app.jar"]
