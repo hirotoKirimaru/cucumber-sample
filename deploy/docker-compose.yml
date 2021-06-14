@@ -7,7 +7,7 @@ services:
       SPRING_PROFILES_ACTIVE: dummy
     restart: always
     depends_on:
-      - "db"
+      - "database"
     ports:
       - 80:80
     networks: [kirimaru-network]
