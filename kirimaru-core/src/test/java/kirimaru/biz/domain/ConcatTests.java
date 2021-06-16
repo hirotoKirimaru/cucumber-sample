@@ -3,6 +3,7 @@ package kirimaru.biz.domain;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -63,6 +64,15 @@ class ConcatTests {
       assertThat(
           target.addBracketAndDoubleQuote(param)
       ).isEqualTo("{\"りんご\",\"ゴリラ\",\"ラッパ\"}");
+    }
+
+    @Test
+    void test_05() {
+      List list = new ArrayList();
+      list.add(null);
+      assertThat(
+          target.tab(list)
+      ).isEqualTo("null");
     }
   }
 }
