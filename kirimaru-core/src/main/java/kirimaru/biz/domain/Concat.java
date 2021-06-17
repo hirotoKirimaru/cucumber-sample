@@ -1,11 +1,6 @@
 package kirimaru.biz.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-import java.io.Serializable;
 import java.text.MessageFormat;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.StringJoiner;
 
