@@ -1,5 +1,6 @@
 package kirimaru.biz.domain;
 
+import lombok.AllArgsConstructor;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -47,5 +48,24 @@ class EqualsTest {
     assertThat(
         Objects.equals(param1, param2)
     ).isEqualTo(false);
+  }
+
+  @AllArgsConstructor
+  static class Nested {
+    public Boolean bool;
+  }
+
+  @Test
+  void test_05() {
+    boolean param1 = true;
+    Nested param2 = null;
+    try {
+      Objects.equals(param1, param2.bool);
+      Assert.fail();
+    } catch (NullPointerException e) {
+    } catch (Exception e) {
+      Assert.fail();
+    }
+
   }
 }
