@@ -17,6 +17,10 @@ public class Concat {
     return sj.toString();
   }
 
+  public String joiner2(List<String> words) {
+    return String.join(",", words);
+  }
+
   public String builder(List<String> words) {
     var sb = new StringBuilder();
     for (String word : words) {
