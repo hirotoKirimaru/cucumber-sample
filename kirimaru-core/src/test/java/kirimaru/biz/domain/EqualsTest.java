@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +21,6 @@ class EqualsTest {
     } catch (Exception e) {
       Assert.fail();
     }
-
   }
 
   @Test
@@ -66,6 +66,12 @@ class EqualsTest {
     } catch (Exception e) {
       Assert.fail();
     }
+  }
 
+  @Test
+  void test_06() {
+    assertThat(
+        BigDecimal.ONE.equals(null)
+    ).isEqualTo(false);
   }
 }
