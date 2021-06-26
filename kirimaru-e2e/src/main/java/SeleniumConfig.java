@@ -1,12 +1,6 @@
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 public class SeleniumConfig {
-//  private static final String ROOT_PATH = "src/main/resources/";
-//  private static final Path INIT_FILE_PATH = Path.of(ROOT_PATH, "selenium.properties");
   private static final Properties properties;
 
   static {
