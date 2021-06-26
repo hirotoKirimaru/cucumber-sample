@@ -5,17 +5,18 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 public class SeleniumConfig {
-  private static final String ROOT_PATH = "src/main/resources/";
-  private static final Path INIT_FILE_PATH = Path.of(ROOT_PATH, "selenium.properties");
+//  private static final String ROOT_PATH = "src/main/resources/";
+//  private static final Path INIT_FILE_PATH = Path.of(ROOT_PATH, "selenium.properties");
   private static final Properties properties;
 
   static {
     properties = new Properties();
     try {
-      properties.load(Files.newBufferedReader(INIT_FILE_PATH, StandardCharsets.UTF_8));
+      properties.load(SeleniumConfig.class.getResourceAsStream("selenium.properties"));
+//      properties.load(Files.newBufferedReader(Path.of("src/main/resources/selenium.properties"), StandardCharsets.UTF_8));
     } catch (Exception e) {
       throw new RuntimeException(
-          String.format("ファイルの読み込みに失敗しました。ファイル名:%s", INIT_FILE_PATH),
+          String.format("ファイルの読み込みに失敗しました。ファイル名:%s", "selenium.properties"),
           e
       );
     }
