@@ -1,17 +1,18 @@
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
 public class AbstractConfig {
   private static final String ROOT_PATH = "src/main/resources/";
-  private static final String INIT_FILE_PATH = ROOT_PATH + "selenium.properties";
+  private static final Path INIT_FILE_PATH = Path.of(ROOT_PATH, "selenium.properties");
   private static final Properties properties;
 
   static {
     properties = new Properties();
     try {
-      properties.load(Files.newBufferedReader(Paths.get(INIT_FILE_PATH), StandardCharsets.UTF_8));
+      properties.load(Files.newBufferedReader(INIT_FILE_PATH, StandardCharsets.UTF_8));
     } catch (Exception e) {
       throw new RuntimeException(
           String.format("ファイルの読み込みに失敗しました。ファイル名:%s", INIT_FILE_PATH),
