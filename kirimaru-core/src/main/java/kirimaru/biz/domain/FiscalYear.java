@@ -28,4 +28,8 @@ public class FiscalYear {
   public Year toYear() {
     return Year.parse(value);
   }
+
+  public LocalDateTime toLocalDateTime() {
+    return LocalDateTime.of(Integer.parseInt(value), 1, 1, 0, 0);
+  }
 }
