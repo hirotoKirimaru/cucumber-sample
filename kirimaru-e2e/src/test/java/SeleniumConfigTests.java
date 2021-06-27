@@ -11,6 +11,16 @@ class SeleniumConfigTests {
   }
 
   @Test
+  void test_01_01() {
+    assertThat(SeleniumConfig.getProperty("noKey")).isEqualTo("");
+  }
+
+  @Test
+  void test_01_02() {
+    assertThat(SeleniumConfig.getProperty("noKey", "dummy")).isEqualTo("dummy");
+  }
+
+  @Test
   void test_02() {
     assertThat(SeleniumConfig.getBaseUrl()).isEqualTo("http://localhost:8080");
   }
