@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +46,7 @@ public class CommonSetup {
             .isbn(rs.getString("isbn"))
             .money(rs.getInt("money"))
             .author(rs.getString("author"))
+            .number(rs.getObject("number", BigInteger.class))
             .generateDate(rs.getObject("generate_date", LocalDateTime.class))
             .generateUser(rs.getString("generate_user"))
             .updateDate(rs.getObject("update_date", LocalDateTime.class))

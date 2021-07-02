@@ -1,12 +1,12 @@
 package kirimaru.biz.mapper;
 
-import kirimaru.biz.domain.book.Isbn;
 import kirimaru.biz.mapper.dto.Book2Dto;
 import kirimaru.biz.mapper.dto.BookDto;
 import kirimaru.biz.mapper.helper.CommonSetup;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,6 +23,7 @@ public class BookMapperTests extends CommonSetup {
         .isbn("9784798126708")
         .money(1000)
         .author("kirimaru")
+        .number(BigInteger.TEN)
         .generateDate(now)
         .generateUser("kirimaru")
         .updateDate(now)
@@ -44,6 +45,7 @@ public class BookMapperTests extends CommonSetup {
         .isbn("9784798126708")
         .money(1000)
         .author("kirimaru")
+        .number(BigInteger.TEN)
         .generateDate(now)
         .generateUser("kirimaru")
         .updateDate(now)
