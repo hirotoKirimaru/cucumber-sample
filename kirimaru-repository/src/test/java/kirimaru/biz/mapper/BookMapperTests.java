@@ -1,5 +1,7 @@
 package kirimaru.biz.mapper;
 
+import kirimaru.biz.domain.book.Isbn;
+import kirimaru.biz.mapper.dto.Book2Dto;
 import kirimaru.biz.mapper.dto.BookDto;
 import kirimaru.biz.mapper.helper.CommonSetup;
 import org.junit.jupiter.api.Test;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class BookMapperTests extends CommonSetup {
   @Autowired
@@ -54,5 +57,43 @@ public class BookMapperTests extends CommonSetup {
     assertThat(actual).isEqualTo(List.of(book1));
   }
 
+
+  @Test
+  void test_03() {
+
+    BookDto book1 = BookDto.builder()
+        .isbn("9784798126708")
+        .money(1000)
+        .author("kirimaru")
+        .generateDate(now)
+        .generateUser("kirimaru")
+        .updateDate(now)
+        .updateUser("kirimaru")
+        .build();
+//    insertBooks(book1);
+    mapper.insert(book1);
+
+    // WHEN
+    try {
+      List<Book2Dto> actual = findBook2List();
+      fail();
+    } catch (Exception e) {
+
+      e.printStackTrace();
+    }
+
+    // THEN
+//    Book2Dto book2 = Book2Dto.builder()
+//        .isbn(new Isbn("9784798126708"))
+//        .money(1000)
+//        .author("kirimaru")
+//        .generateDate(now)
+//        .generateUser("kirimaru")
+//        .updateDate(now)
+//        .updateUser("kirimaru")
+//        .build();
+//
+//    assertThat(actual).isEqualTo(List.of(book2));
+  }
 
 }

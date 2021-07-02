@@ -1,8 +1,10 @@
 package kirimaru.biz.mapper.helper;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import kirimaru.biz.domain.book.Isbn;
 import kirimaru.biz.domain.constant.CodeConstant;
 import kirimaru.biz.domain.book.Book;
+import kirimaru.biz.mapper.dto.Book2Dto;
 import kirimaru.biz.mapper.dto.BookDto;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +35,27 @@ public class CommonSetup {
     return jdbcTemplate.query("SELECT * FROM BOOK", getBookRowMapper());
   }
 
+  protected List<Book2Dto> findBook2List() {
+    return jdbcTemplate.query("SELECT * FROM BOOK", getBook2RowMapper());
+  }
+
   private RowMapper<BookDto> getBookRowMapper() {
     return (rs, i) ->
         BookDto.builder()
             .isbn(rs.getString("isbn"))
+            .money(rs.getInt("money"))
+            .author(rs.getString("author"))
+            .generateDate(rs.getObject("generate_date", LocalDateTime.class))
+            .generateUser(rs.getString("generate_user"))
+            .updateDate(rs.getObject("update_date", LocalDateTime.class))
+            .updateUser(rs.getString("update_user"))
+            .build();
+  }
+
+  private RowMapper<Book2Dto> getBook2RowMapper() {
+    return (rs, i) ->
+        Book2Dto.builder()
+            .isbn(rs.getObject("isbn", Isbn.class))
             .money(rs.getInt("money"))
             .author(rs.getString("author"))
             .generateDate(rs.getObject("generate_date", LocalDateTime.class))
