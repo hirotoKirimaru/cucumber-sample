@@ -33,15 +33,7 @@ public class CommonSetup {
   public static LocalDateTime now = LocalDateTime.of(2021, 10, 1, 2, 3);
 
   protected List<BookDto> findBookList() {
-    return jdbcTemplate.query("SELECT * FROM BOOK", getBookRowMapper());
-  }
-
-  protected List<Book2Dto> findBook2List() {
-    return jdbcTemplate.query("SELECT * FROM BOOK", getBook2RowMapper());
-  }
-
-  private RowMapper<BookDto> getBookRowMapper() {
-    return (rs, i) ->
+    return jdbcTemplate.query("SELECT * FROM BOOK", (rs, i) ->
         BookDto.builder()
             .isbn(rs.getString("isbn"))
             .money(rs.getInt("money"))
@@ -51,7 +43,11 @@ public class CommonSetup {
             .generateUser(rs.getString("generate_user"))
             .updateDate(rs.getObject("update_date", LocalDateTime.class))
             .updateUser(rs.getString("update_user"))
-            .build();
+            .build());
+  }
+
+  protected List<Book2Dto> findBook2List() {
+    return jdbcTemplate.query("SELECT * FROM BOOK", getBook2RowMapper());
   }
 
   private RowMapper<Book2Dto> getBook2RowMapper() {
