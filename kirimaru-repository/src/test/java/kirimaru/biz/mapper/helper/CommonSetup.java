@@ -3,9 +3,11 @@ package kirimaru.biz.mapper.helper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import kirimaru.biz.domain.constant.CodeConstant;
 import kirimaru.biz.domain.book.Book;
+import kirimaru.biz.mapper.dto.BookDto;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
@@ -26,6 +28,23 @@ public class CommonSetup {
   SimpleJdbcInsert simpleJdbcInsert;
 
   public static LocalDateTime now = LocalDateTime.of(2021, 10, 1, 2, 3);
+
+  protected List<BookDto> findBookList() {
+    return jdbcTemplate.query("SELECT * FROM BOOK", getBookRowMapper());
+  }
+
+  private RowMapper<BookDto> getBookRowMapper() {
+    return (rs, i) ->
+        BookDto.builder()
+            .isbn(rs.getString("isbn"))
+            .money(rs.getInt("money"))
+            .author(rs.getString("author"))
+            .generateDate(rs.getObject("generate_date", LocalDateTime.class))
+            .generateUser(rs.getString("generate_user"))
+            .updateDate(rs.getObject("update_date", LocalDateTime.class))
+            .updateUser(rs.getString("update_user"))
+            .build();
+  }
 
 
   protected void insertBooks(Book... records) {

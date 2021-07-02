@@ -33,4 +33,26 @@ public class BookMapperTests extends CommonSetup {
     assertThat(actual).isEqualTo(List.of(book1));
   }
 
+
+  @Test
+  void test_02() {
+
+    BookDto book1 = BookDto.builder()
+        .isbn("9784798126708")
+        .money(1000)
+        .author("kirimaru")
+        .generateDate(now)
+        .generateUser("kirimaru")
+        .updateDate(now)
+        .updateUser("kirimaru")
+        .build();
+//    insertBooks(book1);
+    mapper.insert(book1);
+
+
+    List<BookDto> actual = findBookList();
+    assertThat(actual).isEqualTo(List.of(book1));
+  }
+
+
 }
