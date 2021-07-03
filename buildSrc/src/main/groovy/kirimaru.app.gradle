@@ -1,7 +1,12 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.5.2'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
+ext {
+    springBootVersion = '2.5.2'
+    springManagementVersion = '1.0.11.RELEASE'
 }
 
 group = 'kirimaru'
@@ -19,10 +24,7 @@ configurations {
 }
 
 repositories {
-//    jcenter()
     mavenCentral()
-//    maven { url 'https://repo.spring.io/snapshot' }
-//    maven { url 'https://repo.spring.io/milestone' }
 }
 
 dependencies {
