@@ -1,5 +1,6 @@
 package kirimaru.biz.mapper;
 
+import kirimaru.biz.domain.book.Isbn;
 import kirimaru.biz.mapper.dto.Book2Dto;
 import kirimaru.biz.mapper.dto.BookDto;
 import kirimaru.biz.mapper.helper.CommonSetup;
@@ -76,26 +77,20 @@ public class BookMapperTests extends CommonSetup {
     mapper.insert(book1);
 
     // WHEN
-    try {
-      List<Book2Dto> actual = findBook2List();
-      fail();
-    } catch (Exception e) {
-
-      e.printStackTrace();
-    }
+    List<Book2Dto> actual = findBook2List();
 
     // THEN
-//    Book2Dto book2 = Book2Dto.builder()
-//        .isbn(new Isbn("9784798126708"))
-//        .money(1000)
-//        .author("kirimaru")
-//        .generateDate(now)
-//        .generateUser("kirimaru")
-//        .updateDate(now)
-//        .updateUser("kirimaru")
-//        .build();
-//
-//    assertThat(actual).isEqualTo(List.of(book2));
+    Book2Dto book2 = Book2Dto.builder()
+        .isbn(new Isbn("9784798126708"))
+        .money(1000)
+        .author("kirimaru")
+        .generateDate(now)
+        .generateUser("kirimaru")
+        .updateDate(now)
+        .updateUser("kirimaru")
+        .build();
+
+    assertThat(actual).isEqualTo(List.of(book2));
   }
 
 }

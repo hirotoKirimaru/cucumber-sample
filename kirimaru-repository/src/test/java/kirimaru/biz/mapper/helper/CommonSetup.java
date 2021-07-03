@@ -53,7 +53,7 @@ public class CommonSetup {
   private RowMapper<Book2Dto> getBook2RowMapper() {
     return (rs, i) ->
         Book2Dto.builder()
-            .isbn(rs.getObject("isbn", Isbn.class))
+            .isbn(Isbn.builder().isbn(rs.getString("isbn")).build())
             .money(rs.getInt("money"))
             .author(rs.getString("author"))
             .generateDate(rs.getObject("generate_date", LocalDateTime.class))
