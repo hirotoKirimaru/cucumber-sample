@@ -1,8 +1,8 @@
 plugins {
-    id 'kirimaru.app'
-//    id 'java'
-//    id 'org.springframework.boot' version '2.5.2'
-//    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+//    id 'kirimaru.app'
+    id 'java'
+    id 'org.springframework.boot' version '2.5.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id "org.sonarqube" version "2.7"
     id "jacoco" // JDK15とコンフリクト？
 
@@ -21,7 +21,7 @@ plugins {
 //}
 
 //sourceCompatibility = '16'
-//sourceCompatibility = '15' //lombokが動かない
+sourceCompatibility = '15' //lombokが動かない
 
 // actuator infoに情報を載せる
 springBoot {
