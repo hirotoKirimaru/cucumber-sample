@@ -17,8 +17,7 @@ plugins {
 //jar {
 //    enabled = true
 //}
-group = 'kirimaru'
-version = '0.0.1-SNAPSHOT'
+
 //sourceCompatibility = '16'
 //sourceCompatibility = '15' //lombokが動かない
 
