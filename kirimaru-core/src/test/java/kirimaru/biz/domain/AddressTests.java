@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -71,4 +72,15 @@ class AddressTests {
     );
   }
 
+  @Test
+  void test_03() {
+    var target = Address.builder()
+        .address1("東京都大田区12ー34ー56")
+        .build();
+
+    assertThat(target.extracted(target.getAddress1(), List.of("-", "ー")))
+        .isEqualTo("東京都大田区12-34-56");
+    assertThat(target.getAddress1())
+        .isEqualTo("東京都大田区12ー34ー56");
+  }
 }

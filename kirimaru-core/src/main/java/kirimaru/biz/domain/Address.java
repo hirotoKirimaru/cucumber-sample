@@ -3,6 +3,8 @@ package kirimaru.biz.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,20 +30,38 @@ public class Address implements Serializable {
 //    return address1.replaceAll("[" + "-" + "ー" + "]", "-");
   }
 
-//  private String extracted(String moto, List<String> transferLogicList) {
+  static class MasterCode_0001{
+    String henkanmoto;
+  }
+
+  static class MasterCode_0022{
+    String henkansaki;
+  }
+
+//  public String extracted(String address, List<MasterCode_0001> transferLogicList, MasterCode_0022 saki) {
+    public String extracted(String address, List<String> transferLogicList) {
 //    String a = null;
 //    List<String> array = new ArrayList<>();
+//    String a = this.address1;
+//    String b = null;
 //
-//
-//
-////    for (String replace : List.of("-", "ー")) {
 //      for (ATable replace : transferLogicList) {
-//        moto = moto.replaceAll(replace.get変換元(), replace.get変換先());
+//        address = address.replaceAll(replace.get変換元(), replace.get変換先());
+//      }
 //
+//    for (String replace : List.of("-", "ー")) {
+    for (String replace : transferLogicList) {
+//      for (ATable replace : transferLogicList) {
+//        if (b == null) {
+//          b = a.replaceAll(replace.get変換元(), replace.get変換先());
+//        } else {
+//          b = b.replaceAll(replace.get変換元(), replace.get変換先());
+//        }
 //
 //      address1.replaceAll(replace, "-")
 //      address2.replaceAll(replace, "-");
-//    }
-//    return moto;
-//  }
+      address = address.replaceAll(replace, "-");
+    }
+    return address;
+  }
 }
