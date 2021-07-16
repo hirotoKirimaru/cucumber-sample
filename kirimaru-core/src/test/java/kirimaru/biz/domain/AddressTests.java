@@ -2,11 +2,17 @@ package kirimaru.biz.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AddressTests {
+
 
   @DisplayName("" +
       "[Given]" +
@@ -48,6 +54,21 @@ class AddressTests {
         .isEqualTo("東京都大田区12ー34ー56");
   }
 
+  @MethodSource(value = "param")
+  @ParameterizedTest(name = "{0}を{1}に変換する")
+  void parameterized_test(String before, String after){
+     var target = Address.builder()
+        .address1(before)
+        .build();
 
+    assertThat(target.computeAddress1()).isEqualTo(after);
+  }
+
+  private static Stream<Arguments> param() {
+    return Stream.of(
+        Arguments.of("-", "-"),
+        Arguments.of("ー", "-")
+    );
+  }
 
 }
