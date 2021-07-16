@@ -1,2 +1,0 @@
-KirimaruAppPlugin.java
- KirimaruAppPlugin
