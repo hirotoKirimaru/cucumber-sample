@@ -1,5 +1,7 @@
 package kirimaru.biz.domain;
 
+import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,15 +15,33 @@ import static org.junit.jupiter.api.Assertions.*;
 class FizzBuzzTests {
   FizzBuzz target = new FizzBuzz();
 
+  private StandardOutputStream out;
+
+  @BeforeEach
+  void setUp() {
+    out = new StandardOutputStream();
+    System.setOut(out);
+  }
 
   @Test
   void execute() {
     target.execute();
+    int i = 0;
+    SoftAssertions softly = new SoftAssertions();
+    String actual = out.readLine();
+
+    while (actual != null) {
+      softly.assertThat(target.convert(++i)).isEqualTo(actual);
+      actual = out.readLine();
+    }
+    softly.assertThat(100).isEqualTo(i);
+    softly.assertAll();
+
   }
 
   @ParameterizedTest
   @MethodSource(value = "param")
-  void covert_test(int input, String output){
+  void covert_test(int input, String output) {
     assertThat(target.convert(input)).isEqualTo(output);
   }
 
