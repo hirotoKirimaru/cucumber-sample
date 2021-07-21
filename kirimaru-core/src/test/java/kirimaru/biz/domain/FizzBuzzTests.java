@@ -1,6 +1,7 @@
 package kirimaru.biz.domain;
 
 import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,6 +22,12 @@ class FizzBuzzTests {
   void setUp() {
     out = new StandardOutputStream();
     System.setOut(out);
+  }
+
+  @AfterEach
+  void tearDown() {
+    System.setIn(null);
+    System.setOut(null);
   }
 
   @Test
