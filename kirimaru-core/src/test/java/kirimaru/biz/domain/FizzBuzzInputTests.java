@@ -5,6 +5,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+
 class FizzBuzzInputTests {
   private StandardInputStream in = new StandardInputStream();
   private StandardOutputStream out = new StandardOutputStream();
@@ -18,9 +21,9 @@ class FizzBuzzInputTests {
   }
 
   @AfterEach
-  void tearDown() {
-    System.setIn(null);
-    System.setOut(null);
+  void tearDown() throws Exception {
+    System.setIn(new BufferedInputStream(new FileInputStream(FileDescriptor.in)));
+    System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(FileDescriptor.out), 128), true, StandardCharsets.UTF_8));
   }
 
   @Test
