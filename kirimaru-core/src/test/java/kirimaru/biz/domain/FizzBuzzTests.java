@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class FizzBuzzTests {
   FizzBuzz target = new FizzBuzz();
@@ -26,7 +25,6 @@ class FizzBuzzTests {
 
   @AfterEach
   void tearDown() {
-    System.setIn(null);
     System.setOut(null);
   }
 
