@@ -20,17 +20,33 @@ class AssumeTests {
 
     @Test
     void test_01() {
-      assumeTrue(driverClassName.contains("oracle"));
-
+      // 本当はこれだけでいいはず。
+//      assumeTrue(driverClassName.contains("oracle"));
+      try {
+        assumeTrue(driverClassName.contains("oracle"));
+      } catch (Exception e) {
+        System.out.println(e.getLocalizedMessage());
+        throw e;
+      }
       fail();
     }
 
     @Test
     void test_02() {
-      assumeTrue(
-          driverClassName.contains("oracle"),
-          () ->"このテストはoracle環境では動きません。"
-      );
+      // 本当はこれだけでいいはず
+//      assumeTrue(
+//          driverClassName.contains("oracle"),
+//          () -> "このテストはoracle環境では動きません。"
+//      );
+      try {
+        assumeTrue(
+            driverClassName.contains("oracle"),
+            () -> "このテストはoracle環境では動きません。"
+        );
+      } catch (Exception e) {
+        System.out.println(e.getLocalizedMessage());
+        throw e;
+      }
 
       fail();
     }
@@ -55,6 +71,7 @@ class AssumeTests {
 
       fail();
     }
+
   }
 
 
