@@ -1,3 +1,4 @@
 app:
   config:
     appName: "Kirimaru"
+    local: "true"

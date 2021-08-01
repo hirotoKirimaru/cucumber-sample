@@ -9,4 +9,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "app.config")
 public class CoreProperties {
   private String appName;
+  private String local;
 }
