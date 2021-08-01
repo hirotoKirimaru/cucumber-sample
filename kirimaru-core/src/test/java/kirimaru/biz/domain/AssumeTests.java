@@ -9,17 +9,11 @@ import static org.junit.jupiter.api.Assumptions.assumingThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 @DisplayName("事前条件(Assume)確認テスト")
-@SpringJUnitConfig(AssumeTests.Config.class)
+@SpringJUnitConfig
 class AssumeTests {
-
-  @ComponentScan({"kirimaru.biz.domain.hogehoge"})
-  public static class Config {
-
-  }
 
   private String driverClassName = "org.postgresql.Driver";
 
