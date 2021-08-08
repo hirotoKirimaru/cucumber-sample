@@ -76,6 +76,9 @@ dependencies {
 
     // spring-cloud-starter-config
 //    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+
+    // Unleash
+    implementation 'no.finn.unleash:unleash-client-java:4.4.0'
 }
 
 test {
