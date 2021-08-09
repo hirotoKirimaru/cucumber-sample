@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class VersionConfig {
     @Value("${version}")
-    String version;
+    Version version;
 
     @PostConstruct
     public void after(){

@@ -21,7 +21,7 @@ plugins {
 //}
 
 sourceCompatibility = '16'
-version '0.0.1-SNAPSHOT'
+version '0.0.1'
 
 // actuator infoに情報を載せる
 springBoot {
@@ -34,8 +34,8 @@ bootRun {
         jvmArgs += '-Dspring.profiles.active=' + project.properties.get("profiles")
     }
 
+    // 動的にversionを渡す
     args '--version=' + version
-    println args
 }
 
 configurations {
