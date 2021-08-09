@@ -43,7 +43,7 @@ bootRun {
     }
 
     // 動的にversionを渡す
-    args '--version=' + version
+    args += '--version=' + version
 }
 
 configurations {
