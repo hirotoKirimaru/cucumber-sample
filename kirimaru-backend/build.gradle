@@ -29,11 +29,12 @@ springBoot {
 }
 
 // build時にymlファイルに追記する
-processResources {
-    doLast {
-        file("build/resources/main/application.yml").append("info.version: 1.2.3")
-    }
-}
+// TODO: なぜかエラーになる
+//processResources {
+//    doLast {
+//        file("build/resources/main/application.yml").append("info.version: 1.2.3")
+//    }
+//}
 
 bootRun {
     // -Pprofiles=prdで起動できるようにする
