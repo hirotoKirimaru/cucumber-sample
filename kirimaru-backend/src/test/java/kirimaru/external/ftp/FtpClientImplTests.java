@@ -58,7 +58,7 @@ class FtpClientImplTests {
   }
 
   @AfterEach
-  void tearDoiwn() {
+  void tearDown() {
     server.stop();
     FileUtils.deleteQuietly(FileUtils.getFile(TMP_ROOT_PATH.toFile()));
   }
