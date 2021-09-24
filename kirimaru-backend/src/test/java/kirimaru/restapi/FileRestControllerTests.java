@@ -17,6 +17,7 @@ import org.apache.commons.io.FileUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
@@ -50,23 +51,27 @@ class FileRestControllerTests {
 
   @AfterEach
   void tearDown() {
-    FileUtils.deleteQuietly(
-        path.toFile()
-    );
+    // 本当は削除したいけど、ファイルのディレクトリが適当なので今のままにしておく
+//    FileUtils.deleteQuietly(
+//        path.toFile()
+//    );
   }
 
-  @Test
-  void test_01() throws Exception {
-    String urlPath = "/downloadFile/test.pdf";
+  @Nested
+  class DonwloadFile {
+    @Test
+    void test_01() throws Exception {
+      String urlPath = "/downloadFile/test.pdf";
 
-    MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get(rootUrl + urlPath))
-        .andExpect(status().isOk())
-        .andExpect(
-            header().string(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"test.pdf\""))
-        .andReturn();
+      MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(rootUrl + urlPath))
+          .andExpect(status().isOk())
+          .andExpect(
+              header().string(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"test.pdf\""))
+          .andReturn();
 
-    byte[] body = mvcResult.getResponse().getContentAsByteArray();
-    assertThat(body).isEqualTo(Files.readAllBytes(path));
+      byte[] body = mvcResult.getResponse().getContentAsByteArray();
+      assertThat(body).isEqualTo(Files.readAllBytes(path));
+    }
   }
 
 
