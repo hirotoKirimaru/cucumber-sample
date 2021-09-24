@@ -12,6 +12,7 @@ import java.util.List;
 import kirimaru.external.ftp.FtpClientImpl;
 import kirimaru.external.ftp.FtpConfiguration;
 import org.apache.commons.io.FileUtils;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebCl
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -50,12 +52,13 @@ class FileRestControllerTests {
         Files.createFile(Paths.get(TMP_ROOT_PATH.toString(), EXPECTED_FILE_ONE))
     );
 
-
     String path = "/downloadFile/test.pdf";
 
     this.mockMvc.perform(MockMvcRequestBuilders.get(rootUrl + path))
         .andExpect(status().isOk())
-        .andExpect(header().exists(HttpHeaders.CONTENT_DISPOSITION));
+        .andExpect(
+            header().string(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"test.pdf\""))
+    ;
   }
 
 
