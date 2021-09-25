@@ -8,9 +8,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.List;
 import kirimaru.external.ftp.FtpClientImpl;
 import kirimaru.external.ftp.FtpConfiguration;
@@ -83,13 +85,23 @@ class FileRestControllerTests {
 
     @Test
     void test_01() throws Exception {
+      String encode = Base64.getEncoder().encodeToString("aiueo".getBytes(StandardCharsets.UTF_8));
+//      String json = """
+//          {
+//            "name": "test.pdf",
+//            "value": "YWl1ZW8="
+//          }
+//                    """;
+//      .formatted(encode);
+
       // language=JSON
       String json = """
           {
             "name": "test.pdf",
-            "value": "aaaa"
+            "value": "%s"
           }
-                    """;
+                    """
+          .formatted(encode);
 //      FileRestController.UploadFile uploadFile = new FileRestController.UploadFile(
 //          "test.pdf", "aaaa"
 //      );

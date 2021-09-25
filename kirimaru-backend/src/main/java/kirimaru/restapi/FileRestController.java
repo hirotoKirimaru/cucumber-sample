@@ -2,6 +2,7 @@ package kirimaru.restapi;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Base64;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,12 @@ public class FileRestController {
   @PostMapping()
   public String uploadFile(@Valid @RequestBody UploadFile uploadFile) {
     System.out.println(uploadFile);
+
+    System.out.println(
+        new String(Base64.getDecoder().decode(
+            uploadFile.getValue()
+        ))
+    );
     return "";
   }
 
@@ -60,6 +67,7 @@ public class FileRestController {
   @Data
   @AllArgsConstructor
   protected static class UploadFile {
+
     private String value;
     private String name;
   }
