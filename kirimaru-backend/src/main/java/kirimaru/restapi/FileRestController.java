@@ -1,6 +1,7 @@
 package kirimaru.restapi;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
 import javax.servlet.http.HttpServletRequest;
@@ -41,23 +42,20 @@ public class FileRestController {
 
 
   @GetMapping("/downloadFile/{fileName:.+}")
-  public ResponseEntity<Resource> downloadFile(@PathVariable String fileName,
-      HttpServletRequest request)
+  public ResponseEntity<Resource> downloadFile(@PathVariable String fileName)
       throws Exception {
-    Resource resource = new PathResource(Path.of("tmp", fileName));
-    String contentType = getContentType(request, resource);
-
+    Path path = Path.of("tmp", fileName);
+    Resource resource = new PathResource(path);
     return ResponseEntity.ok()
-        .contentType(MediaType.parseMediaType(contentType))
+        .contentType(MediaType.parseMediaType(getContentType(path)))
         .header(HttpHeaders.CONTENT_DISPOSITION,
             "attachment; filename=\"" + resource.getFilename() + "\"")
         .body(resource);
   }
 
-  private String getContentType(HttpServletRequest request, Resource resource) throws IOException {
+  private String getContentType(Path path) throws IOException {
     try {
-      return request.getServletContext()
-          .getMimeType(resource.getFile().getAbsolutePath());
+      return Files.probeContentType(path);
     } catch (IOException e) {
       log.info("Could not determine file type.");
       return MediaType.APPLICATION_OCTET_STREAM.getType();
