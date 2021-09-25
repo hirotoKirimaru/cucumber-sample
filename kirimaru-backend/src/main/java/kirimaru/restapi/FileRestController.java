@@ -47,18 +47,18 @@ public class FileRestController {
     Path path = Path.of("tmp", fileName);
     Resource resource = new PathResource(path);
     return ResponseEntity.ok()
-        .contentType(MediaType.parseMediaType(getContentType(path)))
+        .contentType(getContentType(path))
         .header(HttpHeaders.CONTENT_DISPOSITION,
             "attachment; filename=\"" + resource.getFilename() + "\"")
         .body(resource);
   }
 
-  private String getContentType(Path path) throws IOException {
+  private MediaType getContentType(Path path) throws IOException {
     try {
-      return Files.probeContentType(path);
+      return MediaType.parseMediaType(Files.probeContentType(path));
     } catch (IOException e) {
       log.info("Could not determine file type.");
-      return MediaType.APPLICATION_OCTET_STREAM.getType();
+      return MediaType.APPLICATION_OCTET_STREAM;
     }
   }
 
