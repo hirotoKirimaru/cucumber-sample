@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
+import kirimaru.api.FileController;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,8 +26,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @AutoConfigureWebClient
-@WebMvcTest(FileRestController.class)
-class FileRestControllerTests {
+@WebMvcTest(FileController.class)
+class FileControllerTests {
 
   @Autowired
   private MockMvc mockMvc;
