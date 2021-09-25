@@ -2,6 +2,7 @@ package kirimaru.restapi;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -71,6 +72,7 @@ class FileRestControllerTests {
 
       MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(rootUrl + urlPath))
           .andExpect(status().isOk())
+          .andExpect(content().contentType("application/pdf"))
           .andExpect(
               header().string(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"test.pdf\""))
           .andReturn();
