@@ -48,6 +48,9 @@ dependencies {
 //    annotationProcessor 'org.projectlombok:lombok'
 //    testCompileOnly 'org.projectlombok:lombok'
 //    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.testcontainers:junit-jupiter:1.16.0'
+    testImplementation 'org.testcontainers:postgresql:1.16.0'
 }
 
 test {
