@@ -2,3 +2,10 @@ spring:
   profiles:
     active:
       - ut
+    group:
+      local:
+        - common
+        - repository-local
+      ut:
+        - common
+        - repository-ut
