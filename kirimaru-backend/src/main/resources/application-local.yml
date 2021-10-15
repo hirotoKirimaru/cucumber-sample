@@ -15,3 +15,13 @@ spring:
   flyway:
     schemas: test
     locations: classpath:db/migration,db/dev
+  application:
+    name: "kirimaru"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "prometheus" # prometheusを有効にする
+  metrics:
+    tags:
+      application: ${spring.application.name}
