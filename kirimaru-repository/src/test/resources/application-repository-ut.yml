@@ -1,8 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:postgres://127.0.0.1:15432/database
-#    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+#    url: jdbc:postgres://127.0.0.1:15432/database
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
     username: user
     password: pass
-  sql.init.mode: always

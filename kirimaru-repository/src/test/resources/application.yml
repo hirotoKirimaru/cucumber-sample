@@ -1,11 +1,11 @@
 spring:
   profiles:
     active:
-      - local
+      - ut
     group:
       local:
-        - common
+        - repository-common
         - repository-local
       ut:
-        - common
+        - repository-common
         - repository-ut
