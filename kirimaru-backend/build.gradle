@@ -20,7 +20,7 @@ plugins {
 //    enabled = true
 //}
 
-sourceCompatibility = '16'
+sourceCompatibility = '17'
 version '0.0.1'
 
 // actuator infoに情報を載せる
