@@ -21,7 +21,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 @MybatisTest
-//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // postgresでテスト
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // postgresでテスト
 public class CommonSetup {
   @Autowired
   JdbcTemplate jdbcTemplate;
@@ -39,7 +39,7 @@ public class CommonSetup {
             .isbn(rs.getString("isbn"))
             .money(rs.getInt("money"))
             .author(rs.getString("author"))
-            .number(rs.getObject("number", BigInteger.class))
+            .number(new BigInteger(rs.getString("number")))
             .generateDate(rs.getObject("generate_date", LocalDateTime.class))
             .generateUser(rs.getString("generate_user"))
             .updateDate(rs.getObject("update_date", LocalDateTime.class))
