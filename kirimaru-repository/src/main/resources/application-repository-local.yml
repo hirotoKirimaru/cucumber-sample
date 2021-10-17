@@ -7,4 +7,6 @@ spring:
   flyway:
     schemas: test
     locations: classpath:db/migration,db/dev
-
+  test:
+    database:
+      replace: none # 実DBを使う設定にする(インメモリDBと入れ替えない)
