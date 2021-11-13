@@ -8,12 +8,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class CollectionTests {
+
+  @AllArgsConstructor
+  @Data
+  public static class Config {
+
+    private String str;
+  }
 
   @Test
   @DisplayName("""
@@ -42,7 +50,7 @@ class CollectionTests {
   @DisplayName("""
       peekを使った副作用の検証
       ※ 想定通りにいかない
-      """ )
+      """)
   @Test
   void test_02() {
     var actual =
@@ -52,6 +60,22 @@ class CollectionTests {
                 new StringBuilder("3"))
             .peek(e -> e.append("-count"))
             .map(StringBuilder::toString)
+            .collect(Collectors.toList());
+
+    assertThat(actual).isEqualTo(
+        List.of("1-count", "2-count", "3-count")
+    );
+  }
+
+  @Test
+  void test_03() {
+    var actual =
+        Stream.of(
+                new Config("1"),
+                new Config("2"),
+                new Config("3"))
+            .peek(e -> e.setStr(e.getStr() + "-count"))
+            .map(Config::getStr)
             .collect(Collectors.toList());
 
     assertThat(actual).isEqualTo(
