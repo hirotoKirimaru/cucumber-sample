@@ -90,14 +90,16 @@ class CollectionTests {
       ・合計値204を返却する
       """)
   void test_01_03() {
-    var base = Stream.of(1, 2, 3);
+    Supplier<Stream<Integer>> base = () -> Stream.of(1, 2, 3);
 
     var evenSum =
-        base.filter(e -> e % 2 == 0)
+        base.get()
+            .filter(e -> e % 2 == 0)
             .mapToInt(e -> e + 100)
             .sum();
 
-    var oddSum = base
+    var oddSum =
+        base.get()
         .filter(e -> e % 2 != 0)
         .mapToInt(e -> e + 50)
         .sum();
