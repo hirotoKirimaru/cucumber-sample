@@ -5,6 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.BaseStream;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.AllArgsConstructor;
@@ -32,7 +37,7 @@ class CollectionTests {
       ・奇数は+50する
       ・51, 102, 53の配列に変換する
       """)
-  void test_01() {
+  void test_01_01() {
     var base = Stream.of(1, 2, 3);
 
     var actual =
@@ -45,6 +50,60 @@ class CollectionTests {
         }).collect(Collectors.toList());
 
     assertThat(actual).isEqualTo(Arrays.asList(51, 102, 53));
+  }
+
+  @Test
+  @DisplayName("""
+      [When]
+      ・1,2,3の配列を渡す
+      [Then]
+      ・偶数は+100する
+      ・奇数は+50する
+      ・合計値102, 51, 53を返却する
+      """)
+  void test_01_02() {
+    Supplier<Stream<Integer>> base = () -> Stream.of(1, 2, 3);
+
+    var evenList =
+        base.get()
+            .filter(e -> e % 2 == 0)
+            .map(e -> e + 100);
+
+    var oddList =
+        base.get()
+            .filter(e -> e % 2 == 1)
+            .map(e -> e + 50);
+
+    var actual = Stream.concat(evenList, oddList);
+
+    assertThat(actual.collect(Collectors.toList()))
+        .isEqualTo(Arrays.asList(102, 51, 53));
+  }
+
+  @Test
+  @DisplayName("""
+      [When]
+      ・1,2,3の配列を渡す
+      [Then]
+      ・偶数は+100する
+      ・奇数は+50する
+      ・合計値204を返却する
+      """)
+  void test_01_03() {
+    var base = Stream.of(1, 2, 3);
+
+    var evenSum =
+        base.filter(e -> e % 2 == 0)
+            .mapToInt(e -> e + 100)
+            .sum();
+
+    var oddSum = base.filter(e -> e % 2 == 1)
+        .mapToInt(e -> e + 50)
+        .sum();
+
+    var actual = evenSum + oddSum;
+
+    assertThat(actual).isEqualTo(204);
   }
 
   @DisplayName("""
