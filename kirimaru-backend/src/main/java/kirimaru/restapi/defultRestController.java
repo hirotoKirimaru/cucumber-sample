@@ -4,6 +4,7 @@ import kirimaru.exception.AlreadyExistsException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +14,7 @@ import java.util.Objects;
 @RestController
 public class defultRestController {
 
-  @RequestMapping("/")
+  @GetMapping("/")
   public String hogeApi(@Validated Param param) throws Exception {
     if (Objects.equals(param.getPiyo(), "runtime")) {
       throw new AlreadyExistsException();
