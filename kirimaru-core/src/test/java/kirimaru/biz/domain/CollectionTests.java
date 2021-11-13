@@ -87,7 +87,7 @@ class CollectionTests {
       [Then]
       ・偶数は+100する
       ・奇数は+50する
-      ・合計値204を返却する
+      ・合計値206を返却する
       """)
   void test_01_03() {
     Supplier<Stream<Integer>> base = () -> Stream.of(1, 2, 3);
@@ -106,7 +106,7 @@ class CollectionTests {
 
     var actual = evenSum + oddSum;
 
-    assertThat(actual).isEqualTo(204);
+    assertThat(actual).isEqualTo(206);
   }
 
   @DisplayName("""
