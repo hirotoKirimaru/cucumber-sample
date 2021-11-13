@@ -71,7 +71,7 @@ class CollectionTests {
 
     var oddList =
         base.get()
-            .filter(e -> e % 2 == 1)
+            .filter(e -> e % 2 != 0)
             .map(e -> e + 50);
 
     var actual = Stream.concat(evenList, oddList);
@@ -97,7 +97,8 @@ class CollectionTests {
             .mapToInt(e -> e + 100)
             .sum();
 
-    var oddSum = base.filter(e -> e % 2 == 1)
+    var oddSum = base
+        .filter(e -> e % 2 != 0)
         .mapToInt(e -> e + 50)
         .sum();
 
