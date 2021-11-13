@@ -12,8 +12,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureWebClient
-@WebMvcTest(defultRestController.class)
-class defultRestControllerTest {
+@WebMvcTest(DefaultRestController.class)
+class DefaultRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @RestController
-public class defultRestController {
+public class DefaultRestController {
 
   @GetMapping("/")
   public String hogeApi(@Validated Param param) throws Exception {
