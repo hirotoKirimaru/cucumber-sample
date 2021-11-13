@@ -24,17 +24,9 @@ class QuestionRepositoryImplTest {
   private QuestionMapper mapper;
   private QuestionRepository target;
 
-  private SoftAssertions softly = new SoftAssertions();
-
   @BeforeEach
   void setup() {
     target = new QuestionRepositoryImpl(mapper);
-    softly = new SoftAssertions();
-  }
-
-  @AfterEach
-  void tearDown() {
-    softly.assertAll();
   }
 
   @DisplayName("" +
@@ -51,11 +43,14 @@ class QuestionRepositoryImplTest {
     );
     List<Questions> actual = target.findQuestions(genreList, 10);
 
+    SoftAssertions softly = new SoftAssertions();
+
     softly.assertThat(actual).hasSize(10);
     softly.assertThat(actual.stream().filter(e -> Objects.equals(e.getGenre(), CodeConstant.Questions.Genre.JAVA.getType())).collect(Collectors.toList())).hasSizeBetween(3, 4);
     softly.assertThat(actual.stream().filter(e -> Objects.equals(e.getGenre(), CodeConstant.Questions.Genre.JAVASCRIPT.getType())).collect(Collectors.toList())).hasSizeBetween(3, 4);
     softly.assertThat(actual.stream().filter(e -> Objects.equals(e.getGenre(), CodeConstant.Questions.Genre.RUBY.getType())).collect(Collectors.toList())).hasSizeBetween(3, 4);
     softly.assertThat(actual.stream().filter(e -> Objects.equals(e.getGenre(), CodeConstant.Questions.Genre.PYTHON.getType())).collect(Collectors.toList())).hasSize(0);
 
+    softly.assertAll();
   }
 }
