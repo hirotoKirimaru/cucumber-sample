@@ -24,8 +24,7 @@ public class ToClassHelper {
 
   <T> T fromJson(InputStream input, Class<T> clazz) {
     try {
-      String json = IOUtils.toString(input, StandardCharsets.UTF_8);
-      return fromJson(json, clazz);
+      return objectMapper.readValue(input, clazz);
     } catch (Exception e) {
       e.printStackTrace();
       throw new RuntimeException("何か失敗した", e);
