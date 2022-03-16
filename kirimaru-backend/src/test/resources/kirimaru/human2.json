@@ -1,0 +1,18 @@
+{
+  "age": 18,
+  "name": "kirimaru",
+  "children": [
+    {
+      "age": 10,
+      "name": "gorilla"
+    },
+    {
+      "age": 30,
+      "name": "dog"
+    },
+    {
+      "age": 40,
+      "name": "cat"
+    }
+  ]
+}
