@@ -1,6 +1,7 @@
 buildscript {
     ext {
-
+        springBootVersion = "2.6.4"
+        springDependencyManagementVersion = "1.0.11.RELEASE"
     }
 }
 
@@ -8,22 +9,27 @@ allprojects {
 }
 
 subprojects {
+    apply plugin: 'java'
+    apply plugin: 'checkstyle'
+    apply plugin: 'idea'
+    apply plugin: 'jacoco'
+
     repositories {
         mavenCentral()
     }
 
-//    java {
-//        targetCompatibility = JavaVersion.VERSION_15;
-//        sourceCompatibility = JavaVersion.VERSION_15;
-//    }
+    java {
+        targetCompatibility = JavaVersion.VERSION_17;
+        sourceCompatibility = JavaVersion.VERSION_17;
+    }
 
-//    compileJava {
-//        options.encoding = "UTF-8"
-//    }
-//
-//    compileTestJava {
-//        options.encoding = "UTF-8"
-//    }
+    compileJava {
+        options.encoding = "UTF-8"
+    }
+
+    compileTestJava {
+        options.encoding = "UTF-8"
+    }
 //
 //    task copyDependencies(type: Copy) {
 //        from configurations.compileClasspath
