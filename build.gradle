@@ -10,9 +10,9 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'checkstyle'
-    apply plugin: 'idea'
-    apply plugin: 'jacoco'
+//    apply plugin: 'checkstyle'
+//    apply plugin: 'idea'
+//    apply plugin: 'jacoco'
 
     repositories {
         mavenCentral()
