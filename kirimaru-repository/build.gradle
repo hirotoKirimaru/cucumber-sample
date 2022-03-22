@@ -16,9 +16,6 @@ compileJava {
 
 }
 
-repositories {
-    mavenCentral()
-}
 bootJar {
     enabled = false
 }

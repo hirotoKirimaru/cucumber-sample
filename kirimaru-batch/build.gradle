@@ -16,9 +16,6 @@ configurations {
 task wrapper(type: Wrapper) {
     gradleVersion = '7.0.2'
 }
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     implementation project(":kirimaru-repository")

@@ -5,9 +5,6 @@ plugins {
 group 'kirimaru'
 version '0.0.1'
 
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     testImplementation 'io.rest-assured:rest-assured:4.3.3'

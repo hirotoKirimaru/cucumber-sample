@@ -8,7 +8,9 @@ allprojects {
 }
 
 subprojects {
-
+    repositories {
+        mavenCentral()
+    }
 
 //    java {
 //        targetCompatibility = JavaVersion.VERSION_15;
