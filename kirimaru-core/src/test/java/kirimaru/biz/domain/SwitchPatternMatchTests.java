@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 /**
+ * https://docs.oracle.com/en/java/javase/17/language/pattern-matching-instanceof-operator.html
  * https://docs.oracle.com/en/java/javase/17/language/pattern-matching-switch-expressions-and-statements.html
  */
 class SwitchPatternMatchTests {
