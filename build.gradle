@@ -47,11 +47,11 @@ subprojects {
 //        }
 //    }
 }
-//task jacocoRootReport(type: JacocoReport){
-//    dependsOn = subprojects.test
-//    reports {
-//        html.enabled = true
-//        xml.enabled = true
-//        csv.enabled =false
-//    }
-//}
+task jacocoRootReport(type: JacocoReport){
+    dependsOn = subprojects.test
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled =false
+    }
+}
