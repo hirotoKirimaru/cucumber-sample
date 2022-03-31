@@ -71,6 +71,28 @@ class FormattedTests {
     assertThat(actual).isEqualTo(expected);
   }
 
+  @Test
+  void test_07() {
+    String actual =
+        """
+            %3$s様
+                
+            貴方だけに素晴らしい商品を用意しました！
+            商品1： %2$s
+            商品2： %1$s
+            """.formatted("きり丸", "りんご", "ゴリラ");
+
+    String expected =
+        """
+            ゴリラ様
+                    
+            貴方だけに素晴らしい商品を用意しました！
+            商品1： りんご
+            商品2： きり丸
+            """;
+    assertThat(actual).isEqualTo(expected);
+  }
+
 //  @CsvSource(value = {
 //      "%%,'','%'",
 //      "%d,'123','123'",
