@@ -78,8 +78,8 @@ class FormattedTests {
             %3$s様
                 
             貴方だけに素晴らしい商品を用意しました！
-            商品1： %2$s
-            商品2： %1$s
+            商品1： %1$s
+            商品2： %2$s
             """.formatted("きり丸", "りんご", "ゴリラ");
 
     String expected =
@@ -87,8 +87,8 @@ class FormattedTests {
             ゴリラ様
                     
             貴方だけに素晴らしい商品を用意しました！
-            商品1： りんご
-            商品2： きり丸
+            商品1： きり丸
+            商品2： りんご
             """;
     assertThat(actual).isEqualTo(expected);
   }
