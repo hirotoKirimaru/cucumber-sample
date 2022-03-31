@@ -13,8 +13,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 /**
- * Stringに生えているのはJava15から。
- * Formatter自体は昔からある。
+ * Stringに生えているのはJava15から。 Formatter自体は昔からある。
  */
 class FormattedTests {
 
@@ -44,6 +43,32 @@ class FormattedTests {
     String actual = "%s様".formatted(null);
 
     assertThat(actual).isEqualTo("null様");
+  }
+
+  @Test
+  void test_05() {
+    String actual = "%s様".formatted("きり丸");
+
+    assertThat(actual).isEqualTo("きり丸様");
+  }
+
+
+  @Test
+  void test_06() {
+    String actual =
+        """
+            %s様
+                
+            貴方だけに素晴らしい商品を用意しました！
+            """.formatted("きり丸");
+
+    String expected =
+        """
+            きり丸様
+                    
+            貴方だけに素晴らしい商品を用意しました！
+            """;
+    assertThat(actual).isEqualTo(expected);
   }
 
 //  @CsvSource(value = {
