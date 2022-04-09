@@ -74,6 +74,31 @@ class FirstSuccessSecondErrorTests {
     softly.assertAll();
   }
 
+  @DisplayName("1回目OK, 2回目NG, 3回目OK, 4回目NG")
+  @Test
+  void first_success_second_error_third_success_forth_error() {
+    // GIVEN
+    OffsetDateTime now = OffsetDateTime.now();
+    when(offsetDateTimeResolver.now())
+        .thenReturn(now)
+        .thenThrow(new RuntimeException(ERROR_MESSAGE))
+        .thenReturn(now)
+        .thenThrow(new RuntimeException(ERROR_MESSAGE));
+
+    // WHEN
+    // THEN
+    SoftAssertions softly = new SoftAssertions();
+    softly.assertThat(offsetDateTimeResolver.now()).isEqualTo(now);
+    softly.assertThatThrownBy(() -> offsetDateTimeResolver.now())
+        .isInstanceOfSatisfying(RuntimeException.class,
+            (e) -> softly.assertThat(e.getMessage()).isEqualTo(ERROR_MESSAGE));
+    softly.assertThat(offsetDateTimeResolver.now()).isEqualTo(now);
+    softly.assertThatThrownBy(() -> offsetDateTimeResolver.now())
+        .isInstanceOfSatisfying(RuntimeException.class,
+            (e) -> softly.assertThat(e.getMessage()).isEqualTo(ERROR_MESSAGE));
+    softly.assertAll();
+  }
+
   @DisplayName("Mockitoの設定方法の変更")
   @Test
   void setting() {
