@@ -99,6 +99,32 @@ class FirstSuccessSecondErrorTests {
     softly.assertAll();
   }
 
+  @Test
+  void _1OK_2OK_3OK_4NG_5OK_6NG() {
+    // GIVEN
+    OffsetDateTime now = OffsetDateTime.now();
+    when(offsetDateTimeResolver.now())
+        .thenReturn(now, now, now)
+        .thenThrow(new RuntimeException(ERROR_MESSAGE))
+        .thenReturn(now)
+        .thenThrow(new RuntimeException(ERROR_MESSAGE));
+
+    // WHEN
+    // THEN
+    SoftAssertions softly = new SoftAssertions();
+    softly.assertThat(offsetDateTimeResolver.now()).isEqualTo(now);
+    softly.assertThat(offsetDateTimeResolver.now()).isEqualTo(now);
+    softly.assertThat(offsetDateTimeResolver.now()).isEqualTo(now);
+    softly.assertThatThrownBy(() -> offsetDateTimeResolver.now())
+        .isInstanceOfSatisfying(RuntimeException.class,
+            (e) -> softly.assertThat(e.getMessage()).isEqualTo(ERROR_MESSAGE));
+    softly.assertThat(offsetDateTimeResolver.now()).isEqualTo(now);
+    softly.assertThatThrownBy(() -> offsetDateTimeResolver.now())
+        .isInstanceOfSatisfying(RuntimeException.class,
+            (e) -> softly.assertThat(e.getMessage()).isEqualTo(ERROR_MESSAGE));
+    softly.assertAll();
+  }
+
   @DisplayName("Mockitoの設定方法の変更")
   @Test
   void setting() {
