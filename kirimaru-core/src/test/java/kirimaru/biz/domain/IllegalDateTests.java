@@ -15,7 +15,9 @@ import java.time.format.ResolverStyle;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 /**
@@ -115,6 +117,19 @@ class IllegalDateTests {
       assertThatThrownBy(
           () -> RequestDate.of2(value)
       ).isInstanceOf(RuntimeException.class);
+    }
+  }
+
+
+  @EnumSource(ResolverStyle.class)
+  @ParameterizedTest
+  void test_01(ResolverStyle value) {
+    try {
+      LocalDate uuuuMMdd = LocalDate.parse("20220229",
+          DateTimeFormatter.ofPattern("uuuuMMdd").withResolverStyle(value));
+      System.out.println(uuuuMMdd);
+    } catch( Exception e){
+      System.out.println(e);
     }
   }
 }
