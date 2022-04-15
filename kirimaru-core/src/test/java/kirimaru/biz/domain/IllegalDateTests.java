@@ -103,5 +103,18 @@ class IllegalDateTests {
           () -> RequestDate.of2(value)
       ).isInstanceOf(RuntimeException.class);
     }
+
+    @ValueSource(strings = {
+        "令和2年2月4日",
+        "R20204",
+        "2022-02-04",
+        "2022/02/04"
+    })
+    @ParameterizedTest
+    void illegal_format(String value) {
+      assertThatThrownBy(
+          () -> RequestDate.of2(value)
+      ).isInstanceOf(RuntimeException.class);
+    }
   }
 }
