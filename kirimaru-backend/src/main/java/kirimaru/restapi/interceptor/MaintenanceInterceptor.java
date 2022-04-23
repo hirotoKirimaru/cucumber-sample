@@ -1,5 +1,6 @@
 package kirimaru.restapi.interceptor;
 
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,11 @@ public class MaintenanceInterceptor implements AsyncHandlerInterceptor {
       log.info("getメソッド");
       return true;
     }
+
+    // URLでメンテナンスモード
+//    if (List.of("/hogehoge", "/aiueo").contains(request.getRequestURI())) {
+//      return false;
+//    }
 
     log.info("preHandle");
 //    response.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
