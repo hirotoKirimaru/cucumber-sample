@@ -27,6 +27,8 @@ public class Term {
   @NonNull
   private final LocalDate end;
 
+
+
   /**
    * 契約日と解約日の間に暦上で何か月の差分があるかを計算する。
    * 端数がある場合は、切り上げる。
@@ -150,5 +152,20 @@ public class Term {
     }
 
     return false;
+  }
+
+  /**
+   * 開始日と終了日の前後関係をチェックする
+   * 異常な場合にtrueを設定する。
+   *
+   * @return
+   * |start|end|返却値|
+   * |---|---|---|
+   * |2022/01/15|2022/01/16|false|
+   * |2022/01/15|2022/01/15|false|
+   * |2022/01/16|2022/01/15|true|
+   */
+  public boolean isIllegalSituation() {
+    return start.isAfter(end);
   }
 }

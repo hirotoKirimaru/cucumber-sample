@@ -194,4 +194,31 @@ class TermTest {
     }
   }
 
+
+  @Nested
+  @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+  class IsIllegalSituation {
+
+    @MethodSource(value = "param")
+    @ParameterizedTest(name = "開始が{0}, 終了が{1}の時、前後関係が異常か{2}")
+    void test_01(LocalDate start, LocalDate end, boolean result) {
+      var target = Term.builder()
+          .start(start)
+          .end(end)
+          .build();
+
+      assertThat(target.isIllegalSituation()).isEqualTo(result);
+    }
+
+    private Stream<Arguments> param() {
+      LocalDate base = LocalDate.of(2020, 1, 15);
+      return Stream.of(
+          Arguments.of(base, base.plusDays(1), false),
+          Arguments.of(base, base, false),
+          Arguments.of(base.plusDays(1), base, true)
+      );
+    }
+  }
+
+
 }
