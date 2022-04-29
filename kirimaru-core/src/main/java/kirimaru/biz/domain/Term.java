@@ -34,6 +34,7 @@ public class Term {
    * 01/01～02/01 = 1 ヵ月 + あまり0日 = 1ヵ月
    * DBとして開始日、終了日は0101～0201.
    */
+  @Deprecated(since = "いつ使う❔")
   public int computeBetweenMonthsRoundUpIncludeEndDate() {
     long between = ChronoUnit.MONTHS.between(start, end);
     LocalDate localDate = start.plusMonths(between);
