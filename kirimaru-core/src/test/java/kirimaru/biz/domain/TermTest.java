@@ -166,7 +166,8 @@ class TermTest {
   class computeBetweenMonthsRoundUp {
 
     @MethodSource(value = "param")
-    @ParameterizedTest(name = "開始日が{0}, 終了日が{1}の時、{2}")
+    @ParameterizedTest(name = "開始日が{0}, 終了日が{1}の時、経過月は{2}")
+//    @ParameterizedTest(name = "|{0}|{1}|{2}|")
     void test_01(LocalDate start, LocalDate end, int result) {
       var target = Term.builder()
           .start(start)
@@ -181,6 +182,7 @@ class TermTest {
           Arguments.of(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 15), 1),
           Arguments.of(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 31), 1),
           Arguments.of(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 2, 1), 2),
+          Arguments.of(LocalDate.of(2020, 1, 15), LocalDate.of(2020, 2, 10), 1),
           Arguments.of(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 12, 31), 12),
           Arguments.of(LocalDate.of(2020, 1, 1), LocalDate.of(2021, 12, 31), 24),
           Arguments.of(LocalDate.of(2020, 2, 29), LocalDate.of(2021, 2, 28), 12), // うるう
