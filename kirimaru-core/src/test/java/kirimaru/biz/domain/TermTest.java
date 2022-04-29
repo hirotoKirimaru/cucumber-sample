@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ContractTest {
+class TermTest {
 
   @Nested
   @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -23,7 +23,7 @@ class ContractTest {
 //    @ParameterizedTest(name="[{index}]{displayName}{arguments}{argumentsWithNames}")
 //    @ParameterizedTest
     void test_01(LocalDate start, LocalDate end, boolean result) {
-      var target = Contract.builder()
+      var target = Term.builder()
           .start(start)
           .end(end)
           .build();
@@ -79,7 +79,7 @@ class ContractTest {
     @MethodSource(value = "canExpire")
     @ParameterizedTest
     void test_01(Param param) {
-      var target = Contract.builder()
+      var target = Term.builder()
           .start(param.start)
           .end(param.end)
           .build();
@@ -131,7 +131,7 @@ class ContractTest {
     @MethodSource(value = "canExpire")
     @ParameterizedTest(name = "契約日が{0}, 解約日が{1}の時、{2}")
     void test_01(LocalDate start, LocalDate end, boolean result) {
-      var target = Contract.builder()
+      var target = Term.builder()
           .start(start)
           .end(end)
           .build();
@@ -168,7 +168,7 @@ class ContractTest {
     @MethodSource(value = "param")
     @ParameterizedTest(name = "開始日が{0}, 終了日が{1}の時、{2}")
     void test_01(LocalDate start, LocalDate end, int result) {
-      var target = Contract.builder()
+      var target = Term.builder()
           .start(start)
           .end(end)
           .build();

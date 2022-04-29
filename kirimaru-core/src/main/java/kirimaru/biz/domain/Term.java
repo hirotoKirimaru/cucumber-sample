@@ -4,13 +4,15 @@ import java.time.temporal.ChronoUnit;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
-import org.springframework.lang.Nullable;
 
 import java.time.LocalDate;
 
+/**
+ * 日付の前後関係をなんやかんや
+ */
 @Value
 @Builder
-public class Contract {
+public class Term {
 
   /**
    * 契約日
