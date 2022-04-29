@@ -2,6 +2,7 @@ package kirimaru.biz.domain;
 
 import java.time.temporal.ChronoUnit;
 import lombok.Builder;
+import lombok.NonNull;
 import lombok.Value;
 import org.springframework.lang.Nullable;
 
@@ -13,13 +14,16 @@ public class Contract {
 
   /**
    * 契約日
+   * 開始日
    */
-  private final LocalDate contractDate;
+  @NonNull
+  private final LocalDate start;
   /**
    * 解約日
+   * 終了日
    */
-  @Nullable
-  private final LocalDate expireDate;
+  @NonNull
+  private final LocalDate end;
 
   /**
    * 契約日と解約日の間に暦上で何か月の差分があるかを計算する。
@@ -29,9 +33,9 @@ public class Contract {
    * DBとして開始日、終了日は0101～0201.
    */
   public int computeBetweenMonthsRoundUpIncludeEndDate() {
-    long between = ChronoUnit.MONTHS.between(contractDate, expireDate);
-    LocalDate localDate = contractDate.plusMonths(between);
-    int i = ChronoUnit.DAYS.between(localDate, expireDate) == 0 ? 0 : 1;
+    long between = ChronoUnit.MONTHS.between(start, end);
+    LocalDate localDate = start.plusMonths(between);
+    int i = ChronoUnit.DAYS.between(localDate, end) == 0 ? 0 : 1;
 
     return (int) between + i;
   }
@@ -40,11 +44,12 @@ public class Contract {
    * 契約日と解約日の間に暦上で何か月の差分があるかを計算する。
    * 端数がある場合は、切り上げる。
    * NOTE: Nヵ月後の日付の場合を、1ヵ月+1とする場合。
+   * 01/01～01/31 = 0 ヵ月 + あまり30日 = 1ヵ月
    * 01/01～02/01 = 1 ヵ月 + あまり1日 = 2ヵ月
    * DBとして開始日、終了日は0101～0131.
    */
-  public int computeBetweenMonthsRoundUpExcludeEndDate() {
-    return (int) ChronoUnit.MONTHS.between(contractDate, expireDate) + 1;
+  public int computeBetweenMonthsRoundUp() {
+    return (int) ChronoUnit.MONTHS.between(start, end) + 1;
   }
 
 
@@ -70,20 +75,20 @@ public class Contract {
    */
   public boolean canExpire() {
     // 月の初日から起算する場合は、最終月の末日
-    if (contractDate.getDayOfMonth() == 1) {
-      if (expireDate.plusDays(1).getDayOfMonth() == 1) {
+    if (start.getDayOfMonth() == 1) {
+      if (end.plusDays(1).getDayOfMonth() == 1) {
         return true;
       }
     }
     // 月の途中から起算し，最終月に応当日のある場合は、最終月の応当日の前日
     // -1日すると、月を跨ぐ可能性があるのでNG
-    if (contractDate.getDayOfMonth() == expireDate.plusDays(1).getDayOfMonth()) {
+    if (start.getDayOfMonth() == end.plusDays(1).getDayOfMonth()) {
       return true;
     }
 
     // 月の途中から起算し，最終月に応当日のない場合は、最終月の末日
-    if (contractDate.getDayOfMonth() > expireDate.getDayOfMonth()) {
-      if (expireDate.plusDays(1).getDayOfMonth() == 1) {
+    if (start.getDayOfMonth() > end.getDayOfMonth()) {
+      if (end.plusDays(1).getDayOfMonth() == 1) {
         return true;
       }
     }
@@ -120,23 +125,23 @@ public class Contract {
   public boolean canExpire2() {
     // 契約日の日 -1 - 解約日の日なら解約できる。
     // 実際に+1や-1日すると、月を跨ぐのでNG
-    if (contractDate.getDayOfMonth() - 1 == expireDate.getDayOfMonth()) {
+    if (start.getDayOfMonth() - 1 == end.getDayOfMonth()) {
       return true;
     }
     // 契約日が月頭、解約日が月末なら解約できる
-    if (contractDate.getDayOfMonth() == 1) {
-      if (expireDate.plusDays(1).getDayOfMonth() == 1) {
+    if (start.getDayOfMonth() == 1) {
+      if (end.plusDays(1).getDayOfMonth() == 1) {
         return true;
       }
     }
 
     // 契約日が2月以外の月末、解約日が2月の月末なら解約できる。
-    if (contractDate.getMonthValue() == 2) {
+    if (start.getMonthValue() == 2) {
       return false;
     }
 
-    if (expireDate.getMonthValue() == 2) {
-      if (expireDate.plusDays(1).getDayOfMonth() == 1) {
+    if (end.getMonthValue() == 2) {
+      if (end.plusDays(1).getDayOfMonth() == 1) {
         return true;
       }
     }

@@ -17,14 +17,15 @@ class ContractTest {
   @Nested
   @TestInstance(TestInstance.Lifecycle.PER_CLASS)
   class CanExpire {
+
     @MethodSource(value = "canExpire")
     @ParameterizedTest(name = "契約日が{0}, 解約日が{1}の時、{2}")
 //    @ParameterizedTest(name="[{index}]{displayName}{arguments}{argumentsWithNames}")
 //    @ParameterizedTest
     void test_01(LocalDate start, LocalDate end, boolean result) {
       var target = Contract.builder()
-          .contractDate(start)
-          .expireDate(end)
+          .start(start)
+          .end(end)
           .build();
 
       assertThat(target.canExpire()).isEqualTo(result);
@@ -54,6 +55,7 @@ class ContractTest {
   @Nested
   @TestInstance(TestInstance.Lifecycle.PER_CLASS)
   class CanExpire_Another {
+
     @BeforeEach
     void setUp() {
       System.out.println("setup");
@@ -78,17 +80,18 @@ class ContractTest {
     @ParameterizedTest
     void test_01(Param param) {
       var target = Contract.builder()
-          .contractDate(param.start)
-          .expireDate(param.end)
+          .start(param.start)
+          .end(param.end)
           .build();
 
       assertThat(target.canExpire()).isEqualTo(param.result);
     }
 
-//    @Builder
+    //    @Builder
     @Data
     @AllArgsConstructor
     class Param implements Arguments {
+
       private LocalDate start;
       private LocalDate end;
       private boolean result;
@@ -124,12 +127,13 @@ class ContractTest {
   @Nested
   @TestInstance(TestInstance.Lifecycle.PER_CLASS)
   class CanExpire2 {
+
     @MethodSource(value = "canExpire")
     @ParameterizedTest(name = "契約日が{0}, 解約日が{1}の時、{2}")
     void test_01(LocalDate start, LocalDate end, boolean result) {
       var target = Contract.builder()
-          .contractDate(start)
-          .expireDate(end)
+          .start(start)
+          .end(end)
           .build();
 
       assertThat(target.canExpire2()).isEqualTo(result);
@@ -152,7 +156,40 @@ class ContractTest {
           Arguments.of(LocalDate.of(2020, 2, 29), LocalDate.of(2024, 12, 31), false),
           Arguments.of(LocalDate.of(2020, 2, 29), LocalDate.of(2024, 11, 30), false)
 
+      );
+    }
+  }
 
+
+  @Nested
+  @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+  class computeBetweenMonthsRoundUp {
+
+    @MethodSource(value = "param")
+    @ParameterizedTest(name = "開始日が{0}, 終了日が{1}の時、{2}")
+    void test_01(LocalDate start, LocalDate end, int result) {
+      var target = Contract.builder()
+          .start(start)
+          .end(end)
+          .build();
+
+      assertThat(target.computeBetweenMonthsRoundUp()).isEqualTo(result);
+    }
+
+    private Stream<Arguments> param() {
+      return Stream.of(
+          Arguments.of(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 15), 1),
+          Arguments.of(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 31), 1),
+          Arguments.of(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 2, 1), 2),
+          Arguments.of(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 12, 31), 12),
+          Arguments.of(LocalDate.of(2020, 1, 1), LocalDate.of(2021, 12, 31), 24),
+          Arguments.of(LocalDate.of(2020, 2, 29), LocalDate.of(2021, 2, 28), 12), // うるう
+          Arguments.of(LocalDate.of(2019, 2, 28), LocalDate.of(2020, 2, 29), 13), // うるう
+          Arguments.of(LocalDate.of(2020, 2, 29), LocalDate.of(2024, 2, 28), 48), //うるう
+          Arguments.of(LocalDate.of(2020, 2, 29), LocalDate.of(2024, 2, 29), 49), //うるう
+          Arguments.of(LocalDate.of(2020, 2, 1), LocalDate.of(2020, 2, 28), 1),
+          Arguments.of(LocalDate.of(2020, 2, 1), LocalDate.of(2020, 2, 29), 1)
+//          Arguments.of(LocalDate.of(2020, 1, 1), LocalDate.of(2021, 2, 1), 2),
       );
     }
   }
