@@ -46,6 +46,14 @@ class MaintenanceInterceptorTests {
         .andExpect(content().string("hogehoge"));
   }
 
+  @Test
+  void success2() throws Exception {
+    // #以後は無視されていることを確認する(そういうテストは書けていない）
+    this.mockMvc.perform(get(rootUrl+ "?piyo=aiueo#:~:text=ほげほげ"))
+        .andExpect(status().isOk())
+        .andExpect(content().string("hogehoge"));
+  }
+
 
   @Disabled("ここまでする必要はない")
   @Test
