@@ -55,8 +55,7 @@ class StaticMockTests {
       softly.assertThat(Target.getSecond()).isEqualTo("1");
 
       try (var mocked = Mockito.mockStatic(Target.class)) {
-        mocked.when(() -> Target.getFirst())
-            .thenReturn("123");
+        mocked.when(() -> Target.getFirst()).thenReturn("123");
 
         softly.assertThat(Target.getFirst()).isEqualTo("123");
         softly.assertThat(Target.getSecond()).isEqualTo(null); // nullになってしまう
@@ -72,13 +71,17 @@ class StaticMockTests {
       softly.assertThat(Target.getSecond()).isEqualTo("1");
 
       try (var mocked = Mockito.mockStatic(Target.class, Mockito.CALLS_REAL_METHODS)) {
-        mocked.when(() -> Target.getFirst())
-            .thenReturn("123");
+        //
+//        mocked.when(() -> Target.getFirst()).thenReturn("123");
+        // こっちでも可能
+        when(Target.getFirst()).thenReturn("123");
 
         softly.assertThat(Target.getFirst()).isEqualTo("123");
         softly.assertThat(Target.getSecond()).isEqualTo("123");
         softly.assertThat(Target.getThird()).isEqualTo("123");
       }
+      softly.assertThat(Target.getFirst()).isEqualTo("1");
+      softly.assertThat(Target.getSecond()).isEqualTo("1");
 
       softly.assertAll();
     }
