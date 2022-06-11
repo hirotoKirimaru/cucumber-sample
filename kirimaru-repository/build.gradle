@@ -43,7 +43,8 @@ dependencies {
     testImplementation 'org.testcontainers:postgresql:1.16.0'
 
     // coreのテストソースコードだけ依存させる
-    testCompileOnly project(':kirimaru-core').sourceSets.test.output
+//    testCompileOnly project(':kirimaru-core').sourceSets.test.output
+    testImplementation project(':kirimaru-core').sourceSets.test.output
 }
 
 test {
