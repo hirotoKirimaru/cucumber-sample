@@ -1,9 +1,11 @@
 package kirimaru.biz.mapper;
 
+import kirimaru.biz.domain.book.Book;
 import kirimaru.biz.domain.book.Isbn;
 import kirimaru.biz.mapper.dto.Book2Dto;
 import kirimaru.biz.mapper.dto.BookDto;
 import kirimaru.biz.mapper.helper.CommonSetup;
+import kirimaru.helper.TestFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,7 +13,6 @@ import java.math.BigInteger;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class BookMapperTests extends CommonSetup {
   @Autowired
@@ -93,4 +94,9 @@ public class BookMapperTests extends CommonSetup {
     assertThat(actual).isEqualTo(List.of(book2));
   }
 
+  @Test
+  void tekitou() {
+    // 依存ができることだけ確認したいので、このテストには意味があまりない
+    Book build = TestFactory.createBookBuilder().build();
+  }
 }
