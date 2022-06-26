@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,7 +18,8 @@ class LabelTest {
   void test_01() {
     String actual = "";
 
-    END: for (String s : List.of("111", "222", "333")) {
+    END:
+    for (String s : List.of("111", "222", "333")) {
       actual += s;
       for (String s1 : List.of("11", "22", "33")) {
         actual += s1;
@@ -30,13 +32,16 @@ class LabelTest {
   }
 
 
-    @Test
+  @Test
+  @Disabled("意味がない")
   void test_02() {
     String actual = "";
 
-    END: for (String s : List.of("111", "222", "333")) {
+    END:
+    for (String s : List.of("111", "222", "333")) {
       actual += s;
-      START: for (String s1 : List.of("11", "22", "33")) {
+      START:
+      for (String s1 : List.of("11", "22", "33")) {
         actual += s1;
         if (s1.equals("22")) {
           break START;
@@ -44,10 +49,10 @@ class LabelTest {
       }
     }
 
-    TWO_LOOP: {
+    TWO_LOOP:
+    {
 
     }
-
 
     assertThat(actual).isEqualTo("1111122");
   }
