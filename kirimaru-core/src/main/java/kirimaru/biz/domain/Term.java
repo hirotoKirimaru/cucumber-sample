@@ -15,26 +15,20 @@ import java.time.LocalDate;
 public class Term {
 
   /**
-   * 契約日
-   * 開始日
+   * 契約日 開始日
    */
   @NonNull
   private final LocalDate start;
   /**
-   * 解約日
-   * 終了日
+   * 解約日 終了日
    */
   @NonNull
   private final LocalDate end;
 
 
-
   /**
-   * 契約日と解約日の間に暦上で何か月の差分があるかを計算する。
-   * 端数がある場合は、切り上げる。
-   * NOTE: Nヵ月後の日付の場合を、1ヵ月とする場合。
-   * 01/01～02/01 = 1 ヵ月 + あまり0日 = 1ヵ月
-   * DBとして開始日、終了日は0101～0201.
+   * 契約日と解約日の間に暦上で何か月の差分があるかを計算する。 端数がある場合は、切り上げる。 NOTE: Nヵ月後の日付の場合を、1ヵ月とする場合。 01/01～02/01 = 1 ヵ月 +
+   * あまり0日 = 1ヵ月 DBとして開始日、終了日は0101～0201.
    */
   @Deprecated(since = "いつ使う❔")
   public int computeBetweenMonthsRoundUpIncludeEndDate() {
@@ -46,12 +40,8 @@ public class Term {
   }
 
   /**
-   * 契約日と解約日の間に暦上で何か月の差分があるかを計算する。
-   * 端数がある場合は、切り上げる。
-   * NOTE: Nヵ月後の日付の場合を、1ヵ月+1とする場合。
-   * 01/01～01/31 = 0 ヵ月 + あまり30日 = 1ヵ月
-   * 01/01～02/01 = 1 ヵ月 + あまり1日 = 2ヵ月
-   * DBとして開始日、終了日は0101～0131.
+   * 契約日と解約日の間に暦上で何か月の差分があるかを計算する。 端数がある場合は、切り上げる。 NOTE: Nヵ月後の日付の場合を、1ヵ月+1とする場合。 01/01～01/31 = 0 ヵ月
+   * + あまり30日 = 1ヵ月 01/01～02/01 = 1 ヵ月 + あまり1日 = 2ヵ月 DBとして開始日、終了日は0101～0131.
    */
   public int computeBetweenMonthsRoundUp() {
     return (int) ChronoUnit.MONTHS.between(start, end) + 1;
@@ -155,23 +145,17 @@ public class Term {
   }
 
   /**
-   * 開始日と終了日の前後関係をチェックする
-   * 異常な場合にtrueを設定する。
+   * 開始日と終了日の前後関係をチェックする 異常な場合にtrueを設定する。
    *
-   * @return
-   * |start|end|返却値|
-   * |---|---|---|
-   * |2022/01/15|2022/01/16|false|
-   * |2022/01/15|2022/01/15|false|
-   * |2022/01/16|2022/01/15|true|
+   * @return |start|end|返却値| |---|---|---| |2022/01/15|2022/01/16|false|
+   * |2022/01/15|2022/01/15|false| |2022/01/16|2022/01/15|true|
    */
   public boolean isIllegalSituation() {
     return start.isAfter(end);
   }
 
   /**
-   * パラメータの日付がこのstartとendの間の期間内であるか。
-   * なお、endと同一は含まないとする。
+   * パラメータの日付がこのstartとendの間の期間内であるか。 なお、endと同一は含まないとする。
    *
    * @param baseDate
    * @return
@@ -180,9 +164,8 @@ public class Term {
     return (!baseDate.isBefore(start)) && baseDate.isBefore(end);
   }
 
-    /**
-   * パラメータの日付がこのstartとendの間の期間内であるか。
-   * なお、endと同一は含むとする。
+  /**
+   * パラメータの日付がこのstartとendの間の期間内であるか。 なお、endと同一は含むとする。
    *
    * @param baseDate
    * @return
