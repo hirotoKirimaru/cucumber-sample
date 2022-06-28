@@ -168,4 +168,26 @@ public class Term {
   public boolean isIllegalSituation() {
     return start.isAfter(end);
   }
+
+  /**
+   * パラメータの日付がこのstartとendの間の期間内であるか。
+   * なお、endと同一は含まないとする。
+   *
+   * @param baseDate
+   * @return
+   */
+  public boolean isDuringExcludeEndDate(@NonNull LocalDate baseDate) {
+    return (!baseDate.isBefore(start)) && baseDate.isBefore(end);
+  }
+
+    /**
+   * パラメータの日付がこのstartとendの間の期間内であるか。
+   * なお、endと同一は含むとする。
+   *
+   * @param baseDate
+   * @return
+   */
+  public boolean isDuringIncludeEndDate(@NonNull LocalDate baseDate) {
+    return (!baseDate.isBefore(start)) && (!baseDate.isAfter(end));
+  }
 }

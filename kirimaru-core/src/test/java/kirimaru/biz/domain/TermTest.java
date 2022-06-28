@@ -1,8 +1,10 @@
 package kirimaru.biz.domain;
 
+import java.time.Period;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -222,5 +224,63 @@ class TermTest {
     }
   }
 
+  @TestInstance(Lifecycle.PER_CLASS)
+  @Nested
+  class isDuringExcludeEndDate {
+    LocalDate start = LocalDate.of(2020, 4, 1);
+    LocalDate end = LocalDate.of(2020, 9, 1);
+    Term base = Term.builder()
+        .start(start)
+        .end(end)
+        .build();
+
+    @MethodSource(value = "param")
+    @ParameterizedTest
+    void test_01(LocalDate baseDate, boolean expected) {
+      assertThat(
+          base.isDuringExcludeEndDate(baseDate)
+      ).isEqualTo(expected);
+    }
+
+    private Stream<Arguments> param() {
+      LocalDate base = LocalDate.of(2020, 1, 15);
+      return Stream.of(
+          Arguments.of(start.minusDays(1), false),
+          Arguments.of(start, true),
+          Arguments.of(end.minusDays(1), true),
+          Arguments.of(end, false)
+      );
+    }
+  }
+
+  @TestInstance(Lifecycle.PER_CLASS)
+  @Nested
+  class isDuringIncludeEndDate {
+    LocalDate start = LocalDate.of(2020, 4, 1);
+    LocalDate end = LocalDate.of(2020, 9, 1);
+    Term base = Term.builder()
+        .start(start)
+        .end(end)
+        .build();
+
+    @MethodSource(value = "param")
+    @ParameterizedTest
+    void test_01(LocalDate baseDate, boolean expected) {
+      assertThat(
+          base.isDuringIncludeEndDate(baseDate)
+      ).isEqualTo(expected);
+    }
+
+    private Stream<Arguments> param() {
+      LocalDate base = LocalDate.of(2020, 1, 15);
+      return Stream.of(
+          Arguments.of(start.minusDays(1), false),
+          Arguments.of(start, true),
+          Arguments.of(end.minusDays(1), true),
+          Arguments.of(end, true),
+          Arguments.of(end.plusDays(1), false)
+      );
+    }
+  }
 
 }
