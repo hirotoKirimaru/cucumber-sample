@@ -21,7 +21,7 @@ class MultiGroupingTests {
 
   }
 
-//  @Disabled("なにもしていない")
+  //  @Disabled("なにもしていない")
   @Test
   void test_01() {
     var param = List.of(
@@ -42,6 +42,28 @@ class MultiGroupingTests {
     assertThat(actual).isEqualTo(expected);
   }
 
+  @Disabled("単純グルーピングをしたい時に。ただ、ソートが正しくはならないので、Valueを意識するならダメ。Keyだけを意識したいときにはループが深くならないので有効。")
+  @Test
+  void test_02() {
+    var param = List.of(
+        new Book("1", "Japanese", 1990, "JP", new Author("きり丸")),
+        new Book("2", "Japanese", 1990, "JP", new Author("乱太郎")),
+        new Book("3", "Japanese", 1990, "JP", new Author("しんべえ")),
+        new Book("4", "Japanese", 1990, "JP", new Author("きり丸"))
+    );
+    var actual = groupingList2(param);
+
+    var expected = List.of(
+        new Book("1", "Japanese", 1990, "JP", new Author("きり丸")),
+        new Book("4", "Japanese", 1990, "JP", new Author("きり丸")),
+        new Book("2", "Japanese", 1990, "JP", new Author("乱太郎")),
+        new Book("3", "Japanese", 1990, "JP", new Author("しんべえ"))
+    );
+
+    assertThat(actual).isEqualTo(expected);
+  }
+
+
   private List<Book> groupingList(List<Book> param) {
     var group = param.stream().collect(
         Collectors.groupingBy(Book::language,
@@ -56,6 +78,21 @@ class MultiGroupingTests {
           list.addAll(books);
         }
       }
+    }
+    return list;
+  }
+
+  private List<Book> groupingList2(List<Book> param) {
+    var group = param.stream().collect(
+        Collectors.groupingBy(
+            e -> e.language + e.year + e.author
+        ));
+
+    List list = new ArrayList();
+    System.out.println(group.keySet());
+    System.out.println(group.values().size());
+    for (List<Book> books : group.values()) {
+      list.addAll(books);
     }
     return list;
   }
