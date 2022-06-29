@@ -157,8 +157,8 @@ public class Term {
   /**
    * パラメータの日付がこのstartとendの間の期間内であるか。 なお、endと同一は含まないとする。
    *
-   * @param baseDate
-   * @return
+   * @param baseDate 基準日付
+   * @return true=期間内
    */
   public boolean isDuringExcludeEndDate(@NonNull LocalDate baseDate) {
     return (!baseDate.isBefore(start)) && baseDate.isBefore(end);
@@ -167,10 +167,25 @@ public class Term {
   /**
    * パラメータの日付がこのstartとendの間の期間内であるか。 なお、endと同一は含むとする。
    *
-   * @param baseDate
-   * @return
+   * @param baseDate 基準日付
+   * @return true=期間内
    */
   public boolean isDuringIncludeEndDate(@NonNull LocalDate baseDate) {
     return (!baseDate.isBefore(start)) && (!baseDate.isAfter(end));
   }
+
+  /**
+   * パラメータの日付がこのstartとendの間の期間を掠るか。
+   *
+   * @param startDate 開始日付
+   * @param endDate   終了日付
+   * @return true=期間内
+   */
+  public boolean isDuring(@NonNull LocalDate startDate, @NonNull LocalDate endDate) {
+//    return (!baseDate.isBefore(start)) && (!baseDate.isAfter(end));
+    // TODO: そのうち頑張る
+
+    return false;
+  }
+
 }
