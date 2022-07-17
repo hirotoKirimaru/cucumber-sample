@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class Questions {
+public class Question {
 
   /**
    * ID.

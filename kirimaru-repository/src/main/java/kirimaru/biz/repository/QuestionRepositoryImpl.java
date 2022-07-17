@@ -1,7 +1,7 @@
 package kirimaru.biz.repository;
 
 import kirimaru.biz.domain.constant.CodeConstant;
-import kirimaru.biz.domain.Questions;
+import kirimaru.biz.domain.Question;
 import kirimaru.biz.mapper.QuestionMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -18,22 +18,22 @@ public class QuestionRepositoryImpl implements QuestionRepository {
    * {@inheritDoc}
    */
   @Override
-  public List<Questions> findQuestions(List<Integer> genre, int size) {
-    List<Questions> questionsList =
+  public List<Question> findQuestions(List<Integer> genre, int size) {
+    List<Question> questionList =
         Arrays.asList(
-            Questions.builder().genre(CodeConstant.Questions.Genre.JAVA.getType()).build(),
-            Questions.builder().genre(CodeConstant.Questions.Genre.JAVA.getType()).build(),
-            Questions.builder().genre(CodeConstant.Questions.Genre.JAVA.getType()).build(),
-            Questions.builder().genre(CodeConstant.Questions.Genre.JAVASCRIPT.getType()).build(),
-            Questions.builder().genre(CodeConstant.Questions.Genre.JAVASCRIPT.getType()).build(),
-            Questions.builder().genre(CodeConstant.Questions.Genre.JAVASCRIPT.getType()).build(),
-            Questions.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build(),
-            Questions.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build(),
-            Questions.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build(),
-            Questions.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build()
+            Question.builder().genre(CodeConstant.Questions.Genre.JAVA.getType()).build(),
+            Question.builder().genre(CodeConstant.Questions.Genre.JAVA.getType()).build(),
+            Question.builder().genre(CodeConstant.Questions.Genre.JAVA.getType()).build(),
+            Question.builder().genre(CodeConstant.Questions.Genre.JAVASCRIPT.getType()).build(),
+            Question.builder().genre(CodeConstant.Questions.Genre.JAVASCRIPT.getType()).build(),
+            Question.builder().genre(CodeConstant.Questions.Genre.JAVASCRIPT.getType()).build(),
+            Question.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build(),
+            Question.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build(),
+            Question.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build(),
+            Question.builder().genre(CodeConstant.Questions.Genre.RUBY.getType()).build()
         );
     mapper.isis();
 
-    return questionsList;
+    return questionList;
   }
 }

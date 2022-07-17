@@ -1,10 +1,9 @@
 package kirimaru.biz.repository;
 
 import kirimaru.biz.domain.constant.CodeConstant;
-import kirimaru.biz.domain.Questions;
+import kirimaru.biz.domain.Question;
 import kirimaru.biz.mapper.QuestionMapper;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ class QuestionRepositoryImplTest {
         CodeConstant.Questions.Genre.JAVASCRIPT.getType(),
         CodeConstant.Questions.Genre.RUBY.getType()
     );
-    List<Questions> actual = target.findQuestions(genreList, 10);
+    List<Question> actual = target.findQuestions(genreList, 10);
 
     SoftAssertions softly = new SoftAssertions();
 

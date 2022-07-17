@@ -1,9 +1,9 @@
 package kirimaru.biz.service;
 
-import kirimaru.biz.domain.Questions;
+import kirimaru.biz.domain.Question;
 
 import java.util.List;
 
 public interface QuestionService {
-  List<Questions> selectQuestions(List<Integer> genre, int size);
+  List<Question> selectQuestions(List<Integer> genre, int size);
 }

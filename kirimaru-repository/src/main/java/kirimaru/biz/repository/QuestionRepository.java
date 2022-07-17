@@ -1,9 +1,9 @@
 package kirimaru.biz.repository;
 
-import kirimaru.biz.domain.Questions;
+import kirimaru.biz.domain.Question;
 
 import java.util.List;
 
 public interface QuestionRepository {
-  List<Questions> findQuestions(List<Integer> genre, int size);
+  List<Question> findQuestions(List<Integer> genre, int size);
 }

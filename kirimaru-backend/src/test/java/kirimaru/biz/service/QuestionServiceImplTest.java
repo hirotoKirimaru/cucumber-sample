@@ -1,6 +1,6 @@
 package kirimaru.biz.service;
 
-import kirimaru.biz.domain.Questions;
+import kirimaru.biz.domain.Question;
 import kirimaru.biz.repository.QuestionRepository;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterEach;
@@ -37,23 +37,23 @@ class QuestionServiceImplTest {
   @Test
   void test_01() {
     List<Integer> genreList = Arrays.asList(1, 2, 3, 4);
-    List<Questions> questionsList =
+    List<Question> questionList =
         Arrays.asList(
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build(),
-            Questions.builder().build()
+            Question.builder().build(),
+            Question.builder().build(),
+            Question.builder().build(),
+            Question.builder().build(),
+            Question.builder().build(),
+            Question.builder().build(),
+            Question.builder().build(),
+            Question.builder().build(),
+            Question.builder().build(),
+            Question.builder().build()
         );
 
-    when(repository.findQuestions(genreList, 10)).thenReturn(questionsList);
+    when(repository.findQuestions(genreList, 10)).thenReturn(questionList);
 
-    List<Questions> actual = target.selectQuestions(genreList, 10);
+    List<Question> actual = target.selectQuestions(genreList, 10);
 
     softly.assertThat(actual).hasSize(10);
   }

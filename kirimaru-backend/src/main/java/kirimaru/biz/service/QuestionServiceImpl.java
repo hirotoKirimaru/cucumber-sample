@@ -1,6 +1,6 @@
 package kirimaru.biz.service;
 
-import kirimaru.biz.domain.Questions;
+import kirimaru.biz.domain.Question;
 import kirimaru.biz.repository.QuestionRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +14,10 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService {
   private final QuestionRepository repository;
 
-  private List<Questions> questionList;
+  private List<Question> questionList;
 
   @Override
-  public List<Questions> selectQuestions(List<Integer> genre, int size) {
+  public List<Question> selectQuestions(List<Integer> genre, int size) {
     return repository.findQuestions(genre, size);
   }
 
