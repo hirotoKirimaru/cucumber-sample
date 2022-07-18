@@ -1,5 +1,6 @@
 package kirimaru.biz.domain;
 
+import java.util.Locale;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,6 +18,11 @@ public class Question {
    * 問題文.
    */
   private String questionSentence;
+  /**
+   * 問題文の言語
+   */
+  private Locale locale;
+
 
   /**
    * ジャンル.

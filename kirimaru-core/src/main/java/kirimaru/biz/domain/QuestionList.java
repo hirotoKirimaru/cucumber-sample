@@ -2,6 +2,7 @@ package kirimaru.biz.domain;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.Builder;
@@ -18,4 +19,13 @@ public class QuestionList {
             Question::getGenre
         ));
   }
+
+  public Map<Locale, List<Question>> groupByLocale() {
+    return value.stream()
+        .collect(Collectors.groupingBy(
+            Question::getLocale
+        ));
+  }
+
+
 }
