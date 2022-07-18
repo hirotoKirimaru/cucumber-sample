@@ -3,6 +3,7 @@ package kirimaru.biz.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -50,4 +51,42 @@ class StrategyPatternTest {
     }
   }
 
+
+  @Nested
+  class translate {
+
+    @Test
+    void test_01() {
+      var target = new QuestionList(
+          List.of(
+              Question.builder().id(1).locale(Locale.ENGLISH).build(),
+              Question.builder().id(2).locale(Locale.ENGLISH).build(),
+              Question.builder().id(3).locale(Locale.FRENCH).build(),
+              Question.builder().id(4).locale(Locale.FRENCH).build(),
+              Question.builder().id(5).locale(Locale.JAPANESE).build()
+          )
+      );
+
+      assertThat(
+          target.translate().getValue()
+      ).containsAll(
+          List.of(
+              Question.builder().id(1).locale(Locale.JAPANESE).build(),
+              Question.builder().id(2).locale(Locale.JAPANESE).build(),
+              Question.builder().id(3).locale(Locale.JAPANESE).build(),
+              Question.builder().id(4).locale(Locale.JAPANESE).build(),
+              Question.builder().id(5).locale(Locale.JAPANESE).build()
+          )
+      );
+      assertThat(target.getValue()).isEqualTo(
+          List.of(
+              Question.builder().id(1).locale(Locale.ENGLISH).build(),
+              Question.builder().id(2).locale(Locale.ENGLISH).build(),
+              Question.builder().id(3).locale(Locale.FRENCH).build(),
+              Question.builder().id(4).locale(Locale.FRENCH).build(),
+              Question.builder().id(5).locale(Locale.JAPANESE).build()
+          )
+      );
+    }
+  }
 }

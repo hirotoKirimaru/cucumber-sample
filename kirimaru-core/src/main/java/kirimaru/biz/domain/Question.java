@@ -1,5 +1,6 @@
 package kirimaru.biz.domain;
 
+import java.io.Serializable;
 import java.util.Locale;
 import lombok.Builder;
 import lombok.Data;
@@ -7,8 +8,8 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-@Builder
-public class Question {
+@Builder(toBuilder = true)
+public class Question implements Serializable {
 
   /**
    * ID.
