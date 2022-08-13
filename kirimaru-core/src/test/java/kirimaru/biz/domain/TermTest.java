@@ -1,6 +1,7 @@
 package kirimaru.biz.domain;
 
 import java.time.Period;
+import kirimaru.biz.domain.Term.Term2;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.junit.jupiter.api.*;
@@ -227,6 +228,7 @@ class TermTest {
   @TestInstance(Lifecycle.PER_CLASS)
   @Nested
   class isDuringExcludeEndDate {
+
     LocalDate start = LocalDate.of(2020, 4, 1);
     LocalDate end = LocalDate.of(2020, 9, 1);
     Term base = Term.builder()
@@ -256,6 +258,7 @@ class TermTest {
   @TestInstance(Lifecycle.PER_CLASS)
   @Nested
   class isDuringIncludeEndDate {
+
     LocalDate start = LocalDate.of(2020, 4, 1);
     LocalDate end = LocalDate.of(2020, 9, 1);
     Term base = Term.builder()
@@ -283,7 +286,7 @@ class TermTest {
     }
   }
 
-    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+  @TestInstance(TestInstance.Lifecycle.PER_CLASS)
   @Nested
   class isOverlap {
 
@@ -307,8 +310,40 @@ class TermTest {
           Arguments.of(LocalDate.of(2022, 10, 31), LocalDate.of(2022, 11, 30), true),
           Arguments.of(LocalDate.of(2022, 2, 1), LocalDate.of(2022, 5, 31), false),
           Arguments.of(LocalDate.of(2022, 12, 1), LocalDate.of(2022, 12, 31), false)
-          );
+      );
     }
   }
 
+
+  @Nested
+  class Term2_record {
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    @Nested
+    class isOverlap {
+
+      Term2 base = new Term2(
+          LocalDate.of(2022, 7, 1),
+          LocalDate.of(2022, 10, 31)
+      );
+
+      @MethodSource(value = "param")
+      @ParameterizedTest
+      public void test(LocalDate start, LocalDate end, boolean expected) {
+        assertThat(base.isOverlap(new Term2(start, end))).isEqualTo(expected);
+      }
+
+      public Stream<Arguments> param() {
+        return Stream.of(
+            Arguments.of(LocalDate.of(2022, 4, 1), LocalDate.of(2022, 7, 31), true),
+            Arguments.of(LocalDate.of(2022, 8, 1), LocalDate.of(2022, 9, 30), true),
+            Arguments.of(LocalDate.of(2022, 10, 1), LocalDate.of(2022, 12, 31), true),
+            Arguments.of(LocalDate.of(2022, 6, 1), LocalDate.of(2022, 11, 30), true),
+            Arguments.of(LocalDate.of(2022, 10, 31), LocalDate.of(2022, 11, 30), true),
+            Arguments.of(LocalDate.of(2022, 2, 1), LocalDate.of(2022, 5, 31), false),
+            Arguments.of(LocalDate.of(2022, 12, 1), LocalDate.of(2022, 12, 31), false)
+        );
+      }
+    }
+
+  }
 }

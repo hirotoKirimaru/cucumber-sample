@@ -25,6 +25,13 @@ public class Term {
   @NonNull
   private final LocalDate end;
 
+  public record Term2(LocalDate start, LocalDate end) {
+    public boolean isOverlap(
+        @NonNull Term2 param
+    ) {
+      return !start.isAfter(param.end()) && !param.start().isAfter(end);
+    }
+  }
 
   /**
    * 契約日と解約日の間に暦上で何か月の差分があるかを計算する。 端数がある場合は、切り上げる。 NOTE: Nヵ月後の日付の場合を、1ヵ月とする場合。 01/01～02/01 = 1 ヵ月 +
@@ -189,7 +196,7 @@ public class Term {
   public boolean isOverlap(
       @NonNull Term param
   ) {
-    return (!param.getEnd().isBefore(start)) && (!param.getStart().isAfter(end));
+    return !start.isAfter(param.getEnd()) && !param.getStart().isAfter(end);
   }
 
 }
