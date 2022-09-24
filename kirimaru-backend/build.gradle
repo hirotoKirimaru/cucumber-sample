@@ -7,6 +7,8 @@ plugins {
     id 'org.gradle.test-retry' version '1.1.9'
 }
 
+apply from: 'analysis.gradle'
+
 //bootJar{
 //    archiveFileName = 'kirimaru.jar'
 //}
@@ -135,21 +137,6 @@ test {
 
 }
 
-sonarqube {
-    properties {
-        property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.projectKey", "hirotoKirimaru_cucumber-sample"
-        property "sonar.organization", "hirotokirimaru-github"
-        property "sonar.login", "7a3d5a80c3619dce9eef1efa9d4e9b9fbf0b9f83"
-//        print "${project.buildDir}"
-//        property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
-        property "sonar.jacoco.reportPath", "/kirimaru-backend/build/jacoco/test.exec"
-        property "sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
-    }
-//    doLast {
-//        print "${project.buildDir}"
-//    }
-}
 jacocoTestReport {
     reports {
         xml.enabled true
