@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        springBootVersion = "2.6.4"
-        springDependencyManagementVersion = "1.0.11.RELEASE"
+        springBootVersion = "2.7.4"
+        springDependencyManagementVersion = "1.0.14.RELEASE"
     }
 }
 
@@ -10,9 +10,6 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
-//    apply plugin: 'checkstyle'
-//    apply plugin: 'idea'
-//    apply plugin: 'jacoco'
 
     repositories {
         mavenCentral()
@@ -30,22 +27,7 @@ subprojects {
     compileTestJava {
         options.encoding = "UTF-8"
     }
-//
-//    task copyDependencies(type: Copy) {
-//        from configurations.compileClasspath
-//        into 'build/deps'
-//    }
 
-//    test {
-//        useJUnitPlatform()
-//    }
-//    jacocoTestReport {
-//        reports {
-//            xml.enabled true
-//            html.enabled true
-//            csv.enabled false
-//        }
-//    }
 }
 task jacocoRootReport(type: JacocoReport){
     dependsOn = subprojects.test
