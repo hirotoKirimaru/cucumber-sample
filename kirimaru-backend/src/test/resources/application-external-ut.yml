@@ -4,9 +4,10 @@ external:
     protocol: http
     port: 80
     timeout: 3
-  twitter:
+  twitter: &twitter
     <<: *common
     endpoint: twitter
+  twitter2: *twitter
   facebook:
     <<: *common
     port: 10080
