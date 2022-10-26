@@ -56,4 +56,68 @@ class AppStringTest {
       ).isEqualTo("");
     }
   }
+
+  @Nested
+  class IllegalByteCount {
+
+    @Test
+    void test_01() {
+      assertThat(
+          AppString.of("1111").illegalByteCount(4)
+      ).isFalse();
+    }
+
+    @Test
+    void test_02() {
+      assertThat(
+          AppString.of("1111").illegalByteCount(3)
+      ).isTrue();
+    }
+
+    @Test
+    void test_03() {
+      assertThat(
+          AppString.of("吉野家").illegalByteCount(9)
+      ).isFalse();
+    }
+
+    @Test
+    void test_04() {
+      assertThat(
+          AppString.of("吉野家").illegalByteCount(8)
+      ).isTrue();
+    }
+  }
+
+  @Nested
+  class IllegalWordCount {
+
+    @Test
+    void test_01() {
+      assertThat(
+          AppString.of("1111").illegalWordCount(4)
+      ).isFalse();
+    }
+
+    @Test
+    void test_02() {
+      assertThat(
+          AppString.of("1111").illegalWordCount(3)
+      ).isTrue();
+    }
+
+    @Test
+    void test_03() {
+      assertThat(
+          AppString.of("吉野家").illegalWordCount(3)
+      ).isFalse();
+    }
+
+    @Test
+    void test_04() {
+      assertThat(
+          AppString.of("吉野家").illegalWordCount(2)
+      ).isTrue();
+    }
+  }
 }

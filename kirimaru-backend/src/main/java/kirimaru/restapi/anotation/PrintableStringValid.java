@@ -12,15 +12,18 @@ import javax.validation.Payload;
 @Constraint(validatedBy = {AppStringValidator.class})
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AppStringValid {
-  String message() default "文字数が規定より超えています。";
+public @interface PrintableStringValid {
+  String message() default "使用不可能な文字が含まれています。";
   Class<?>[] groups() default {};
   Class<? extends Payload>[] payload() default {};
+
+  int byteCount() default 0;
+  int wordCount() default 0;
 
   @Target({ElementType.FIELD})
   @Retention(RetentionPolicy.RUNTIME)
   @Documented
   @interface List {
-    AppStringValid[] value();
+    PrintableStringValid[] value();
   }
 }

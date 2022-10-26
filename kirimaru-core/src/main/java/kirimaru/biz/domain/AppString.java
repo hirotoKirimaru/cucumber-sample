@@ -2,7 +2,6 @@ package kirimaru.biz.domain;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -50,5 +49,23 @@ public class AppString implements Serializable {
   @Override
   public String toString() {
     return value == null ? "" : value;
+  }
+
+  /**
+   * 規定のバイト数を超過しているかどうか。
+   * @param byteCount 規定のバイト数
+   * @return false = 以下, true = 超過
+   */
+  public boolean illegalByteCount(int byteCount){
+    return value.getBytes(StandardCharsets.UTF_8).length > byteCount;
+  }
+
+  /**
+   * 規定の単純な文字数を超過しているかどうか。
+   * @param count 規定の単純な文字数
+   * @return false = 以下, true = 超過
+   */
+  public boolean illegalWordCount(int count){
+    return value.length() > count;
   }
 }
