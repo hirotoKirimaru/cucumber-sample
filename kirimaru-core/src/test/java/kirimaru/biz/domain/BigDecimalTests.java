@@ -427,4 +427,21 @@ class BigDecimalTests {
         BigDecimal.ZERO.signum()
     ).isEqualTo(0);
   }
+
+  @Test
+  void test_27() {
+    assertThat(
+        new BigDecimal("1.00000000000").scale()
+    ).isEqualTo(11);
+    assertThat(
+        new BigDecimal("1.00000000000").stripTrailingZeros().scale()
+    ).isEqualTo(0);
+
+    assertThat(
+        new BigDecimal("1.00000000001").scale()
+    ).isEqualTo(11);
+    assertThat(
+        new BigDecimal("1.00000000001").stripTrailingZeros().scale()
+    ).isEqualTo(11);
+  }
 }
