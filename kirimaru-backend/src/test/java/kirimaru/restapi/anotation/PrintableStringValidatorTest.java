@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
-class AppStringValidatorTest {
+class PrintableStringValidatorTest {
 
   private Validator validator;
 
@@ -50,18 +50,20 @@ class AppStringValidatorTest {
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) throws Exception {
       return Stream.of(
           new Target(null, false),
-          new Target("あいうえおかきくけこ", false),
-          new Target("あいうえおかきくけこさ", true),
-          new Target("1234567890", false),
-          new Target("12345678901", true)
-
+          new Target("あいうえお", false),
+          new Target("吉野家", false),
+          new Target("𠮷野家", true),
+          new Target("🥺", true),
+          new Target("あい🥺うえお", true),
+          new Target("∥", true),
+          new Target("あい∥うえお", true)
       ).map(Arguments::of);
     }
   }
 
   private static class TestBean {
 
-    @AppStringValid(byteCount = 30, wordCount = 10)
+    @PrintableStringValid
     private String targetStr;
 
     TestBean(String targetStr) {

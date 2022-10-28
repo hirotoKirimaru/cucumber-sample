@@ -17,6 +17,9 @@ public @interface AppStringValid {
   Class<?>[] groups() default {};
   Class<? extends Payload>[] payload() default {};
 
+  int byteCount() default 0;
+  int wordCount() default 0;
+
   @Target({ElementType.FIELD})
   @Retention(RetentionPolicy.RUNTIME)
   @Documented
