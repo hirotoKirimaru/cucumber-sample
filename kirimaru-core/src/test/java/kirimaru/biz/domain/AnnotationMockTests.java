@@ -1,16 +1,23 @@
 package kirimaru.biz.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Answers;
-import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-class MockTests {
+@ExtendWith(MockitoExtension.class)
+class AnnotationMockTests {
 
+  @Component
   public class Target {
 
     public String getFirst() {
@@ -28,46 +35,27 @@ class MockTests {
   }
 
   @Nested
-  class NoMock {
+  class RealMethod {
 
-    Target target = new Target();
-
-    @Test
-    void test_01() {
-      assertThat(
-          target.getFirst()
-      ).isEqualTo("1");
-    }
-
-    @Test
-    void test_02() {
-      assertThat(
-          target.getSecond()
-      ).isEqualTo("1");
-    }
-  }
-
-  @Nested
-  class Mock {
+    @Mock(answer = Answers.CALLS_REAL_METHODS)
+    Target target;
 
     @Test
     void test_01() {
-      Target target = Mockito.mock(Target.class, Mockito.CALLS_REAL_METHODS);
       SoftAssertions softly = new SoftAssertions();
       softly.assertThat(target.getFirst()).isEqualTo("1");
       softly.assertThat(target.getSecond()).isEqualTo("1");
 
       when(target.getFirst()).thenReturn("123");
-
       softly.assertThat(target.getFirst()).isEqualTo("123");
       softly.assertThat(target.getSecond()).isEqualTo("123");
 
       softly.assertAll();
     }
 
+    @Disabled("第二引数の変更が必要")
     @Test
     void test_02() {
-      Target target = Mockito.mock(Target.class);
       SoftAssertions softly = new SoftAssertions();
       softly.assertThat(target.getFirst()).isNull();
       softly.assertThat(target.getSecond()).isNull();
@@ -80,12 +68,30 @@ class MockTests {
       softly.assertAll();
     }
   }
+
   @Nested
-  class PartialMock {
+  @SpringJUnitConfig(AnnotationMockTests.Config.class)
+  class MockBean {
+
+    @org.springframework.boot.test.mock.mockito.MockBean(answer = Answers.CALLS_REAL_METHODS)
+    Target target;
 
     @Test
     void test_01() {
-      Target target = Mockito.mock(Target.class);
+      SoftAssertions softly = new SoftAssertions();
+      softly.assertThat(target.getFirst()).isEqualTo("1");
+      softly.assertThat(target.getSecond()).isEqualTo("1");
+
+      when(target.getFirst()).thenReturn("123");
+      softly.assertThat(target.getFirst()).isEqualTo("123");
+      softly.assertThat(target.getSecond()).isEqualTo("123");
+
+      softly.assertAll();
+    }
+
+    @Disabled("第二引数の変更が必要")
+    @Test
+    void test_02() {
       SoftAssertions softly = new SoftAssertions();
       softly.assertThat(target.getFirst()).isNull();
       softly.assertThat(target.getSecond()).isNull();
@@ -95,13 +101,12 @@ class MockTests {
       softly.assertThat(target.getFirst()).isEqualTo("123");
       softly.assertThat(target.getSecond()).isNull();
 
-      when(target.getSecond()).thenCallRealMethod();
-
-      softly.assertThat(target.getFirst()).isEqualTo("123");
-      softly.assertThat(target.getSecond()).isEqualTo("123");
-
-
       softly.assertAll();
     }
+  }
+
+  @ComponentScan({"kirimaru.biz.domain.hogehoge.tekitou"})
+  public static class Config {
+
   }
 }
