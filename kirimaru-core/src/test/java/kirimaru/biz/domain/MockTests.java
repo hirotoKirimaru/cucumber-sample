@@ -79,4 +79,28 @@ class MockTests {
       softly.assertAll();
     }
   }
+  @Nested
+  class PartialMock {
+
+    @Test
+    void test_01() {
+      Target target = Mockito.mock(Target.class);
+      SoftAssertions softly = new SoftAssertions();
+      softly.assertThat(target.getFirst()).isNull();
+      softly.assertThat(target.getSecond()).isNull();
+
+      when(target.getFirst()).thenReturn("123");
+
+      softly.assertThat(target.getFirst()).isEqualTo("123");
+      softly.assertThat(target.getSecond()).isNull();
+
+      when(target.getSecond()).thenCallRealMethod();
+
+      softly.assertThat(target.getFirst()).isEqualTo("123");
+      softly.assertThat(target.getSecond()).isEqualTo("123");
+
+
+      softly.assertAll();
+    }
+  }
 }
