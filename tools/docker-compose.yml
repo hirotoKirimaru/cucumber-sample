@@ -11,3 +11,10 @@ services:
       POSTGRES_DB: database
     hostname: postgres
     restart: always
+    networks: &dev_net
+      - develop
+  redis:
+    image: redis:latest
+    networks: *dev_net
+networks:
+  develop:
