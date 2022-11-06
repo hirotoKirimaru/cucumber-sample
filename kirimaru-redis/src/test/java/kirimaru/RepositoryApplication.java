@@ -17,10 +17,19 @@ public class RepositoryApplication {
   private static final GenericContainer<?> redis;
 
   static {
-    redis = new GenericContainer<>(DockerImageName.parse("redis:latest"))
+    // latestだと接続できない？？？
+    // alpineじゃないと接続できない？？？
+//    GenericContainer<?> redis = new GenericContainer<>(DockerImageName.parse("redis:latest"))
+    redis = new GenericContainer<>(DockerImageName.parse("redis:7.0.5-alpine"))
         .withExposedPorts(6379);
     redis.start();
+    System.setProperty("spring.redis.host", redis.getHost());
+    System.setProperty("spring.redis.port", redis.getMappedPort(6379).toString());
   }
+
+//  @DynamicPropertySource
+//  static void setup(DynamicPropertyRegistry registry) {
+//  }
 
   @Test
   void contextLoads() {
