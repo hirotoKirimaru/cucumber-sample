@@ -1,5 +1,6 @@
 package kirimaru;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -11,6 +12,7 @@ import org.testcontainers.utility.DockerImageName;
 
 @SpringBootApplication
 @Testcontainers
+@Slf4j
 public class RepositoryApplication {
 
   @Container
@@ -22,9 +24,12 @@ public class RepositoryApplication {
 //    GenericContainer<?> redis = new GenericContainer<>(DockerImageName.parse("redis:latest"))
     redis = new GenericContainer<>(DockerImageName.parse("redis:7.0.5-alpine"))
         .withExposedPorts(6379);
+    log.error("*************");
+    log.error(redis.toString());
     redis.start();
-    System.setProperty("spring.redis.host", redis.getHost());
-    System.setProperty("spring.redis.port", redis.getMappedPort(6379).toString());
+    log.error("***********");
+//    System.setProperty("spring.redis.host", redis.getHost());
+//    System.setProperty("spring.redis.port", redis.getMappedPort(6379).toString());
   }
 
 //  @DynamicPropertySource
