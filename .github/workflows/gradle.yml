@@ -24,9 +24,9 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 17
-    - name: docker images
-      working-directory: tools
-      run: docker-compose build redis
+#    - name: docker images
+#      working-directory: tools
+#      run: docker-compose build redis
     - name: sudo
       run: sudo chmod +x ./gradlew
     - name: Build with Gradle
