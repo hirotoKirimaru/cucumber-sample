@@ -14,12 +14,11 @@ import org.testcontainers.utility.DockerImageName;
 public class RepositoryApplication {
 
   @Container
-  private static final GenericContainer<?> redis =
-      new GenericContainer<>(DockerImageName.parse("redis:latest"))
-          .withExposedPorts(6379);
+  private static final GenericContainer<?> redis;
 
-  @DynamicPropertySource
-  static void setup(DynamicPropertyRegistry registry) {
+  static {
+    redis = new GenericContainer<>(DockerImageName.parse("redis:latest"))
+        .withExposedPorts(6379);
     redis.start();
   }
 
