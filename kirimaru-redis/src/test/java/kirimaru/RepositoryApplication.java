@@ -26,7 +26,10 @@ public class RepositoryApplication {
         .withExposedPorts(6379);
     log.error("*************");
     log.error(redis.toString());
+    System.out.println("****************");
+    System.out.println(redis);
     redis.start();
+    System.out.println("******************");
     log.error("***********");
 //    System.setProperty("spring.redis.host", redis.getHost());
 //    System.setProperty("spring.redis.port", redis.getMappedPort(6379).toString());
