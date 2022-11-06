@@ -7,11 +7,13 @@ import java.util.List;
 import kirimaru.biz.mapper.dto.UserDto;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
 
 @DataRedisTest
+@Disabled
 class UserRedisMapperTests {
   @Autowired
   UserRedisMapper mapper;
