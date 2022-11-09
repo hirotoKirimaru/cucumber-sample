@@ -1,7 +1,6 @@
 package kirimaru.helper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,7 @@ class DebugTests {
     @Test
     void test_02() {
       assertThat(
-          DebugUtil.getLineNo()
+          Debugs.getLineNo()
       ).isEqualTo(25);
     }
   }
