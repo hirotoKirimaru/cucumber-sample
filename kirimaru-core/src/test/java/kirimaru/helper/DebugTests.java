@@ -15,14 +15,14 @@ class DebugTests {
     void test_01() {
       assertThat(
           new TestClass().getLineNo()
-      ).isEqualTo(18);
+      ).isEqualTo(17);
     }
 
     @Test
     void test_02() {
       assertThat(
           Debugs.getLineNo()
-      ).isEqualTo(25);
+      ).isEqualTo(24);
     }
   }
 }
