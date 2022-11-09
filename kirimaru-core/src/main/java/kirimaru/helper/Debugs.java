@@ -3,6 +3,9 @@ package kirimaru.helper;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import java.time.LocalDateTime;
@@ -19,7 +22,7 @@ public class Debugs {
     return Thread.currentThread().getStackTrace()[2].getLineNumber();
   }
 
-  public static String debugJson(@Nullable Object object) {
+  public static String debugJson(@Nullable Object object, String... ignore) {
     if (object == null) {
       return "";
     }
@@ -44,8 +47,14 @@ public class Debugs {
           new LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss"))
       );
       om.registerModule(javaTimeModule);
-      log.debug(om.writeValueAsString(object));
-      return om.writeValueAsString(object);
+
+      SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter
+          .serializeAllExcept(ignore);
+      FilterProvider filters = new SimpleFilterProvider()
+          .addFilter("myFilter", theFilter);
+
+      log.debug(om.writer(filters).writeValueAsString(object));
+      return om.writer(filters).writeValueAsString(object);
       // 自分で頑張ってJSON作るときにはこっち。親クラス名が欲しいときはこっちで作るといいかも。
       // ただ、Stringの"がエスケープされてすごい見づらい。
 //      ObjectNode objectNode = om.createObjectNode();

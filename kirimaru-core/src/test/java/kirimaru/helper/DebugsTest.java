@@ -2,11 +2,13 @@ package kirimaru.helper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 import org.json.JSONException;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -24,6 +26,8 @@ class DebugsTest {
       private String id;
       private String name;
       private LocalDateTime createdAt;
+      @JsonIgnore
+      private String ignore;
       private Children children;
     }
 
@@ -86,6 +90,7 @@ class DebugsTest {
           Parent.builder()
               .id("10000")
               .name("親")
+              .ignore("無視")
               .children(Children.builder()
                   .children(List.of(
                       Child.builder()
@@ -179,5 +184,94 @@ class DebugsTest {
           JSONCompareMode.STRICT
       );
     }
+
+    @Test
+    void test_07() throws JSONException {
+      // LANGUAGE=JSON
+      String expect = """
+           {
+              "name": "親",
+              "children": {
+              "children": [
+                {
+                  "id": "20001"
+                },
+                {
+                  "id": "20002",
+                  "name": "2番目"
+                }
+              ]
+            }
+          }
+          """;
+      String actual = Debugs.debugJson(
+          Parent.builder()
+              .name("親")
+              .ignore("無視")
+              .children(Children.builder()
+                  .children(List.of(
+                      Child.builder()
+                          .id("20001")
+                          .name(null)
+                          .build(),
+                      Child.builder()
+                          .id("20002")
+                          .name("2番目")
+                          .build()
+                  ))
+                  .build())
+              .build()
+          , "id"
+      );
+      JSONAssert.assertEquals(
+          expect,
+          actual,
+          JSONCompareMode.STRICT
+      );
+    }
+
+    @Test
+    @Disabled("子の指定方法が分からない")
+    void test_08() throws JSONException {
+      // LANGUAGE=JSON
+      String expect = """
+           {
+              "name": "親",
+              "children": {
+              "children": [
+                {
+                  "id": "20002",
+                  "name": "2番目"
+                }
+              ]
+            }
+          }
+          """;
+      String actual = Debugs.debugJson(
+          Parent.builder()
+              .name("親")
+              .ignore("無視")
+              .children(Children.builder()
+                  .children(List.of(
+                      Child.builder()
+                          .id("20001")
+                          .name(null)
+                          .build(),
+                      Child.builder()
+                          .id("20002")
+                          .name("2番目")
+                          .build()
+                  ))
+                  .build())
+              .build()
+          , "id", "children.children[0]"
+      );
+      JSONAssert.assertEquals(
+          expect,
+          actual,
+          JSONCompareMode.STRICT
+      );
+    }
+
   }
 }
