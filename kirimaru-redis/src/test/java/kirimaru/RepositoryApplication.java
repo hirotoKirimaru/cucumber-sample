@@ -26,9 +26,11 @@ public class RepositoryApplication {
 //    GenericContainer<?>
     redis = new GenericContainer<>(DockerImageName.parse("redis:latest"))
 //    redis = new GenericContainer<>(DockerImageName.parse("redis:7.0.5-alpine"))
-        .withExposedPorts(port)
+        .withExposedPorts(6379, 16379, 26379, 36379)
     ;
-    // TODO: GitHub Actionsでは49154????
+    // 結局、使えるポートかが分からないから、デフォルトの6379以外も開けておく
+    // GitHub Actionsだと6379ポートは使ってる？
+
 
 //    log.error("*************");
 //    log.error(redis.toString());
@@ -38,7 +40,8 @@ public class RepositoryApplication {
 //    System.out.println("******************");
 //    log.error("***********");
     System.setProperty("spring.redis.host", redis.getHost());
-    System.setProperty("spring.redis.port", redis.getMappedPort(port).toString());
+    System.setProperty("spring.redis.port", redis.getFirstMappedPort().toString());
+//    System.setProperty("spring.redis.port", redis.getMappedPort(port).toString());
   }
 
   // TODO: こっちじゃうまく接続できない
