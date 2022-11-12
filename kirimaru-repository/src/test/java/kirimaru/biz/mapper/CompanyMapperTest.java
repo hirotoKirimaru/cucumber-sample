@@ -3,6 +3,7 @@ package kirimaru.biz.mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import kirimaru.biz.mapper.dto.CompanyDepartmentDto;
 import kirimaru.biz.mapper.dto.CompanyDto;
 import kirimaru.biz.mapper.dto.DepartmentDto;
@@ -39,19 +40,20 @@ class CompanyMapperTest extends CommonSetup {
 
     @Test
     void test_01() {
-      CompanyDto entity = CompanyDto.builder()
-          .companyId("1")
-          .name("親企業")
-          .build();
-
-      mapper.insert(entity);
-
       DepartmentDto departmentDto = DepartmentDto.builder()
           .departmentId("100")
           .name("プロダクト部")
           .build();
 
       departmentMapper.insert(departmentDto);
+
+      CompanyDto entity = CompanyDto.builder()
+          .companyId("1")
+          .name("親企業")
+          .departmentList(List.of(departmentDto))
+          .build();
+
+      mapper.insert(entity);
 
       CompanyDepartmentDto companyDepartmentDto = CompanyDepartmentDto.builder()
           .companyId(entity.getCompanyId())

@@ -23,7 +23,7 @@ public interface DepartmentMapper {
   @Select("""
       SELECT DEPARTMENT.*
        FROM DEPARTMENT, COMPANY_DEPARTMENT
-       WHERE DEPARTMENT.COMPANY_ID = COMPANY_DEPARTMENT.COMPANY_ID
+       WHERE DEPARTMENT.DEPARTMENT_ID = COMPANY_DEPARTMENT.DEPARTMENT_ID
        AND COMPANY_ID = #{companyId}
       """)
   List<DepartmentDto> findByCompanyId(@Param("companyId") String id);

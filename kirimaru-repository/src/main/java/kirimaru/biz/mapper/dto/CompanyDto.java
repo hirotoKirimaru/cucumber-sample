@@ -16,5 +16,6 @@ public class CompanyDto implements Serializable {
   String companyId;
   String name;
 
-  List<DepartmentDto> departmentList;
+  @Builder.Default
+  List<DepartmentDto> departmentList = List.of();
 }
