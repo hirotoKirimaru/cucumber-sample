@@ -44,6 +44,8 @@ jobs:
     - name: sudo
       run: sudo chmod +x ./gradlew
     - name: Build with Gradle
+      env:
+        GITHUB: true
       run: ./gradlew build
     - name: test
       env:
