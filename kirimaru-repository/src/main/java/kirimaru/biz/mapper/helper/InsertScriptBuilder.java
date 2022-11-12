@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class InsertScriptBuilder {
+
   private CodeConstant.DbTable table;
   private List<Field> field = new ArrayList();
+  private boolean commonColumn = false;
 
   public String build() {
     var sb = new StringBuilder();
@@ -29,11 +31,13 @@ public class InsertScriptBuilder {
         sj.add(field1.columnName);
       }
     }
+    if (commonColumn) {
+      sj.add("generate_date");
+      sj.add("generate_user");
+      sj.add("update_date");
+      sj.add("update_user");
 
-    sj.add("generate_date");
-    sj.add("generate_user");
-    sj.add("update_date");
-    sj.add("update_user");
+    }
 
     sb.append(sj).append(" VALUES ");
 
@@ -48,11 +52,12 @@ public class InsertScriptBuilder {
 //    sj.add("'" + LocalDateTime.of(2021, 10, 1, 2, 3).toString() + "'");
 //    sj.add("'kirimaru'");
 
-
-    sj.add("'" + StaticBeanAccessor.getNowString() + "'");
-    sj.add("'" + StaticBeanAccessor.getUser() + "'");
-    sj.add("'" + StaticBeanAccessor.getNowString() + "'");
-    sj.add("'" + StaticBeanAccessor.getUser() + "'");
+    if (commonColumn) {
+      sj.add("'" + StaticBeanAccessor.getNowString() + "'");
+      sj.add("'" + StaticBeanAccessor.getUser() + "'");
+      sj.add("'" + StaticBeanAccessor.getNowString() + "'");
+      sj.add("'" + StaticBeanAccessor.getUser() + "'");
+    }
 
     sb.append(sj);
     sb.append("</script>");
@@ -70,9 +75,14 @@ public class InsertScriptBuilder {
     return this;
   }
 
+  public InsertScriptBuilder commonUpdateColumn(boolean bool) {
+    this.commonColumn = bool;
+    return this;
+  }
 
   @AllArgsConstructor
   private class Field {
+
     private final String columnName;
     private final String attributeName;
     private final Object attribute;

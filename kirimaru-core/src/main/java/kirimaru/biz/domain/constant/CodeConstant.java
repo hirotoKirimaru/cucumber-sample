@@ -8,7 +8,14 @@ public final class CodeConstant {
   @AllArgsConstructor
   @Getter
   public enum DbTable {
-    BOOK("book");
+    BOOK("book"),
+    USERS("users"),
+    COMPANY("company"),
+    DEPARTMENT("department"),
+    DEPARTMENT_MEMBER("department_member")
+
+
+    ;
 
     String table;
   }

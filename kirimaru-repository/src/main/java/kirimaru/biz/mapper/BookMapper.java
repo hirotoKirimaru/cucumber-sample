@@ -35,6 +35,7 @@ public interface BookMapper {
 //          .field("generate_user", "generateUser", record.getGenerateUser())
 //          .field("update_date", "updateDate", record.getUpdateDate())
 //          .field("update_user", "updateUser", record.getUpdateUser())
+          .commonUpdateColumn(true)
           .build();
     }
   }
