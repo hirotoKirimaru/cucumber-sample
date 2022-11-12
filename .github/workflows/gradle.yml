@@ -10,16 +10,16 @@ jobs:
     # redisのコンテナを立てる？
     # https://docs.github.com/ja/actions/using-containerized-services/creating-redis-service-containers
     # Service containers to run with `container-job`
-    services:
-      redis:
-        image: redis
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+#    services:
+#      redis:
+#        image: redis
+#        ports:
+#          - 6379:6379
+#        options: >-
+#          --health-cmd "redis-cli ping"
+#          --health-interval 10s
+#          --health-timeout 5s
+#          --health-retries 5
 
     steps:
     - uses: actions/checkout@v1
@@ -46,6 +46,8 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: test
+      env:
+        GITHUB: true
       run: ./gradlew test
     - if: always()
       name: Upload test result

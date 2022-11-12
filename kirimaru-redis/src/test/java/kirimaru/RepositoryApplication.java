@@ -1,16 +1,19 @@
 package kirimaru;
 
+import kirimaru.biz.mapper.testexecutionlistner.DisabledOnGitHubTestExecutionListener;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.context.TestExecutionListeners;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 @SpringBootApplication
+@TestExecutionListeners(DisabledOnGitHubTestExecutionListener.class)
 @Testcontainers
 @Slf4j
 public class RepositoryApplication {

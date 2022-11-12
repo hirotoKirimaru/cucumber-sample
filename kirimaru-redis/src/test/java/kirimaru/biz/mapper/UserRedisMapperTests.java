@@ -4,16 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import kirimaru.biz.mapper.anotation.DisabledOnGitHub;
 import kirimaru.biz.mapper.dto.UserDto;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
 
 @DataRedisTest
-//@Disabled
+@DisabledOnGitHub
 class UserRedisMapperTests {
   @Autowired
   UserRedisMapper mapper;
