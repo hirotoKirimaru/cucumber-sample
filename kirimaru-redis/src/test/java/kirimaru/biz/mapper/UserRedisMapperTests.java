@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
 
 @DataRedisTest
-@Disabled
+//@Disabled
 class UserRedisMapperTests {
   @Autowired
   UserRedisMapper mapper;

@@ -21,18 +21,19 @@ public class RepositoryApplication {
   static {
     // latestだと接続できない？？？
     // alpineじゃないと接続できない？？？
-//    GenericContainer<?> redis = new GenericContainer<>(DockerImageName.parse("redis:latest"))
-    redis = new GenericContainer<>(DockerImageName.parse("redis:7.0.5-alpine"))
+//    GenericContainer<?>
+      redis = new GenericContainer<>(DockerImageName.parse("redis:latest"))
+//    redis = new GenericContainer<>(DockerImageName.parse("redis:7.0.5-alpine"))
         .withExposedPorts(6379);
-    log.error("*************");
-    log.error(redis.toString());
-    System.out.println("****************");
-    System.out.println(redis);
+//    log.error("*************");
+//    log.error(redis.toString());
+//    System.out.println("****************");
+//    System.out.println(redis);
     redis.start();
-    System.out.println("******************");
-    log.error("***********");
-//    System.setProperty("spring.redis.host", redis.getHost());
-//    System.setProperty("spring.redis.port", redis.getMappedPort(6379).toString());
+//    System.out.println("******************");
+//    log.error("***********");
+    System.setProperty("spring.redis.host", redis.getHost());
+    System.setProperty("spring.redis.port", redis.getMappedPort(6379).toString());
   }
 
 //  @DynamicPropertySource
