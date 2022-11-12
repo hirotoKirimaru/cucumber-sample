@@ -9,13 +9,16 @@ import kirimaru.biz.mapper.dto.UserDto;
 import kirimaru.biz.mapper.testexecutionlistner.DisabledOnGitHubTestExecutionListener;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
 import org.springframework.test.context.TestExecutionListeners;
 
 @DataRedisTest
-@TestExecutionListeners(DisabledOnGitHubTestExecutionListener.class) // TODO: DIができなくなる。
-@DisabledOnGitHub
+//@TestExecutionListeners(DisabledOnGitHubTestExecutionListener.class) // TODO: DIができなくなる。
+//@DisabledOnGitHub
+@DisabledOnOs(OS.LINUX)
 class UserRedisMapperTests {
   @Autowired
   UserRedisMapper mapper;
