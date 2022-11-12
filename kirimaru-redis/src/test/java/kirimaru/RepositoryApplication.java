@@ -13,7 +13,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 @SpringBootApplication
-@TestExecutionListeners(DisabledOnGitHubTestExecutionListener.class)
 @Testcontainers
 @Slf4j
 public class RepositoryApplication {
