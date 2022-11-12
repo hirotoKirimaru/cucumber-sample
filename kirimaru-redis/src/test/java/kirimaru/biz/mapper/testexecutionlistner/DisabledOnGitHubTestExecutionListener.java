@@ -43,8 +43,9 @@ public class DisabledOnGitHubTestExecutionListener implements TestExecutionListe
       return true;
     }
 
-    String property = testContext.getApplicationContext().getEnvironment()
-        .getProperty("GITHUB");
+//    String property = testContext.getApplicationContext().getEnvironment()
+//        .getProperty("GITHUB");
+    String property = System.getProperty("GITHUB");
     return !Boolean.parseBoolean(property);
   }
 }
