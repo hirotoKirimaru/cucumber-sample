@@ -11,6 +11,7 @@ public final class CodeConstant {
     BOOK("book"),
     USERS("users"),
     COMPANY("company"),
+    COMPANY_DEPARTMENT("company_department"),
     DEPARTMENT("department"),
     DEPARTMENT_MEMBER("department_member")
 

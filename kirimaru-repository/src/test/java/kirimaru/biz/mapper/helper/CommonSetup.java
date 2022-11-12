@@ -11,8 +11,12 @@ import javax.sql.DataSource;
 import kirimaru.biz.domain.book.Book;
 import kirimaru.biz.domain.book.Isbn;
 import kirimaru.biz.domain.constant.CodeConstant;
+import kirimaru.biz.domain.constant.CodeConstant.DbTable;
 import kirimaru.biz.mapper.dto.Book2Dto;
 import kirimaru.biz.mapper.dto.BookDto;
+import kirimaru.biz.mapper.dto.CompanyDepartmentDto;
+import kirimaru.biz.mapper.dto.CompanyDto;
+import kirimaru.biz.mapper.dto.DepartmentDto;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,6 +25,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 @MybatisTest
 public class CommonSetup {
+
   @Autowired
   JdbcTemplate jdbcTemplate;
 
@@ -71,7 +76,18 @@ public class CommonSetup {
     for (var record : records) {
       this.simpleJdbcInsert.execute(toMap(record));
     }
+  }
 
+  protected void insertCompanyDepartment(CompanyDepartmentDto... records) {
+    this.simpleJdbcInsert =
+        new SimpleJdbcInsert(dataSource)
+            .withTableName(DbTable.COMPANY_DEPARTMENT.getTable())
+    ;
+    for (var record : records) {
+//      Map<String, Object> map = new HashMap<>();
+//      map.put("company_id", record.get(""))
+      this.simpleJdbcInsert.execute(toMap(record));
+    }
   }
 
   public Map<String, Object> toMap(Serializable entity) {
@@ -84,7 +100,8 @@ public class CommonSetup {
         continue;
       }
 
-      var snakeName = new PropertyNamingStrategy.SnakeCaseStrategy().translate(readablePropertyName);
+      var snakeName = new PropertyNamingStrategy.SnakeCaseStrategy().translate(
+          readablePropertyName);
       Object object = source.getValue(readablePropertyName);
 
       if (object instanceof Serializable) {

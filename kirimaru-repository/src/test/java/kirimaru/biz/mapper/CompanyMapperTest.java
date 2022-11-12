@@ -3,7 +3,9 @@ package kirimaru.biz.mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+import kirimaru.biz.mapper.dto.CompanyDepartmentDto;
 import kirimaru.biz.mapper.dto.CompanyDto;
+import kirimaru.biz.mapper.dto.DepartmentDto;
 import kirimaru.biz.mapper.helper.CommonSetup;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
@@ -14,6 +16,9 @@ class CompanyMapperTest extends CommonSetup {
 
   @Autowired
   CompanyMapper mapper;
+
+  @Autowired
+  DepartmentMapper departmentMapper;
 
   @Test
   void test_01() {
@@ -30,7 +35,6 @@ class CompanyMapperTest extends CommonSetup {
   }
 
   @Nested
-  @Disabled("後回し")
   class LazyLoad {
 
     @Test
@@ -42,8 +46,26 @@ class CompanyMapperTest extends CommonSetup {
 
       mapper.insert(entity);
 
+      DepartmentDto departmentDto = DepartmentDto.builder()
+          .departmentId("100")
+          .name("プロダクト部")
+          .build();
+
+      departmentMapper.insert(departmentDto);
+
+      CompanyDepartmentDto companyDepartmentDto = CompanyDepartmentDto.builder()
+          .companyId(entity.getCompanyId())
+          .departmentId(departmentDto.getDepartmentId())
+          .build();
+      insertCompanyDepartment(companyDepartmentDto);
+
+      // WHEN & THEN
+      CompanyDto actual = mapper.findByPrimaryKey("1");
+      actual.getDepartmentList();
+      // TODO: lazy_load???
+
       assertThat(
-          mapper.findByPrimaryKey("1")
+          actual
       ).isEqualTo(entity);
     }
   }
