@@ -19,7 +19,7 @@ public interface UsersMapper {
   UserDto findByPrimaryKey(@Param("userId") String id);
 
   @InsertProvider(type = UsersMapper.ScriptBuilder.class, method = "insert")
-  int insert(@Param("user") UserDto user);
+  int insert(UserDto user);
 
   class ScriptBuilder {
 

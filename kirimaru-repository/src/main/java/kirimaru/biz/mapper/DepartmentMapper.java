@@ -20,16 +20,15 @@ public interface DepartmentMapper {
   DepartmentDto findByPrimaryKey(@Param("departmentId") String id);
 
   @InsertProvider(type = DepartmentMapper.ScriptBuilder.class, method = "insert")
-  int insert(@Param("department") DepartmentDto entity);
+  int insert(DepartmentDto entity);
 
   class ScriptBuilder {
 
     public String insert(DepartmentDto entity) {
       return new InsertScriptBuilder()
           .table(DbTable.DEPARTMENT)
-          .field("departmentId", "department_id", entity.getDepartmentId())
+          .field("department_id", "departmentId", entity.getDepartmentId())
           .field("name", "name", entity.getName())
-
           .build();
     }
   }

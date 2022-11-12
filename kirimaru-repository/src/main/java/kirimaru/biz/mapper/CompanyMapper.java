@@ -5,13 +5,18 @@ import kirimaru.biz.mapper.dto.CompanyDto;
 import kirimaru.biz.mapper.dto.UserDto;
 import kirimaru.biz.mapper.helper.InsertScriptBuilder;
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.mapping.FetchType;
 
 @Mapper
 public interface CompanyMapper {
 
+//  @Results(id = "company", value = @Result(property = "departmentList", many = @Many(select = "", fetchType = FetchType.LAZY)))
   @Select("""
       SELECT * 
       FROM COMPANY
@@ -25,12 +30,9 @@ public interface CompanyMapper {
   class ScriptBuilder {
 
     public String insert(CompanyDto entity) {
-      return new InsertScriptBuilder()
-          .table(DbTable.COMPANY)
+      return new InsertScriptBuilder().table(DbTable.COMPANY)
           .field("company_id", "companyId", entity.getCompanyId())
-          .field("name", "name", entity.getName())
-          .commonUpdateColumn(false)
-          .build();
+          .field("name", "name", entity.getName()).commonUpdateColumn(false).build();
     }
   }
 }
