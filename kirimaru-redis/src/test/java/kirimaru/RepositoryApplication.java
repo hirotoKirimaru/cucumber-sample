@@ -18,14 +18,17 @@ public class RepositoryApplication {
   @Container
   private static final GenericContainer<?> redis;
 
+  static int port = 6379;
   static {
+//    int port = 49154;
     // latestだと接続できない？？？
     // alpineじゃないと接続できない？？？
 //    GenericContainer<?>
-      redis = new GenericContainer<>(DockerImageName.parse("redis:latest"))
+    redis = new GenericContainer<>(DockerImageName.parse("redis:latest"))
 //    redis = new GenericContainer<>(DockerImageName.parse("redis:7.0.5-alpine"))
-        .withExposedPorts(49154);
-      // TODO: GitHub Actionsでは49154????
+        .withExposedPorts(port)
+    ;
+    // TODO: GitHub Actionsでは49154????
 
 //    log.error("*************");
 //    log.error(redis.toString());
@@ -35,11 +38,16 @@ public class RepositoryApplication {
 //    System.out.println("******************");
 //    log.error("***********");
     System.setProperty("spring.redis.host", redis.getHost());
-    System.setProperty("spring.redis.port", redis.getMappedPort(49154).toString());
+    System.setProperty("spring.redis.port", redis.getMappedPort(port).toString());
   }
 
+  // TODO: こっちじゃうまく接続できない
 //  @DynamicPropertySource
 //  static void setup(DynamicPropertyRegistry registry) {
+//    registry.add("spring.redis.host", redis::getHost);
+//    registry.add("spring.redis.port", () -> redis.getMappedPort(port).toString());
+    // NOTE:
+//    registry.add("spring.redis.port", () -> redis.getFirstMappedPort().toString());
 //  }
 
   @Test
