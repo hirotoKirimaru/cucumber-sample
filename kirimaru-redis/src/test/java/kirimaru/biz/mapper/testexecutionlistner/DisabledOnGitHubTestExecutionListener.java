@@ -3,10 +3,12 @@ package kirimaru.biz.mapper.testexecutionlistner;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import kirimaru.biz.mapper.anotation.DisabledOnGitHub;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListener;
 
+@Slf4j
 public class DisabledOnGitHubTestExecutionListener implements TestExecutionListener {
 
   @Override
@@ -46,9 +48,9 @@ public class DisabledOnGitHubTestExecutionListener implements TestExecutionListe
     String property = testContext.getApplicationContext().getEnvironment()
         .getProperty("GITHUB");
     String property2 = System.getProperty("GITHUB");
-    System.out.println("*************");
-    System.out.println(property);
-    System.out.println(property2);
+    log.error("*************");
+    log.error(property);
+    log.error(property2);
 
     return !Boolean.parseBoolean(property);
   }

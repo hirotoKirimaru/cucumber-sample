@@ -2,3 +2,6 @@ app:
   config:
     appName: "Kirimaru"
     local: "true"
+logging.level:
+  root: DEBUG
+  org.springframework.web: DEBUG
