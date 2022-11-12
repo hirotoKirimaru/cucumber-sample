@@ -1,5 +1,6 @@
 package kirimaru.biz.mapper;
 
+import java.util.List;
 import kirimaru.biz.domain.constant.CodeConstant.DbTable;
 import kirimaru.biz.mapper.dto.CompanyDto;
 import kirimaru.biz.mapper.dto.DepartmentDto;
@@ -18,6 +19,14 @@ public interface DepartmentMapper {
       WHERE DEPARTMENT_ID = #{departmentId}
       """)
   DepartmentDto findByPrimaryKey(@Param("departmentId") String id);
+
+  @Select("""
+      SELECT DEPARTMENT.*
+       FROM DEPARTMENT, COMPANY_DEPARTMENT
+       WHERE DEPARTMENT.COMPANY_ID = COMPANY_DEPARTMENT.COMPANY_ID
+       AND COMPANY_ID = #{companyId}
+      """)
+  List<DepartmentDto> findByCompanyId(@Param("companyId") String id);
 
   @InsertProvider(type = DepartmentMapper.ScriptBuilder.class, method = "insert")
   int insert(DepartmentDto entity);

@@ -16,7 +16,7 @@ import org.apache.ibatis.mapping.FetchType;
 @Mapper
 public interface CompanyMapper {
 
-//  @Results(id = "company", value = @Result(property = "departmentList", many = @Many(select = "", fetchType = FetchType.LAZY)))
+  @Results(id = "company", value = @Result(column = "departmentList", many = @Many(select = "kirimaru.biz.mapper.DepartmentMapper.findByCompanyId", fetchType = FetchType.LAZY)))
   @Select("""
       SELECT * 
       FROM COMPANY
