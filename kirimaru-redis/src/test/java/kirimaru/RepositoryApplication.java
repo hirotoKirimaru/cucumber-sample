@@ -18,7 +18,7 @@ public class RepositoryApplication {
   @Container
   private static final GenericContainer<?> redis;
 
-  static int port = 6379;
+//  static int port = 6379;
   static {
 //    int port = 49154;
     // latestだと接続できない？？？
@@ -26,7 +26,8 @@ public class RepositoryApplication {
 //    GenericContainer<?>
     redis = new GenericContainer<>(DockerImageName.parse("redis:latest"))
 //    redis = new GenericContainer<>(DockerImageName.parse("redis:7.0.5-alpine"))
-        .withExposedPorts(6379, 16379, 26379, 36379)
+//        .withExposedPorts(6379, 16379, 26379, 36379)
+        .withExposedPorts(6379)
     ;
     // 結局、使えるポートかが分からないから、デフォルトの6379以外も開けておく
     // GitHub Actionsだと6379ポートは使ってる？
@@ -40,8 +41,8 @@ public class RepositoryApplication {
 //    System.out.println("******************");
 //    log.error("***********");
     System.setProperty("spring.redis.host", redis.getHost());
-    System.setProperty("spring.redis.port", redis.getFirstMappedPort().toString());
-//    System.setProperty("spring.redis.port", redis.getMappedPort(port).toString());
+//    System.setProperty("spring.redis.port", redis.getFirstMappedPort().toString());
+    System.setProperty("spring.redis.port", redis.getMappedPort(49154).toString());
   }
 
   // TODO: こっちじゃうまく接続できない
