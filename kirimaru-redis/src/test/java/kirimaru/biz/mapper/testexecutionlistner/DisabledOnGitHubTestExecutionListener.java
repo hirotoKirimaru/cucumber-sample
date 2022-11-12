@@ -16,7 +16,7 @@ public class DisabledOnGitHubTestExecutionListener implements TestExecutionListe
       return;
     }
     assumeTrue(
-        true,
+        false,
         () -> String.format("%sはGitHubでは動きません",
             testContext.getTestClass().getSimpleName())
     );
@@ -31,7 +31,7 @@ public class DisabledOnGitHubTestExecutionListener implements TestExecutionListe
     }
 
     assumeTrue(
-        true,
+        false,
         () -> String.format("%s#%sはGitHubでは動きません",
             testContext.getTestClass().getSimpleName(), testContext.getTestMethod().getName())
     );
