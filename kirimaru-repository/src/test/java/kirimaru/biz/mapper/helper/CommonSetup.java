@@ -17,6 +17,7 @@ import kirimaru.biz.mapper.dto.BookDto;
 import kirimaru.biz.mapper.dto.CompanyDepartmentDto;
 import kirimaru.biz.mapper.dto.CompanyDto;
 import kirimaru.biz.mapper.dto.DepartmentDto;
+import kirimaru.biz.mapper.dto.DepartmentUserDto;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -82,6 +83,18 @@ public class CommonSetup {
     this.simpleJdbcInsert =
         new SimpleJdbcInsert(dataSource)
             .withTableName(DbTable.COMPANY_DEPARTMENT.getTable())
+    ;
+    for (var record : records) {
+//      Map<String, Object> map = new HashMap<>();
+//      map.put("company_id", record.get(""))
+      this.simpleJdbcInsert.execute(toMap(record));
+    }
+  }
+
+  protected void insert(DepartmentUserDto... records) {
+    this.simpleJdbcInsert =
+        new SimpleJdbcInsert(dataSource)
+            .withTableName(DbTable.DEPARTMENT_MEMBER.getTable())
     ;
     for (var record : records) {
 //      Map<String, Object> map = new HashMap<>();
