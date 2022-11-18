@@ -18,7 +18,7 @@ import org.apache.ibatis.mapping.FetchType;
 @Mapper
 public interface DepartmentMapper {
 
-  @Results(id="department",
+  @Results(id = "department",
       value = {
           @Result(id = true, column = "department_id", property = "departmentId"),
           @Result(column = "department_id", property = "userList",
@@ -42,6 +42,24 @@ public interface DepartmentMapper {
        AND COMPANY_ID = #{companyId}
       """)
   List<DepartmentDto> findByCompanyId(@Param("companyId") String id);
+
+  @Results(id = "departmentLazy",
+      value = {
+          @Result(id = true, column = "department_id", property = "departmentId"),
+          @Result(column = "department_id", property = "userList",
+              many = @Many(
+                  select = "kirimaru.biz.mapper.UsersMapper.findByDepartmentId", fetchType = FetchType.LAZY
+              )
+          )
+      }
+  )
+    @Select("""
+      SELECT DEPARTMENT.*
+       FROM DEPARTMENT, COMPANY_DEPARTMENT
+       WHERE DEPARTMENT.DEPARTMENT_ID = COMPANY_DEPARTMENT.DEPARTMENT_ID
+       AND COMPANY_ID = #{companyId}
+      """)
+  List<DepartmentDto> findByCompanyIdAndLazy(@Param("companyId") String id);
 
   @InsertProvider(type = DepartmentMapper.ScriptBuilder.class, method = "insert")
   int insert(DepartmentDto entity);

@@ -10,11 +10,14 @@ import kirimaru.biz.mapper.dto.DepartmentDto;
 import kirimaru.biz.mapper.dto.DepartmentUserDto;
 import kirimaru.biz.mapper.dto.UserDto;
 import kirimaru.biz.mapper.helper.CommonSetup;
+import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 class CompanyMapperTest extends CommonSetup {
 
@@ -26,6 +29,8 @@ class CompanyMapperTest extends CommonSetup {
 
   @Autowired
   UsersMapper usersMapper;
+  @Autowired
+  SqlSession session;
 
   @Test
   void test_01() {
@@ -181,6 +186,93 @@ class CompanyMapperTest extends CommonSetup {
       assertThat(
           actual
       ).isEqualTo(entity);
+    }
+  }
+
+
+  @Nested
+  class FindByPrimaryKeyAndLazyLoad {
+
+    @DisplayName("""
+        よく分からないエラー検証
+        1. LazyLoadを使用していること
+        1. データ取得してから1分以上後に、Lazyのレコードを取得する
+        1. DBがOracleだった
+        [THEN]
+        
+        
+        """)
+    @Test
+    @Transactional(timeout = 1)
+    void test_01() throws InterruptedException {
+
+      UserDto userDto = UserDto.builder()
+          .userId("10000")
+          .name("きり丸")
+          .build();
+      UserDto userDto2 = UserDto.builder()
+          .userId("10001")
+          .name("きり丸")
+          .build();
+      usersMapper.insert(userDto);
+      usersMapper.insert(userDto2);
+
+      DepartmentDto departmentDto = DepartmentDto.builder()
+          .departmentId("100")
+          .name("プロダクト部")
+          .userList(List.of(userDto))
+          .build();
+
+      departmentMapper.insert(departmentDto);
+
+      CompanyDto entity = CompanyDto.builder()
+          .companyId("1")
+          .name("親企業")
+          .departmentList(List.of(departmentDto))
+          .build();
+
+      mapper.insert(entity);
+
+      // 関連テーブル
+      DepartmentUserDto departmentUserDto = DepartmentUserDto.builder()
+          .departmentId(departmentDto.getDepartmentId())
+          .userId(userDto.getUserId())
+          .build();
+      insert(departmentUserDto);
+
+      CompanyDepartmentDto companyDepartmentDto = CompanyDepartmentDto.builder()
+          .companyId(entity.getCompanyId())
+          .departmentId(departmentDto.getDepartmentId())
+          .build();
+      insertCompanyDepartment(companyDepartmentDto);
+
+      // WHEN & THEN
+      CompanyDto actual = mapper.findByPrimaryKeyAndLazyLoad("1");
+//      CompanyDto actual2 = mapper.findByPrimaryKeyAndLazyLoad("1");
+      UserDto byPrimaryKey = usersMapper.findByPrimaryKey(userDto2.getUserId());
+
+      usersMapper.update(
+          byPrimaryKey.toBuilder()
+              .name("123")
+              .build()
+      );
+//      session.rollback();
+//      Thread.sleep(3000);
+
+
+
+//      assertThat(
+//          actual
+//      ).isEqualTo(entity);
+      actual.getDepartmentList().get(0).getUserList().get(0);
+    }
+
+    private UserDto.UserDtoBuilder getBuild(String str) {
+      return UserDto.builder()
+          .userId(str)
+          .name(str)
+
+          ;
     }
   }
 }

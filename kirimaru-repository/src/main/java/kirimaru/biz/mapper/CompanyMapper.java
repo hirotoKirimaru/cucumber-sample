@@ -32,6 +32,22 @@ public interface CompanyMapper {
       """)
   CompanyDto findByPrimaryKey(@Param("companyId") String id);
 
+  @Results(id = "companyLazy",
+      value = {
+          @Result(id = true, column = "company_id", property = "companyId"),
+          @Result(column = "company_id", property = "departmentList",
+              many = @Many(
+                  select = "kirimaru.biz.mapper.DepartmentMapper.findByCompanyIdAndLazy", fetchType = FetchType.LAZY)
+          )
+      }
+  )
+  @Select("""
+      SELECT * 
+      FROM COMPANY
+      WHERE COMPANY_ID = #{companyId}
+      """)
+  CompanyDto findByPrimaryKeyAndLazyLoad(@Param("companyId") String id);
+
   @InsertProvider(type = CompanyMapper.ScriptBuilder.class, method = "insert")
   int insert(CompanyDto user);
 
