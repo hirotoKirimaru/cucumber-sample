@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import org.testcontainers.shaded.org.apache.commons.lang.SerializationUtils;
 
 class CompanyMapperTest extends CommonSetup {
 
@@ -259,12 +260,28 @@ class CompanyMapperTest extends CommonSetup {
 //      session.rollback();
 //      Thread.sleep(3000);
 
-
-
 //      assertThat(
 //          actual
 //      ).isEqualTo(entity);
-      actual.getDepartmentList().get(0).getUserList().get(0);
+
+
+//      try {
+//        actual.toBuilder().build().getDepartmentList().get(0).getUserList().get(0);
+//      } catch(Error e) {
+//        System.out.println(e);
+//        System.out.println("*****************");
+//      }
+
+      try {
+        CompanyDto clone = (CompanyDto) SerializationUtils.clone(actual);
+        clone.getDepartmentList().get(0).getUserList().get(0);
+      } catch(Exception e) {
+        System.out.println(e);
+        System.out.println("*****************");
+
+
+      }
+//      actual.getDepartmentList().get(0).getUserList().get(0);
     }
 
     private UserDto.UserDtoBuilder getBuild(String str) {
