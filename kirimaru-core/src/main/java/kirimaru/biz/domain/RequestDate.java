@@ -2,6 +2,7 @@ package kirimaru.biz.domain;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.Year;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
@@ -52,10 +53,9 @@ public class RequestDate {
    */
   public LocalDate from年月to日割りなし日付(LocalDate endMonth) {
     YearMonth yearMonth = YearMonth.from(endMonth);
-    try {
+    if (yearMonth.isValidDay(localDate.getDayOfMonth() - 1)) {
       return yearMonth.atDay(localDate.getDayOfMonth() - 1);
-    } catch (DateTimeException e) {
-      System.out.println(e);
+    } else {
       return yearMonth.atEndOfMonth();
     }
   }
