@@ -1,15 +1,13 @@
 package kirimaru.biz.domain;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
-import java.time.temporal.ChronoUnit;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NonNull;
-import lombok.Value;
 import lombok.experimental.Accessors;
 
 /**
@@ -43,4 +41,22 @@ public class RequestDate {
     return new RequestDate(value, LocalDate.parse(value, SHORT_DATE_FORMATTER));
   }
 
+  public static RequestDate of(LocalDate value) {
+    return new RequestDate(value.format(SHORT_DATE_FORMATTER), value);
+  }
+
+  /**
+   * 開始日から、年月を元に日割りなしの日付を取得する。
+   *
+   * @param endMonth 終わり日付
+   */
+  public LocalDate from年月to日割りなし日付(LocalDate endMonth) {
+    YearMonth yearMonth = YearMonth.from(endMonth);
+    try {
+      return yearMonth.atDay(localDate.getDayOfMonth() - 1);
+    } catch (DateTimeException e) {
+      System.out.println(e);
+      return yearMonth.atEndOfMonth();
+    }
+  }
 }
