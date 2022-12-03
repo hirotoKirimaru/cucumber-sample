@@ -3,6 +3,7 @@ package kirimaru.restapi;
 import kirimaru.biz.domain.Company;
 import kirimaru.biz.domain.Human;
 import kirimaru.biz.mapper.dto.CompanyDto;
+import kirimaru.external.mail.MailFunction;
 import kirimaru.restapi.converter.DtoConverter;
 import kirimaru.restapi.dto.HumanDto;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CompanyRestController {
   private final DtoConverter<CompanyDto, Company> converter;
+  private final MailFunction mailer;
 
   public ResponseEntity<Void> insert(CompanyDto dto){
     var entity = converter.toEntity(dto);
