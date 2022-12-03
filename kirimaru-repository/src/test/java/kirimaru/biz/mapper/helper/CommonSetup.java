@@ -18,6 +18,7 @@ import kirimaru.biz.mapper.dto.CompanyDepartmentDto;
 import kirimaru.biz.mapper.dto.CompanyDto;
 import kirimaru.biz.mapper.dto.DepartmentDto;
 import kirimaru.biz.mapper.dto.DepartmentUserDto;
+import org.apache.catalina.User;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
