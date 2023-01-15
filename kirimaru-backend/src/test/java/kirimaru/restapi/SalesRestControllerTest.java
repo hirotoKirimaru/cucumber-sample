@@ -1,11 +1,15 @@
 package kirimaru.restapi;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import kirimaru.restapi.SalesRestController.SaleDto;
@@ -38,7 +42,7 @@ class SalesRestControllerTest {
 
   @Test
   void success() throws Exception {
-    String expected= """
+    String expected = """
         {
             "salesList": []
         }
@@ -62,17 +66,17 @@ class SalesRestControllerTest {
 
     // LANGUAGE=JSON
     String expected = """
-{
-  "salesList": [
-    {
-      "name": "DDD"
-    },
-    {
-      "name": "CCC"
-    }
-  ]
-}
-       """;
+        {
+          "salesList": [
+            {
+              "name": "DDD"
+            },
+            {
+              "name": "CCC"
+            }
+          ]
+        }
+               """;
 
     var result = this.mockMvc.perform(get(rootUrl))
         .andExpect(status().isOk())
@@ -93,10 +97,10 @@ class SalesRestControllerTest {
 
     // LANGUAGE=JSON
     String expected = """
-{
-  "salesList": [null]
-}
-       """;
+        {
+          "salesList": [null]
+        }
+               """;
 
     var result = this.mockMvc.perform(get(rootUrl))
         .andExpect(status().isOk())
@@ -109,4 +113,18 @@ class SalesRestControllerTest {
     JSONAssert.assertEquals(result.getResponse().getContentAsString(), expected, false);
   }
 
+  @Test
+  void test_01() {
+    var sample = new ArrayList<>();
+    assertAll(
+        () -> assertThatThrownBy(() -> List.of(null))
+            .isInstanceOf(NullPointerException.class),
+        () -> assertThatThrownBy(() -> Arrays.asList(null))
+            .isInstanceOf(NullPointerException.class),
+        () -> assertThatThrownBy(() -> new ArrayList<>(null))
+            .isInstanceOf(NullPointerException.class),
+        () -> Collections.singletonList(null),
+        () -> sample.add(null)
+    );
+  }
 }
