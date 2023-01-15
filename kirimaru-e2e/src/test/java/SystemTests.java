@@ -1,9 +1,14 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIf;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class SystemTests {
+  @DisabledOnOs(OS.LINUX) // GithubActionsだと動かん…
   @Test
   void test_01() {
 
