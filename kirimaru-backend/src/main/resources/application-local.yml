@@ -12,7 +12,6 @@ spring:
     username: user
     password: pass
     initialization-mode: always
-  jackson.default-property-inclusion: NON_EMPTY # 空データは0として扱う
 
   flyway:
     schemas: test

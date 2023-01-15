@@ -5,7 +5,5 @@ import kirimaru.restapi.SalesRestController.SaleDto;
 
 public interface SalesService {
 
-  default List<SaleDto> execute() {
-    return List.of();
-  }
+  List<SaleDto> execute();
 }

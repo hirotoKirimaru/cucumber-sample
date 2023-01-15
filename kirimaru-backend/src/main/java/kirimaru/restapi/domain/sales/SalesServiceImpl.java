@@ -9,6 +9,6 @@ public class SalesServiceImpl implements SalesService {
 
   @Override
   public List<SaleDto> execute() {
-    return SalesService.super.execute();
+    return List.of();
   }
 }

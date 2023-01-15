@@ -20,7 +20,7 @@ public class SalesRestController {
   private final SalesService service;
 
   @GetMapping(value = "")
-  public ResponseEntity<SalesDto> hogeApi(@Valid Param param)  {
+  public ResponseEntity<SalesDto> findAll(@Valid Param param)  {
 
     return ResponseEntity.ok(new SalesDto(service.execute()));
   }
@@ -39,6 +39,7 @@ public class SalesRestController {
   @Data
   @AllArgsConstructor
   public static class SaleDto {
+    private String id;
     private String name;
   }
 }
