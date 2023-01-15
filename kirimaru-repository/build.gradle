@@ -43,6 +43,9 @@ dependencies {
     testImplementation 'org.testcontainers:junit-jupiter:1.16.0'
     testImplementation 'org.testcontainers:postgresql:1.16.0'
 
+    // database-rider
+    testImplementation 'com.github.database-rider:rider-junit5:1.35.0'
+
     // coreのテストソースコードだけ依存させる
 //    testCompileOnly project(':kirimaru-core').sourceSets.test.output
     testImplementation project(':kirimaru-core').sourceSets.test.output
