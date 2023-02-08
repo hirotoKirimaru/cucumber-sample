@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -15,6 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 //@Disabled("わからぬ")
 @SpringJUnitConfig(initializers = ConfigDataApplicationContextInitializer.class)
 @EnableConfigurationProperties({CoreProperties.class})
+// @DisabledIfSystemProperty() // こんなのもあるんか
 //@ActiveProfiles("stg")  // ActiveProfileではない
 class DisalbedIfTests {
 
@@ -24,10 +26,11 @@ class DisalbedIfTests {
 //  @Value("${app.config.appName}")
 //  private String a;
 
-  @Disabled("systemPropertiesではないので、取得できない")
+  // どうも、YAMLの設定値を読み込むことは難しい模様
+//  @Disabled("systemPropertiesではないので、取得できない")
 //  @DisabledIf(value = "#{${app.config.appName}.equalsIgnoreCase('kirimaru')}", loadContext = true)
   @DisabledIf(value = "#{${'app.config.appName': 'kirimaru'}.equalsIgnoreCase('kirimaru')}", loadContext = true) // 流石に成功するパターン
-//  @DisabledIf(value = "#{#{app.config.appName}.equalsIgnoreCase('kirimaru')}", loadContext = true)
+//  @DisabledIf(value = "#{${app.config.appName}[0].equalsIgnoreCase('kirimaru')}", loadContext = true)
 //  @DisabledIf(value = "#{${CoreProperties}.getAppName().equalsIgnoreCase('kirimaru')}", loadContext = true)
   @Test
   void test_01() {
