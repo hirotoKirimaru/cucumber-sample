@@ -25,7 +25,10 @@ class DisalbedIfTests {
 //  private String a;
 
   @Disabled("systemPropertiesではないので、取得できない")
-  @DisabledIf(value = "#{${app.config.appName}.equalsIgnoreCase('kirimaru')}", loadContext = true)
+//  @DisabledIf(value = "#{${app.config.appName}.equalsIgnoreCase('kirimaru')}", loadContext = true)
+  @DisabledIf(value = "#{${'app.config.appName': 'kirimaru'}.equalsIgnoreCase('kirimaru')}", loadContext = true) // 流石に成功するパターン
+//  @DisabledIf(value = "#{#{app.config.appName}.equalsIgnoreCase('kirimaru')}", loadContext = true)
+//  @DisabledIf(value = "#{${CoreProperties}.getAppName().equalsIgnoreCase('kirimaru')}", loadContext = true)
   @Test
   void test_01() {
     fail();
