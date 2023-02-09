@@ -37,6 +37,18 @@ class DisalbedIfTests {
     fail();
   }
 
+  @DisabledIf(value = "#{environment.getProperty('app.config.appName').equalsIgnoreCase('kirimaru')}", loadContext = true) // 流石に成功するパターン
+  @Test
+  void test_01_01() {
+    fail();
+  }
+
+  @DisabledIf(value = "#{environment.getProperty('app.config.appName').equalsIgnoreCase('kirimatsu')}", loadContext = true) // 流石に成功するパターン
+  @Test
+  void test_01_02() {
+    // 何も起きないこと
+  }
+
   // 初期値を使用する
   @DisabledIf("${app.config.local:true}")
   @Test
