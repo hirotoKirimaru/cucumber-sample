@@ -15,13 +15,13 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 //@Disabled("わからぬ")
 @SpringJUnitConfig(initializers = ConfigDataApplicationContextInitializer.class)
-@EnableConfigurationProperties({CoreProperties.class})
+//@EnableConfigurationProperties({CoreProperties.class})
 // @DisabledIfSystemProperty() // こんなのもあるんか
 //@ActiveProfiles("stg")  // ActiveProfileではない
 class DisalbedIfTests {
 
-  @Autowired
-  CoreProperties coreProperties;
+//  @Autowired
+//  CoreProperties coreProperties;
 
 //  @Value("${app.config.appName}")
 //  private String a;
