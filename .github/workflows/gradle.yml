@@ -35,7 +35,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
     - name: Set up JDK 17
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v3
       with:
         java-version: 17
 #    - name: docker images
@@ -53,7 +53,7 @@ jobs:
       run: ./gradlew test
     - if: always()
       name: Upload test result
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: test
         path: kirimaru-backend/build/reports/**/*
