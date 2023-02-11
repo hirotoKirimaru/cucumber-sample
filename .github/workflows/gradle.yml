@@ -56,7 +56,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: test
-        path: build/reports/**/*
+        path: kirimaru-backend/build/reports/**/*
     - name: testReport
       run: ./gradlew jacocoTestReport
     - name: Publish Test Report
