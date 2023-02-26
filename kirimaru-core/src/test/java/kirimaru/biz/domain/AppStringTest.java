@@ -120,4 +120,32 @@ class AppStringTest {
       ).isTrue();
     }
   }
+
+
+  @Nested
+  class PadLeft {
+
+    @Test
+    void test_01() {
+      assertThat(
+          String.format("%03d", 1)
+      ).isEqualTo("001");
+    }
+
+    @Test
+    void test_02() {
+      // Java15から導入
+      assertThat(
+          "%03d".formatted(1)
+      ).isEqualTo("001");
+    }
+
+    @Test
+    void test_03() {
+      // もーちょっとちゃんとしたやつないのかな・・・
+      assertThat(
+          String.format("%3s", 1).replace(" ", "X")
+      ).isEqualTo("XX1");
+    }
+  }
 }
