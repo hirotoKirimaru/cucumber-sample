@@ -1,11 +1,10 @@
 package kirimaru.restapi.anotation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import kirimaru.biz.domain.AppString;
 import org.hibernate.validator.internal.engine.constraintvalidation.ConstraintValidatorContextImpl;
 import org.hibernate.validator.internal.metadata.descriptor.ConstraintDescriptorImpl;
-import org.hibernate.validator.internal.util.annotation.ConstraintAnnotationDescriptor;
 
 public class AppStringValidator implements ConstraintValidator<AppStringValid, String> {
 

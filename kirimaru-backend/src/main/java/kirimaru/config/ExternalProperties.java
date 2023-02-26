@@ -1,12 +1,11 @@
 package kirimaru.config;
 
+import jakarta.annotation.PostConstruct;
+import java.net.URI;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-
-import javax.annotation.PostConstruct;
-import java.net.URI;
 
 @Getter
 @Setter

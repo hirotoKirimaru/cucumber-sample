@@ -1,13 +1,12 @@
 package kirimaru.restapi.interceptor;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.Nullable;
 import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.WebRequestHandlerInterceptorAdapter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 public class LoggingInterceptor extends WebRequestHandlerInterceptorAdapter {
