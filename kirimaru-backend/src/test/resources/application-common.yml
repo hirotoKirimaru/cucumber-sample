@@ -5,3 +5,6 @@ app:
 logging.level:
   root: "DEBUG"
   org.springframework.web: "DEBUG"
+test:
+  nest:
+    os: ${OS}
