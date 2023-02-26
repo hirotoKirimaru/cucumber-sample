@@ -1,7 +1,12 @@
 package kirimaru.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.TestPropertySource;
@@ -17,8 +22,10 @@ class SpringValueTests {
   private String appName2;
   @Value("${app.config.appName3:null}")
   private String appName3;
-  @Value("${app.config.appName3:#{null}}")
+  @Value("${app.config.appName4:#{null}}")
   private String appName4;
+  @Value("#{environment.OS}")
+  private String os;
 
   @ComponentScan({"kirimaru.biz.domain.hogehoge"})
   public static class Config {
@@ -37,4 +44,10 @@ class SpringValueTests {
     softly.assertAll();
   }
 
+  @Test
+  @Disabled
+  @EnabledOnOs(OS.WINDOWS)
+  void test_02() {
+    assertThat(os).isEqualTo("Windows_NT");
+  }
 }
