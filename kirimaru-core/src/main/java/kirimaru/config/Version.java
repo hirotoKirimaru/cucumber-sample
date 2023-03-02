@@ -3,8 +3,6 @@ package kirimaru.config;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.annotation.PostConstruct;
-import lombok.Data;
 import lombok.Value;
 
 /**
