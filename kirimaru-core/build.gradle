@@ -48,7 +48,10 @@ dependencies {
 
     // rest-assured
     testImplementation 'io.rest-assured:xml-path:5.3.0'
-    testImplementation 'io.rest-assured:spring-mock-mvc:5.3.0'
+    testImplementation ('io.rest-assured:spring-mock-mvc:5.3.0') {
+        // コンフリクトするので除外
+        exclude group: 'org.codehaus.groovy', module: 'groovy-xml'
+    }
 
     // Wiremock Server
     testImplementation "com.github.tomakehurst:wiremock-jre8:2.27.2"
