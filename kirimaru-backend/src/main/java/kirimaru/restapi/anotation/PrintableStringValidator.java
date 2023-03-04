@@ -1,7 +1,7 @@
 package kirimaru.restapi.anotation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import kirimaru.biz.domain.AppString;
 
 public class PrintableStringValidator implements ConstraintValidator<PrintableStringValid, String> {

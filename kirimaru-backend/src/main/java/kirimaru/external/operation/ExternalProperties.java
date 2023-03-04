@@ -1,14 +1,12 @@
 package kirimaru.external.operation;
 
+import jakarta.annotation.PostConstruct;
+import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.Assert;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import javax.annotation.PostConstruct;
-import java.util.Map;
 
 @Setter
 @ToString

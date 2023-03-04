@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import kirimaru.e2e.helper.ApiTestTemplate;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ public class AnimalApi_patch extends ApiTestTemplate {
         }
         """;
   @Test
+  @Disabled("ライブラリを入れないとPatchメソッドは動かない")
   void test_01() {
     ResponseEntity<String> response = patch(PATH, body);
 
@@ -31,6 +33,7 @@ public class AnimalApi_patch extends ApiTestTemplate {
   }
 
   @Test
+  @Disabled("ライブラリを入れないとPatchメソッドは動かない")
   void test_02() {
     String response = patch2(PATH, body);
 

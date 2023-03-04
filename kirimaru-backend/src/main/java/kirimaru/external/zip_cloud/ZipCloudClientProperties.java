@@ -5,8 +5,6 @@ import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-
 @Component
 @ConfigurationProperties(prefix = "external.zip-cloud")
 @ToString(callSuper = true)

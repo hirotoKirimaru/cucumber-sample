@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
@@ -69,11 +70,10 @@ public class RestTemplateInterceptor implements ClientHttpRequestInterceptor {
     }
 
     @Override
-    public HttpStatus getStatusCode() throws IOException {
+    public HttpStatusCode getStatusCode() throws IOException {
       return this.response.getStatusCode();
     }
 
-    @Override
     public int getRawStatusCode() throws IOException {
       return this.response.getRawStatusCode();
     }

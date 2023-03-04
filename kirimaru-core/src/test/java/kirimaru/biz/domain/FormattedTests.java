@@ -40,7 +40,7 @@ class FormattedTests {
 
   @Test
   void test_04() {
-    String actual = "%s様".formatted(null);
+    String actual = "%s様".formatted((Object[]) null);
 
     assertThat(actual).isEqualTo("null様");
   }
@@ -99,7 +99,6 @@ class FormattedTests {
 
     assertThat(actual).isEqualTo("様");
   }
-
 
 //  @CsvSource(value = {
 //      "%%,'','%'",

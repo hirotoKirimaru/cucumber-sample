@@ -1,7 +1,7 @@
 package kirimaru.restapi;
 
+import jakarta.validation.Valid;
 import java.util.List;
-import javax.validation.Valid;
 import kirimaru.restapi.domain.sales.SalesService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
