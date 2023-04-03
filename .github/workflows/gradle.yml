@@ -23,6 +23,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 # Launchableのために、フルクローンする必要がある
     - name: Cache gradle modules
       uses: actions/cache@v3
       env:
@@ -42,6 +44,18 @@ jobs:
 #    - name: docker images
 #      working-directory: tools
 #      run: docker-compose build redis
+    - name: Launchable Python Set Up
+      uses: actions/setup-python@v4 # Launchableに必要
+      with:
+        python-version: "3.10"
+    - name: Launchable JDK 1.8 Set Up
+      uses: actions/setup-java@v3 # Launchableに必要
+      with:
+        distribution: 'adopt'
+        java-version: '8'
+    - name: Install launchable command
+      run: |
+        pip install launchable
     - name: sudo
       run: sudo chmod +x ./gradlew
     - name: Build with Gradle
@@ -69,6 +83,16 @@ jobs:
       run: ./gradlew sonarqube
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_SONAR }}
+    - name: verify
+      run: launchable verify
+    - name: record build
+      run: launchable record build --name ${GITHUB_RUN_ID}
+    - name: Run tests
+      run: gradle test
+    - name: launchable record tests
+      run: launchable record tests gradle build/test-results/test/TEST-*.xml
+      if: always()
+
 #  analyze:
 #    runs-on: ubuntu-latest
 #    steps:
