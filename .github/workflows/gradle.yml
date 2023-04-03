@@ -2,6 +2,9 @@ name: Java CI
 
 on: [push]
 
+env:
+  LAUNCHABLE_TOKEN: ${{ secrets.LAUNCHABLE_TOKEN }}
+
 jobs:
   build:
 
