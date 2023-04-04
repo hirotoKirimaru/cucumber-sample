@@ -56,14 +56,18 @@ jobs:
 #          --health-interval 10s
 #          --health-timeout 5s
 #          --health-retries 5
-    - name: test
+    - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
-      env:
-        GITHUB: true
-      with:
-        arguments: test
-        gradle-version: current
-        build-root-directory: /
+    - name: test
+      run: ./gradlew test
+#     - name: test
+#       uses: gradle/gradle-build-action@v2
+#       env:
+#         GITHUB: true
+#       with:
+#         arguments: test
+#         gradle-version: current
+#         build-root-directory: /
 
     - if: always()
       name: Upload test result
