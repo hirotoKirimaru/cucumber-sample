@@ -74,7 +74,7 @@ jobs:
 #        distribution: 'temurin'
 #        java-version: 17
     - name: setup
-      uses: ./.github/actions/setup/java
+      uses: .github/actions/setup/java
     - name: sudo
       run: sudo chmod +x ./gradlew
     - name: Build with Gradle
