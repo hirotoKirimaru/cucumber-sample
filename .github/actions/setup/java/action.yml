@@ -1,5 +1,6 @@
 name: Java Set Up
 jobs:
+  using: "composite"
   setup:
     runs-on: ubuntu-latest
     steps:
