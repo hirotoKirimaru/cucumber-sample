@@ -75,6 +75,9 @@ jobs:
 #        java-version: 17
     - name: setup
       uses: ./.github/actions/setup/java
+      with:
+        runner: ${{ runner }}
+        gradle-hash: ${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
     - name: sudo
       run: sudo chmod +x ./gradlew
     - name: Build with Gradle
