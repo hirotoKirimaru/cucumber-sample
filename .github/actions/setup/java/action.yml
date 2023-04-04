@@ -6,6 +6,7 @@ name: Java Set Up
 runs:
   using: "composite"
 #  runs-on: ubuntu-latest
+#  TODO: runner.os　hashFiles等々をパラメータでもらうようにする
   steps:
   - uses: actions/checkout@v3
   - name: Cache gradle modules

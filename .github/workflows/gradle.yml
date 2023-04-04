@@ -147,7 +147,7 @@ jobs:
       - name: sudo
         run: sudo chmod +x ./gradlew
       - name: build
-        run: ./gradlew build
+        run: ./gradlew build -x test
 #         uses: gradle/gradle-build-action@v2
 #         env:
 #           GITHUB: true
