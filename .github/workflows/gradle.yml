@@ -56,10 +56,15 @@ jobs:
 #          --health-interval 10s
 #          --health-timeout 5s
 #          --health-retries 5
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
-    - name: test
+
+    - name: sudo
+      run: sudo chmod +x ./gradlew
+    - name: Build with Gradle
+      env:
+        GITHUB: true
       run: ./gradlew test
+
+
 #     - name: test
 #       uses: gradle/gradle-build-action@v2
 #       env:
@@ -116,11 +121,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: build
-        uses: gradle/gradle-build-action@v2
-        env:
-          GITHUB: true
-        with:
-          arguments: build
+        run: ./gradlew build
+#         uses: gradle/gradle-build-action@v2
+#         env:
+#           GITHUB: true
+#         with:
+#           arguments: build
   lint:
     needs: test
     runs-on: ubuntu-latest
