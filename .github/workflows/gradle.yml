@@ -63,6 +63,8 @@ jobs:
       with:
         arguments: test
         gradle-version: current
+        build-root-directory: /
+
     - if: always()
       name: Upload test result
       uses: actions/upload-artifact@v3
