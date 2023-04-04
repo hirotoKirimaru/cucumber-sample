@@ -2,8 +2,12 @@ name: Java Set Up
 inputs:
   runner-os:
     description: '動作環境'
+    required: true
+    default: 'Linux'
   gradle-hash:
     description: 'Gradleファイルのハッシュ'
+    required: true
+    default: 'gradle'
 
 runs:
   using: "composite"

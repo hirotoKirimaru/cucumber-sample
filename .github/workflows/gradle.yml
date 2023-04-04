@@ -47,6 +47,7 @@ jobs:
   test:
 #    needs: setup
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
     # redisのコンテナを立てる？
     # https://docs.github.com/ja/actions/using-containerized-services/creating-redis-service-containers
