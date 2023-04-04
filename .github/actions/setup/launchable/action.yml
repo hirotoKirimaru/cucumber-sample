@@ -3,7 +3,7 @@ name: Launchable Set Up
 env:
   LAUNCHABLE_TOKEN: ${{ secrets.LAUNCHABLE_TOKEN }}
 
-jobs:
+runs:
   using: "composite"
   setup:
     runs-on: ubuntu-latest

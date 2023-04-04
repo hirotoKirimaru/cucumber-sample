@@ -1,5 +1,9 @@
 name: Java Set Up
-jobs:
+#inputs:
+#  environment:
+#    description: "deploy environment"
+#    required: true
+runs:
   using: "composite"
   setup:
     runs-on: ubuntu-latest
