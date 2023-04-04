@@ -1,6 +1,6 @@
 name: Java Set Up
 inputs:
-  runner:
+  runner-os:
     description: '動作環境'
   gradle-hash:
     description: 'Gradleファイルのハッシュ'
@@ -21,11 +21,11 @@ runs:
         ~/.gradle/wrapper
 #        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
 #      key: linux-gradle-gradle
-      key: ${{ inputs.runner.os }}-gradle-${{ gradle-hash }}
+      key: ${{ inputs.runner-os }}-gradle-${{ gradle-hash }}
       restore-keys: |
 #        linux-gradle-
 #          ${{ runner.os }}-gradle-
-          ${{ inputs.runner.os }}-gradle-
+          ${{ inputs.runner-os }}-gradle-
   - name: Set up JDK 17
     uses: actions/setup-java@v3
     with:
