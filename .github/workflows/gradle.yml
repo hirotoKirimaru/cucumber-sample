@@ -77,7 +77,8 @@ jobs:
     - name: setup
       uses: ./.github/actions/setup/java
       with:
-        runner-os: ${{ runner.os }}
+        # この辺も共通化するといい？
+        runner: ${{ runner }}
         gradle-hash: ${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
     - name: sudo
       run: sudo chmod +x ./gradlew
