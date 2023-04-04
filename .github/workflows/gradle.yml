@@ -62,6 +62,7 @@ jobs:
         GITHUB: true
       with:
         arguments: test
+        gradle-version: current
     - if: always()
       name: Upload test result
       uses: actions/upload-artifact@v3
