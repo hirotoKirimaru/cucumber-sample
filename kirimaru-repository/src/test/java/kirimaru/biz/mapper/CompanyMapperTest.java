@@ -1,7 +1,6 @@
 package kirimaru.biz.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import kirimaru.biz.mapper.dto.CompanyDepartmentDto;
@@ -11,14 +10,12 @@ import kirimaru.biz.mapper.dto.DepartmentUserDto;
 import kirimaru.biz.mapper.dto.UserDto;
 import kirimaru.biz.mapper.helper.CommonSetup;
 import org.apache.ibatis.session.SqlSession;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import org.testcontainers.shaded.org.apache.commons.lang.SerializationUtils;
+import org.testcontainers.shaded.org.apache.commons.lang3.SerializationUtils;
 
 class CompanyMapperTest extends CommonSetup {
 
