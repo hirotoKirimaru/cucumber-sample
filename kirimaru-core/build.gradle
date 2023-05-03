@@ -31,20 +31,20 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok'
 
     // xmlunitで特定の項目を無視したければ、このライブラリを使う。
-    testImplementation 'org.xmlunit:xmlunit-core:2.7.0'
-    testImplementation 'org.xmlunit:xmlunit-placeholders:2.7.0'
+    testImplementation 'org.xmlunit:xmlunit-core:2.9.0'
+    testImplementation 'org.xmlunit:xmlunit-placeholders:2.9.0'
 
-    testImplementation 'com.codeborne:selenide:5.2.3'
-    testImplementation 'io.cucumber:cucumber-java:4.3.1'
-    testImplementation 'io.cucumber:cucumber-junit:4.3.1'
+    testImplementation 'com.codeborne:selenide:6.12.3'
+    testImplementation 'io.cucumber:cucumber-java:7.11.1'
+    testImplementation 'io.cucumber:cucumber-junit:7.11.1'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         exclude group: 'junit', module: 'junit'
     }
 
     // FTPサーバ
-    implementation 'commons-net:commons-net:3.7.2'
-    testImplementation 'org.mockftpserver:MockFtpServer:2.7.1'
+    implementation 'commons-net:commons-net:3.8.0'
+    testImplementation 'org.mockftpserver:MockFtpServer:3.1.0'
 
     // rest-assured
     testImplementation 'io.rest-assured:xml-path:5.3.0'
@@ -54,7 +54,7 @@ dependencies {
     }
 
     // Wiremock Server
-    testImplementation "com.github.tomakehurst:wiremock-jre8:2.27.2"
+    testImplementation 'com.github.tomakehurst:wiremock-jre8:2.35.0'
     testImplementation "ru.lanwen.wiremock:wiremock-junit5:1.3.1"
 
     // WebClient
@@ -67,11 +67,11 @@ dependencies {
 //    implementation 'org.springframework.cloud:spring-cloud-starter-config'
 
     // Unleash
-    implementation 'no.finn.unleash:unleash-client-java:4.4.0'
+    implementation 'no.finn.unleash:unleash-client-java:4.4.1'
 
     // static mockの検証
 //    testImplementation 'org.mockito:mockito-core:4.0.0'
-    testImplementation 'org.mockito:mockito-inline:4.6.1'
+    testImplementation 'org.mockito:mockito-inline:5.2.0'
 }
 
 test {

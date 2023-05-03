@@ -37,14 +37,14 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
-    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.0'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.1'
 
-    testImplementation 'org.testcontainers:junit-jupiter:1.16.0'
-    testImplementation 'org.testcontainers:postgresql:1.16.0'
+    testImplementation 'org.testcontainers:junit-jupiter:1.17.6'
+    testImplementation 'org.testcontainers:postgresql:1.17.6'
 
     // database-rider
-    testImplementation 'com.github.database-rider:rider-junit5:1.35.0'
+    testImplementation 'com.github.database-rider:rider-junit5:1.36.0'
 
     // coreのテストソースコードだけ依存させる
 //    testCompileOnly project(':kirimaru-core').sourceSets.test.output
