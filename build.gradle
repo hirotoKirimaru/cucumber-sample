@@ -31,9 +31,9 @@ subprojects {
 }
 task jacocoRootReport(type: JacocoReport){
     dependsOn = subprojects.test
-//    reports {
-//        html.enabled = true
-//        xml.enabled = true
-//        csv.enabled =false
-//    }
+    reports {
+        html.required = true
+        xml.required = true
+        csv.required = false
+    }
 }
