@@ -29,7 +29,7 @@ subprojects {
     }
 
 }
-task jacocoRootReport(type: JacocoReport){
+tasks.register('jacocoRootReport', JacocoReport) {
     dependsOn = subprojects.test
     reports {
         html.required = true
