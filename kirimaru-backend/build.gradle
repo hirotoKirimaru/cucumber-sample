@@ -2,7 +2,7 @@ plugins {
     id 'org.springframework.boot' version "${springBootVersion}"
     id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
     id "org.sonarqube" version "2.7"
-    id "jacoco" // JDK15とコンフリクト？
+    id 'jacoco-report-aggregation'
 
     id 'org.gradle.test-retry' version '1.1.9'
 }
