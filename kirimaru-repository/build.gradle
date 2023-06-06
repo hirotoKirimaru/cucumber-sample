@@ -37,7 +37,7 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2'
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.1'
 
     testImplementation 'org.testcontainers:junit-jupiter:1.17.6'

@@ -43,7 +43,7 @@ dependencies {
     }
 
     // FTPサーバ
-    implementation 'commons-net:commons-net:3.8.0'
+    implementation 'commons-net:commons-net:3.9.0'
     testImplementation 'org.mockftpserver:MockFtpServer:3.1.0'
 
     // rest-assured
