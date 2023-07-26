@@ -13,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringJUnitConfig
-@TestPropertySource(properties = {"domain=https"})
+@TestPropertySource(properties = {"domain=kirimaru"})
 class StaticSpringValue {
 
   private static String actual;
@@ -21,7 +21,7 @@ class StaticSpringValue {
   private static String actual2;
   private static String actual3;
 
-  private final String EXPECTED = "https";
+  private final String EXPECTED = "kirimaru";
 
   @Autowired
   StaticSpringValueBean bean;
