@@ -8,18 +8,24 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class HodderTests {
+/**
+ * メルセンヌ素数とは.
+ * <p>
+ * https://ja.wikipedia.org/wiki/%E3%83%A1%E3%83%AB%E3%82%BB%E3%83%B3%E3%83%8C%E6%95%B0
+ * </p>
+ */
+class MersennePrimeTests {
 
   static class Target {
 
     /**
-     * 素数であり、2^J-1を満たす値のことをHodder Number(ホダー数)と呼ぶ
+     * 素数であり、メルセンヌ数(2^J-1)を満たす値のことをメルセンヌ素数と呼ぶ
      *
      * @param value 値
-     * @return 0=ホダー数ではない, 1=ホダー数
+     * @return 0=メルセンヌ素数ではない, 1=メルセンヌ素数
      */
-    public static int isHodder(int value) {
-      if (isPrime(value) && isCond(value)) {
+    public static int isMersennePrime(int value) {
+      if (isMersenne(value) && isPrime(value)) {
         return 1;
       }
       return 0;
@@ -27,14 +33,16 @@ class HodderTests {
 
     /**
      * 2^j-1が整数かどうか
+     *
      * @param value 値
      */
-    private static boolean isCond(int value) {
+    private static boolean isMersenne(int value) {
       return log2(value + 1) % 1 == 0;
     }
 
     /**
      * 底が2のlog
+     *
      * @param value 値
      */
     public static double log2(int value) {
@@ -43,6 +51,7 @@ class HodderTests {
 
     /**
      * 素数判定.
+     *
      * @param value 値
      */
     public static boolean isPrime(int value) {
@@ -66,7 +75,7 @@ class HodderTests {
   @MethodSource(value = "param")
   @ParameterizedTest(name = "{0}は{1}")
   void parameterized_test(int value, int rtn) {
-    assertThat(Target.isHodder(value)).isEqualTo(rtn);
+    assertThat(Target.isMersennePrime(value)).isEqualTo(rtn);
   }
 
   private static Stream<Arguments> param() {
