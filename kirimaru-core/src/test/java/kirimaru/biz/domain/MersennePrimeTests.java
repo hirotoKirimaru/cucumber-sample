@@ -61,8 +61,7 @@ class MersennePrimeTests {
       if (value <= 3) {
         return true;
       }
-      // 3以上の奇数について判定
-      for (int i = 3; i <= Math.sqrt(value); i += 2) {
+      for (int i = 2; i <= Math.sqrt(value); i++) {
         if (value % i == 0) {
           return false;
         }
@@ -72,13 +71,13 @@ class MersennePrimeTests {
     }
   }
 
-  @MethodSource(value = "param")
+  @MethodSource(value = "mersennePrimeParam")
   @ParameterizedTest(name = "{0}は{1}")
-  void parameterized_test(int value, int rtn) {
+  void mersennePrime(int value, int rtn) {
     assertThat(Target.isMersennePrime(value)).isEqualTo(rtn);
   }
 
-  private static Stream<Arguments> param() {
+  private static Stream<Arguments> mersennePrimeParam() {
     return Stream.of(
         Arguments.of(1, 0),
         Arguments.of(2, 0),
@@ -94,6 +93,32 @@ class MersennePrimeTests {
         Arguments.of(126, 0),
         Arguments.of(127, 1),
         Arguments.of(128, 0)
+    );
+  }
+
+
+  @MethodSource(value = "primeParam")
+  @ParameterizedTest(name = "{0}は{1}")
+  void prime(int value, boolean rtn) {
+    assertThat(Target.isPrime(value)).isEqualTo(rtn);
+  }
+
+  private static Stream<Arguments> primeParam() {
+    return Stream.of(
+        Arguments.of(1, false),
+        Arguments.of(2, true),
+        Arguments.of(3, true),
+        Arguments.of(4, false),
+        Arguments.of(5, true),
+        Arguments.of(6, false),
+        Arguments.of(7, true),
+        Arguments.of(8, false),
+        Arguments.of(30, false),
+        Arguments.of(31, true),
+        Arguments.of(32, false),
+        Arguments.of(126, false),
+        Arguments.of(127, true),
+        Arguments.of(128, false)
     );
   }
 }
