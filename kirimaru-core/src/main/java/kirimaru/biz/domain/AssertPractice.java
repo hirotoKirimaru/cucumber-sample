@@ -1,11 +1,6 @@
 package kirimaru.biz.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.util.Assert;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 public class AssertPractice {
 

@@ -6,7 +6,6 @@ import static org.mockito.Mockito.when;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.Answers;
 import org.mockito.Mockito;
 
 class MockTests {

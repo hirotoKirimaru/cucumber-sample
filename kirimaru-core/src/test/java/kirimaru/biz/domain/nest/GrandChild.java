@@ -1,12 +1,9 @@
 package kirimaru.biz.domain.nest;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Setter;
-import lombok.Value;
-
 import java.math.BigDecimal;
 import java.util.Map;
+import lombok.Builder;
+import lombok.Value;
 
 @Value
 //@Data

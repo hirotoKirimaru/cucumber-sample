@@ -1,11 +1,11 @@
 package kirimaru.e2e;
 
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static org.hamcrest.Matchers.equalTo;
+
 import kirimaru.restapi.AnimalsRestController;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
-import static org.hamcrest.Matchers.equalTo;
 
 @Disabled("動かなくなっている")
 public class RestAssuredTests {

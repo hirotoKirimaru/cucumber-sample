@@ -1,16 +1,15 @@
 package kirimaru.biz.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
 class ConcatTests {
   Concat target = new Concat();

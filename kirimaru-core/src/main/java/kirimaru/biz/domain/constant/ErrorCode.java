@@ -1,10 +1,9 @@
 package kirimaru.biz.domain.constant;
 
-import lombok.Getter;
-import lombok.NonNull;
-
 import java.text.MessageFormat;
 import java.util.Objects;
+import lombok.Getter;
+import lombok.NonNull;
 
 @Getter
 public enum ErrorCode {

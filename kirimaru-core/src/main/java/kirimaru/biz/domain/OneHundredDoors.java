@@ -1,6 +1,7 @@
 package kirimaru.biz.domain;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder

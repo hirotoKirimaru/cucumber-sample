@@ -1,13 +1,12 @@
 package kirimaru.biz.domain;
 
-import lombok.AllArgsConstructor;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 import java.util.Objects;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import lombok.AllArgsConstructor;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 class EqualsTest {
   @Test

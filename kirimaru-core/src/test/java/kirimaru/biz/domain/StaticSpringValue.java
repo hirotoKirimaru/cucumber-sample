@@ -1,16 +1,15 @@
 package kirimaru.biz.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import lombok.Data;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringJUnitConfig
 @TestPropertySource(properties = {"domain=kirimaru"})

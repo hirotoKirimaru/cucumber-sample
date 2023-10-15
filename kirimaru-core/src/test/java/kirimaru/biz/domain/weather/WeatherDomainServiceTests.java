@@ -1,19 +1,18 @@
 package kirimaru.biz.domain.weather;
 
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
 class WeatherDomainServiceTests {
   WeatherDomainService target = new WeatherDomainService(new CsvMapper());

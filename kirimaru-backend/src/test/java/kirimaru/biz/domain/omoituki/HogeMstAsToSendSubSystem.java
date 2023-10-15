@@ -1,10 +1,9 @@
 package kirimaru.biz.domain.omoituki;
 
-import kirimaru.biz.repository.QuestionRepository;
-import lombok.RequiredArgsConstructor;
-
 import java.util.Arrays;
 import java.util.List;
+import kirimaru.biz.repository.QuestionRepository;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class HogeMstAsToSendSubSystem implements ToSendSubSystem {

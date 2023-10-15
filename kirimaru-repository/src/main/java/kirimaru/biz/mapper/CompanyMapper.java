@@ -2,7 +2,6 @@ package kirimaru.biz.mapper;
 
 import kirimaru.biz.domain.constant.CodeConstant.DbTable;
 import kirimaru.biz.mapper.dto.CompanyDto;
-import kirimaru.biz.mapper.dto.UserDto;
 import kirimaru.biz.mapper.helper.InsertScriptBuilder;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Many;

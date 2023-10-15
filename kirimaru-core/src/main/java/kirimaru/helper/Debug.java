@@ -1,7 +1,5 @@
 package kirimaru.helper;
 
-import java.util.Arrays;
-
 public interface Debug {
 
   /**

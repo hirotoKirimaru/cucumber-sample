@@ -1,15 +1,12 @@
 package kirimaru.biz.mapper;
 
+import java.util.List;
 import kirimaru.biz.domain.constant.CodeConstant;
 import kirimaru.biz.mapper.dto.BookDto;
 import kirimaru.biz.mapper.helper.InsertScriptBuilder;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Mapper
 public interface BookMapper {

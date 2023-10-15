@@ -1,12 +1,16 @@
 package kirimaru.biz.domain;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 class FizzBuzzInputTests {
   private StandardInputStream in = new StandardInputStream();

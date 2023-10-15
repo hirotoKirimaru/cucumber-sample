@@ -1,8 +1,8 @@
 package kirimaru.biz.domain.constant;
 
-import lombok.AllArgsConstructor;
-
 import static kirimaru.biz.domain.constant.LogLevel.ERROR;
+
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum ErrorMessageCode {

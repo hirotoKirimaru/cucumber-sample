@@ -2,7 +2,6 @@ package kirimaru.config;
 
 import no.finn.unleash.DefaultUnleash;
 import no.finn.unleash.Unleash;
-import no.finn.unleash.UnleashContextProvider;
 import no.finn.unleash.util.UnleashConfig;
 import org.springframework.context.annotation.Bean;
 

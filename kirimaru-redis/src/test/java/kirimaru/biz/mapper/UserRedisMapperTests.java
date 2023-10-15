@@ -1,19 +1,15 @@
 package kirimaru.biz.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-import kirimaru.biz.mapper.anotation.DisabledOnGitHub;
 import kirimaru.biz.mapper.dto.UserDto;
-import kirimaru.biz.mapper.testexecutionlistner.DisabledOnGitHubTestExecutionListener;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
-import org.springframework.test.context.TestExecutionListeners;
 
 @DataRedisTest
 //@TestExecutionListeners(DisabledOnGitHubTestExecutionListener.class) // TODO: DIができなくなる。

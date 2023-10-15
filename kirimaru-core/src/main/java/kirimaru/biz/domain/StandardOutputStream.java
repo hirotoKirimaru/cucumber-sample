@@ -1,6 +1,10 @@
 package kirimaru.biz.domain;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.StringReader;
 
 public class StandardOutputStream extends PrintStream {
   private BufferedReader br = new BufferedReader(new StringReader(""));

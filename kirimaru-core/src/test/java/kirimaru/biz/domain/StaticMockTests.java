@@ -1,7 +1,6 @@
 package kirimaru.biz.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import org.assertj.core.api.SoftAssertions;

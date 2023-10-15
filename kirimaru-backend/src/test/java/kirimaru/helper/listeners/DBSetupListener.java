@@ -1,12 +1,11 @@
 package kirimaru.helper.listeners;
 
+import java.util.Objects;
 import kirimaru.helper.anotation.DBSetup;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListener;
-
-import java.util.Objects;
 
 @Slf4j
 public class DBSetupListener implements TestExecutionListener {

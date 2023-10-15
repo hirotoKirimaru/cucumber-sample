@@ -1,11 +1,10 @@
 package kirimaru.biz.domain;
 
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
-
-import java.time.LocalDate;
 
 /**
  * 日付の前後関係をなんやかんや

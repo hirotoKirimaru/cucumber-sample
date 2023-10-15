@@ -1,9 +1,8 @@
 package kirimaru.biz.domain.card;
 
-import lombok.AllArgsConstructor;
-
 import java.util.Arrays;
 import java.util.Optional;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class Card {

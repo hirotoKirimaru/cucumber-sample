@@ -1,7 +1,6 @@
 package kirimaru.core.testexecutionlistner;
 
 import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import kirimaru.core.anotation.OracleOnly;
 import org.junit.jupiter.api.Nested;

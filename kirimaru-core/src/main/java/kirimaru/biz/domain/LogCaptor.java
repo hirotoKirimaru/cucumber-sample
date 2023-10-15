@@ -1,11 +1,10 @@
 package kirimaru.biz.domain;
 
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
 
 
 @Component

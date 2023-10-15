@@ -1,7 +1,5 @@
 package kirimaru.config;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 

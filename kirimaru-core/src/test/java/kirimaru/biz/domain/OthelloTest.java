@@ -1,5 +1,8 @@
 package kirimaru.biz.domain;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.stream.Stream;
 import kirimaru.biz.domain.constant.CodeConstant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,10 +16,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OthelloTest {
   private final Othello target;

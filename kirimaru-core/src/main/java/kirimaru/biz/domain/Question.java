@@ -1,11 +1,10 @@
 package kirimaru.biz.domain;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import lombok.Builder;
 import lombok.Data;
-
-import java.time.LocalDateTime;
 
 @Data
 @Builder(toBuilder = true)

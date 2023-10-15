@@ -1,14 +1,14 @@
 package kirimaru.biz.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import kirimaru.biz.domain.book.Book;
 import kirimaru.biz.domain.book.CustomBuilderBook;
 import kirimaru.biz.domain.book.Isbn;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.Test;
 
 class LombokBuilderTests {
 

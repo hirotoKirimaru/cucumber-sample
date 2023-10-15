@@ -1,13 +1,12 @@
 package kirimaru.biz.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Random;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.Random;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @Disabled("3回リトライを常に実行するとウザいので、やめる。辞めるとテストが通らなくなるので、テスト自体をDisabledにする")
 class RetryTests {

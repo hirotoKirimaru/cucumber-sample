@@ -2,7 +2,6 @@ package kirimaru.biz.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import kirimaru.biz.mapper.dto.CompanyDto;
 import kirimaru.biz.mapper.dto.UserDto;
 import kirimaru.biz.mapper.helper.CommonSetup;
 import org.junit.jupiter.api.Test;

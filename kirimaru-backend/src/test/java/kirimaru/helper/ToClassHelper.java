@@ -1,21 +1,15 @@
 package kirimaru.helper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.InputStream;
-import kirimaru.biz.domain.Human;
-import org.apache.commons.io.IOUtils;
-import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.apache.commons.io.IOUtils;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 
 @ExtendWith(MockitoExtension.class)

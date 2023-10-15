@@ -1,11 +1,7 @@
 package kirimaru.biz.domain.executor;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.Value;
-
 import java.util.concurrent.atomic.AtomicInteger;
+import lombok.Value;
 
 @Value
 //@Builder

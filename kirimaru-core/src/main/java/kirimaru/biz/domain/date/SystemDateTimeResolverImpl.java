@@ -1,10 +1,9 @@
 package kirimaru.biz.domain.date;
 
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
 
 @Data
 @Component

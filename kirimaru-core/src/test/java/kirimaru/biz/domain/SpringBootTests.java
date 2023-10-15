@@ -1,13 +1,12 @@
 package kirimaru.biz.domain;
 
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.time.LocalDateTime;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 /**
  * SpringJunitConfigを使うと、SpringBootTestと異なって、必要なComponentのみをScanできるようになるので、テスト時間が短くなる。

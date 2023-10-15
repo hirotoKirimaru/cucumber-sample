@@ -1,22 +1,29 @@
 package kirimaru.external.zip_cloud;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
-import kirimaru.external.zip_cloud.dto.ZipAddressDto;
-import kirimaru.external.zip_cloud.dto.ZipCloudDto;
-import org.apache.commons.io.IOUtils;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import ru.lanwen.wiremock.ext.WiremockResolver;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.getRequestedFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.*;
+import com.github.tomakehurst.wiremock.WireMockServer;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
+import kirimaru.external.zip_cloud.dto.ZipAddressDto;
+import kirimaru.external.zip_cloud.dto.ZipCloudDto;
+import org.apache.commons.io.IOUtils;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import ru.lanwen.wiremock.ext.WiremockResolver;
 
 @ExtendWith(WiremockResolver.class)
 @Disabled("WebClientわからない")

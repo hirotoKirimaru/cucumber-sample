@@ -1,6 +1,11 @@
 package kirimaru.biz.domain;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.List;
 import kirimaru.biz.domain.nest.Child;
 import kirimaru.biz.domain.nest.GrandChild;
 import kirimaru.biz.domain.nest.Parent;
@@ -11,12 +16,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class ReflectionTests {
 

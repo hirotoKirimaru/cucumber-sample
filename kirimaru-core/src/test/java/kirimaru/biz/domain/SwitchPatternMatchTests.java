@@ -1,15 +1,5 @@
 package kirimaru.biz.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-
-import java.util.ArrayList;
-import java.util.List;
-import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-
 /**
  * https://docs.oracle.com/en/java/javase/17/language/pattern-matching-instanceof-operator.html
  * https://docs.oracle.com/en/java/javase/17/language/pattern-matching-switch-expressions-and-statements.html

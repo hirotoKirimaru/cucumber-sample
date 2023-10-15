@@ -1,13 +1,9 @@
 package kirimaru.biz.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Value;
-import org.springframework.lang.Nullable;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Year;
+import lombok.Builder;
+import lombok.Value;
 
 @Value
 @Builder

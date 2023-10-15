@@ -1,10 +1,9 @@
 package kirimaru.biz.domain.book;
 
-import lombok.Builder;
-import lombok.Value;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Value;
 
 @Value
 @Builder(toBuilder = true)

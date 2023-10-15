@@ -1,8 +1,9 @@
 package kirimaru.biz.domain;
 
-import lombok.Data;
+import static kirimaru.biz.domain.constant.CodeConstant.Othello.SQUARE;
+import static kirimaru.biz.domain.constant.CodeConstant.Othello.piece;
 
-import static kirimaru.biz.domain.constant.CodeConstant.Othello.*;
+import lombok.Data;
 
 @Data
 public class Board {

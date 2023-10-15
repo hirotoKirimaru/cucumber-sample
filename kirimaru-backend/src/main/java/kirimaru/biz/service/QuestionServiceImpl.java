@@ -1,12 +1,11 @@
 package kirimaru.biz.service;
 
+import java.util.List;
 import kirimaru.biz.domain.Question;
 import kirimaru.biz.repository.QuestionRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

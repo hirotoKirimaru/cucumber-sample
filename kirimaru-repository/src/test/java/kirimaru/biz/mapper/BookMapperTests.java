@@ -1,5 +1,9 @@
 package kirimaru.biz.mapper;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.math.BigInteger;
+import java.util.List;
 import kirimaru.biz.domain.book.Book;
 import kirimaru.biz.domain.book.Isbn;
 import kirimaru.biz.mapper.dto.Book2Dto;
@@ -8,11 +12,6 @@ import kirimaru.biz.mapper.helper.CommonSetup;
 import kirimaru.helper.TestFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.math.BigInteger;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class BookMapperTests extends CommonSetup {
   @Autowired

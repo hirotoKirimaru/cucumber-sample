@@ -5,7 +5,6 @@ import static org.mockito.Mockito.when;
 import java.time.OffsetDateTime;
 import kirimaru.biz.domain.date.OffsetDateTimeResolver;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
