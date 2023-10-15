@@ -2,7 +2,7 @@ plugins {
     id 'org.springframework.boot' version "${springBootVersion}"
     id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
     id 'java'
-    id 'org.projectlombok' version "${lombokVersion}"
+//    id 'org.projectlombok' version "${lombokVersion}"
 }
 
 bootJar {
