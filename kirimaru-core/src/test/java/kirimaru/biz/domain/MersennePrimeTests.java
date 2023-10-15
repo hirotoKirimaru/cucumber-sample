@@ -3,6 +3,7 @@ package kirimaru.biz.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -123,7 +124,8 @@ class MersennePrimeTests {
   }
 
   @Test
+  @Disabled
   void test_01() {
-    System.out.println(Target.log2(2));
+    System.out.println(Target.log2(3));
   }
 }
