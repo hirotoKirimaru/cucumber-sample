@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.math.BigDecimal;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class EqualsTest {
@@ -15,10 +15,10 @@ class EqualsTest {
     Boolean param2 = null;
     try {
       var actual = param1 == param2;
-      Assert.fail();
+      Assertions.fail();
     } catch (NullPointerException e) {
     } catch (Exception e) {
-      Assert.fail();
+      Assertions.fail();
     }
   }
 
@@ -60,10 +60,10 @@ class EqualsTest {
     Nested param2 = null;
     try {
       Objects.equals(param1, param2.bool);
-      Assert.fail();
+      Assertions.fail();
     } catch (NullPointerException e) {
     } catch (Exception e) {
-      Assert.fail();
+      Assertions.fail();
     }
   }
 

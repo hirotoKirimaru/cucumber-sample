@@ -1,8 +1,8 @@
 package kirimaru.config;
 
-import no.finn.unleash.DefaultUnleash;
-import no.finn.unleash.Unleash;
-import no.finn.unleash.util.UnleashConfig;
+import io.getunleash.DefaultUnleash;
+import io.getunleash.Unleash;
+import io.getunleash.util.UnleashConfig;
 import org.springframework.context.annotation.Bean;
 
 public class FeatureFlags {

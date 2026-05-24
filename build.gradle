@@ -1,8 +1,8 @@
 buildscript {
     ext {
-        springBootVersion = "3.1.4"
-        springDependencyManagementVersion = "1.1.3"
-//        lombokVersion = "1.18.30"
+        springBootVersion = "3.4.2"
+        springDependencyManagementVersion = "1.1.7"
+        lombokPluginVersion = "8.11"
     }
 }
 
@@ -17,9 +17,8 @@ subprojects {
     }
 
     java {
-        // TODO: 21にアップデートしたい
-        targetCompatibility = JavaVersion.VERSION_17
-        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_21
     }
 
     compileJava {
@@ -30,6 +29,10 @@ subprojects {
         options.encoding = "UTF-8"
     }
 
+    tasks.withType(Test).configureEach {
+        // Docker Engine v25+ で TestContainers 1.20系が古いAPIバージョン(1.32)を要求してしまう問題を回避
+        systemProperty 'api.version', System.getProperty('api.version', '1.43')
+    }
 }
 tasks.register('jacocoRootReport', JacocoReport) {
     dependsOn = subprojects.test
