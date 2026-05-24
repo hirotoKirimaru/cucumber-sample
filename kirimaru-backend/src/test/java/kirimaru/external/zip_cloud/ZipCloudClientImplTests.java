@@ -7,7 +7,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -22,27 +22,24 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import ru.lanwen.wiremock.ext.WiremockResolver;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
-@ExtendWith(WiremockResolver.class)
 @Disabled("WebClientわからない")
 class ZipCloudClientImplTests {
 
+  @RegisterExtension
+  static WireMockExtension wm = WireMockExtension.newInstance().build();
+
   ZipCloudClient target;
 
-  private WireMockServer server;
-
-  ZipCloudClientImplTests(@WiremockResolver.Wiremock WireMockServer server) {
-    this.server = server;
-  }
+  private final WireMockExtension server = wm;
 
   @BeforeEach
   void setup() {
     ZipCloudClientProperties properties = new ZipCloudClientProperties();
     properties.setSchema("http");
     properties.setHost("localhost");
-    properties.setPort(server.port());
+    properties.setPort(server.getPort());
     properties.setPath("/api/search");
 
 //    RestOperationFactory restOperationFactory = new RestOperationFactory(restTemplateBuilder, new RestTemplateInterceptor());

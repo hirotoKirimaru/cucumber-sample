@@ -1,8 +1,8 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.4'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
     id 'java'
-    id 'io.freefair.lombok' version '8.0.1'
+    id 'io.freefair.lombok' version "${lombokPluginVersion}"
 }
 
 group 'kirimaru'
@@ -24,8 +24,6 @@ jar {
     enabled = true
 }
 
-//generateLombokConfig.enabled = false
-
 dependencies {
     implementation project(':kirimaru-core')
     implementation project(':kirimaru-redis')
@@ -33,18 +31,19 @@ dependencies {
 
     // Database
     implementation 'org.flywaydb:flyway-core'
+    runtimeOnly 'org.flywaydb:flyway-database-postgresql'
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'org.postgresql:postgresql'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1'
-    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.1'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4'
 
-    testImplementation 'org.testcontainers:junit-jupiter:1.17.6'
-    testImplementation 'org.testcontainers:postgresql:1.17.6'
+    testImplementation 'org.testcontainers:junit-jupiter:1.20.4'
+    testImplementation 'org.testcontainers:postgresql:1.20.4'
 
     // database-rider
-    testImplementation 'com.github.database-rider:rider-junit5:1.36.0'
+    testImplementation 'com.github.database-rider:rider-junit5:1.44.0'
 
     // coreのテストソースコードだけ依存させる
 //    testCompileOnly project(':kirimaru-core').sourceSets.test.output
